@@ -7,6 +7,12 @@ public class Card : MonoBehaviour
     private bool hasBeenPlayed;
     private int handIndex;
     private GameManager gm;
+    private bool isDragged = true;
+    [SerializeField] private int energyCost;
+    [SerializeField] private int nutritionPoints;
+    [SerializeField] private bool canTarget = false;
+    [SerializeField] private ArrowHandler arrowHandler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,10 +21,27 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(hasBeenPlayed == false)
+        Debug.Log(canTarget.ToString());
+        if (canTarget)
+        {
+            Debug.Log("YO!");
+            arrowHandler.setVisibile(true);
+            arrowHandler.SetOrigin(new Vector2(this.transform.position.x, this.transform.position.y));
+        }
+
+        this.isDragged = true;
+    }
+
+    private void OnMouseUp()
+    {
+        if (hasBeenPlayed == false && gm.SpendEnergy(energyCost))
         {
             hasBeenPlayed = true;
-            MoveToDiscardPile();
+            MoveToDiscardPile(false);
+        }
+        if (canTarget)
+        {
+            arrowHandler.setVisibile(false);
         }
     }
 
@@ -37,9 +60,9 @@ public class Card : MonoBehaviour
         this.hasBeenPlayed = hasBeenPlayed;
     }
 
-    private void MoveToDiscardPile()
+    public void MoveToDiscardPile(bool isEndTurn)
     {
-        gm.SendToDiscard(this);
+        gm.SendToDiscard(this, isEndTurn);
         gameObject.SetActive(false);
     }
 }
