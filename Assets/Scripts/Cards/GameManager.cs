@@ -6,25 +6,56 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private List<Card> deck = new List<Card>();
     [SerializeField] private List<Card> discardPile = new List<Card>();
+    [SerializeField] private List<Card> hand = new List<Card>();
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private bool[] availableCardSlots;
+    private int maxEnergy = 3;
+    private int energy;
+
+
+    private void Start()
+    {
+        DrawCards(5);
+        AddEnergy(maxEnergy);
+    }
+
+    private void AddEnergy(int amount)
+    {
+        energy += amount;
+        Debug.Log(energy.ToString() + " / " + maxEnergy.ToString());
+    }
+
+    public bool SpendEnergy(int amount)
+    {
+        if(energy-amount < 0)
+        {
+            return false;
+        }
+        else
+        {
+            energy -= amount;
+            Debug.Log(energy.ToString() + " / " + maxEnergy.ToString());
+            return true;
+        }
+    }
 
     private bool DrawCard()
     {
         Card randCard = deck[Random.Range(0, deck.Count)];
 
-            for (int i = 0; i < availableCardSlots.Length; i++){
-                if (availableCardSlots[i]){
-                    randCard.gameObject.SetActive(true);
-                    randCard.transform.position = cardSlots[i].position;
-                    randCard.SetIndex(i);
-                    randCard.SetHasBeenPlayed(false);
-                    availableCardSlots[i] = false;
-                    deck.Remove(randCard);
-                    return true;
-                }
+        for (int i = 0; i < availableCardSlots.Length; i++){
+            if (availableCardSlots[i]){
+                randCard.gameObject.SetActive(true);
+                randCard.transform.position = cardSlots[i].transform.position;
+                randCard.SetIndex(i);
+                randCard.SetHasBeenPlayed(false);
+                hand.Add(randCard);
+                availableCardSlots[i] = false;
+                deck.Remove(randCard);
+                return true;
             }
-            return false;
+        }
+        return false;
     }
 
     public void DrawCards(int count)
@@ -41,18 +72,24 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Couldn't draw a card. The deck is empty!"); //TODO: create reshuffle function
+                Debug.Log("Couldn't draw a card. The deck is empty!"); 
                 Shuffle();
-                return;
+                i--;
             }
         }
         Debug.Log("I DID IT! :)");
     }
 
-    public void SendToDiscard(Card card)
+    public void SendToDiscard(Card card, bool isEndTurn)
     {
+        int idx = card.GetIndex();
+        availableCardSlots[idx] = true;
+        card.SetIndex(-1);
+        card.SetHasBeenPlayed(false);
+        if (!isEndTurn){
+            hand.Remove(card);
+        }
         discardPile.Add(card);
-        availableCardSlots[card.GetIndex()] = true;
     }
 
     private void Shuffle()
@@ -61,11 +98,15 @@ public class GameManager : MonoBehaviour
         discardPile.Clear();
     }
 
-    private void Update()
+    public void EndTurn()
     {
-        if (Input.GetButtonDown("Submit"))
+        foreach (var card in hand)
         {
-            DrawCards(5);
+            card.MoveToDiscardPile(true);
         }
+        hand.Clear();
+        DrawCards(5);
+        SpendEnergy(energy);
+        AddEnergy(maxEnergy);
     }
 }
