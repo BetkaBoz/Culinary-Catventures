@@ -4,13 +4,10 @@ using UnityEngine;
 public class MapConfig : ScriptableObject
 {
     [SerializeField] private int maxSectors = 5;
-
-    // [SerializeField] private float wrapperWidth = 1;
-    private float wrapperWidth = 1;
-
     [SerializeField] [Range(0, 0.2F)] private float padding = 0.2F;
-
     [SerializeField] private GameObject islandPrefab;
+    
+    private float wrapperWidth = 1;
 
     public int MaxSectors
     {

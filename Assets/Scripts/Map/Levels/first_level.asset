@@ -15,4 +15,3 @@ MonoBehaviour:
   maxSectors: 5
   padding: 0.2
   islandPrefab: {fileID: 6715429979060519542, guid: d75fa3c07dadf624b9a1bef9dfe24b8b, type: 3}
-  gameMap: {fileID: 0}
