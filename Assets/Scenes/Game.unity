@@ -191,7 +191,7 @@ Canvas:
   m_GameObject: {fileID: 535714815}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1239527376}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -217,7 +217,7 @@ RectTransform:
   - {fileID: 1188729491}
   - {fileID: 717294728}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -644,7 +644,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1915996403}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -672,12 +673,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915996402}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 865.3642, y: 535.0693, z: -843.40356}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 1239527377}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1915996404
 MonoBehaviour:
@@ -691,8 +692,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4936081e8d40a374cbd296b09992bfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSectors: 5
-  wrapperWidth: 1920
-  padding: 0.2
-  islandPrefab: {fileID: 6715429979060519542, guid: d75fa3c07dadf624b9a1bef9dfe24b8b, type: 3}
-  GameMap: {fileID: 717294727}
+  conf: {fileID: 11400000, guid: 90330dc18ec9b0a4faec76476a75faf1, type: 2}
+  gameMap: {fileID: 717294727}

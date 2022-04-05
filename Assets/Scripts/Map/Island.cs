@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Schema;
 using UnityEngine;
 
 
@@ -33,12 +30,9 @@ public class Island : MonoBehaviour
     public void setRandomIslandType( )
     {
         IslandType = (IslandTypes) Random.Range(2, 8);
-        Debug.Log(IslandType);
+        // Debug.Log(IslandType);
     }
     
-    
-
-
     // Start is called before the first frame update
     void Start()
     {
