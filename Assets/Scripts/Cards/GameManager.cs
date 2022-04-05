@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Card> deck = new List<Card>();
     [SerializeField] private List<Card> discardPile = new List<Card>();
     [SerializeField] private List<Card> hand = new List<Card>();
+    [SerializeField] private List<Customer> customers = new List<Customer>();
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private bool[] availableCardSlots;
     private int maxEnergy = 3;
@@ -103,6 +104,10 @@ public class GameManager : MonoBehaviour
         foreach (var card in hand)
         {
             card.MoveToDiscardPile(true);
+        }
+        foreach (var customer in customers)
+        {
+            customer.EndTurn();
         }
         hand.Clear();
         DrawCards(5);

@@ -389,7 +389,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &771761595 stripped
 Transform:
@@ -1202,8 +1202,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438480067}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 212.90433, y: 227.3944, z: -38.50448}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.695709, y: 103.394394, z: -38.50448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1074633232}
@@ -1217,8 +1217,8 @@ Transform:
   - {fileID: 2062312492}
   - {fileID: 1177628610}
   - {fileID: 1201015224}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 1667768507}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1452035014
 GameObject:
@@ -1416,7 +1416,7 @@ RectTransform:
   m_Children:
   - {fileID: 1295462937}
   m_Father: {fileID: 1667768507}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -1850,7 +1850,7 @@ Canvas:
   m_GameObject: {fileID: 1667768503}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1295399596}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1873,10 +1873,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1438480068}
   - {fileID: 1958059600}
   - {fileID: 1484089933}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2030,7 +2031,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1921860195
 PrefabInstance:
@@ -2146,7 +2147,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1667768507}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2167,8 +2168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrowHeadPrefab: {fileID: 5727427495513789959, guid: 0b3c4c8effd693b478c975c56260f64f, type: 3}
   ArrowNodePrefab: {fileID: 2317772978382087144, guid: 6f8d57a8969e93040b5495faf33f2d18, type: 3}
-  arrowNodeNum: 10
-  scaleFactor: 10
+  arrowNodeNum: 8
+  scaleFactor: 5
 --- !u!4 &2043584789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
