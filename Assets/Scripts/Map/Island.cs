@@ -12,6 +12,43 @@ public class Island : MonoBehaviour
     [SerializeField] private IslandTypes IslandType { get; set; }
     [SerializeField] private int Sector;
 
+    private bool isVisiting = false;
+    private Island previousIsland = null;
+    private Island nextIsland = null;
+
+
+    public void switchIsVisiting()
+    {
+        isVisiting = !isVisiting;
+        
+        Color currentColor = this.GetComponent<SpriteRenderer>().color;
+        if (isVisiting)
+        {
+            currentColor.a = 0;
+        }
+        else
+        {
+            currentColor.a = 255;
+        }
+        this.GetComponent<SpriteRenderer>().color = currentColor;
+    }
+
+    public bool IsVisiting
+    {
+        get => isVisiting;
+    }
+
+    public Island PreviousIsland
+    {
+        get => previousIsland;
+        set => previousIsland = value;
+    }
+
+    public Island NextIsland
+    {
+        get => nextIsland;
+        set => nextIsland = value;
+    }
 
     public string getIslandType()
     {

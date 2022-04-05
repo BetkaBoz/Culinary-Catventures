@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,6 +11,7 @@ public class MapManager : MonoBehaviour
 {
     [SerializeField] MapConfig conf; // config file, contains most of thevariables this file would, but neatly tidied + allows us to swap config files for other levels
     [SerializeField] private GameObject gameMap;
+    private List<GameObject> islands = new List<GameObject>();
     
     /// <summary>
     /// Instantiates new Island with given Sector and islandDum coordinates
@@ -41,6 +43,7 @@ public class MapManager : MonoBehaviour
         Island.transform.SetPositionAndRotation(
             Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(xPosRangeStart, xPosRangeEnd),
                 1f - (sectorNum + 0.5f) * conf.SectorDistance)), Quaternion.identity);
+        islands.Add(Island);
     }
 
     /// <summary>
