@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 // TODO :
@@ -8,25 +11,18 @@ using Random = UnityEngine.Random;
 //      on different screen aspect ratios
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] MapConfig conf; // config file, contains most of thevariables this file would, but neatly tidied + allows us to swap config files for other levels
+    [SerializeField] MapConfig
+        conf; // config file, contains most of thevariables this file would, but neatly tidied + allows us to swap config files for other levels
+
     [SerializeField] private GameObject gameMap;
-    
+    private List<GameObject> islands = new List<GameObject>();
+
     /// <summary>
     /// Instantiates new Island with given Sector and islandDum coordinates
     /// with automatic position calculation based on camera size and randomized horizontal position in calculated range
     /// </summary>
-    private void CreateIsland(string name, int type, int sectorNum, int islandNum, int islandCnt) // type: 0-start, 1-finish, 2-random
+    private void CreateIsland(string name, int type, int sectorNum, int islandNum, int islandCnt)
     {
-        GameObject Island = Instantiate(conf.IslandPrefab);
-        Island.transform.SetParent(this.gameMap.transform); // puts Island as child of the Map game object
-        switch (type) // type: 0-start, 1-finish, 2-random
-        {
-            case 0: Island.GetComponent<Island>().setStartType(); break;
-            case 1: Island.GetComponent<Island>().setFinishType(); break;
-            case 2: Island.GetComponent<Island>().setRandomIslandType(); break;
-        }
-        Island.name = Island.GetComponent<Island>().getIslandType() + name + sectorNum + "-" + islandNum;
-
         // position calculation:
         float xPosRangeStart = conf.WrapperWidth / islandCnt * islandNum;
         float xPosRangeEnd = conf.WrapperWidth / islandCnt * (islandNum + 1);
@@ -35,12 +31,38 @@ public class MapManager : MonoBehaviour
         xPosRangeStart += distance;
         xPosRangeEnd -= distance;
 
+        GameObject Island = Instantiate(conf.IslandPrefab, Camera.main.ViewportToWorldPoint(new Vector3(
+            Random.Range(xPosRangeStart, xPosRangeEnd),
+            1f - (sectorNum + 0.5f) * conf.SectorDistance,
+            10)), Quaternion.identity);
+        switch (type)
+        {
+            case 0:
+                Island.GetComponent<Island>().setStartType();
+                break;
+            case 1:
+                Island.GetComponent<Island>().setFinishType();
+                break;
+            case 2:
+                Island.GetComponent<Island>().setRandomIslandType();
+                break;
+        }
+        Island.transform.SetParent(this.gameMap.transform); // puts Island as child of the Map game object
+        Island.name = Island.GetComponent<Island>().getIslandType() + name + sectorNum + "-" + islandNum;
+
         // setting position relative to the camera (Viewport has values from bottom left corner [0,0] to top right [1,1])
         // x position randomly placed in calculated range
         // y position inverted so we generate Islands from top to bottom and shifted for half a sectorDistance
-        Island.transform.SetPositionAndRotation(
-            Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(xPosRangeStart, xPosRangeEnd),
-                1f - (sectorNum + 0.5f) * conf.SectorDistance)), Quaternion.identity);
+        // Island.transform.SetPositionAndRotation(
+        //     Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(xPosRangeStart, xPosRangeEnd),
+        //         1f - (sectorNum + 0.5f) * conf.SectorDistance, 0)), Quaternion.identity);
+
+        // Debug.Log(Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(xPosRangeStart, xPosRangeEnd),
+        //     1f - (sectorNum + 0.5f) * conf.SectorDistance, 0)).z);
+        // Debug.Log(Island.transform.position);
+
+        // Island.transform.position = new Vector3(Island.transform.position.x, Island.transform.position.y, 0);
+        islands.Add(Island);
     }
 
     /// <summary>
@@ -78,11 +100,19 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
         conf.SectorDistance = (float) 1 / conf.MaxSectors; // in Viewport, not World of ScreenSpace
         SetUpIslands();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // foreach (var island in islands)
+        // {
+        //     island.transform.position = new Vector3(island.transform.position.x, island.transform.position.y, 0);
+        // }
     }
 
     // Update is called once per frame
