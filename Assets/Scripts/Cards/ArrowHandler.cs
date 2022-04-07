@@ -15,9 +15,11 @@ public class ArrowHandler : MonoBehaviour
                                                                //determine the position of P1 and P2
     private readonly List<Vector2> controlPointFactors = new List<Vector2> { new Vector2(-0.3f, 0.8f), new Vector2(0.1f, 1.4f) };
     private Vector2 mousePossition;
+    private Camera cam;
 
     private void Awake()
     {
+        cam = Camera.main;
         this.origin = this.GetComponent<RectTransform>();
         for (int i = 0; i < this.arrowNodeNum; ++i)
         {
@@ -50,7 +52,7 @@ public class ArrowHandler : MonoBehaviour
         //P0 arrow emitter point
         this.controlPoints[0] = new Vector2(this.origin.position.x, this.origin.position.y);
         //P3 mouse position
-        mousePossition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePossition = cam.ScreenToWorldPoint(Input.mousePosition);
         this.controlPoints[3] = mousePossition;
         //set P1 and P2
         this.controlPoints[1] = this.controlPoints[0] + (this.controlPoints[3] - this.controlPoints[0]) * this.controlPointFactors[0];
