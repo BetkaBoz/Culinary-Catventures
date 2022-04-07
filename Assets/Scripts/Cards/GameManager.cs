@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Customer> customers = new List<Customer>();
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private bool[] availableCardSlots;
+    [SerializeField] private Text energyUI;
     private int maxEnergy = 3;
     private int energy;
 
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
     private void AddEnergy(int amount)
     {
         energy += amount;
-        Debug.Log(energy.ToString() + " / " + maxEnergy.ToString());
+        energyUI.text = energy.ToString() + " / " + maxEnergy.ToString();
     }
 
     public bool SpendEnergy(int amount)
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
         else
         {
             energy -= amount;
-            Debug.Log(energy.ToString() + " / " + maxEnergy.ToString());
+            energyUI.text = energy.ToString() + " / " + maxEnergy.ToString();
             return true;
         }
     }

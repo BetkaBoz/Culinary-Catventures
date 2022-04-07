@@ -10,18 +10,22 @@ public class Card : MonoBehaviour //, IPointerDownHandler, IBeginDragHandler, IE
     private int handIndex;
     private GameManager gm;
     private bool isDragged = true;
+    private Camera cam;
+    private Vector3 dragOffset;
     #endregion
     #region SerializeFields
     [SerializeField] private int energyCost;
     [SerializeField] private int nutritionPoints;
     [SerializeField] private bool canTarget = false;
     [SerializeField] private ArrowHandler arrowHandler;
+    [SerializeField] private ManouverTargetController targetController;
     #endregion
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         gm = FindObjectOfType<GameManager>();
+        cam = Camera.main;
     }
 
     #region DragNDrop
@@ -56,25 +60,34 @@ public class Card : MonoBehaviour //, IPointerDownHandler, IBeginDragHandler, IE
             arrowHandler.setVisibile(true);
             arrowHandler.SetOrigin(new Vector2(this.transform.position.x, this.transform.position.y));
         }
+        else
+        {
+            targetController.setPos(false);
+            dragOffset = this.transform.position - GetMousePos();
+        }
 
         this.isDragged = true;
     }
 
+    private void OnMouseDrag()
+    {
+        this.transform.position = GetMousePos() + dragOffset;
+    }
+
     private void OnMouseUp()
     {
-        //if (hasBeenPlayed == false && gm.SpendEnergy(energyCost))
-        //{
-        //    hasBeenPlayed = true;
-        //    MoveToDiscardPile(false);
-        //}
+        LayerMask dragTarget = LayerMask.GetMask("DragTarget");
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 1, dragTarget.value);
         if (canTarget)
         {
-            LayerMask dragTarget = LayerMask.GetMask("DragTarget");
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 1, dragTarget.value);
             if (hit.collider != null)
             {
-                Debug.Log("YOHO");
-                hit.transform.GetComponentInParent<Customer>().Feed((ushort)nutritionPoints);
+                if (hasBeenPlayed == false && gm.SpendEnergy(energyCost))
+                {
+                    hasBeenPlayed = true;
+                    MoveToDiscardPile(false);
+                    hit.transform.GetComponentInParent<Customer>().Feed((ushort)nutritionPoints);
+                }
             }
             else
             {
@@ -82,6 +95,19 @@ public class Card : MonoBehaviour //, IPointerDownHandler, IBeginDragHandler, IE
             }
             arrowHandler.setVisibile(false);
         }
+        else
+        {
+            if (hit.collider != null)
+            {
+                if (hasBeenPlayed == false && gm.SpendEnergy(energyCost))
+                {
+                    hasBeenPlayed = true;
+                    MoveToDiscardPile(false);
+                }
+            }
+            targetController.setPos(true);
+        }
+        this.isDragged = false;
     }
     #endregion
 
@@ -96,6 +122,13 @@ public class Card : MonoBehaviour //, IPointerDownHandler, IBeginDragHandler, IE
         return this.handIndex;
     }
     #endregion
+
+    private Vector3 GetMousePos()
+    {
+        var mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        return mousePos;
+    }
 
     public void SetHasBeenPlayed(bool hasBeenPlayed)
     {

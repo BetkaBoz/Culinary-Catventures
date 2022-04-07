@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3663957300191498615
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2686739532223626573, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 14.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2686739532223626573, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 19.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930961853989487726, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: canTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930961853989487726, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: energyCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930961853989487726, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: arrowHandler
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930961853989487726, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: nutritionPoints
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750023451601023371, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_Name
+      value: Card Batatas Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750023451601023371, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -216.72437
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -227.57298
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 38.50448
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131055936586114683, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622441844335363643, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c6e32e01db9d087429ee9a624237e1a4, type: 3}
+    - target: {fileID: 8622441844335363643, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622441844335363643, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622441844335363643, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 51036776d89295f4d9f44be7cf809482, type: 3}
