@@ -8,6 +8,7 @@ public class ArrowHandler : MonoBehaviour
     public GameObject ArrowNodePrefab; //lol randem XD PEAK 2010 comedy
     public int arrowNodeNum;
     public float scaleFactor = 1f; //scale of arrows
+    public bool isVisible { get; set; }
 
     private RectTransform origin; //point P0
     private List<RectTransform> arrowNodes = new List<RectTransform>(); //list of arrow nodes
@@ -35,6 +36,7 @@ public class ArrowHandler : MonoBehaviour
         {
             this.controlPoints.Add(Vector2.zero);
         }
+        isVisible = false;
     }
 
     public void SetOrigin(Vector2 newOrigin)
@@ -44,6 +46,7 @@ public class ArrowHandler : MonoBehaviour
 
     public void setVisibile(bool isVisible)
     {
+        this.isVisible = isVisible;
         this.gameObject.SetActive(isVisible);
     }
 
