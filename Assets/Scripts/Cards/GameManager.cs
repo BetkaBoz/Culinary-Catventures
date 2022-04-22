@@ -5,39 +5,48 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private List<Card> deck = new List<Card>();
+    [SerializeField] Player player;
+    private List<Card> deck;
     [SerializeField] private List<Card> discardPile = new List<Card>();
     [SerializeField] private List<Card> hand = new List<Card>();
     [SerializeField] private List<Customer> customers = new List<Customer>();
-    [SerializeField] private Transform[] cardSlots;
+    [SerializeField] private CardSlot[] cardSlots;
     [SerializeField] private bool[] availableCardSlots;
     [SerializeField] private Text energyUI;
-    private int maxEnergy = 3;
-    private int energy;
+    [SerializeField] private DiscardController discardController;
+    public bool discardPhase;
+    //public Player Player
+    //{
+    //    get
+    //    {
+    //        return player;
+    //    }
+    //}
 
 
     private void Start()
     {
+        deck = new List<Card>(player.Deck);
         DrawCards(5);
-        AddEnergy(maxEnergy);
+        AddEnergy(player.MaxEnergy);
     }
 
     private void AddEnergy(int amount)
     {
-        energy += amount;
-        energyUI.text = energy.ToString() + " / " + maxEnergy.ToString();
+        player.Energy += amount;
+        energyUI.text = player.Energy.ToString() + " / " + player.MaxEnergy.ToString();
     }
 
     public bool SpendEnergy(int amount)
     {
-        if(energy-amount < 0)
+        if(player.Energy - amount < 0)
         {
             return false;
         }
         else
         {
-            energy -= amount;
-            energyUI.text = energy.ToString() + " / " + maxEnergy.ToString();
+            player.Energy -= amount;
+            energyUI.text = player.Energy.ToString() + " / " + player.MaxEnergy.ToString();
             return true;
         }
     }
@@ -48,10 +57,12 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < availableCardSlots.Length; i++){
             if (availableCardSlots[i]){
-                randCard.gameObject.SetActive(true);
-                randCard.transform.position = cardSlots[i].transform.position;
-                randCard.SetIndex(i);
-                randCard.SetHasBeenPlayed(false);
+                //randCard.gameObject.SetActive(true);
+                //randCard.transform.position = cardSlots[i].transform.position;
+                cardSlots[i].SetHasBeenPlayed(false);
+                cardSlots[i].gameObject.SetActive(true);
+                cardSlots[i].SetCard(randCard);
+                randCard.HandIndex = i;
                 hand.Add(randCard);
                 availableCardSlots[i] = false;
                 deck.Remove(randCard);
@@ -85,10 +96,11 @@ public class GameManager : MonoBehaviour
 
     public void SendToDiscard(Card card, bool isEndTurn)
     {
-        int idx = card.GetIndex();
+        int idx = card.HandIndex;
         availableCardSlots[idx] = true;
-        card.SetIndex(-1);
-        card.SetHasBeenPlayed(false);
+        card.HandIndex = -1;
+        //card.SetHasBeenPlayed(false);
+        cardSlots[idx].gameObject.SetActive(false);
         if (!isEndTurn){
             hand.Remove(card);
         }
@@ -105,7 +117,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (var card in hand)
         {
-            card.MoveToDiscardPile(true);
+            //card.MoveToDiscardPile(true);
+            SendToDiscard(card, true);
         }
         foreach (var customer in customers)
         {
@@ -113,7 +126,31 @@ public class GameManager : MonoBehaviour
         }
         hand.Clear();
         DrawCards(5);
-        SpendEnergy(energy);
-        AddEnergy(maxEnergy);
+        SpendEnergy(player.Energy);
+        AddEnergy(player.MaxEnergy);
+    }
+
+    public void StartDiscard()
+    {
+        discardPhase = true;
+        discardController.gameObject.SetActive(true);
+        for(int i = 0; i < cardSlots.Length; i++)
+        {
+            cardSlots[i].Deselect();
+        }
+    }
+
+    public void StopDiscard()
+    {
+        discardPhase = false;
+        discardController.gameObject.SetActive(false);
+    }
+
+    public void SetCard(CardSlot card)
+    {
+        if (discardPhase)
+        {
+            discardController.SelectCard(card);
+        }
     }
 }
