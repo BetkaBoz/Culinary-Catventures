@@ -7,12 +7,12 @@ public class DiscardACard : Card
 {
     public override void CardEffect(GameManager gm, RaycastHit2D hit)
     {
-        gm.StartCoroutine(this.Discard(gm).ToString());
+        Discard(gm);
     }
-    private IEnumerable Discard(GameManager gm)
+    private async void Discard(GameManager gm)
     {
-        gm.StartDiscard();
-        yield return new WaitUntil(() => gm.discardPhase == false);
+        await gm.StartDiscard();
+        //yield return new WaitUntil(() => gm.discardPhase == false);
         gm.SpendEnergy(-2);
     }
 }

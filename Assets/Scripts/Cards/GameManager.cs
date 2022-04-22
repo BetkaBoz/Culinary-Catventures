@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -130,20 +131,30 @@ public class GameManager : MonoBehaviour
         AddEnergy(player.MaxEnergy);
     }
 
-    public void StartDiscard()
+    public async Task StartDiscard()
     {
+        Debug.Log("Start Discard");
+        discardController.ToggleDiscard();
         discardPhase = true;
-        discardController.gameObject.SetActive(true);
-        for(int i = 0; i < cardSlots.Length; i++)
+        for (int i = 0; i < cardSlots.Length; i++)
         {
             cardSlots[i].Deselect();
         }
+        while (discardPhase)
+        {
+            Debug.Log("I'm yealding ova here!");
+            await Task.Yield();
+        }
+        Debug.Log("I'm done mate!");
+
+        //StopDiscard();
     }
 
     public void StopDiscard()
     {
+        Debug.Log("Stop Discard");
+        discardController.ToggleDiscard();
         discardPhase = false;
-        discardController.gameObject.SetActive(false);
     }
 
     public void SetCard(CardSlot card)

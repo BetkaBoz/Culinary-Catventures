@@ -17,7 +17,7 @@ public class DiscardController : MonoBehaviour
         if(selectedCard != null)
         {
             gm.SendToDiscard(selectedCard.GetCard(), false);
-            ToggleDiscard();
+            gm.StopDiscard();
         }
     }
     
@@ -25,15 +25,15 @@ public class DiscardController : MonoBehaviour
     {
         if (!gm.discardPhase)
         {
-            gm.StartDiscard();
+            this.gameObject.SetActive(true);
             targetController.setPos(false);
             discardBttn.interactable = false;
         }
         else
         {
-            gm.StopDiscard();
             targetController.setPos(true);
             discardBttn.interactable = false;
+            this.gameObject.SetActive(false);
         }
     }
 

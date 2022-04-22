@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class CardSlot : MonoBehaviour
+public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     #region PrivateVars
     private bool hasBeenPlayed;
@@ -16,7 +17,7 @@ public class CardSlot : MonoBehaviour
     private Vector3 originalPos;
     private Vector3 originalMousePos;
 
-    [SerializeField] private SpriteRenderer artworkImage;
+    [SerializeField] private Image artworkImage;
     #endregion
     [SerializeField] private ArrowHandler arrowHandler;
     [SerializeField] private ManouverTargetController targetController;
@@ -150,7 +151,10 @@ public class CardSlot : MonoBehaviour
                     {
                         this.transform.position = this.originalPos;
                     }
-                    targetController.setPos(true);
+                    if (!gm.discardPhase)
+                    {
+                        targetController.setPos(true);
+                    }
                 }
                 this.isDragged = false;
                 this.isSelected = false;
@@ -212,6 +216,150 @@ public class CardSlot : MonoBehaviour
             this.transform.position = originalPos;
             this.isDragged = false;
             this.isSelected = false;
+        }
+    }
+
+    private void Select()
+    {
+        if (!gm.discardPhase)
+        {
+            if (this.isSelected)
+            {
+                Debug.Log("wat");
+                isSelected = false;
+                this.transform.position = originalPos;
+            }
+            else
+            {
+                Debug.Log("yed");
+                isSelected = true;
+                originalPos = this.transform.position;
+                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+            }
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Click");
+        Select();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("DOWN");
+        //Debug.Log(canTarget.ToString());
+        if (gm.discardPhase)
+        {
+            dragOffset = this.transform.position - GetMousePos();
+            isSelected = false;
+            isDragged = true;
+        }
+        else
+        {
+            if (!card.CanTarget)
+            {
+                targetController.setPos(false);
+                dragOffset = this.transform.position - GetMousePos();
+                //this.isDragged = true;
+            }
+            //isSelected = true;
+            //this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+        }
+        originalMousePos = GetMousePos();
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        Debug.Log("BEGIN DRAG");
+        Select();
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        Debug.Log("DRAG");
+        if (this.isSelected && (originalMousePos != GetMousePos()))
+        {
+            this.isDragged = true;
+        }
+        if (this.isDragged)
+        {
+            if (this.card.CanTarget && !gm.discardPhase)
+            {
+                if (!arrowHandler.isVisible)
+                {
+                    arrowHandler.setVisibile(true);
+                    arrowHandler.SetOrigin(new Vector2(this.transform.position.x, this.transform.position.y));
+                }
+            }
+            else
+            {
+                this.transform.position = GetMousePos() + dragOffset;
+            }
+
+        }
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Debug.Log("END");
+        LayerMask dragTarget = LayerMask.GetMask("DragTarget");
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 1, dragTarget.value);
+        if (hit.collider != null)
+        {
+            if (gm.discardPhase)
+            {
+                gm.SetCard(this);
+                this.isSelected = true;
+            }
+            else
+            {
+                if (card.CanTarget)
+                {
+                    if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
+                    {
+                        hasBeenPlayed = true;
+                        this.card.CardEffect(gm, hit);
+                        MoveToDiscardPile(false);
+                        arrowHandler.setVisibile(false);
+                    }
+                }
+                else
+                {
+                    if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
+                    {
+                        hasBeenPlayed = true;
+                        this.card.CardEffect(gm, hit);
+                        MoveToDiscardPile(false);
+                    }
+                    else
+                    {
+                        this.transform.position = this.originalPos;
+                    }
+                    if (!gm.discardPhase)
+                    {
+                        targetController.setPos(true);
+                    }
+                }
+                this.isDragged = false;
+                this.isSelected = false;
+                this.transform.position = this.originalPos;
+            }
+
+        }
+        else
+        {
+            if (card.CanTarget && !gm.discardPhase)
+            {
+                arrowHandler.setVisibile(false);
+            }
+            else
+            {
+                if (isDragged)
+                {
+                    this.transform.position = this.originalPos;
+                }
+            }
         }
     }
 }
