@@ -27,12 +27,14 @@ public class DiscardController : MonoBehaviour
         {
             this.gameObject.SetActive(true);
             targetController.setPos(false);
+            discardBttn.gameObject.SetActive(true);
             discardBttn.interactable = false;
         }
         else
         {
             targetController.setPos(true);
             discardBttn.interactable = false;
+            discardBttn.gameObject.SetActive(false);
             this.gameObject.SetActive(false);
         }
     }
