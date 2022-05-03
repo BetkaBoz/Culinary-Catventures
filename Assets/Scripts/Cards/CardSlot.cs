@@ -25,6 +25,14 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     [SerializeField] private Card card = null;
     [SerializeField] private Text nutritionalValue;
 
+    public bool Selected
+    {
+        get
+        {
+            return isSelected;
+        }
+    }
+
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -61,7 +69,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         return null;
     }
 
-    #region DragNDrop
+    #region OldDragNDrop
     private void OnMouseDown()
     {
         //Debug.Log(canTarget.ToString());
@@ -223,7 +231,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     private void Select()
     {
-        if (!gm.discardPhase)
+        if(card.NutritionPoints == -1) { return; }
+        if (!gm.discardPhase && gm.combinePhase)
         {
             if (this.isSelected)
             {
@@ -245,6 +254,10 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         Debug.Log("Click");
         Select();
+        if (gm.combinePhase)
+        {
+            gm.FindCombineTarget();
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -273,18 +286,20 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (gm.combinePhase) { return; }
         canvasGroup.blocksRaycasts = false;
         Debug.Log("BEGIN DRAG");
-        Select();
+        //Select();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         Debug.Log("DRAG");
-        if (this.isSelected && (originalMousePos != GetMousePos()))
-        {
+        if (gm.combinePhase) { return; }
+        //if (this.isSelected && (originalMousePos != GetMousePos()))
+        //{
             this.isDragged = true;
-        }
+        //}
         if (this.isDragged)
         {
             if (this.card.CanTarget && !gm.discardPhase)
@@ -305,6 +320,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (gm.combinePhase) { return; }
         canvasGroup.blocksRaycasts = true;
         Debug.Log("END");
         LayerMask dragTarget = LayerMask.GetMask("DragTarget");

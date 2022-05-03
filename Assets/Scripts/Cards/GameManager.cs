@@ -8,14 +8,17 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] Player player;
     private List<Card> deck;
-    [SerializeField] private List<Card> discardPile = new List<Card>();
-    [SerializeField] private List<Card> hand = new List<Card>();
+    private List<Card> discardPile = new List<Card>();
+    private List<Card> hand = new List<Card>();
+    private List<Card> exhaustPile = new List<Card>();
     [SerializeField] private List<Customer> customers = new List<Customer>();
     [SerializeField] private CardSlot[] cardSlots;
     [SerializeField] private bool[] availableCardSlots;
     [SerializeField] private Text energyUI;
     [SerializeField] private DiscardController discardController;
+    [SerializeField] private CombineController combineController;
     public bool discardPhase;
+    public bool combinePhase;
     //public Player Player
     //{
     //    get
@@ -108,6 +111,17 @@ public class GameManager : MonoBehaviour
         discardPile.Add(card);
     }
 
+    public void SendToExhaust(Card card)
+    {
+        int idx = card.HandIndex;
+        availableCardSlots[idx] = true;
+        card.HandIndex = -1;
+        //card.SetHasBeenPlayed(false);
+        cardSlots[idx].gameObject.SetActive(false);
+        hand.Remove(card);
+        exhaustPile.Add(card);
+    }
+
     private void Shuffle()
     {
         deck = new List<Card>(discardPile);
@@ -163,5 +177,75 @@ public class GameManager : MonoBehaviour
         {
             discardController.SelectCard(card);
         }
+    }
+
+    public void ToggleCombine()
+    {
+        if (combinePhase == true)
+        {
+            StopCombine();
+        }
+        else
+        {
+            StartCombine();
+        }
+    }
+
+    private void StartCombine()
+    {
+        Debug.Log("Start Combine");
+        combineController.ToggleCombine();
+        combinePhase = true;
+        for (int i = 0; i < cardSlots.Length; i++)
+        {
+            cardSlots[i].Deselect();
+        }
+    }
+
+    private void StopCombine()
+    {
+        Debug.Log("Stop Combine");
+        combineController.ToggleCombine();
+        combinePhase = false;
+    }
+
+    public void FindCombineTarget()
+    {
+        List<string> find = new List<string>();
+
+        for (int i = 0; i < cardSlots.Length; i++)
+        {
+            if (cardSlots[i].Selected)
+            {
+                find.Add(cardSlots[i].GetCard().CardName);
+            }
+        }
+        combineController.FindCard(find.ToArray());
+    }
+
+    public void CombineCards(Card target)
+    {
+        for (int i = 0; i < cardSlots.Length; i++)
+        {
+            if (cardSlots[i].Selected)
+            {
+                cardSlots[i].Deselect();
+                SendToExhaust(cardSlots[i].GetCard());
+            }
+        }
+        for (int i = 0; i < availableCardSlots.Length; i++)
+        {
+            if (availableCardSlots[i])
+            {
+                cardSlots[i].SetHasBeenPlayed(false);
+                cardSlots[i].gameObject.SetActive(true);
+                cardSlots[i].SetCard(target);
+                target.HandIndex = i;
+                hand.Add(target);
+                availableCardSlots[i] = false;
+                break;
+            }
+        }
+        ToggleCombine();
     }
 }

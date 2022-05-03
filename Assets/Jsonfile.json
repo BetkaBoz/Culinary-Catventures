@@ -1,0 +1,59 @@
+{
+	"comboInfo": [
+		{
+			"numOfCards": 5,
+			"cardsUsed": ["Pepper","Batatas","Sausage","Spaghetti","Broccoli"],
+			"cardProduced": "EnergyShit"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Chicken Legs","Batatas","Rice","Avocado"],
+			"cardProduced": "Pepper"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Broccoli","Egg","Chicken Wings"],
+			"cardProduced": "Sausage"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Avocado","Broccoli"],
+			"cardProduced": "Batatas"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Batatas","Rice"],
+			"cardProduced": "Spaghetti"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Chicken Legs","Chicken Wings"],
+			"cardProduced": "Egg"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Egg","Chicken Legs"],
+			"cardProduced": "Rice"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Chicken Legs","Sausage"],
+			"cardProduced": "Rice"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Egg","Avocado"],
+			"cardProduced": "Rice"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Avocado","Sausage"],
+			"cardProduced": "Rice"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Broccoli","Sausage"],
+			"cardProduced": "Rice"
+		}
+	]
+}
