@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Island : MonoBehaviour
@@ -80,5 +81,11 @@ public class Island : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    private void OnMouseDown()
+    {
+        Debug.Log("Clicked");
+        SceneManager.LoadScene("Battle");
     }
 }

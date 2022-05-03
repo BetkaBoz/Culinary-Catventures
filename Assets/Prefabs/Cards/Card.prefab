@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8131055936586114683}
   - component: {fileID: 8622441844335363643}
   - component: {fileID: 3930961853989487726}
-  - component: {fileID: 8008300419303044317}
+  - component: {fileID: 2686739532223626573}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -96,7 +96,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300f693d6c1542d4a809bc7f7e7394dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &8008300419303044317
+  energyCost: 0
+  nutritionPoints: 0
+  canTarget: 0
+  arrowHandler: {fileID: 0}
+--- !u!61 &2686739532223626573
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,5 +124,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 13.9239, y: 19.69476}
   m_EdgeRadius: 0
