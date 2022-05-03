@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -13,9 +14,20 @@ public class Island : MonoBehaviour
     [SerializeField] private int Sector;
 
     private bool isVisiting = false;
-    private Island previousIsland = null;
-    private Island nextIsland = null;
+    private List<Island> previousIslands = new List<Island>();
+    private List<Island> nextIslands = new List<Island>();
 
+    public List<Island> PreviousIslands
+    {
+        get => previousIslands;
+        set => previousIslands = value;
+    }
+
+    public List<Island> NextIslands
+    {
+        get => nextIslands;
+        set => nextIslands = value;
+    }
 
     public void switchIsVisiting()
     {
@@ -36,18 +48,6 @@ public class Island : MonoBehaviour
     public bool IsVisiting
     {
         get => isVisiting;
-    }
-
-    public Island PreviousIsland
-    {
-        get => previousIsland;
-        set => previousIsland = value;
-    }
-
-    public Island NextIsland
-    {
-        get => nextIsland;
-        set => nextIsland = value;
     }
 
     public string getIslandType()
