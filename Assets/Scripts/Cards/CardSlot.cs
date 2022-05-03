@@ -262,7 +262,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("DOWN");
+        //Debug.Log("DOWN");
         //Debug.Log(canTarget.ToString());
         if (gm.discardPhase)
         {
@@ -288,13 +288,13 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         if (gm.combinePhase) { return; }
         canvasGroup.blocksRaycasts = false;
-        Debug.Log("BEGIN DRAG");
+        //Debug.Log("BEGIN DRAG");
         //Select();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("DRAG");
+        //Debug.Log("DRAG");
         if (gm.combinePhase) { return; }
         //if (this.isSelected && (originalMousePos != GetMousePos()))
         //{
@@ -322,7 +322,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         if (gm.combinePhase) { return; }
         canvasGroup.blocksRaycasts = true;
-        Debug.Log("END");
+        //Debug.Log("END");
         LayerMask dragTarget = LayerMask.GetMask("DragTarget");
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 1, dragTarget.value);
         if (hit.collider != null)

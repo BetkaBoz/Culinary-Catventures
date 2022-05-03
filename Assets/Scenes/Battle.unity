@@ -409,6 +409,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2101083055}
     m_Modifications:
+    - target: {fileID: 819210364646571906, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: arrowHandler
+      value: 
+      objectReference: {fileID: 1958059601}
+    - target: {fileID: 819210364646571906, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: targetController
+      value: 
+      objectReference: {fileID: 87699217}
     - target: {fileID: 4566925227505613918, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
       propertyPath: m_Name
       value: CardSlot 3
@@ -1272,6 +1280,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2101083055}
     m_Modifications:
+    - target: {fileID: 819210364646571906, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: arrowHandler
+      value: 
+      objectReference: {fileID: 1958059601}
+    - target: {fileID: 819210364646571906, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: targetController
+      value: 
+      objectReference: {fileID: 87699217}
     - target: {fileID: 4566925227505613918, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
       propertyPath: m_Name
       value: CardSlot 4
@@ -2415,7 +2431,6 @@ MonoBehaviour:
     comboInfo: []
   findSlot: {fileID: 1980041537}
   gm: {fileID: 1912536889}
-  targetController: {fileID: 87699217}
   combineBttn: {fileID: 324663979}
 --- !u!1 &1439880446
 GameObject:
@@ -2798,6 +2813,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2101083055}
     m_Modifications:
+    - target: {fileID: 819210364646571906, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: arrowHandler
+      value: 
+      objectReference: {fileID: 1958059601}
+    - target: {fileID: 819210364646571906, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: targetController
+      value: 
+      objectReference: {fileID: 87699217}
     - target: {fileID: 4566925227505613918, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
       propertyPath: m_Name
       value: CardSlot 1
@@ -4046,6 +4069,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2101083055}
     m_Modifications:
+    - target: {fileID: 819210364646571906, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: arrowHandler
+      value: 
+      objectReference: {fileID: 1958059601}
+    - target: {fileID: 819210364646571906, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: targetController
+      value: 
+      objectReference: {fileID: 87699217}
     - target: {fileID: 4566925227505613918, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
       propertyPath: m_Name
       value: CardSlot 5

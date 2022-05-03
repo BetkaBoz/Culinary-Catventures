@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         deck = new List<Card>(player.Deck);
         DrawCards(5);
         AddEnergy(player.MaxEnergy);
+        combinePhase = false;
+        discardPhase = false;
     }
 
     private void AddEnergy(int amount)
