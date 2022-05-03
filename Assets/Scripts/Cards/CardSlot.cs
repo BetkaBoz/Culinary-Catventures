@@ -16,6 +16,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     private Vector3 dragOffset;
     private Vector3 originalPos;
     private Vector3 originalMousePos;
+    private CanvasGroup canvasGroup;
 
     [SerializeField] private Image artworkImage;
     #endregion
@@ -26,6 +27,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     private void Awake()
     {
+        canvasGroup = GetComponent<CanvasGroup>();
         gm = FindObjectOfType<GameManager>();
         cam = Camera.main;
         isDragged = false;
@@ -271,6 +273,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        canvasGroup.blocksRaycasts = false;
         Debug.Log("BEGIN DRAG");
         Select();
     }
@@ -302,6 +305,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        canvasGroup.blocksRaycasts = true;
         Debug.Log("END");
         LayerMask dragTarget = LayerMask.GetMask("DragTarget");
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 1, dragTarget.value);
