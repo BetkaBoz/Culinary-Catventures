@@ -121,10 +121,10 @@ public class GameManager : MonoBehaviour
             //card.MoveToDiscardPile(true);
             SendToDiscard(card, true);
         }
-        foreach (var customer in customers)
-        {
-            customer.EndTurn();
-        }
+        //foreach (var customer in customers)
+        //{
+        //    customer.EndTurn();
+        //}
         hand.Clear();
         DrawCards(5);
         SpendEnergy(player.Energy);

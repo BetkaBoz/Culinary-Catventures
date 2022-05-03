@@ -15,6 +15,6 @@ public class FoodBase : Card
     }
     public override void CardEffect(GameManager gm, RaycastHit2D hit)
     {
-        hit.transform.GetComponent<Customer>().Feed((ushort)this.NutritionPoints);
+        hit.transform.GetComponent<Customer>().Feed(NutritionPoints);
     }
 }

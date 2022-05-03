@@ -2,38 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Customer : MonoBehaviour
+public class Customer : MonoBehaviour, IDropHandler
 {
-    [SerializeField] private ushort maxHunger = 0;
+    [SerializeField] private int maxHunger = 0;
     [SerializeField] private byte turnsUntilAngry = 0;
     [SerializeField] private Text hunger;
-    private ushort currHunger;
+    private int currHunger;
     private byte numTurnsStunned;
 
     private void Awake()
     {
         currHunger = maxHunger;
         numTurnsStunned = 0;
-        hunger.text = currHunger.ToString();
+        hunger.text = $"{currHunger}";
     }
 
-    public void Feed(ushort amount)
+    public void Feed(int amount)
     {
-        if(currHunger >= amount)
-        {
-            currHunger -= amount;
-        }
-        else
-        {
-            currHunger -= currHunger;
-        }
-        if(numTurnsStunned <= 0)
-        {
-            numTurnsStunned++;
-        }
+        currHunger = currHunger >= amount ? currHunger - amount : 0;
+        if (numTurnsStunned <= 0) numTurnsStunned++; 
         Debug.Log("Yum yum " + currHunger.ToString() + " " + amount.ToString());
-        hunger.text = currHunger.ToString();
+        hunger.text = $"{currHunger}";
     }
 
     public void EndTurn()
@@ -61,5 +52,10 @@ public class Customer : MonoBehaviour
         {
             Debug.Log("Fok dis shid I'm out");
         }
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        Debug.Log("ide to");
     }
 }
