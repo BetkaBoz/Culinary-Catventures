@@ -158,12 +158,20 @@ public class GameManager : MonoBehaviour
         }
         while (discardPhase)
         {
-            Debug.Log("I'm yealding ova here!");
+            //Debug.Log("I'm yealding ova here! " + discardPhase.ToString());
             await Task.Yield();
         }
         Debug.Log("I'm done mate!");
 
         //StopDiscard();
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            StopDiscard();
+        }
     }
 
     public void StopDiscard()
@@ -177,6 +185,7 @@ public class GameManager : MonoBehaviour
     {
         if (discardPhase)
         {
+            Debug.Log("SET");
             discardController.SelectCard(card);
         }
     }
