@@ -1546,7 +1546,7 @@ GameObject:
   - component: {fileID: 810021250}
   - component: {fileID: 810021249}
   m_Layer: 5
-  m_Name: Combine
+  m_Name: CombineBTN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
