@@ -13,11 +13,16 @@ public abstract class Card : ScriptableObject
     [SerializeField] private Sprite artwork;
     [SerializeField] private int nutritionPoints;
     #endregion
+    #region Getters/Setters
     public int NutritionPoints
     {
         get
         {
             return nutritionPoints;
+        }
+        set
+        {
+            nutritionPoints = value;
         }
     }
     public int HandIndex
@@ -59,6 +64,6 @@ public abstract class Card : ScriptableObject
             return artwork;
         }
     }
-
+    #endregion
     public abstract void CardEffect(GameManager gm, RaycastHit2D hit);
 }

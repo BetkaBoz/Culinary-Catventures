@@ -215,7 +215,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void MoveToDiscardPile(bool isEndTurn)
     {
-        gm.SendToDiscard(this.card, isEndTurn);
+        gm.SendToDiscard(handIndex, isEndTurn);
         //gameObject.SetActive(false);
     }
 
@@ -288,6 +288,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         if (gm.combinePhase) { return; }
         canvasGroup.blocksRaycasts = false;
+        originalPos = this.transform.position;
         //Debug.Log("BEGIN DRAG");
         //Select();
     }
@@ -381,5 +382,10 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                 }
             }
         }
+    }
+
+    public void Hide(bool isHiding)
+    {
+        gameObject.SetActive(!isHiding);
     }
 }

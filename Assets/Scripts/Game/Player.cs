@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     #region Private Vars
     private string className;
@@ -120,29 +120,26 @@ public class Player : MonoBehaviour
         this.vegetarianFoodMod = data.vegetarianFoodMod;
     }
 
-    public bool changeReputation(int amount)
-    {
-        this.reputation += amount;
-        if (this.reputation <= 0)
-        {
-            return true; //true = Player is dead
-        }
-        else
-        {
-            return false; //false = player still lives
-        }
-    }
-
-    public bool changeMoney(int amount)
+    public void changeMoney(int amount)
     {
         this.money += amount;
         if (this.money <= 0)
         {
-            return true; //true = Player is dead
+            Die();
         }
-        else
+    }
+
+    public void TakeDamage(int amount)
+    {
+        reputation += amount;
+        if (reputation <= 0)
         {
-            return false; //false = player still lives
+            Die();
         }
+    }
+
+    public void Die()
+    {
+        Debug.Log("Oh nou I'm ded :(");
     }
 }
