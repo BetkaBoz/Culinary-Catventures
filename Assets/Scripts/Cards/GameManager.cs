@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void HideCardSlot(int idx, bool isHidden)
+    {
+        cardSlots[idx].Hide(isHidden);
+    }
+
     private bool DrawCard()
     {
         Card randCard = deck[Random.Range(0, deck.Count)];
@@ -66,7 +71,7 @@ public class GameManager : MonoBehaviour
                 //randCard.gameObject.SetActive(true);
                 //randCard.transform.position = cardSlots[i].transform.position;
                 cardSlots[i].SetHasBeenPlayed(false);
-                cardSlots[i].gameObject.SetActive(true);
+                HideCardSlot(i, false);
                 cardSlots[i].SetCard(randCard);
                 randCard.HandIndex = i;
                 hand.Add(randCard);
@@ -100,13 +105,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("I DID IT! :)");
     }
 
-    public void SendToDiscard(Card card, bool isEndTurn)
+    public void SendToDiscard(int idx, bool isEndTurn)
     {
-        int idx = card.HandIndex;
+        Card card = cardSlots[idx].GetCard();
         availableCardSlots[idx] = true;
         card.HandIndex = -1;
         //card.SetHasBeenPlayed(false);
-        cardSlots[idx].gameObject.SetActive(false);
+        HideCardSlot(idx, true);
         if (!isEndTurn){
             hand.Remove(card);
         }
@@ -135,7 +140,7 @@ public class GameManager : MonoBehaviour
         foreach (var card in hand)
         {
             //card.MoveToDiscardPile(true);
-            SendToDiscard(card, true);
+            SendToDiscard(card.HandIndex, true);
         }
         //foreach (var customer in customers)
         //{

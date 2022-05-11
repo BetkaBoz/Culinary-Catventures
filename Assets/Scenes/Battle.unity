@@ -3882,7 +3882,7 @@ MonoBehaviour:
   ArrowHeadPrefab: {fileID: 5727427495513789959, guid: 0b3c4c8effd693b478c975c56260f64f, type: 3}
   ArrowNodePrefab: {fileID: 2317772978382087144, guid: 6f8d57a8969e93040b5495faf33f2d18, type: 3}
   arrowNodeNum: 8
-  scaleFactor: 15
+  scaleFactor: 25
 --- !u!1 &1968061641
 GameObject:
   m_ObjectHideFlags: 0

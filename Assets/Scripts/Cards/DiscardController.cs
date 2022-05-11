@@ -10,13 +10,14 @@ public class DiscardController : MonoBehaviour
     [SerializeField] private Transform cardSlot;
     [SerializeField] private GameManager gm;
     [SerializeField] private Button discardBttn;
+
     private CardSlot selectedCard;
 
     public void DiscardCard()
     {
         if(selectedCard != null)
         {
-            gm.SendToDiscard(selectedCard.GetCard(), false);
+            gm.SendToDiscard(selectedCard.GetIndex(), false);
             gm.StopDiscard();
         }
     }
