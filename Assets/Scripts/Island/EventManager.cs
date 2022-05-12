@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
+using TMPro;
 using UnityEngine;
 using Random = System.Random;
 
@@ -9,12 +7,18 @@ public class EventManager : MonoBehaviour
 {
     [SerializeField] bool isChallenge = false;
     [SerializeField] EventType eventType;
+    [SerializeField] TextMeshProUGUI  BtnPrompt;
     [SerializeField] private int timeCost = 1;
 
+    private IslandManager islandManager;
+    private bool isOnEvent = false;
+    private bool isUsed = false;
     void Start()
     {
         if (isChallenge) this.eventType = EventType.Challenge;
         else assignRandomType();
+        
+        islandManager = FindObjectOfType<IslandManager>();
     }
 
     public void assignRandomType()
@@ -26,13 +30,18 @@ public class EventManager : MonoBehaviour
 
     void Update()
     {
+        if (isOnEvent && !isUsed && Input.GetButtonDown("Jump"))
+        {
+            isUsed = true;
+            ClearBtnPrompt();
+            SwitchEvent();
+            islandManager.lowerTime(timeCost);
+        }
     }
-
-    private void OnTriggerEnter2D(Collider2D col)
+    
+    
+    private void SwitchEvent()
     {
-        IslandManager islandManager = FindObjectOfType<IslandManager>();
-        islandManager.lowerTime(timeCost);
-        
         switch (eventType)
         {
             case EventType.Merchant:
@@ -54,6 +63,23 @@ public class EventManager : MonoBehaviour
                 Debug.Log("What are you doing here?");
                 break;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(!isUsed) BtnPrompt.text = "Press SPACE to do stuff";
+        isOnEvent = true;
+    }
+    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        ClearBtnPrompt();
+        isOnEvent = false;
+    }
+    
+    private void ClearBtnPrompt()
+    {
+        BtnPrompt.text = "";
     }
 
     enum EventType : int
