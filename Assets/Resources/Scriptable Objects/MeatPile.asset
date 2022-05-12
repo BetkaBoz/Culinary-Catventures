@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44d8e82a9d0e754cade3c1e69e75da9, type: 3}
   m_Name: MeatPile
   m_EditorClassIdentifier: 
-  cardName: 
+  cardName: Meat Pile
   energyCost: 0
-  canTarget: 0
-  artwork: {fileID: 0}
+  canTarget: 1
+  artwork: {fileID: 21300000, guid: 7459f809d6dff8f43bf85eaa625bf278, type: 3}
   nutritionPoints: 0
-  foodType: 
+  cardType: Meat

@@ -10,6 +10,14 @@ public class DiscardController : MonoBehaviour
     [SerializeField] private Transform cardSlot;
     [SerializeField] private GameManager gm;
     [SerializeField] private Button discardBttn;
+    private string[] filter;
+    public string[] Filter
+    {
+        set
+        {
+            filter = value;
+        }
+    }
 
     private CardSlot selectedCard;
 
@@ -42,12 +50,27 @@ public class DiscardController : MonoBehaviour
 
     public void SelectCard(CardSlot otherSelectedCard)
     {
-        if(this.selectedCard != null)
+        if (IsinFilter(otherSelectedCard.GetCard().CardType))
         {
-            this.selectedCard.Deselect();
+            if (this.selectedCard != null)
+            {
+                this.selectedCard.Deselect();
+            }
+            this.selectedCard = otherSelectedCard;
+            this.selectedCard.transform.position = new Vector3(this.cardSlot.position.x, this.cardSlot.position.y, this.selectedCard.transform.position.z);
+            discardBttn.interactable = true;
         }
-        this.selectedCard = otherSelectedCard;
-        this.selectedCard.transform.position = new Vector3 (this.cardSlot.position.x, this.cardSlot.position.y, this.selectedCard.transform.position.z);
-        discardBttn.interactable = true;
+    }
+
+    private bool IsinFilter(string selectedCardType)
+    {
+        for(int i = 0; i < filter.Length; i++)
+        {
+            if(selectedCardType == filter[i])
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

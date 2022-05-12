@@ -12,8 +12,16 @@ public abstract class Card : ScriptableObject
     [SerializeField] private bool canTarget = false;
     [SerializeField] private Sprite artwork;
     [SerializeField] private int nutritionPoints;
+    [SerializeField] private string cardType;
     #endregion
     #region Getters/Setters
+    public string CardType
+    {
+        get
+        {
+            return cardType;
+        }
+    }
     public int NutritionPoints
     {
         get

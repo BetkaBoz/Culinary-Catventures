@@ -12,6 +12,7 @@ public class CombineController : MonoBehaviour
     [SerializeField] private GameManager gm;
     //[SerializeField] private ManouverTargetController targetController; 
     [SerializeField] private Button combineBttn;
+    private Card result;
 
     //This class is used to load individual entries in the JSON file
     [System.Serializable]
@@ -81,7 +82,7 @@ public class CombineController : MonoBehaviour
 
     //Functions calls LookForCard to see if the selected combination is in the JSON file
     //If yes then show found card 
-    public void FindCard(string[] find)
+    public void FindCard(string[] find, string[] types)
     {
         //This is here because there are no 1 card combination
         //Also it will reset the shown card (aka hides it)
@@ -95,30 +96,49 @@ public class CombineController : MonoBehaviour
             return;
         }
         string found = LookForCard(find);
-        Card foundCard = null;
+        Debug.Log(found);
         if (found != "NOTHING")
         {
-            Debug.Log(found);
-            //Right now we can only combine food, might change it later if we decide to combine manouvers
-            foundCard = Resources.Load<FoodBase>("Scriptable Objects/" + found);
-            if (foundCard != null)
+            LoadPreviewCard(found);
+        }
+        else
+        {
+            Debug.Log("Yo I'm here");
+            switch (GetPileType(types))
             {
-                if (!findSlot.gameObject.activeSelf)
-                {
-                    findSlot.gameObject.SetActive(true);
-                }
-                findSlot.SetCard(foundCard);
-                combineBttn.interactable = true;
+                case "Meat":
+                    LoadPreviewCard("MeatPile");
+                    break;
+                case "Vegetarian":
+                    LoadPreviewCard("VeggiePile");
+                    break;
+                default:
+                    LoadPreviewCard("FoodPile");
+                    break;
             }
-            else
+            result.NutritionPoints = gm.GetComboNP(true);
+            findSlot.SetCard(result);
+            //if (findSlot.gameObject.activeSelf)
+            //{
+            //    findSlot.gameObject.SetActive(false);
+            //}
+            //combineBttn.interactable = false;
+        }
+    }
+
+    private void LoadPreviewCard(string target)
+    {
+        Card foundCard = null;
+        //Right now we can only combine food, might change it later if we decide to combine manouvers
+        foundCard = Resources.Load<FoodBase>("Scriptable Objects/" + target);
+        if (foundCard != null)
+        {
+            if (!findSlot.gameObject.activeSelf)
             {
-                //This is here just in case (program never got here so far)
-                if (findSlot.gameObject.activeSelf)
-                {
-                    findSlot.gameObject.SetActive(false);
-                }
-                combineBttn.interactable = false;
+                findSlot.gameObject.SetActive(true);
             }
+            findSlot.SetCard(foundCard);
+            combineBttn.interactable = true;
         }
         else
         {
@@ -129,6 +149,31 @@ public class CombineController : MonoBehaviour
             }
             combineBttn.interactable = false;
         }
+        result = foundCard;
+    }
+
+    private string GetPileType(string[] types)
+    {
+        bool isMeat = false;
+        bool isVeggie = false;
+        for(int i = 0; i < types.Length; i++)
+        {
+            if (types[i] == "Meat")
+                isMeat = true;
+            if (types[i] == "Vegetarian")
+                isVeggie = true;
+            if (types[i] == "Mix")
+            {
+                isVeggie = true;
+                isMeat = true;
+                break; //no need to look further we know it will be mixed food
+            }
+        }
+        if (isMeat == isVeggie)
+            return "Mix";
+        if (isMeat)
+            return "Meat";
+        return "Vegetarian";
     }
 
     //Functions checks if the combination of selected cards is in the JSON file
@@ -161,6 +206,6 @@ public class CombineController : MonoBehaviour
     //Combines the card and sends it to players hand
     public void CombineCard()
     {
-        gm.CombineCards(findSlot.GetCard());
+        gm.CombineCards(result);
     }
 }

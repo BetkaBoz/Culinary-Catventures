@@ -18,6 +18,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     private CanvasGroup canvasGroup;
 
     [SerializeField] private Image artworkImage;
+    [SerializeField] private Image[] energyImage;
     [SerializeField] private GameManager gm;
     #endregion
     [SerializeField] private ArrowHandler arrowHandler;
@@ -58,6 +59,24 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             this.nutritionalValue.text = otherCard.NutritionPoints.ToString();
         }
         this.artworkImage.sprite = otherCard.Artwork;
+        UpdateEnergy();
+    }
+
+    private void UpdateEnergy()
+    {
+        int numOfEnergy = card.EnergyCost;
+        for(int i = 0; i < energyImage.Length; i++)
+        {
+            if (numOfEnergy > 0)
+            {
+                numOfEnergy--;
+                energyImage[i].enabled = true;
+            }
+            else
+            {
+                energyImage[i].enabled = false;
+            }
+        }
     }
 
     public Card GetCard()

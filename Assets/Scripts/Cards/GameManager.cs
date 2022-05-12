@@ -120,13 +120,13 @@ public class GameManager : MonoBehaviour
         discardPile.Add(card);
     }
 
-    public void SendToExhaust(Card card)
+    public void SendToExhaust(int idx)
     {
-        int idx = card.HandIndex;
+        Card card = cardSlots[idx].GetCard();
         availableCardSlots[idx] = true;
         card.HandIndex = -1;
         //card.SetHasBeenPlayed(false);
-        cardSlots[idx].gameObject.SetActive(false);
+        HideCardSlot(idx, true);
         hand.Remove(card);
         exhaustPile.Add(card);
     }
@@ -188,6 +188,11 @@ public class GameManager : MonoBehaviour
         discardPhase = false;
     }
 
+    public void SetDiscardFilter(string[] filter)
+    {
+        discardController.Filter = filter;
+    }
+
     public void SetCard(CardSlot card)
     {
         if (discardPhase)
@@ -230,15 +235,22 @@ public class GameManager : MonoBehaviour
     public void FindCombineTarget()
     {
         List<string> find = new List<string>();
+        List<string> types = new List<string>();
+        Card card;
 
         for (int i = 0; i < cardSlots.Length; i++)
         {
             if (cardSlots[i].Selected)
             {
+                card = cardSlots[i].GetCard();
+                //if(card.CardType != "Manoeuvre")
+                //{
                 find.Add(cardSlots[i].GetCard().CardName);
+                types.Add(cardSlots[i].GetCard().CardType);
+                //}
             }
         }
-        combineController.FindCard(find.ToArray());
+        combineController.FindCard(find.ToArray(), types.ToArray());
     }
 
     public void CombineCards(Card target)
@@ -248,7 +260,7 @@ public class GameManager : MonoBehaviour
             if (cardSlots[i].Selected)
             {
                 cardSlots[i].Deselect();
-                SendToExhaust(cardSlots[i].GetCard());
+                SendToExhaust(i);
             }
         }
         for (int i = 0; i < availableCardSlots.Length; i++)
@@ -265,5 +277,25 @@ public class GameManager : MonoBehaviour
             }
         }
         ToggleCombine();
+    }
+
+    public int GetComboNP(bool isPile)
+    {
+        int result = 0;
+        for (int i = 0; i < cardSlots.Length; i++)
+        {
+            if (cardSlots[i].Selected)
+            {
+                result += cardSlots[i].GetCard().NutritionPoints;
+            }
+        }
+        if (isPile)
+        {
+            return result + (int)(result * 0.25f);
+        }
+        else
+        {
+            return result + (int)(result * 0.5f);
+        }
     }
 }
