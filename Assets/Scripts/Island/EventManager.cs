@@ -9,6 +9,15 @@ public class EventManager : MonoBehaviour
     [SerializeField] EventType eventType;
     [SerializeField] TextMeshProUGUI  BtnPrompt;
     [SerializeField] private int timeCost = 1;
+    
+    
+    [SerializeField] private Sprite spriteRandom;
+    [SerializeField] private Sprite spriteMerchant;
+    [SerializeField] private Sprite spriteHarvest;
+    [SerializeField] private Sprite spriteChallenge;
+
+    
+    
 
     private IslandManager islandManager;
     private bool isOnEvent = false;
@@ -17,7 +26,7 @@ public class EventManager : MonoBehaviour
     {
         if (isChallenge) this.eventType = EventType.Challenge;
         else assignRandomType();
-        
+        assignSprite();
         islandManager = FindObjectOfType<IslandManager>();
     }
 
@@ -28,6 +37,36 @@ public class EventManager : MonoBehaviour
         this.eventType = (EventType) values.GetValue(random.Next(values.Length - 1));
     }
 
+
+    public void assignSprite()
+    {
+        switch (eventType)
+        {
+            case EventType.Merchant:
+                Debug.Log("MERCHANT");
+                GetComponent<SpriteRenderer>().sprite =  spriteMerchant;
+                break;
+            case EventType.Random:
+                Debug.Log("RANDOM EVENT");
+                GetComponent<SpriteRenderer>().sprite =  spriteRandom;
+
+                break;
+            case EventType.Harvest:
+                Debug.Log("HARVEST");
+                GetComponent<SpriteRenderer>().sprite =  spriteHarvest;
+
+                break;
+            case EventType.Challenge:
+                Debug.Log("CHALLENGE");
+                GetComponent<SpriteRenderer>().sprite =  spriteChallenge;
+
+                break;
+            default:
+                Debug.Log("What are you doing here?");
+                break;
+        }
+    }
+    
     void Update()
     {
         if (isOnEvent && !isUsed && Input.GetButtonDown("Jump"))
@@ -45,19 +84,16 @@ public class EventManager : MonoBehaviour
         switch (eventType)
         {
             case EventType.Merchant:
-                Debug.Log("Buy shit!");
+                Debug.Log("MERCHANT");
                 break;
-            case EventType.Academy:
-                Debug.Log("Learn shit!");
+            case EventType.Random:
+                Debug.Log("RANDOM EVENT");
                 break;
-            case EventType.Forest:
-                Debug.Log("Lose shit!");
-                break;
-            case EventType.Lava:
-                Debug.Log("Shit yourself!");
+            case EventType.Harvest:
+                Debug.Log("HARVEST");
                 break;
             case EventType.Challenge:
-                Debug.Log("Betka ma bije!");
+                Debug.Log("CHALLENGE");
                 break;
             default:
                 Debug.Log("What are you doing here?");
@@ -85,9 +121,9 @@ public class EventManager : MonoBehaviour
     enum EventType : int
     {
         Merchant = 1,
-        Academy = 2,
-        Forest = 3,
-        Lava = 4,
+        Random = 2,
+        Harvest = 3,
+
 
         Challenge = 10
     }

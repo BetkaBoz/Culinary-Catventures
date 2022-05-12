@@ -116,3 +116,7 @@ MonoBehaviour:
   eventType: 0
   BtnPrompt: {fileID: 0}
   timeCost: 1
+  spriteRandom: {fileID: 21300000, guid: 5df97710e01278544bc25e1362752be9, type: 3}
+  spriteMerchant: {fileID: 21300000, guid: 3b57da7279fc7f940b8eb4dc29179269, type: 3}
+  spriteHarvest: {fileID: 21300000, guid: 79b8ec930e625dc4d846848b2b60a0ee, type: 3}
+  spriteChallenge: {fileID: 21300000, guid: 996ae53fa256f7b4b9c71ab3d6f43bce, type: 3}
