@@ -56,16 +56,17 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         }
         else
         {
-            this.nutritionalValue.text = otherCard.NutritionPoints.ToString();
+            this.nutritionalValue.text = ""+otherCard.NutritionPoints;
         }
         this.artworkImage.sprite = otherCard.Artwork;
         UpdateEnergy();
+        //UpdateNP();
     }
 
     private void UpdateEnergy()
     {
         int numOfEnergy = card.EnergyCost;
-        for(int i = 0; i < energyImage.Length; i++)
+        for (int i = 0; i < energyImage.Length; i++)
         {
             if (numOfEnergy > 0)
             {
@@ -78,6 +79,13 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             }
         }
     }
+
+    //public void UpdateNP()
+    //{
+    //    int result;
+    //    result = card.NutritionPoints * 
+    //    this.nutritionalValue.text
+    //}
 
     public Card GetCard()
     {
