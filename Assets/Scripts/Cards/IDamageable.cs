@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IDamageable
 {
     void TakeDamage(int amount);
-    void Die();
+    void Die(bool status);
 }

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
-public class Customer : MonoBehaviour, IDropHandler
+public class Customer : MonoBehaviour, IDropHandler, IDamageable
 {
     [SerializeField] private int maxHunger = 0;
     [SerializeField] private byte turnsUntilAngry = 0;
@@ -21,10 +22,7 @@ public class Customer : MonoBehaviour, IDropHandler
 
     public void Feed(int amount)
     {
-        currHunger = currHunger >= amount ? currHunger - amount : 0;
-        if (numTurnsStunned <= 0) numTurnsStunned++; 
-        Debug.Log("Yum yum " + currHunger.ToString() + " " + amount.ToString());
-        hunger.text = $"{currHunger}";
+        TakeDamage(amount);
     }
 
     public void EndTurn()
@@ -50,6 +48,7 @@ public class Customer : MonoBehaviour, IDropHandler
         }
         else
         {
+            Die(true);
             Debug.Log("Fok dis shid I'm out");
         }
     }
@@ -57,5 +56,25 @@ public class Customer : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("ide to");
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currHunger = currHunger >= amount ? currHunger - amount : 0;
+        if (numTurnsStunned <= 0) numTurnsStunned++;
+        Debug.Log("Yum yum " + currHunger.ToString() + " " + amount.ToString());
+        hunger.text = $"{currHunger}";
+
+        if (currHunger ==  0)
+        {
+            Die(true);
+            //++money and rep
+        }
+    }
+
+    public void Die(bool status)
+    {
+        GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 2f)
+            .OnComplete(() => { Destroy(gameObject); });
     }
 }

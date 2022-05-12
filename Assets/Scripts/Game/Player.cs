@@ -125,7 +125,7 @@ public class Player : MonoBehaviour, IDamageable
         this.money += amount;
         if (this.money <= 0)
         {
-            Die();
+            Die(false);
         }
     }
 
@@ -134,11 +134,11 @@ public class Player : MonoBehaviour, IDamageable
         reputation += amount;
         if (reputation <= 0)
         {
-            Die();
+            Die(true);
         }
     }
 
-    public void Die()
+    public void Die(bool status)
     {
         Debug.Log("Oh nou I'm ded :(");
     }
