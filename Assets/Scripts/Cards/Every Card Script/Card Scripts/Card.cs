@@ -49,6 +49,10 @@ public abstract class Card : ScriptableObject
         {
             return energyCost;
         }
+        set
+        {
+            energyCost = value;
+        }
     }
     public bool CanTarget
     {

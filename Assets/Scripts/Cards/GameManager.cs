@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Customer> customers = new List<Customer>();
     [SerializeField] private CardSlot[] cardSlots;
     [SerializeField] private bool[] availableCardSlots;
-    [SerializeField] private Text energyUI;
+    [SerializeField] private TextMeshProUGUI energyUI;
     [SerializeField] private DiscardController discardController;
     [SerializeField] private CombineController combineController;
     public bool discardPhase;
@@ -107,6 +108,7 @@ public class GameManager : MonoBehaviour
 
     public void SendToDiscard(int idx, bool isEndTurn)
     {
+        ////Debug.Log("idx:"+idx);
         Card card = cardSlots[idx].GetCard();
         availableCardSlots[idx] = true;
         card.HandIndex = -1;

@@ -8,17 +8,17 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 {
     #region PrivateVars
     private bool hasBeenPlayed;
-    private int handIndex;
-    private GameManager gm;
+    //private int handIndex;
     private bool isDragged = false;
     private bool isSelected = false;
     private Camera cam;
     private Vector3 dragOffset;
     private Vector3 originalPos;
-    private Vector3 originalMousePos;
+    //private Vector3 originalMousePos;
     private CanvasGroup canvasGroup;
 
     [SerializeField] private Image artworkImage;
+    [SerializeField] private GameManager gm;
     #endregion
     [SerializeField] private ArrowHandler arrowHandler;
     [SerializeField] private ManouverTargetController targetController;
@@ -36,7 +36,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        gm = FindObjectOfType<GameManager>();
+        //gm = FindObjectOfType<GameManager>();
         cam = Camera.main;
         isDragged = false;
         isSelected = false;
@@ -70,135 +70,135 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     }
 
     #region OldDragNDrop
-    private void OnMouseDown()
-    {
-        //Debug.Log(canTarget.ToString());
-        if (this.isSelected)
-        {
-            isSelected = false;
-            this.transform.position = originalPos;
-        }
-        else
-        {
-            originalPos = this.transform.position;
-            if (gm.discardPhase)
-            {
-                dragOffset = this.transform.position - GetMousePos();
-                isSelected = false;
-                isDragged = true;
-            }
-            else
-            {
-                if (!card.CanTarget)
-                {
-                    targetController.setPos(false);
-                    dragOffset = this.transform.position - GetMousePos();
-                    //this.isDragged = true;
-                }
-                isSelected = true;
-                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
-            }
-        }
-        originalMousePos = GetMousePos();
-    }
+    //private void OnMouseDown()
+    //{
+    //    //Debug.Log(canTarget.ToString());
+    //    if (this.isSelected)
+    //    {
+    //        isSelected = false;
+    //        this.transform.position = originalPos;
+    //    }
+    //    else
+    //    {
+    //        originalPos = this.transform.position;
+    //        if (gm.discardPhase)
+    //        {
+    //            dragOffset = this.transform.position - GetMousePos();
+    //            isSelected = false;
+    //            isDragged = true;
+    //        }
+    //        else
+    //        {
+    //            if (!card.CanTarget)
+    //            {
+    //                targetController.setPos(false);
+    //                dragOffset = this.transform.position - GetMousePos();
+    //                //this.isDragged = true;
+    //            }
+    //            isSelected = true;
+    //            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+    //        }
+    //    }
+    //    originalMousePos = GetMousePos();
+    //}
 
-    private void OnMouseDrag()
-    {
-        if (this.isSelected && (originalMousePos != GetMousePos()))
-        {
-            this.isDragged = true;
-        }
-        if (this.isDragged)
-        {
-            if (this.card.CanTarget && !gm.discardPhase)
-            {
-                if (!arrowHandler.isVisible)
-                {
-                    arrowHandler.setVisibile(true);
-                    arrowHandler.SetOrigin(new Vector2(this.transform.position.x, this.transform.position.y));
-                }
-            }
-            else
-            {
-                this.transform.position = GetMousePos() + dragOffset;
-            }
+    //private void OnMouseDrag()
+    //{
+    //    if (this.isSelected && (originalMousePos != GetMousePos()))
+    //    {
+    //        this.isDragged = true;
+    //    }
+    //    if (this.isDragged)
+    //    {
+    //        if (this.card.CanTarget && !gm.discardPhase)
+    //        {
+    //            if (!arrowHandler.isVisible)
+    //            {
+    //                arrowHandler.setVisibile(true);
+    //                arrowHandler.SetOrigin(new Vector2(this.transform.position.x, this.transform.position.y));
+    //            }
+    //        }
+    //        else
+    //        {
+    //            this.transform.position = GetMousePos() + dragOffset;
+    //        }
 
-        }
-    }
+    //    }
+    //}
 
-    private void OnMouseUp()
-    {
-        LayerMask dragTarget = LayerMask.GetMask("DragTarget");
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 1, dragTarget.value);
-        if (hit.collider != null)
-        {
-            if (gm.discardPhase)
-            {
-                gm.SetCard(this);
-                this.isSelected = true;
-            }
-            else
-            {
-                if (card.CanTarget)
-                {
-                    if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
-                    {
-                        hasBeenPlayed = true;
-                        this.card.CardEffect(gm, hit);
-                        MoveToDiscardPile(false);
-                        arrowHandler.setVisibile(false);
-                    }
-                }
-                else
-                {
-                    if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
-                    {
-                        hasBeenPlayed = true;
-                        this.card.CardEffect(gm, hit);
-                        MoveToDiscardPile(false);
-                    }
-                    else
-                    {
-                        this.transform.position = this.originalPos;
-                    }
-                    if (!gm.discardPhase)
-                    {
-                        targetController.setPos(true);
-                    }
-                }
-                this.isDragged = false;
-                this.isSelected = false;
-                this.transform.position = this.originalPos;
-            }
+    //private void OnMouseUp()
+    //{
+    //    LayerMask dragTarget = LayerMask.GetMask("DragTarget");
+    //    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 1, dragTarget.value);
+    //    if (hit.collider != null)
+    //    {
+    //        if (gm.discardPhase)
+    //        {
+    //            gm.SetCard(this);
+    //            this.isSelected = true;
+    //        }
+    //        else
+    //        {
+    //            if (card.CanTarget)
+    //            {
+    //                if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
+    //                {
+    //                    hasBeenPlayed = true;
+    //                    this.card.CardEffect(gm, hit);
+    //                    MoveToDiscardPile(false);
+    //                    arrowHandler.setVisibile(false);
+    //                }
+    //            }
+    //            else
+    //            {
+    //                if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
+    //                {
+    //                    hasBeenPlayed = true;
+    //                    this.card.CardEffect(gm, hit);
+    //                    MoveToDiscardPile(false);
+    //                }
+    //                else
+    //                {
+    //                    this.transform.position = this.originalPos;
+    //                }
+    //                if (!gm.discardPhase)
+    //                {
+    //                    targetController.setPos(true);
+    //                }
+    //            }
+    //            this.isDragged = false;
+    //            this.isSelected = false;
+    //            this.transform.position = this.originalPos;
+    //        }
 
-        }
-        else
-        {
-            if (card.CanTarget && !gm.discardPhase)
-            {
-                arrowHandler.setVisibile(false);
-            }
-            else
-            {
-                if (isDragged)
-                {
-                    this.transform.position = this.originalPos;
-                }
-            }
-        }
-    }
+    //    }
+    //    else
+    //    {
+    //        if (card.CanTarget && !gm.discardPhase)
+    //        {
+    //            arrowHandler.setVisibile(false);
+    //        }
+    //        else
+    //        {
+    //            if (isDragged)
+    //            {
+    //                this.transform.position = this.originalPos;
+    //            }
+    //        }
+    //    }
+    //}
     #endregion
 
     #region IndexGetSet
-    public void SetIndex(int handIndex)
-    {
-        this.handIndex = handIndex;
-    }
+    //public void SetIndex(int handIndex)
+    //{
+    //    this.handIndex = handIndex;
+    //}
 
-    public int GetIndex()
-    {
-        return this.handIndex;
-    }
+    //public int GetIndex()
+    //{
+    //    return this.handIndex;
+    //}
     #endregion
 
     private Vector3 GetMousePos()
@@ -215,7 +215,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void MoveToDiscardPile(bool isEndTurn)
     {
-        gm.SendToDiscard(handIndex, isEndTurn);
+        gm.SendToDiscard(card.HandIndex, isEndTurn);
         //gameObject.SetActive(false);
     }
 
@@ -281,14 +281,16 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             //isSelected = true;
             //this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
         }
-        originalMousePos = GetMousePos();
+        //originalMousePos = GetMousePos();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        //you can only select cards (by clicking) during select phase
         if (gm.combinePhase) { return; }
         canvasGroup.blocksRaycasts = false;
         originalPos = this.transform.position;
+        //Debug.Log("idx:" + card.HandIndex);
         //Debug.Log("BEGIN DRAG");
         //Select();
     }
@@ -299,10 +301,12 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         if (gm.combinePhase) { return; }
         //if (this.isSelected && (originalMousePos != GetMousePos()))
         //{
-            this.isDragged = true;
+        //the whole isDragged thing might be useless now
+        this.isDragged = true;
         //}
         if (this.isDragged)
         {
+            //if you are a manouver or if you have to discard a card don't use targeting arrows
             if (this.card.CanTarget && !gm.discardPhase)
             {
                 if (!arrowHandler.isVisible)
@@ -342,8 +346,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                         hasBeenPlayed = true;
                         this.card.CardEffect(gm, hit);
                         MoveToDiscardPile(false);
-                        arrowHandler.setVisibile(false);
                     }
+                    arrowHandler.setVisibile(false);
                 }
                 else
                 {
@@ -364,7 +368,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                 }
                 this.isDragged = false;
                 this.isSelected = false;
-                this.transform.position = this.originalPos;
+                //this.transform.position = this.originalPos;
             }
 
         }
@@ -386,6 +390,14 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void Hide(bool isHiding)
     {
+        if (isHiding)
+        {
+            Debug.Log("psst I'm hiding");
+        }
+        else
+        {
+            Debug.Log("Yahaha you've found me!");
+        }
         gameObject.SetActive(!isHiding);
     }
 }
