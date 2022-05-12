@@ -17,4 +17,4 @@ MonoBehaviour:
   canTarget: 1
   artwork: {fileID: 21300000, guid: d46ebdc5f9bd31a41976d0ca14a755d4, type: 3}
   nutritionPoints: 8
-  foodType: Vegeterian
+  cardType: Vegetarian

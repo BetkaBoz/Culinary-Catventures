@@ -17,3 +17,4 @@ MonoBehaviour:
   canTarget: 0
   artwork: {fileID: 21300000, guid: fd4a074f7983bd54482c06d3f849a4a8, type: 3}
   nutritionPoints: -1
+  cardType: Manoeuvre
