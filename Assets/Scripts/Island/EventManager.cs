@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public class EventManager : MonoBehaviour
@@ -15,6 +16,16 @@ public class EventManager : MonoBehaviour
     [SerializeField] private Sprite spriteMerchant;
     [SerializeField] private Sprite spriteHarvest;
     [SerializeField] private Sprite spriteChallenge;
+    
+    //EVENT WINDOW
+    [SerializeField] private GameObject  eventWindow;
+
+    [SerializeField] private Sprite spriteEventImg;
+    [SerializeField] private TextMeshProUGUI  eventWindowName;
+    [SerializeField] private TextMeshProUGUI  eventWindowText;
+    [SerializeField] private TextMeshProUGUI eventFirstButtontext;
+    [SerializeField] private TextMeshProUGUI eventSecondButtontext;
+    [SerializeField] private TextMeshProUGUI eventThirdButtontext;
 
     
     
@@ -24,6 +35,10 @@ public class EventManager : MonoBehaviour
     private bool isUsed = false;
     void Start()
     {
+       
+
+        //spriteEventImg = eventWindow.GetComponentInChildren()
+
         if (isChallenge) this.eventType = EventType.Challenge;
         else assignRandomType();
         assignSprite();
@@ -40,25 +55,27 @@ public class EventManager : MonoBehaviour
 
     public void assignSprite()
     {
+        Image imageComponent = GetComponent<Image>();
+
         switch (eventType)
         {
             case EventType.Merchant:
                 Debug.Log("MERCHANT");
-                GetComponent<SpriteRenderer>().sprite =  spriteMerchant;
+                imageComponent.sprite  =  spriteMerchant;
                 break;
             case EventType.Random:
                 Debug.Log("RANDOM EVENT");
-                GetComponent<SpriteRenderer>().sprite =  spriteRandom;
+                imageComponent.sprite =  spriteRandom;
 
                 break;
             case EventType.Harvest:
                 Debug.Log("HARVEST");
-                GetComponent<SpriteRenderer>().sprite =  spriteHarvest;
+                imageComponent.sprite =  spriteHarvest;
 
                 break;
             case EventType.Challenge:
                 Debug.Log("CHALLENGE");
-                GetComponent<SpriteRenderer>().sprite =  spriteChallenge;
+                imageComponent.sprite =  spriteChallenge;
 
                 break;
             default:
