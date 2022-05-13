@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public enum BattleState { PLAYERTURN, ENEMYTURN, WON, LOST }
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Player player;
@@ -20,6 +22,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CombineController combineController;
     public bool discardPhase;
     public bool combinePhase;
+
+    public BattleState battleState;
+
     public Player Player
     {
         get
@@ -28,18 +33,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private void Start()
     {
-        deck = new List<Card>(player.Deck);
-        for (int i = 0; i < cardSlots.Length; i++)
+        if (customers.Count == 0)
         {
-            cardSlots[i].Hide(true);
+            //if player is not dead then you won
+            battleState = BattleState.WON;
+            //else you lose and its end of game
         }
-        DrawCards(5);
-        AddEnergy(player.MaxEnergy);
-        combinePhase = false;
-        discardPhase = false;
+            
+        else
+        {
+            deck = new List<Card>(player.Deck);
+            for (int i = 0; i < cardSlots.Length; i++)
+            {
+                cardSlots[i].Hide(true);
+            }
+            DrawCards(5);
+            AddEnergy(player.MaxEnergy);
+            combinePhase = false;
+            discardPhase = false;
+
+            battleState = BattleState.PLAYERTURN;
+        }
     }
 
     private void AddEnergy(int amount)
@@ -152,6 +168,9 @@ public class GameManager : MonoBehaviour
         DrawCards(5);
         SpendEnergy(player.Energy);
         AddEnergy(player.MaxEnergy);
+
+        //battleState = BattleState.ENEMYTURN;
+       // StartCoroutine(EnemyTurn());
     }
 
     public void DiscardHand()
@@ -306,5 +325,28 @@ public class GameManager : MonoBehaviour
         {
             return result + (int)(result * 0.5f);
         }
+    }
+
+    public void EndBattle()
+    {
+        if (battleState == BattleState.WON)
+        {
+            Debug.Log("YAY you WON!");
+        }
+        if (battleState == BattleState.LOST)
+        {
+            Debug.Log("wOw you LOST!");
+        }
+
+    }
+
+    public void EnemyTurn()
+    {
+
+    }
+
+    public void customerListDelete(Customer customer)
+    {
+        customers.Remove(customer);
     }
 }

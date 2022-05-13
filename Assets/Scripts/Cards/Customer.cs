@@ -10,6 +10,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     [SerializeField] private int maxHunger = 0;
     [SerializeField] private byte turnsUntilAngry = 0;
     [SerializeField] private Text hunger;
+    [SerializeField] private GameManager gm;
     private int currHunger;
     private byte numTurnsStunned;
 
@@ -74,7 +75,8 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     public void Die(bool status)
     {
-        GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 2f)
-            .OnComplete(() => { Destroy(gameObject); });
+        gm.customerListDelete(this);
+        //GetComponentsInChildren<Image>().DOFade(new Color(0, 0, 0, 0), 1f, 2f).OnComplete(() => { Destroy(gameObject); });
+        GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 2f).OnComplete(() => { Destroy(gameObject); });
     }
 }
