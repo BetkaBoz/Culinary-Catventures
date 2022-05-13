@@ -78,4 +78,18 @@ public abstract class Card : ScriptableObject
     }
     #endregion
     public abstract void CardEffect(GameManager gm, RaycastHit2D hit);
+    public int CalculateNP(GameManager gm)
+    {
+        switch (CardType)
+        {
+            case "Vegetarian":
+                return (int)(nutritionPoints * gm.Player.VegetarianFoodMod);
+            case "Meat":
+                return (int)(nutritionPoints * gm.Player.MeatFoodMod);
+            case "Mix":
+                return (int)(nutritionPoints * gm.Player.GeneralFoodMod);
+            default:
+                return -1;
+        }
+    }
 }

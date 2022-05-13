@@ -20,18 +20,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CombineController combineController;
     public bool discardPhase;
     public bool combinePhase;
-    //public Player Player
-    //{
-    //    get
-    //    {
-    //        return player;
-    //    }
-    //}
+    public Player Player
+    {
+        get
+        {
+            return player;
+        }
+    }
 
 
     private void Start()
     {
         deck = new List<Card>(player.Deck);
+        for (int i = 0; i < cardSlots.Length; i++)
+        {
+            cardSlots[i].Hide(true);
+        }
         DrawCards(5);
         AddEnergy(player.MaxEnergy);
         combinePhase = false;
@@ -139,11 +143,7 @@ public class GameManager : MonoBehaviour
 
     public void EndTurn()
     {
-        foreach (var card in hand)
-        {
-            //card.MoveToDiscardPile(true);
-            SendToDiscard(card.HandIndex, true);
-        }
+        DiscardHand();
         foreach (var customer in customers)
         {
             customer.EndTurn();
@@ -152,6 +152,15 @@ public class GameManager : MonoBehaviour
         DrawCards(5);
         SpendEnergy(player.Energy);
         AddEnergy(player.MaxEnergy);
+    }
+
+    public void DiscardHand()
+    {
+        foreach (var card in hand)
+        {
+            //card.MoveToDiscardPile(true);
+            SendToDiscard(card.HandIndex, true);
+        }
     }
 
     public async Task StartDiscard()
