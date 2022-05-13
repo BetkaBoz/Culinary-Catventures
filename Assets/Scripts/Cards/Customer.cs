@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     private int currHunger;
     private byte numTurnsStunned;
 
+    private bool isDead = false;
+
     private void Awake()
     {
         currHunger = maxHunger;
@@ -26,7 +29,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         TakeDamage(amount);
     }
 
-    public void EndTurn()
+    public bool EndTurn()
     {
         turnsUntilAngry--;
         numTurnsStunned--;
@@ -51,7 +54,10 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         {
             Die(true);
             Debug.Log("Fok dis shid I'm out");
+            return true;
         }
+
+        return false;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -75,8 +81,16 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     public void Die(bool status)
     {
+        if (!isDead)
+        {
+            //GetComponentsInChildren<Image>().DOFade(new Color(0, 0, 0, 0), 1f, 2f).OnComplete(() => { Destroy(gameObject); });
+            isDead = true;
+            GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 5f).OnComplete(() => { Destroy(gameObject); });
+        }
+    }
+
+    private void OnDestroy()
+    {
         gm.customerListDelete(this);
-        //GetComponentsInChildren<Image>().DOFade(new Color(0, 0, 0, 0), 1f, 2f).OnComplete(() => { Destroy(gameObject); });
-        GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 2f).OnComplete(() => { Destroy(gameObject); });
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -160,10 +161,12 @@ public class GameManager : MonoBehaviour
     public void EndTurn()
     {
         DiscardHand();
+        // List<Customer> deadQueue = new List<Customer>();
         foreach (var customer in customers)
         {
             customer.EndTurn();
         }
+        // customers = customers.Except(deadQueue).ToList();
         hand.Clear();
         DrawCards(5);
         SpendEnergy(player.Energy);
