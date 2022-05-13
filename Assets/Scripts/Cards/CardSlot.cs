@@ -60,7 +60,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         }
         this.artworkImage.sprite = otherCard.Artwork;
         UpdateEnergy();
-        //UpdateNP();
+        UpdateNP();
     }
 
     private void UpdateEnergy()
@@ -80,13 +80,13 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         }
     }
 
-    //public void UpdateNP()
-    //{
-    //    int result;
-    //    result = card.NutritionPoints * 
-    //    this.nutritionalValue.text
-    //}
-
+    public void UpdateNP()
+    {
+        int result = card.CalculateNP(gm);
+        if(result != -1)
+            this.nutritionalValue.text = ""+result;
+    }
+    
     public Card GetCard()
     {
         if(card != null)

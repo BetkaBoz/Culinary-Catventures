@@ -9,9 +9,9 @@ public class Player : MonoBehaviour, IDamageable
     private int reputation = 0;
     private int money = 0;
     private int score;
-    private float generalFoodMod;
-    private float meatFoodMod;
-    private float vegetarianFoodMod;
+    [SerializeField] private float generalFoodMod;
+    [SerializeField] private float meatFoodMod;
+    [SerializeField] private float vegetarianFoodMod;
     private int maxEnergy = 3;
     private int energy;
     [SerializeField] private List<Card> deck = new List<Card>();
