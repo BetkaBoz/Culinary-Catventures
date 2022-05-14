@@ -11,7 +11,6 @@ public class EventManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI  BtnPrompt;
     [SerializeField] private int timeCost = 1;
     
-    
     [SerializeField] private Sprite spriteRandom;
     [SerializeField] private Sprite spriteMerchant;
     [SerializeField] private Sprite spriteHarvest;
@@ -27,33 +26,32 @@ public class EventManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI eventSecondButtontext;
     [SerializeField] private TextMeshProUGUI eventThirdButtontext;
 
-    
-    
-
     private IslandManager islandManager;
     private bool isOnEvent = false;
     private bool isUsed = false;
     void Start()
     {
-       
-
         //spriteEventImg = eventWindow.GetComponentInChildren()
 
-        if (isChallenge) this.eventType = EventType.Challenge;
-        else assignRandomType();
-        assignSprite();
+        AssignType();
         islandManager = FindObjectOfType<IslandManager>();
     }
 
-    public void assignRandomType()
+    private void AssignType()
+    {
+        if (isChallenge) this.eventType = EventType.Challenge;
+        else AssignRandomType();
+        AssignSprite();
+    }
+
+    public void AssignRandomType()
     {
         Array values = Enum.GetValues(typeof(EventType));
         Random random = new Random(Guid.NewGuid().GetHashCode());
         this.eventType = (EventType) values.GetValue(random.Next(values.Length - 1));
     }
-
-
-    public void assignSprite()
+    
+    public void AssignSprite()
     {
         Image imageComponent = GetComponent<Image>();
 
@@ -90,13 +88,12 @@ public class EventManager : MonoBehaviour
         {
             isUsed = true;
             ClearBtnPrompt();
-            SwitchEvent();
+            RecognizeAndRunEvent();
             islandManager.lowerTime(timeCost);
         }
     }
     
-    
-    private void SwitchEvent()
+    private void RecognizeAndRunEvent()
     {
         switch (eventType)
         {
@@ -140,7 +137,6 @@ public class EventManager : MonoBehaviour
         Merchant = 1,
         Random = 2,
         Harvest = 3,
-
 
         Challenge = 10
     }
