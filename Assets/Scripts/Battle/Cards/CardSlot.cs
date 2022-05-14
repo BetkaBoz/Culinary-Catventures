@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     #region PrivateVars
     private bool hasBeenPlayed;
     //private int handIndex;
     private bool isDragged = false;
     private bool isSelected = false;
+    private bool isRised = false;
     private Camera cam;
     private Vector3 dragOffset;
     private Vector3 originalPos;
@@ -49,16 +50,16 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void SetCard(Card otherCard)
     {
-        this.card = otherCard;
+        card = otherCard;
         if(otherCard.NutritionPoints == -1)
         {
-            this.nutritionalValue.text = "";
+            nutritionalValue.text = "";
         }
         else
         {
-            this.nutritionalValue.text = ""+otherCard.NutritionPoints;
+            nutritionalValue.text = ""+otherCard.NutritionPoints;
         }
-        this.artworkImage.sprite = otherCard.Artwork;
+        artworkImage.sprite = otherCard.Artwork;
         UpdateEnergy();
         UpdateNP();
     }
@@ -84,7 +85,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         int result = card.CalculateNP(gm);
         if(result != -1)
-            this.nutritionalValue.text = ""+result;
+            nutritionalValue.text = ""+result;
     }
     
     public Card GetCard()
@@ -248,11 +249,12 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void Deselect()
     {
-        if (this.isSelected)
+        if (isSelected)
         {
-            this.transform.position = originalPos;
-            this.isDragged = false;
-            this.isSelected = false;
+            transform.position = originalPos;
+            isDragged = false;
+            isSelected = false;
+            isRised = false;
         }
     }
 
@@ -261,18 +263,19 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         if(card.NutritionPoints == -1) { return; }
         if (!gm.discardPhase && gm.combinePhase)
         {
-            if (this.isSelected)
+            if (isSelected)
             {
                 Debug.Log("wat");
                 isSelected = false;
-                this.transform.position = originalPos;
+                transform.position = originalPos;
             }
             else
             {
                 Debug.Log("yed");
                 isSelected = true;
-                originalPos = this.transform.position;
-                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+                if (isRised) { return; }
+                originalPos = transform.position;
+                transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
             }
         }
     }
@@ -293,7 +296,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         //Debug.Log(canTarget.ToString());
         if (gm.discardPhase)
         {
-            dragOffset = this.transform.position - GetMousePos();
+            dragOffset = transform.position - GetMousePos();
             isSelected = false;
             isDragged = true;
         }
@@ -302,7 +305,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             if (!card.CanTarget)
             {
                 targetController.setPos(false);
-                dragOffset = this.transform.position - GetMousePos();
+                dragOffset = transform.position - GetMousePos();
                 //this.isDragged = true;
             }
             //isSelected = true;
@@ -316,7 +319,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         //you can only select cards (by clicking) during select phase
         if (gm.combinePhase) { return; }
         canvasGroup.blocksRaycasts = false;
-        originalPos = this.transform.position;
+        //originalPos = this.transform.position;
         //Debug.Log("idx:" + card.HandIndex);
         //Debug.Log("BEGIN DRAG");
         //Select();
@@ -329,22 +332,22 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         //if (this.isSelected && (originalMousePos != GetMousePos()))
         //{
         //the whole isDragged thing might be useless now
-        this.isDragged = true;
+        isDragged = true;
         //}
-        if (this.isDragged)
+        if (isDragged)
         {
             //if you are a manouver or if you have to discard a card don't use targeting arrows
-            if (this.card.CanTarget && !gm.discardPhase)
+            if (card.CanTarget && !gm.discardPhase)
             {
                 if (!arrowHandler.isVisible)
                 {
                     arrowHandler.setVisibile(true);
-                    arrowHandler.SetOrigin(new Vector2(this.transform.position.x, this.transform.position.y));
+                    arrowHandler.SetOrigin(new Vector2(transform.position.x, transform.position.y)+Vector2.up);
                 }
             }
             else
             {
-                this.transform.position = GetMousePos() + dragOffset;
+                transform.position = GetMousePos() + dragOffset;
             }
 
         }
@@ -362,7 +365,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             if (gm.discardPhase)
             {
                 gm.SetCard(this);
-                this.isSelected = true;
+                isSelected = true;
             }
             else
             {
@@ -371,30 +374,31 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                     if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
                     {
                         hasBeenPlayed = true;
-                        this.card.CardEffect(gm, hit);
+                        card.CardEffect(gm, hit);
                         MoveToDiscardPile(false);
                     }
                     arrowHandler.setVisibile(false);
+                    Deselect();
                 }
                 else
                 {
                     if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
                     {
                         hasBeenPlayed = true;
-                        this.card.CardEffect(gm, hit);
                         MoveToDiscardPile(false);
+                        card.CardEffect(gm, hit);
                     }
                     else
                     {
-                        this.transform.position = this.originalPos;
+                        transform.position = originalPos;
                     }
                     if (!gm.discardPhase)
                     {
                         targetController.setPos(true);
                     }
                 }
-                this.isDragged = false;
-                this.isSelected = false;
+                isDragged = false;
+                isSelected = false;
                 //this.transform.position = this.originalPos;
             }
 
@@ -409,7 +413,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             {
                 if (isDragged)
                 {
-                    this.transform.position = this.originalPos;
+                    transform.position = originalPos;
                 }
             }
         }
@@ -417,14 +421,24 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void Hide(bool isHiding)
     {
-        if (isHiding)
-        {
-            Debug.Log("psst I'm hiding");
-        }
-        else
-        {
-            Debug.Log("Yahaha you've found me!");
-        }
         gameObject.SetActive(!isHiding);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (isRised) { return;}
+        originalPos = transform.position;
+        transform.position = transform.position + (Vector3.up*0.5f);
+        isRised = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (isDragged || isSelected) { return; }
+        if(Vector2.Distance(GetMousePos(), (transform.position+(Vector3.down*2f))) > 1)
+        {
+            transform.position = originalPos;
+            isRised = false;
+        }
     }
 }

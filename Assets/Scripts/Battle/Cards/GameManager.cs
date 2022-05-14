@@ -202,15 +202,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DeselectAllCards()
+    {
+        for (int i = 0; i < cardSlots.Length; i++)
+        {
+            cardSlots[i].Deselect();
+        }
+    }
+
     public async Task StartDiscard()
     {
         Debug.Log("Start Discard");
         discardController.ToggleDiscard();
         discardPhase = true;
-        for (int i = 0; i < cardSlots.Length; i++)
-        {
-            cardSlots[i].Deselect();
-        }
+        DeselectAllCards();
         while (discardPhase)
         {
             //Debug.Log("I'm yealding ova here! " + discardPhase.ToString());
@@ -267,10 +272,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Start Combine");
         combineController.ToggleCombine();
         combinePhase = true;
-        for (int i = 0; i < cardSlots.Length; i++)
-        {
-            cardSlots[i].Deselect();
-        }
+        DeselectAllCards();
     }
 
     private void StopCombine()
