@@ -7,7 +7,6 @@ using UnityEngine.UI;
 using TMPro;
 
 public enum BattleState { PLAYERTURN, ENEMYTURN, WON, LOST }
-
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Player player;
@@ -23,16 +22,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CombineController combineController;
     public bool discardPhase;
     public bool combinePhase;
-
     public BattleState battleState;
 
-    public Player Player
-    {
-        get
-        {
-            return player;
-        }
-    }
+
+    //public Player Player
+    //{
+    //    get
+    //    {
+    //        return player;
+    //    }
+    //}
+
+    public Player Player => player;      //getter
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
         {
             //if player is not dead then you won
             battleState = BattleState.WON;
+            Debug.Log("YAY YOU WON!");
             //else you lose and its end of game
         }
             
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void AddEnergy(int amount)
+    public void AddEnergy(int amount)
     {
         player.Energy += amount;
         energyUI.text = player.Energy.ToString() + " / " + player.MaxEnergy.ToString();
@@ -79,6 +81,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //----------------- TURN-BASE RELATED CODE ---------------------
+    public void EndPlayersTurn()
+    {
+        DiscardHand();
+        // List<Customer> deadQueue = new List<Customer>();
+        foreach (var customer in customers)
+        {
+            customer.StartTurn();
+        }
+        // customers = customers.Except(deadQueue).ToList();
+        hand.Clear();
+        
+        SpendEnergy(player.Energy);
+        AddEnergy(player.MaxEnergy);
+
+        battleState = BattleState.ENEMYTURN;
+        Debug.Log("ITS ENEMIES TURN");
+    }
+
+    public void EndEnemyTurn()
+    {
+        DrawCards(5);
+
+        foreach (var customer in customers)
+        {
+            customer.EndTurn();
+        }
+
+        battleState = BattleState.PLAYERTURN;
+        Debug.Log("ITS PLAYERS TURN");
+    }
+
+    // ----------------- CARDS RELATED CODE ---------------------
     public void HideCardSlot(int idx, bool isHidden)
     {
         cardSlots[idx].Hide(isHidden);
@@ -156,24 +191,6 @@ public class GameManager : MonoBehaviour
     {
         deck = new List<Card>(discardPile);
         discardPile.Clear();
-    }
-
-    public void EndTurn()
-    {
-        DiscardHand();
-        // List<Customer> deadQueue = new List<Customer>();
-        foreach (var customer in customers)
-        {
-            customer.EndTurn();
-        }
-        // customers = customers.Except(deadQueue).ToList();
-        hand.Clear();
-        DrawCards(5);
-        SpendEnergy(player.Energy);
-        AddEnergy(player.MaxEnergy);
-
-        //battleState = BattleState.ENEMYTURN;
-       // StartCoroutine(EnemyTurn());
     }
 
     public void DiscardHand()
@@ -328,24 +345,6 @@ public class GameManager : MonoBehaviour
         {
             return result + (int)(result * 0.5f);
         }
-    }
-
-    public void EndBattle()
-    {
-        if (battleState == BattleState.WON)
-        {
-            Debug.Log("YAY you WON!");
-        }
-        if (battleState == BattleState.LOST)
-        {
-            Debug.Log("wOw you LOST!");
-        }
-
-    }
-
-    public void EnemyTurn()
-    {
-
     }
 
     public void customerListDelete(Customer customer)

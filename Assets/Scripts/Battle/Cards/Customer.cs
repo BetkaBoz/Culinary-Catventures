@@ -8,25 +8,60 @@ using DG.Tweening;
 
 public class Customer : MonoBehaviour, IDropHandler, IDamageable
 {
-    [SerializeField] private int maxHunger = 0;
-    [SerializeField] private byte turnsUntilAngry = 0;
-    [SerializeField] private Text hunger;
-    [SerializeField] private GameManager gm;
+    [SerializeField] int maxHunger = 0;
+    [SerializeField] byte turnsUntilAngry = 0;
+    [SerializeField] Text hunger;
+    [SerializeField] GameManager gm;
+    [SerializeField] ActionManager ac;
+    [SerializeField] Player player;
+    [SerializeField] Image bubbleAwait;
+    [SerializeField] Image bubbleAction;
+
     private int currHunger;
     private byte numTurnsStunned;
-
+    private bool satisfied;
     private bool isDead = false;
 
+ 
     private void Awake()
     {
+        bubbleAwait.gameObject.SetActive(false);
+        bubbleAction.gameObject.SetActive(true);
+        bubbleAction.DOColor(new Color(0, 0, 0, 0), 5f).OnComplete(() => 
+        {
+            bubbleAwait.gameObject.SetActive(true);
+            bubbleAction.gameObject.SetActive(false); 
+        });
+
         currHunger = maxHunger;
         numTurnsStunned = 0;
         hunger.text = $"{currHunger}";
     }
 
-    public void Feed(int amount)
+    public void Feed(int amount) 
     {
         TakeDamage(amount);
+    }
+
+    public bool StartTurn()
+    {
+        bubbleAwait.gameObject.SetActive(false);
+        if (!satisfied) 
+        {
+            switch (ac.CurrentIndex)
+            {
+                case 0:
+                    player.TakeDamage(-5);
+                    satisfied = true;
+                    break;
+                case 1:
+                    gm.AddEnergy(-1);
+                    satisfied = true;
+                    break;
+            }
+            gm.EndEnemyTurn();
+        }
+        return false;
     }
 
     public bool EndTurn()
@@ -53,6 +88,9 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         else
         {
             Die(true);
+
+            player.TakeDamage(-25);
+
             Debug.Log("Fok dis shid I'm out");
             return true;
         }
@@ -67,6 +105,8 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     public void TakeDamage(int amount)
     {
+        satisfied = true;
+
         currHunger = currHunger >= amount ? currHunger - amount : 0;
         if (numTurnsStunned <= 0) numTurnsStunned++;
         Debug.Log("Yum yum " + currHunger.ToString() + " " + amount.ToString());
@@ -77,15 +117,16 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             Die(true);
             //++money and rep
         }
+        
     }
 
     public void Die(bool status)
     {
         if (!isDead)
         {
-            //GetComponentsInChildren<Image>().DOFade(new Color(0, 0, 0, 0), 1f, 2f).OnComplete(() => { Destroy(gameObject); });
             isDead = true;
-            GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 5f).OnComplete(() => { Destroy(gameObject); });
+            bubbleAwait.DOColor(new Color(0, 0, 0, 0), 2f);
+            GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 2f).OnComplete(() => { Destroy(gameObject); });
         }
     }
 
