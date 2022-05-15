@@ -20,10 +20,10 @@ public class GameManager : MonoBehaviour
 
     public bool discardPhase;
     public int count;
-    private List<Card> deck;
-    private List<Card> discardPile = new List<Card>();
-    private List<Card> hand = new List<Card>();
-    private List<Card> exhaustPile = new List<Card>();
+    [SerializeField] private List<Card> deck;
+    [SerializeField] private List<Card> discardPile = new List<Card>();
+    [SerializeField] private List<Card> hand = new List<Card>();
+    [SerializeField] private List<Card> exhaustPile = new List<Card>();
     public bool combinePhase;
     public BattleState battleState;
     public Player Player => player;      //getter
@@ -91,13 +91,15 @@ public class GameManager : MonoBehaviour
     public void EndPlayersTurn()
     {
         DiscardHand();
+        hand.Clear(); //Cleans the hand so cards don't duplicate FIX!!!
         count = customers.Count-1;
 
         foreach (var customer in customers)
         {
             customer.StartTurn();
         }
-        
+
+        //hand.Clear();
         SpendEnergy(player.Energy);
         AddEnergy(player.MaxEnergy);
 
@@ -169,7 +171,7 @@ public class GameManager : MonoBehaviour
 
     public void SendToDiscard(int idx, bool isEndTurn)
     {
-        ////Debug.Log("idx:"+idx);
+        Debug.Log("idx:"+idx);
         Card card = cardSlots[idx].GetCard();
         availableCardSlots[idx] = true;
         card.HandIndex = -1;
@@ -235,7 +237,11 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            StopDiscard();
+            //StopDiscard();
+            foreach(var card in hand)
+            {
+                Debug.Log(card.HandIndex);
+            }
         }
     }
 

@@ -378,7 +378,6 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                         MoveToDiscardPile(false);
                     }
                     arrowHandler.setVisibile(false);
-                    Deselect();
                 }
                 else
                 {
@@ -399,7 +398,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                 }
                 isDragged = false;
                 isSelected = false;
-                //this.transform.position = this.originalPos;
+                isRised = false;
+                transform.position = originalPos;
             }
 
         }
@@ -409,13 +409,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             {
                 arrowHandler.setVisibile(false);
             }
-            else
-            {
-                if (isDragged)
-                {
-                    transform.position = originalPos;
-                }
-            }
+            isRised = false;
+            transform.position = originalPos;
         }
     }
 
