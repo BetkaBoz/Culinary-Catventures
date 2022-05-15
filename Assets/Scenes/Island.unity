@@ -712,6 +712,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781179812}
   m_CullTransparentMesh: 1
+--- !u!1 &826546654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 798999069868067327, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
+  m_PrefabInstance: {fileID: 3827266121654298481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &826546655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826546654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2debf8d4e3046a4c810486812c44703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &886283829 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8365468295377838716, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
@@ -1508,6 +1525,10 @@ PrefabInstance:
     - target: {fileID: 798999069868067327, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
       propertyPath: m_TagString
       value: EventWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7761319028587943077, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
+      propertyPath: m_Name
+      value: SecondButton
       objectReference: {fileID: 0}
     - target: {fileID: 8365468295377838716, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
       propertyPath: m_Pivot.x

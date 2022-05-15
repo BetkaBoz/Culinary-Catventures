@@ -95,6 +95,7 @@ public class EventManager : MonoBehaviour
     {
         if (isOnEvent && !isUsed && Input.GetButtonDown("Jump"))
         {
+            Time.timeScale = 0;
             isUsed = true;
             ClearBtnPrompt();
             RecognizeAndRunEvent();
