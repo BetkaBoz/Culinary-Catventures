@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
 {
     [SerializeField] float movementSpeed;
     private Rigidbody2D body;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
