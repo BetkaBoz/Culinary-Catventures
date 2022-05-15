@@ -140,7 +140,23 @@ PrefabInstance:
       objectReference: {fileID: 1852367454}
     - target: {fileID: 65602712083082045, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Name
-      value: Customer
+      value: Customer 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -255
+      objectReference: {fileID: 0}
+    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 4028628294751422943, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_RaycastTarget
@@ -171,8 +187,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -310
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5964164950074446246, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Pivot.x
@@ -1207,63 +1235,7 @@ PrefabInstance:
       objectReference: {fileID: 1073939564}
     - target: {fileID: 65602712083082045, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Name
-      value: Customer2
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4092058823310649159, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 48.00003
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 35
+      value: Customer 2
       objectReference: {fileID: 0}
     - target: {fileID: 5964164950074446246, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Pivot.x
@@ -1373,19 +1345,47 @@ PrefabInstance:
       objectReference: {fileID: 1015492633}
     - target: {fileID: 65602712083082045, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Name
-      value: Customer3
+      value: Customer 3
       objectReference: {fileID: 0}
     - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_RootOrder
+      propertyPath: m_LocalRotation.w
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4092058823310649159, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -255
+      objectReference: {fileID: 0}
+    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
+      propertyPath: m_AnchoredPosition.x
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5964164950074446246, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Pivot.x
@@ -5088,10 +5088,11 @@ MonoBehaviour:
   - {fileID: 1805034233}
   availableCardSlots: 01010101010101010101
   energyUI: {fileID: 1229504367}
-  repUI: {fileID: 0}
+  repUI: {fileID: 1753204477}
   discardController: {fileID: 1415203266}
   combineController: {fileID: 1415203271}
   discardPhase: 0
+  count: 0
   combinePhase: 0
   battleState: 0
 --- !u!4 &1912536890
@@ -6104,67 +6105,7 @@ PrefabInstance:
       objectReference: {fileID: 305108869}
     - target: {fileID: 65602712083082045, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Name
-      value: Customer4
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478967375822261197, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4092058823310649159, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 48.000015
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914901193229148083, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 35
+      value: Customer 4
       objectReference: {fileID: 0}
     - target: {fileID: 5964164950074446246, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Pivot.x

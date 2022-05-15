@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] CombineController combineController;
 
     public bool discardPhase;
+    public int count;
     private List<Card> deck;
     private List<Card> discardPile = new List<Card>();
     private List<Card> hand = new List<Card>();
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
             }
             DrawCards(5);
             AddEnergy(player.MaxEnergy);
+            repUI.text = $"{player.Rep}/{player.MaxRep}";
             combinePhase = false;
             discardPhase = false;
 
@@ -73,27 +75,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddRep(int amount)
+    public void HurtPlayer(int amount)
     {
-        player.Rep += amount;
+        player.TakeDamage(amount);
         repUI.text = $"{player.Rep}/{player.MaxRep}";
     }
+
+    //public void AddRep(int amount)
+    //{
+    //    player.Rep = amount;
+    //    repUI.text = $"{player.Rep}/{player.MaxRep}";
+    //}
 
     //----------------- TURN-BASE RELATED CODE ---------------------
     public void EndPlayersTurn()
     {
         DiscardHand();
+        count = customers.Count-1;
 
         foreach (var customer in customers)
         {
             customer.StartTurn();
         }
-
-        hand.Clear();
         
         SpendEnergy(player.Energy);
         AddEnergy(player.MaxEnergy);
-        AddRep(player.Rep);
 
         battleState = BattleState.ENEMYTURN;
         Debug.Log("ITS ENEMIES TURN");

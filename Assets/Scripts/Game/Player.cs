@@ -10,13 +10,13 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float vegetarianFoodMod;
     [SerializeField] List<Card> deck = new List<Card>();
     private string className;
-    //private int reputation = 0;
+    private int reputation = 0;
     private int money = 0;
     private int score;
     private int maxEnergy = 5;
     private int energy;
     private int maxRep = 50;
-    private int rep;
+    private int rep = 50;
     
     #endregion
 
@@ -137,7 +137,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         Player data = this; //just some bs so intelisense works
         this.className = data.className;
-        //this.reputation = data.reputation;
+        this.reputation = data.reputation;
         this.money = data.money;
         this.score = data.score;
         this.generalFoodMod = data.generalFoodMod;

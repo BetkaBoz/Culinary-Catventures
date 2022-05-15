@@ -35,8 +35,6 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     private void Awake()
     {
-        
-
         currHunger = maxHunger;
         numTurnsStunned = 0;
         hunger.text = $"{currHunger}";
@@ -54,7 +52,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             switch (ac.CurrentIndex)
             {
                 case 0:
-                    gm.Player.TakeDamage(5);
+                    gm.HurtPlayer(5);
                     satisfied = true;
                     break;
                 case 1:
@@ -62,7 +60,9 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
                     satisfied = true;
                     break;
             }
-            gm.EndEnemyTurn();
+
+            if (gm.count <= 0) gm.EndEnemyTurn();
+            else gm.count--;
         }
         return false;
     }
