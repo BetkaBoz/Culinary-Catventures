@@ -17,4 +17,4 @@ MonoBehaviour:
   canTarget: 1
   artwork: {fileID: 21300000, guid: 2dc77d9da2ed7fa4881808e34f8dc9e5, type: 3}
   nutritionPoints: 10
-  cardType: Meat
+  foodType: Meat
