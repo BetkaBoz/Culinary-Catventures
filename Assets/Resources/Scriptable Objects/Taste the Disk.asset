@@ -17,3 +17,9 @@ MonoBehaviour:
   canTarget: 0
   artwork: {fileID: 21300000, guid: ff753dad87c3d804ea1a83abde312b83, type: 3}
   nutritionPoints: -1
+  cardType: Manoeuvre
+  amountEnergyGained: 2
+  filter:
+  - Vegetarian
+  - Meat
+  - Mix
