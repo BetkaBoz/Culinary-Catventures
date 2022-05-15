@@ -10,29 +10,21 @@ public enum BattleState { PLAYERTURN, ENEMYTURN, WON, LOST }
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Player player;
+    [SerializeField] List<Customer> customers = new List<Customer>();
+    [SerializeField] CardSlot[] cardSlots;
+    [SerializeField] bool[] availableCardSlots;
+    [SerializeField] TextMeshProUGUI energyUI;
+    [SerializeField] TextMeshProUGUI repUI;
+    [SerializeField] DiscardController discardController;
+    [SerializeField] CombineController combineController;
+
+    public bool discardPhase;
     private List<Card> deck;
     private List<Card> discardPile = new List<Card>();
     private List<Card> hand = new List<Card>();
     private List<Card> exhaustPile = new List<Card>();
-    [SerializeField] private List<Customer> customers = new List<Customer>();
-    [SerializeField] private CardSlot[] cardSlots;
-    [SerializeField] private bool[] availableCardSlots;
-    [SerializeField] private TextMeshProUGUI energyUI;
-    [SerializeField] private DiscardController discardController;
-    [SerializeField] private CombineController combineController;
-    public bool discardPhase;
     public bool combinePhase;
     public BattleState battleState;
-
-
-    //public Player Player
-    //{
-    //    get
-    //    {
-    //        return player;
-    //    }
-    //}
-
     public Player Player => player;      //getter
 
     private void Start()
@@ -64,7 +56,7 @@ public class GameManager : MonoBehaviour
     public void AddEnergy(int amount)
     {
         player.Energy += amount;
-        energyUI.text = player.Energy.ToString() + " / " + player.MaxEnergy.ToString();
+        energyUI.text = $"{player.Energy}/{player.MaxEnergy}";
     }
 
     public bool SpendEnergy(int amount)
@@ -76,25 +68,32 @@ public class GameManager : MonoBehaviour
         else
         {
             player.Energy -= amount;
-            energyUI.text = player.Energy.ToString() + " / " + player.MaxEnergy.ToString();
+            energyUI.text = $"{player.Energy}/{player.MaxEnergy}";
             return true;
         }
+    }
+
+    public void AddRep(int amount)
+    {
+        player.Rep += amount;
+        repUI.text = $"{player.Rep}/{player.MaxRep}";
     }
 
     //----------------- TURN-BASE RELATED CODE ---------------------
     public void EndPlayersTurn()
     {
         DiscardHand();
-        // List<Customer> deadQueue = new List<Customer>();
+
         foreach (var customer in customers)
         {
             customer.StartTurn();
         }
-        // customers = customers.Except(deadQueue).ToList();
+
         hand.Clear();
         
         SpendEnergy(player.Energy);
         AddEnergy(player.MaxEnergy);
+        AddRep(player.Rep);
 
         battleState = BattleState.ENEMYTURN;
         Debug.Log("ITS ENEMIES TURN");

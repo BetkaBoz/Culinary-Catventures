@@ -31,8 +31,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 478967375822261197}
   - {fileID: 5914901193229148083}
+  - {fileID: 478967375822261197}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -96,7 +96,6 @@ MonoBehaviour:
   hunger: {fileID: 0}
   gm: {fileID: 0}
   ac: {fileID: 5127947662343195631}
-  player: {fileID: 0}
   bubbleAwait: {fileID: 4743167894120093829}
   bubbleAction: {fileID: 4028628294751422943}
 --- !u!61 &3719504316910534307
@@ -137,7 +136,7 @@ GameObject:
   - component: {fileID: 1662449947950501}
   - component: {fileID: 4028628294751422943}
   - component: {fileID: 5127947662343195631}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BubbleAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +155,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5964164950074446246}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -185,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -229,7 +228,7 @@ GameObject:
   - component: {fileID: 8877854660695639776}
   - component: {fileID: 4743167894120093829}
   - component: {fileID: 4882964528873434880}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: BubbleAwait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +247,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5964164950074446246}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -305,3 +304,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53cfff5d9a0951469b2186dc56543f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleAwait: {fileID: 4743167894120093829}
+  bubbleAction: {fileID: 4028628294751422943}

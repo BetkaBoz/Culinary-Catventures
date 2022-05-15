@@ -5,16 +5,19 @@ using UnityEngine;
 public class Player : MonoBehaviour, IDamageable
 {
     #region Private Vars
+    [SerializeField] float generalFoodMod;
+    [SerializeField] float meatFoodMod;
+    [SerializeField] float vegetarianFoodMod;
+    [SerializeField] List<Card> deck = new List<Card>();
     private string className;
-    private int reputation = 0;
+    //private int reputation = 0;
     private int money = 0;
     private int score;
-    [SerializeField] private float generalFoodMod;
-    [SerializeField] private float meatFoodMod;
-    [SerializeField] private float vegetarianFoodMod;
-    private int maxEnergy = 3;
+    private int maxEnergy = 5;
     private int energy;
-    [SerializeField] private List<Card> deck = new List<Card>();
+    private int maxRep = 50;
+    private int rep;
+    
     #endregion
 
     #region Getters/Setters
@@ -106,13 +109,35 @@ public class Player : MonoBehaviour, IDamageable
             energy = value;
         }
     }
+    public int MaxRep
+    {
+        get
+        {
+            return maxRep;
+        }
+        set
+        {
+            maxRep = value;
+        }
+    }
+    public int Rep
+    {
+        get
+        {
+            return rep;
+        }
+        set
+        {
+            rep = value;
+        }
+    }
     #endregion
 
     private void LoadPlayer()
     {
         Player data = this; //just some bs so intelisense works
         this.className = data.className;
-        this.reputation = data.reputation;
+        //this.reputation = data.reputation;
         this.money = data.money;
         this.score = data.score;
         this.generalFoodMod = data.generalFoodMod;
@@ -131,8 +156,8 @@ public class Player : MonoBehaviour, IDamageable
 
     public void TakeDamage(int amount)
     {
-        reputation += amount;
-        if (reputation <= 0)
+        rep -= amount;
+        if (rep <= 0)
         {
             Die(true);
         }

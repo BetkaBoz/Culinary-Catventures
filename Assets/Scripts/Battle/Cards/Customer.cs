@@ -13,7 +13,6 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     [SerializeField] Text hunger;
     [SerializeField] GameManager gm;
     [SerializeField] ActionManager ac;
-    [SerializeField] Player player;
     [SerializeField] Image bubbleAwait;
     [SerializeField] Image bubbleAction;
 
@@ -22,16 +21,21 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     private bool satisfied;
     private bool isDead = false;
 
- 
-    private void Awake()
+    private void Start()
     {
         bubbleAwait.gameObject.SetActive(false);
         bubbleAction.gameObject.SetActive(true);
-        bubbleAction.DOColor(new Color(0, 0, 0, 0), 5f).OnComplete(() => 
+        bubbleAction.DOColor(new Color(0, 0, 0, 0), 5f).OnComplete(() =>
         {
             bubbleAwait.gameObject.SetActive(true);
-            bubbleAction.gameObject.SetActive(false); 
+            bubbleAction.gameObject.SetActive(false);
         });
+    }
+
+
+    private void Awake()
+    {
+        
 
         currHunger = maxHunger;
         numTurnsStunned = 0;
@@ -45,13 +49,12 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     public bool StartTurn()
     {
-        bubbleAwait.gameObject.SetActive(false);
         if (!satisfied) 
         {
             switch (ac.CurrentIndex)
             {
                 case 0:
-                    player.TakeDamage(-5);
+                    gm.Player.TakeDamage(5);
                     satisfied = true;
                     break;
                 case 1:
@@ -66,6 +69,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     public bool EndTurn()
     {
+        bubbleAwait.gameObject.SetActive(true);
         turnsUntilAngry--;
         numTurnsStunned--;
         Debug.Log("hunger: " + currHunger.ToString());
@@ -89,7 +93,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         {
             Die(true);
 
-            player.TakeDamage(-25);
+            gm.Player.TakeDamage(-25);
 
             Debug.Log("Fok dis shid I'm out");
             return true;
