@@ -9,9 +9,9 @@ public class Player : MonoBehaviour, IDamageable
     private int reputation = 0;
     private int money = 0;
     private int score;
-    [SerializeField] private float generalFoodMod;
-    [SerializeField] private float meatFoodMod;
-    [SerializeField] private float vegetarianFoodMod;
+    private float generalFoodMod;
+    private float meatFoodMod;
+    private float vegetarianFoodMod;
     private int maxEnergy = 3;
     private int energy;
     [SerializeField] private List<Card> deck = new List<Card>();
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour, IDamageable
         this.money += amount;
         if (this.money <= 0)
         {
-            Die(false);
+            Die();
         }
     }
 
@@ -134,11 +134,11 @@ public class Player : MonoBehaviour, IDamageable
         reputation += amount;
         if (reputation <= 0)
         {
-            Die(true);
+            Die();
         }
     }
 
-    public void Die(bool status)
+    public void Die()
     {
         Debug.Log("Oh nou I'm ded :(");
     }
