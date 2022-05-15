@@ -10,6 +10,7 @@ public class IslandManager : MonoBehaviour
 
     void Start()
     {
+        timeText.text = "Time: " + time;
     }
 
     void Update()
