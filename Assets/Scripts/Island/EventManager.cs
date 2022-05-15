@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,12 +30,19 @@ public class EventManager : MonoBehaviour
     private IslandManager islandManager;
     private bool isOnEvent = false;
     private bool isUsed = false;
+
+    private void Awake()
+    {
+        eventWindow = GameObject.FindGameObjectsWithTag("EventWindow")[0];
+    }
+
     void Start()
     {
         //spriteEventImg = eventWindow.GetComponentInChildren()
 
         AssignType();
         islandManager = FindObjectOfType<IslandManager>();
+        eventWindow.SetActive(false);
     }
 
     private void AssignType()
@@ -54,6 +62,7 @@ public class EventManager : MonoBehaviour
     public void AssignSprite()
     {
         Image imageComponent = GetComponent<Image>();
+        
 
         switch (eventType)
         {
@@ -90,6 +99,8 @@ public class EventManager : MonoBehaviour
             ClearBtnPrompt();
             RecognizeAndRunEvent();
             islandManager.lowerTime(timeCost);
+            
+            eventWindow.SetActive(true);
         }
     }
     

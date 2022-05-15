@@ -266,6 +266,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5316605240045808818, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316605240045808822, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 781179815}
     - target: {fileID: 6869055986416572060, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1496,6 +1504,10 @@ PrefabInstance:
     - target: {fileID: 798999069868067327, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 798999069868067327, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
+      propertyPath: m_TagString
+      value: EventWindow
       objectReference: {fileID: 0}
     - target: {fileID: 8365468295377838716, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
       propertyPath: m_Pivot.x
