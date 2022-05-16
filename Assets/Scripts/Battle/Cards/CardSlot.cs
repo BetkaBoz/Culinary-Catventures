@@ -265,13 +265,13 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         {
             if (isSelected)
             {
-                Debug.Log("wat");
+                //Debug.Log("wat");
                 isSelected = false;
                 transform.position = originalPos;
             }
             else
             {
-                Debug.Log("yed");
+                //Debug.Log("yed");
                 isSelected = true;
                 if (isRised) { return; }
                 originalPos = transform.position;
@@ -282,7 +282,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Click");
+        //Debug.Log("Click");
         Select();
         if (gm.combinePhase)
         {

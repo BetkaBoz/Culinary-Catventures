@@ -15,7 +15,8 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     [SerializeField] ActionManager ac;
     [SerializeField] Image bubbleAwait;
     [SerializeField] Image bubbleAction;
-
+    [SerializeField] GameObject debuffs;
+    //poob
     private int currHunger;
     private byte numTurnsStunned;
     private bool satisfied;
@@ -58,7 +59,8 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             switch (ac.CurrentIndex)
             {
                 case 0:
-                    gm.AddEnergy(-1);
+                    GameObject temp = Instantiate(debuffs);
+                    gm.BuffPlayer(temp.GetComponent<IBuffable>());
                     satisfied = true;
                     break;
                 case 1:
@@ -73,23 +75,24 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     {
         bubbleAwait.gameObject.SetActive(true);
         turnsUntilAngry--;
-        numTurnsStunned--;
-        Debug.Log("hunger: " + currHunger.ToString());
+        if (numTurnsStunned > 0)
+            numTurnsStunned--;
+        //Debug.Log("hunger: " + currHunger.ToString());
         if(turnsUntilAngry >= 8)
         {
-            Debug.Log("I sleep");
+            //Debug.Log("I sleep");
         }
         else if (turnsUntilAngry >= 5)
         {
-            Debug.Log("This is fine");
+            //Debug.Log("This is fine");
         }
         else if(turnsUntilAngry >= 3)
         {
-            Debug.Log("Yo what up?!");
+            //Debug.Log("Yo what up?!");
         }
         else if(turnsUntilAngry >= 1)
         {
-            Debug.Log("I'm angeri");
+            //Debug.Log("I'm angeri");
         }
         else
         {
@@ -97,7 +100,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
             gm.Player.TakeDamage(-25);
 
-            Debug.Log("Fok dis shid I'm out");
+            //Debug.Log("Fok dis shid I'm out");
             return true;
         }
 
@@ -106,7 +109,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("ide to");
+        //Debug.Log("ide to");
     }
 
     public void TakeDamage(int amount)
@@ -115,7 +118,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
         currHunger = currHunger >= amount ? currHunger - amount : 0;
         if (numTurnsStunned <= 0) numTurnsStunned++;
-        Debug.Log("Yum yum " + currHunger.ToString() + " " + amount.ToString());
+        //Debug.Log("Yum yum " + currHunger.ToString() + " " + amount.ToString());
         hunger.text = $"{currHunger}";
 
         if (currHunger ==  0)
