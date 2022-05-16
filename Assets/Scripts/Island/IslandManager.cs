@@ -7,7 +7,10 @@ public class IslandManager : MonoBehaviour
 {
     [SerializeField] private int time;
     [SerializeField] TextMeshProUGUI  timeText;
+    [SerializeField] private GameObject grabberPrefab;
 
+    public int Time { get => time;}
+    
     void Start()
     {
         timeText.text = "Time: " + time;
@@ -19,12 +22,17 @@ public class IslandManager : MonoBehaviour
 
     public void lowerTime(int lowerBy)
     {
-        this.time -= lowerBy;
+        time -= lowerBy;
         if (time <= 0)
         {
             time = 0;
             Debug.Log("Cas bojovat!");
             // TODO : zamkni ostatne eventy
+            // TODO : vytvor instanciu ruky
+            //  chod s rukou k hracovi (dlzka ruky je vzdy distance haca od fightu)
+            //  vypni hracovi movement
+            //  pritiahni hraca k stredu a zacni boj
+            Instantiate(grabberPrefab);
         }
         timeText.text = "Time: " + time;
     }

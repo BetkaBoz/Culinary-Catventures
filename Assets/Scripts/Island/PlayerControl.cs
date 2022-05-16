@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,17 +9,21 @@ public class PlayerControl : MonoBehaviour
 {
     [SerializeField] float movementSpeed;
     private Rigidbody2D body;
+    private bool isDisabled = false;
+    private Transform challengePosition;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         
+        challengePosition = GameObject.FindGameObjectsWithTag("Challenge")[0].transform;
+
         Time.timeScale = 1;
     }
 
     void FixedUpdate()
     {
-        MovePlayer();
+        if(!isDisabled) MovePlayer();
     }
 
     private void MovePlayer()
@@ -35,6 +40,13 @@ public class PlayerControl : MonoBehaviour
         {
             transform.localScale = new Vector3(inputX * Math.Abs(transform.localScale.x) , transform.localScale.y, transform.localScale.z);
         }
+    }
+
+    public void DragPlayer(float speed)
+    {
+        isDisabled = true;
+        body.velocity = Vector2.zero;
+        transform.position = Vector2.MoveTowards(transform.position, challengePosition.position, speed * Time.deltaTime);
     }
 }
 
