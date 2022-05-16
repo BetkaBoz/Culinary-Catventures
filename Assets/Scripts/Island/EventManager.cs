@@ -28,6 +28,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI eventThirdButtontext;
 
     private IslandManager islandManager;
+    
     private bool isOnEvent = false;
     private bool isUsed = false;
 
@@ -41,8 +42,8 @@ public class EventManager : MonoBehaviour
         //spriteEventImg = eventWindow.GetComponentInChildren()
 
         AssignType();
-        islandManager = FindObjectOfType<IslandManager>();
         eventWindow.SetActive(false);
+        islandManager = FindObjectOfType<IslandManager>();
     }
 
     private void AssignType()
@@ -93,13 +94,13 @@ public class EventManager : MonoBehaviour
     
     void Update()
     {
-        if (isOnEvent && !isUsed && Input.GetButtonDown("Jump"))
+        if (isOnEvent && islandManager.Time > 0 && !isUsed && Input.GetButtonDown("Jump"))
         {
             Time.timeScale = 0;
             isUsed = true;
+            eventWindow.GetComponent<EventWindowControl>().Init(timeCost);
             ClearBtnPrompt();
             RecognizeAndRunEvent();
-            islandManager.lowerTime(timeCost);
             
             eventWindow.SetActive(true);
         }

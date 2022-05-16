@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - EventWindow
+  - Challenge
   layers:
   - Default
   - TransparentFX
