@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
             }
             DrawCards(5);
             AddEnergy(player.MaxEnergy);
-            repUI.text = $"{player.Rep}/{player.MaxRep}";
+            repUI.text = $"{player.Rep}";
             combinePhase = false;
             discardPhase = false;
 
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     public void HurtPlayer(int amount)
     {
         player.TakeDamage(amount);
-        repUI.text = $"{player.Rep}/{player.MaxRep}";
+        repUI.text = $"{player.Rep}";
     }
 
     //public void AddRep(int amount)
@@ -90,6 +90,9 @@ public class GameManager : MonoBehaviour
     //----------------- TURN-BASE RELATED CODE ---------------------
     public void EndPlayersTurn()
     {
+        battleState = BattleState.ENEMYTURN;
+        Debug.Log("ITS ENEMIES TURN");
+
         DiscardHand();
         hand.Clear(); //Cleans the hand so cards don't duplicate FIX!!!
         count = customers.Count-1;
@@ -103,21 +106,20 @@ public class GameManager : MonoBehaviour
         SpendEnergy(player.Energy);
         AddEnergy(player.MaxEnergy);
 
-        battleState = BattleState.ENEMYTURN;
-        Debug.Log("ITS ENEMIES TURN");
+        EndEnemyTurn();
     }
 
     public void EndEnemyTurn()
     {
+        battleState = BattleState.PLAYERTURN;
+        Debug.Log("ITS PLAYERS TURN");
+
         DrawCards(5);
 
         foreach (var customer in customers)
         {
             customer.EndTurn();
         }
-
-        battleState = BattleState.PLAYERTURN;
-        Debug.Log("ITS PLAYERS TURN");
     }
 
     // ----------------- CARDS RELATED CODE ---------------------

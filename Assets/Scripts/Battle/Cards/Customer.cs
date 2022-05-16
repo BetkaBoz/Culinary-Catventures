@@ -45,26 +45,22 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         TakeDamage(amount);
     }
 
-    public bool StartTurn()
+    public void StartTurn()
     {
         if (!satisfied) 
         {
             switch (ac.CurrentIndex)
             {
                 case 0:
-                    gm.HurtPlayer(5);
-                    satisfied = true;
-                    break;
-                case 1:
                     gm.AddEnergy(-1);
                     satisfied = true;
                     break;
+                case 1:
+                    gm.HurtPlayer(5);
+                    satisfied = true;
+                    break;
             }
-
-            if (gm.count <= 0) gm.EndEnemyTurn();
-            else gm.count--;
         }
-        return false;
     }
 
     public bool EndTurn()

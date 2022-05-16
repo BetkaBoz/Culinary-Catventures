@@ -15,8 +15,8 @@ public class Player : MonoBehaviour, IDamageable
     private int score;
     private int maxEnergy = 5;
     private int energy;
-    private int maxRep = 50;
-    private int rep = 50;
+    private int maxRep = 100;
+    private int rep = 100;
     
     #endregion
 
