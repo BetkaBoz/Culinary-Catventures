@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EventWindow
   - Challenge
+  - PlayerGrabber
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerGrabber : MonoBehaviour
 {
@@ -8,10 +9,11 @@ public class PlayerGrabber : MonoBehaviour
     [SerializeField] private Sprite handClosed;
     [SerializeField] private float speed = 1;
     [SerializeField] private float speedAfterCatchModifier = 1;
+    [SerializeField] private float battleThreshold;
 
     private LineRenderer lr;
     private SpriteRenderer hand;
-    private Transform challengePosition;
+    private Vector3 challengePosition;
     private Transform playerTransform;
 
     // Start is called before the first frame update
@@ -20,10 +22,9 @@ public class PlayerGrabber : MonoBehaviour
         hand = GetComponent<SpriteRenderer>();
         hand.sprite = handOpen;
         
-        challengePosition = GameObject.FindGameObjectsWithTag("Challenge")[0].transform;
+        challengePosition = GameObject.FindGameObjectsWithTag("Challenge")[0].transform.position;
         playerTransform = GameObject.FindGameObjectsWithTag("Player")[0].transform;
-
-        transform.position = challengePosition.position;
+        transform.position = challengePosition;
 
         lr = GetComponent<LineRenderer>();
         
@@ -41,11 +42,20 @@ public class PlayerGrabber : MonoBehaviour
         RotateTowardsChallenge();
         CatchPlayer();
         RendererLine();
+        StartBattleIfClose();
+    }
+
+    private void StartBattleIfClose()
+    {
+        if (Vector2.Distance(transform.position, challengePosition) < battleThreshold)
+        {
+            SceneManager.LoadScene("Battle", LoadSceneMode.Single);
+        }
     }
 
     private void RendererLine()
     {
-        lr.SetPosition(0, challengePosition.position);
+        lr.SetPosition(0, challengePosition);
         lr.SetPosition(1, transform.position);
     }
 
@@ -64,7 +74,7 @@ public class PlayerGrabber : MonoBehaviour
 
     private void RotateTowardsChallenge()
     {
-        Vector2 direction = challengePosition.transform.position - transform.position;
+        Vector2 direction = challengePosition - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         // transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5 * Time.deltaTime);

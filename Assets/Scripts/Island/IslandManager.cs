@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IslandManager : MonoBehaviour
 {
@@ -26,14 +27,13 @@ public class IslandManager : MonoBehaviour
         if (time <= 0)
         {
             time = 0;
-            Debug.Log("Cas bojovat!");
-            // TODO : zamkni ostatne eventy
-            // TODO : vytvor instanciu ruky
-            //  chod s rukou k hracovi (dlzka ruky je vzdy distance haca od fightu)
-            //  vypni hracovi movement
-            //  pritiahni hraca k stredu a zacni boj
             Instantiate(grabberPrefab);
         }
         timeText.text = "Time: " + time;
+    }
+    
+    public void StartBattle()
+    {
+        SceneManager.LoadScene("Battle", LoadSceneMode.Single);
     }
 }

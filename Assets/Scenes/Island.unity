@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 123882544329960339, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeCost
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 123882544329960339, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: BtnPrompt
@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2309775051987797995, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeCost
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2309775051987797995, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: BtnPrompt
@@ -152,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 1899404666}
     - target: {fileID: 2309775052018455786, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeCost
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2309775052018455786, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: BtnPrompt
@@ -160,7 +160,7 @@ PrefabInstance:
       objectReference: {fileID: 1899404666}
     - target: {fileID: 2309775052326214008, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeCost
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2309775052326214008, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: BtnPrompt
@@ -168,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 1899404666}
     - target: {fileID: 2309775052734145321, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeCost
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2309775052734145321, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: BtnPrompt
@@ -176,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 1899404666}
     - target: {fileID: 2309775053093561664, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeCost
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2309775053093561664, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: BtnPrompt
@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 1899404666}
     - target: {fileID: 2309775053326330560, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeCost
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2309775053326330560, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: BtnPrompt
