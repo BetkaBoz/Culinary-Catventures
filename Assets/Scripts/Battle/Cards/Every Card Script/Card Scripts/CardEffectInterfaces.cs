@@ -29,8 +29,8 @@ public interface IStun
     void StunEnemy(Customer target, int amount);
 }
 //Add other interfaces after you figure out how buffing works
-//public interface IChangeFoodPower
-//{
-//    void ChangeFoodPower(float amount);
-//}
+public interface IChangeFoodPower
+{
+    void ChangeFoodPower(GameManager gm, float amount, string type);
+}
 

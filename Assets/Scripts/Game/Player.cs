@@ -5,9 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour, IDamageable
 {
     #region Private Vars
-    [SerializeField] float generalFoodMod;
-    [SerializeField] float meatFoodMod;
-    [SerializeField] float vegetarianFoodMod;
+    [SerializeField] float generalFoodModBase;
+    [SerializeField] float meatFoodModBase;
+    [SerializeField] float vegetarianFoodModBase;
+    [SerializeField] float generalFoodModBonus;
+    [SerializeField] float meatFoodModBonus;
+    [SerializeField] float vegetarianFoodModBonus;
     [SerializeField] List<Card> deck = new List<Card>();
     private string className;
     private int reputation = 0;
@@ -47,33 +50,54 @@ public class Player : MonoBehaviour, IDamageable
     {
         get
         {
-            return generalFoodMod;
+            return generalFoodModBase + generalFoodModBonus;
+        }
+    }
+    public float GeneralFoodModBonus
+    {
+        get
+        {
+            return generalFoodModBonus;
         }
         set
         {
-            generalFoodMod = value;
+            generalFoodModBonus = value;
         }
     }
     public float MeatFoodMod
     {
         get
         {
-            return meatFoodMod;
+            return meatFoodModBase+meatFoodModBonus;
+        }
+    }
+    public float MeatFoodModBonus
+    {
+        get
+        {
+            return meatFoodModBonus;
         }
         set
         {
-            meatFoodMod = value;
+            meatFoodModBonus = value;
         }
     }
     public float VegetarianFoodMod
     {
         get
         {
-            return vegetarianFoodMod;
+            return vegetarianFoodModBase + vegetarianFoodModBonus;
+        }
+    }
+    public float VegetarianFoodModBonus
+    {
+        get
+        {
+            return vegetarianFoodModBonus;
         }
         set
         {
-            vegetarianFoodMod = value;
+            vegetarianFoodModBonus = value;
         }
     }
     public List<Card> Deck
@@ -132,7 +156,7 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
     #endregion
-
+    
     private void LoadPlayer()
     {
         Player data = this; //just some bs so intelisense works
@@ -140,9 +164,12 @@ public class Player : MonoBehaviour, IDamageable
         this.reputation = data.reputation;
         this.money = data.money;
         this.score = data.score;
-        this.generalFoodMod = data.generalFoodMod;
-        this.meatFoodMod = data.meatFoodMod;
-        this.vegetarianFoodMod = data.vegetarianFoodMod;
+        this.generalFoodModBase = data.generalFoodModBase;
+        this.generalFoodModBonus = data.generalFoodModBonus;
+        this.meatFoodModBase = data.meatFoodModBase;
+        this.meatFoodModBonus = data.meatFoodModBonus;
+        this.vegetarianFoodModBase = data.vegetarianFoodModBase;
+        this.vegetarianFoodModBonus = data.vegetarianFoodModBonus;
     }
 
     public void changeMoney(int amount)

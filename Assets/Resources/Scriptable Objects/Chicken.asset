@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b23a4ecb995b0a9488043627d59d9c96, type: 3}
-  m_Name: Draw A Card
+  m_Script: {fileID: 11500000, guid: c44d8e82a9d0e754cade3c1e69e75da9, type: 3}
+  m_Name: Chicken
   m_EditorClassIdentifier: 
-  cardName: Quick Grab
+  cardName: Chicken
   energyCost: 1
-  canTarget: 0
-  artwork: {fileID: 21300000, guid: fd4a074f7983bd54482c06d3f849a4a8, type: 3}
-  nutritionPoints: -1
-  cardType: Manoeuvre
+  canTarget: 1
+  artwork: {fileID: 21300000, guid: 74eddfae52fca8c4ca9d6a59e3599731, type: 3}
+  nutritionPoints: 10
+  cardType: Meat
