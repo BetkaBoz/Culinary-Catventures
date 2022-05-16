@@ -25,11 +25,17 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     {
         bubbleAwait.gameObject.SetActive(false);
         bubbleAction.gameObject.SetActive(true);
-        bubbleAction.DOColor(new Color(0, 0, 0, 0), 5f).OnComplete(() =>
+
+        bubbleAction.DOFade(0f, 4f).OnComplete(() =>
         {
             bubbleAwait.gameObject.SetActive(true);
             bubbleAction.gameObject.SetActive(false);
         });
+        //bubbleAction.DOColor(new Color(0, 0, 0, 0), 5f).OnComplete(() =>
+        //{
+        //    bubbleAwait.gameObject.SetActive(true);
+        //    bubbleAction.gameObject.SetActive(false);
+        //});
     }
 
 

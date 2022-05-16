@@ -3,24 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image bubbleAwait;
     [SerializeField] Image bubbleAction;
 
-    private bool entered;
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        bubbleAwait.enabled = false;
-        bubbleAction.gameObject.SetActive(true);
+        bubbleAwait.DOFade(0f, 0.15f).OnComplete(() =>
+        {
+            bubbleAction.DOFade(1f, 0.15f).OnPlay(() =>
+            {
+                bubbleAction.gameObject.SetActive(true);
+            });
+        });
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        bubbleAwait.enabled = true;
-        bubbleAction.gameObject.SetActive(false);
+        bubbleAction.DOFade(0f, 0.15f).OnPlay(() =>
+        {
+            bubbleAwait.DOFade(1f, 0.15f).OnComplete(() =>
+            {
+                bubbleAwait.gameObject.SetActive(true);
+            });
+        });
     }
 
 }
