@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -31,6 +32,8 @@ public class EventManager : MonoBehaviour
     
     private bool isOnEvent = false;
     private bool isUsed = false;
+    private bool canShowEventWindow = true;
+    private GameObject playerGrabber;
 
     private void Awake()
     {
@@ -98,11 +101,14 @@ public class EventManager : MonoBehaviour
         {
             Time.timeScale = 0;
             isUsed = true;
-            eventWindow.GetComponent<EventWindowControl>().Init(timeCost);
             ClearBtnPrompt();
             RecognizeAndRunEvent();
-            
-            eventWindow.SetActive(true);
+
+            if (canShowEventWindow)
+            {
+                eventWindow.GetComponent<EventWindowControl>().Init(timeCost);
+                eventWindow.SetActive(true);   
+            }
         }
     }
     
@@ -121,6 +127,8 @@ public class EventManager : MonoBehaviour
                 break;
             case EventType.Challenge:
                 Debug.Log("CHALLENGE");
+                canShowEventWindow = false;
+                islandManager.StartBattle();
                 break;
             default:
                 Debug.Log("What are you doing here?");
@@ -130,7 +138,7 @@ public class EventManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(!isUsed) BtnPrompt.text = "Press SPACE to do stuff";
+        if(!isUsed && islandManager.Time > 0) BtnPrompt.text = "Press SPACE to do stuff";
         isOnEvent = true;
     }
     

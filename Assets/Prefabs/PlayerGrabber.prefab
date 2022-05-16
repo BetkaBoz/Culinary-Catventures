@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1579238199287190204}
   m_Layer: 0
   m_Name: PlayerGrabber
-  m_TagString: Untagged
+  m_TagString: PlayerGrabber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   handClosed: {fileID: 21300000, guid: 4dbe594a01b22524d8a256623a1de4e4, type: 3}
   speed: 7
   speedAfterCatchModifier: 1.02
+  battleThreshold: 0.05
 --- !u!212 &2880927101861361359
 SpriteRenderer:
   m_ObjectHideFlags: 0
