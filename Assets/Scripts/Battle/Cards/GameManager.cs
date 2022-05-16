@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Card> discardPile = new List<Card>();
     [SerializeField] private List<Card> hand = new List<Card>();
     [SerializeField] private List<Card> exhaustPile = new List<Card>();
+    [SerializeField] private List<IBuffable> buffs = new List<IBuffable>();
     public bool combinePhase;
     public BattleState battleState;
     public Player Player => player;      //getter
@@ -81,6 +82,63 @@ public class GameManager : MonoBehaviour
         repUI.text = $"{player.Rep}";
     }
 
+    public void BuffPlayer(IBuffable buff, bool applyNow = false)
+    {
+        buff.SetTarget(player);
+        buffs.Add(buff);
+        if (applyNow)
+            ApplyBuff(buff);
+    }
+    //run this at the start of Player's turn so all the buffs are added properly
+    public void ApplyBuff(IBuffable buff)
+    {
+        if (buff.Finished)
+            buffs.Remove(buff);
+        else
+        {
+            Debug.Log("apply");
+            buff.Apply();
+        }
+        UpdateUI();
+    }
+
+    //run this at the start of Player's turn so all the buffs are added properly
+    public void ApplyBuffables()
+    {
+        player.GeneralFoodModBonus = 0;
+        player.MeatFoodModBonus = 0;
+        player.VegetarianFoodModBonus = 0;
+        List<IBuffable> delBuffs = new List<IBuffable>();
+        foreach (var buff in buffs)
+        {
+            if (buff.Finished)
+                delBuffs.Add(buff);
+            else
+            {
+                Debug.Log("apply");
+                buff.Apply();
+            }
+        }
+        //TODO: Find a better way to do this
+        foreach (var buff in delBuffs)
+        {
+            Debug.Log("delet");
+            buffs.Remove(buff);
+            buff.EndEffect();
+        }
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        repUI.text = $"{player.Rep}";
+        energyUI.text = $"{player.Energy}/{player.MaxEnergy}";
+        foreach(var card in cardSlots)
+        {
+            card.UpdateNP();
+        }
+    }
+
     //public void AddRep(int amount)
     //{
     //    player.Rep = amount;
@@ -94,7 +152,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("ITS ENEMIES TURN");
 
         DiscardHand();
-        hand.Clear(); //Cleans the hand so cards don't duplicate FIX!!!
+        hand.Clear(); //Cleans the hand so cards don't duplicate MAKE BETTER!!!
         count = customers.Count-1;
 
         foreach (var customer in customers)
@@ -107,6 +165,7 @@ public class GameManager : MonoBehaviour
         AddEnergy(player.MaxEnergy);
 
         EndEnemyTurn();
+        ApplyBuffables();
     }
 
     public void EndEnemyTurn()
@@ -157,23 +216,23 @@ public class GameManager : MonoBehaviour
             {
                 if (!DrawCard())
                 {
-                    Debug.Log("Couldn't draw a card. The hand is full!");
+                    //Debug.Log("Couldn't draw a card. The hand is full!");
                     return;
                 }
             }
             else
             {
-                Debug.Log("Couldn't draw a card. The deck is empty!"); 
+                //Debug.Log("Couldn't draw a card. The deck is empty!"); 
                 Shuffle();
                 i--;
             }
         }
-        Debug.Log("I DID IT! :)");
+        //Debug.Log("I DID IT! :)");
     }
 
     public void SendToDiscard(int idx, bool isEndTurn)
     {
-        Debug.Log("idx:"+idx);
+        //Debug.Log("idx:"+idx);
         Card card = cardSlots[idx].GetCard();
         availableCardSlots[idx] = true;
         card.HandIndex = -1;
@@ -239,11 +298,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            //StopDiscard();
-            foreach(var card in hand)
-            {
-                Debug.Log(card.HandIndex);
-            }
+            StopDiscard();
         }
     }
 
@@ -263,7 +318,7 @@ public class GameManager : MonoBehaviour
     {
         if (discardPhase)
         {
-            Debug.Log("SET");
+            //Debug.Log("SET");
             discardController.SelectCard(card);
         }
     }
@@ -282,7 +337,7 @@ public class GameManager : MonoBehaviour
 
     private void StartCombine()
     {
-        Debug.Log("Start Combine");
+        //Debug.Log("Start Combine");
         combineController.ToggleCombine();
         combinePhase = true;
         DeselectAllCards();
@@ -290,7 +345,7 @@ public class GameManager : MonoBehaviour
 
     private void StopCombine()
     {
-        Debug.Log("Stop Combine");
+        //Debug.Log("Stop Combine");
         combineController.ToggleCombine();
         combinePhase = false;
     }

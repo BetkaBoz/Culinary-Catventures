@@ -138,6 +138,14 @@ PrefabInstance:
       propertyPath: hunger
       value: 
       objectReference: {fileID: 1852367454}
+    - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: debuffs
+      value: 
+      objectReference: {fileID: 8931328722958470894, guid: 9c396e3026d7470448d282448a760bc4, type: 3}
+    - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: maxHunger
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 65602712083082045, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Name
       value: Customer 1
@@ -1237,6 +1245,14 @@ PrefabInstance:
       propertyPath: hunger
       value: 
       objectReference: {fileID: 1073939564}
+    - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: debuffs
+      value: 
+      objectReference: {fileID: 8931328722958470894, guid: 9c396e3026d7470448d282448a760bc4, type: 3}
+    - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: maxHunger
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 65602712083082045, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Name
       value: Customer 2
@@ -1351,6 +1367,14 @@ PrefabInstance:
       propertyPath: hunger
       value: 
       objectReference: {fileID: 1015492633}
+    - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: debuffs
+      value: 
+      objectReference: {fileID: 8931328722958470894, guid: 9c396e3026d7470448d282448a760bc4, type: 3}
+    - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: maxHunger
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 65602712083082045, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Name
       value: Customer 3
@@ -1601,25 +1625,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f97db0a95acf246b5cd98c87e2ad82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalFoodMod: 1
-  meatFoodMod: 1.5
-  vegetarianFoodMod: 1.25
+  generalFoodModBase: 1
+  meatFoodModBase: 1
+  vegetarianFoodModBase: 1
+  generalFoodModBonus: 0
+  meatFoodModBonus: 0
+  vegetarianFoodModBonus: 0
   deck:
   - {fileID: 11400000, guid: 46a402b78d6f77c42ac07f8dd7c004ba, type: 2}
   - {fileID: 11400000, guid: 35e21ca778596c0479f2647a80b969e7, type: 2}
+  - {fileID: 11400000, guid: 351425e4cf2404541845611689c2d689, type: 2}
   - {fileID: 11400000, guid: 9734095e5e8ad0e45b03299dd63f33e7, type: 2}
+  - {fileID: 11400000, guid: 4dc0434742b230741a0e4aeccf53629e, type: 2}
+  - {fileID: 11400000, guid: 187c0a0ff8fa3a146a10034b0fa26f25, type: 2}
   - {fileID: 11400000, guid: bd0b5a655d9fdc34b9ffb5d047f7ac05, type: 2}
   - {fileID: 11400000, guid: f65611cde29c7934a880f0cca25eb3b1, type: 2}
+  - {fileID: 11400000, guid: 04cf38d94563e494396f6b153571e53f, type: 2}
+  - {fileID: 11400000, guid: 734d03b68abe91d4998f7ebdab661b1a, type: 2}
+  - {fileID: 11400000, guid: da599a308f53c7e4fba177dda0e7e2c9, type: 2}
   - {fileID: 11400000, guid: 5f251d38747dee846a43cb37ead20189, type: 2}
+  - {fileID: 11400000, guid: 685da506fdbca2443802872d84070a97, type: 2}
+  - {fileID: 11400000, guid: 072f8a5fb749f9c4eaeb093373481d8e, type: 2}
   - {fileID: 11400000, guid: 4f12c29ab13959147884c0f761122fdc, type: 2}
+  - {fileID: 11400000, guid: 144145c2dad2f3b419667ff0ac6ddbc9, type: 2}
   - {fileID: 11400000, guid: 79e570868a9e4144faa45b5b0e3b437b, type: 2}
+  - {fileID: 11400000, guid: 51b5d22314b26e247af3925061c0edc7, type: 2}
+  - {fileID: 11400000, guid: f5986a78c5ad1e546aff75a942327f8c, type: 2}
+  - {fileID: 11400000, guid: 76747097478ef55438ce0728f4bebd82, type: 2}
   - {fileID: 11400000, guid: 1a1643d24f3c713458ade65358e36bfe, type: 2}
   - {fileID: 11400000, guid: 7e2f98cc43353734c8941fe4e38359fd, type: 2}
   - {fileID: 11400000, guid: b6d9a3f9f208cbd429a6a905c3092245, type: 2}
-  - {fileID: 11400000, guid: 685da506fdbca2443802872d84070a97, type: 2}
-  - {fileID: 11400000, guid: da599a308f53c7e4fba177dda0e7e2c9, type: 2}
   - {fileID: 11400000, guid: a6c43d398bdd30f4daae5925752b4bf3, type: 2}
-  - {fileID: 11400000, guid: 734d03b68abe91d4998f7ebdab661b1a, type: 2}
+  - {fileID: 11400000, guid: b34fdf64bf5f33341a0b862535532a3b, type: 2}
+  - {fileID: 11400000, guid: e964297736755964c85230482268dd93, type: 2}
+  - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
+  - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
+  - {fileID: 11400000, guid: d697d8f2166824041a9a56606dd1a542, type: 2}
 --- !u!4 &534415302
 Transform:
   m_ObjectHideFlags: 0
@@ -5109,6 +5150,7 @@ MonoBehaviour:
   discardPile: []
   hand: []
   exhaustPile: []
+  buffs: []
   combinePhase: 0
   battleState: 0
 --- !u!4 &1912536890
@@ -5827,7 +5869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -23.74, y: 0}
+  m_AnchoredPosition: {x: -23.74, y: -80}
   m_SizeDelta: {x: 1184.34, y: 345.09}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2101083056
@@ -6119,6 +6161,14 @@ PrefabInstance:
       propertyPath: hunger
       value: 
       objectReference: {fileID: 305108869}
+    - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: debuffs
+      value: 
+      objectReference: {fileID: 8931328722958470894, guid: 9c396e3026d7470448d282448a760bc4, type: 3}
+    - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
+      propertyPath: maxHunger
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 65602712083082045, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: m_Name
       value: Customer 4
