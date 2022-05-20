@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -17,16 +18,20 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     private Vector3 originalPos;
     //private Vector3 originalMousePos;
     private CanvasGroup canvasGroup;
-
-    [SerializeField] private Image artworkImage;
-    [SerializeField] private Image[] energyImage;
-    [SerializeField] private GameManager gm;
+    private int spriteOrder;
     #endregion
+
+    #region SerializeFields
+    [SerializeField] private Image artworkImage;
+    [SerializeField] private TextMeshProUGUI energyTxt;
+    [SerializeField] private GameManager gm;
     [SerializeField] private ArrowHandler arrowHandler;
     [SerializeField] private ManouverTargetController targetController;
     [SerializeField] private Card card = null;
     [SerializeField] private Text nutritionalValue;
+    #endregion
 
+    #region Getters/Setters
     public bool Selected
     {
         get
@@ -35,6 +40,60 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         }
     }
 
+    public void SetHasBeenPlayed(bool hasBeenPlayed)
+    {
+        this.hasBeenPlayed = hasBeenPlayed;
+    }
+
+    public void SetCard(Card otherCard)
+    {
+        card = otherCard;
+        if (otherCard.NutritionPoints == -1)
+        {
+            nutritionalValue.text = "";
+        }
+        else
+        {
+            nutritionalValue.text = "" + otherCard.NutritionPoints;
+        }
+        artworkImage.sprite = otherCard.Artwork;
+        UpdateEnergy();
+        UpdateNP();
+    }
+
+    public Card GetCard()
+    {
+        if (card != null)
+        {
+            return card;
+        }
+        return null;
+    }
+
+    private Vector3 GetMousePos()
+    {
+        var mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        return mousePos;
+    }
+    #endregion
+
+    #region UpdateTextboxes
+    private void UpdateEnergy()
+    {
+        int numOfEnergy = card.EnergyCost;
+        energyTxt.text = $"{numOfEnergy}";
+    }
+
+    public void UpdateNP()
+    {
+        int result = card.CalculateNP(gm);
+        if (result != -1)
+            nutritionalValue.text = "" + result;
+    }
+    #endregion
+
+    #region Misc. Functions
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -48,210 +107,22 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         }
     }
 
-    public void SetCard(Card otherCard)
-    {
-        card = otherCard;
-        if(otherCard.NutritionPoints == -1)
-        {
-            nutritionalValue.text = "";
-        }
-        else
-        {
-            nutritionalValue.text = ""+otherCard.NutritionPoints;
-        }
-        artworkImage.sprite = otherCard.Artwork;
-        UpdateEnergy();
-        UpdateNP();
-    }
-
-    private void UpdateEnergy()
-    {
-        int numOfEnergy = card.EnergyCost;
-        for (int i = 0; i < energyImage.Length; i++)
-        {
-            if (numOfEnergy > 0)
-            {
-                numOfEnergy--;
-                energyImage[i].enabled = true;
-            }
-            else
-            {
-                energyImage[i].enabled = false;
-            }
-        }
-    }
-
-    public void UpdateNP()
-    {
-        int result = card.CalculateNP(gm);
-        if(result != -1)
-            nutritionalValue.text = ""+result;
-    }
-    
-    public Card GetCard()
-    {
-        if(card != null)
-        {
-            return card;
-        }
-        return null;
-    }
-
-    #region OldDragNDrop
-    //private void OnMouseDown()
-    //{
-    //    //Debug.Log(canTarget.ToString());
-    //    if (this.isSelected)
-    //    {
-    //        isSelected = false;
-    //        this.transform.position = originalPos;
-    //    }
-    //    else
-    //    {
-    //        originalPos = this.transform.position;
-    //        if (gm.discardPhase)
-    //        {
-    //            dragOffset = this.transform.position - GetMousePos();
-    //            isSelected = false;
-    //            isDragged = true;
-    //        }
-    //        else
-    //        {
-    //            if (!card.CanTarget)
-    //            {
-    //                targetController.setPos(false);
-    //                dragOffset = this.transform.position - GetMousePos();
-    //                //this.isDragged = true;
-    //            }
-    //            isSelected = true;
-    //            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
-    //        }
-    //    }
-    //    originalMousePos = GetMousePos();
-    //}
-
-    //private void OnMouseDrag()
-    //{
-    //    if (this.isSelected && (originalMousePos != GetMousePos()))
-    //    {
-    //        this.isDragged = true;
-    //    }
-    //    if (this.isDragged)
-    //    {
-    //        if (this.card.CanTarget && !gm.discardPhase)
-    //        {
-    //            if (!arrowHandler.isVisible)
-    //            {
-    //                arrowHandler.setVisibile(true);
-    //                arrowHandler.SetOrigin(new Vector2(this.transform.position.x, this.transform.position.y));
-    //            }
-    //        }
-    //        else
-    //        {
-    //            this.transform.position = GetMousePos() + dragOffset;
-    //        }
-
-    //    }
-    //}
-
-    //private void OnMouseUp()
-    //{
-    //    LayerMask dragTarget = LayerMask.GetMask("DragTarget");
-    //    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 1, dragTarget.value);
-    //    if (hit.collider != null)
-    //    {
-    //        if (gm.discardPhase)
-    //        {
-    //            gm.SetCard(this);
-    //            this.isSelected = true;
-    //        }
-    //        else
-    //        {
-    //            if (card.CanTarget)
-    //            {
-    //                if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
-    //                {
-    //                    hasBeenPlayed = true;
-    //                    this.card.CardEffect(gm, hit);
-    //                    MoveToDiscardPile(false);
-    //                    arrowHandler.setVisibile(false);
-    //                }
-    //            }
-    //            else
-    //            {
-    //                if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
-    //                {
-    //                    hasBeenPlayed = true;
-    //                    this.card.CardEffect(gm, hit);
-    //                    MoveToDiscardPile(false);
-    //                }
-    //                else
-    //                {
-    //                    this.transform.position = this.originalPos;
-    //                }
-    //                if (!gm.discardPhase)
-    //                {
-    //                    targetController.setPos(true);
-    //                }
-    //            }
-    //            this.isDragged = false;
-    //            this.isSelected = false;
-    //            this.transform.position = this.originalPos;
-    //        }
-
-    //    }
-    //    else
-    //    {
-    //        if (card.CanTarget && !gm.discardPhase)
-    //        {
-    //            arrowHandler.setVisibile(false);
-    //        }
-    //        else
-    //        {
-    //            if (isDragged)
-    //            {
-    //                this.transform.position = this.originalPos;
-    //            }
-    //        }
-    //    }
-    //}
-    #endregion
-
-    #region IndexGetSet
-    //public void SetIndex(int handIndex)
-    //{
-    //    this.handIndex = handIndex;
-    //}
-
-    //public int GetIndex()
-    //{
-    //    return this.handIndex;
-    //}
-    #endregion
-
-    private Vector3 GetMousePos()
-    {
-        var mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        return mousePos;
-    }
-
-    public void SetHasBeenPlayed(bool hasBeenPlayed)
-    {
-        this.hasBeenPlayed = hasBeenPlayed;
-    }
-
     public void MoveToDiscardPile(bool isEndTurn)
     {
         gm.SendToDiscard(card.HandIndex, isEndTurn);
         //gameObject.SetActive(false);
     }
 
+    public void ResetPos()
+    {
+        transform.position = originalPos;
+    }
+
     public void Deselect()
     {
         if (isSelected)
         {
-            transform.position = originalPos;
+            ResetPos();
             isDragged = false;
             isSelected = false;
             isRised = false;
@@ -279,7 +150,9 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             }
         }
     }
+    #endregion
 
+    #region DragNDrop
     public void OnPointerClick(PointerEventData eventData)
     {
         //Debug.Log("Click");
@@ -413,27 +286,46 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             transform.position = originalPos;
         }
     }
+    #endregion
 
-    public void Hide(bool isHiding)
-    {
-        gameObject.SetActive(!isHiding);
-    }
-
+    #region MouseHover
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (isRised) { return;}
+        //spriteOrder = transform.GetSiblingIndex();
         originalPos = transform.position;
         transform.position = transform.position + (Vector3.up*0.5f);
+        //transform.SetAsLastSibling();
+        gm.MoveNeighbours(card.HandIndex,false);
         isRised = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (isDragged || isSelected) { return; }
-        if(Vector2.Distance(GetMousePos(), (transform.position+(Vector3.down*2f))) > 1)
-        {
-            transform.position = originalPos;
-            isRised = false;
-        }
+        transform.position = originalPos;
+        //transform.SetSiblingIndex(spriteOrder);
+        gm.MoveNeighbours(card.HandIndex, true);
+        isRised = false;
     }
+
+    public void Hide(bool isHiding)
+    {
+        gameObject.SetActive(!isHiding);
+    }
+
+    public void MoveLeft(float amount)
+    {
+        if (isRised) { return; }
+        originalPos = transform.position;
+        transform.position = transform.position + (Vector3.left * amount);//0.5f
+    }
+
+    public void MoveRight(float amount)
+    {
+        if (isRised) { return; }
+        originalPos = transform.position;
+        transform.position = transform.position + (Vector3.right * amount);
+    }
+    #endregion
 }
