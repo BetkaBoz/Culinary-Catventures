@@ -16,7 +16,7 @@ public class EventWindowControl : MonoBehaviour
     private Button trdBtn;
 
     private int timeCost = 1;
-    // Start is called before the first frame update
+
     void Start()
     {
         fstBtn = transform.Find("FirstButton").GetComponent<Button>();
@@ -32,7 +32,7 @@ public class EventWindowControl : MonoBehaviour
         trdBtn.onClick.AddListener(delegate { CloseEvent(); });
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         

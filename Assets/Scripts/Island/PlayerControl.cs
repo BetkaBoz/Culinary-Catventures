@@ -25,7 +25,8 @@ public class PlayerControl : MonoBehaviour
     {
         if(!isDisabled) MovePlayer();
     }
-
+    
+    //Hýbanie hráčom
     private void MovePlayer()
     {
         float inputX = Input.GetAxisRaw("Horizontal");
@@ -33,7 +34,7 @@ public class PlayerControl : MonoBehaviour
         FlipSprite(inputX);
         body.velocity = new Vector2(inputX * movementSpeed, inputY * movementSpeed);
     }
-
+    //Otáčanie spritu hráča podľa hýbania
     private void FlipSprite(float inputX)
     {
         if (inputX != 0 && inputX != transform.localScale.x)
@@ -41,7 +42,8 @@ public class PlayerControl : MonoBehaviour
             transform.localScale = new Vector3(inputX * Math.Abs(transform.localScale.x) , transform.localScale.y, transform.localScale.z);
         }
     }
-
+    
+    //Nehýbanie hráča, keď ho berie ruka
     public void DragPlayer(float speed)
     {
         isDisabled = true;

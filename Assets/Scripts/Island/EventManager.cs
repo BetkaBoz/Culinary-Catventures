@@ -8,9 +8,9 @@ using Random = System.Random;
 
 public class EventManager : MonoBehaviour
 {
-    [SerializeField] bool isChallenge = false;
-    [SerializeField] EventType eventType;
-    [SerializeField] TextMeshProUGUI  BtnPrompt;
+    [SerializeField] private bool isChallenge = false;
+    [SerializeField] private EventType eventType;
+    [SerializeField] private TextMeshProUGUI  btnPrompt;
     [SerializeField] private int timeCost = 1;
     
     [SerializeField] private Sprite spriteRandom;
@@ -33,7 +33,7 @@ public class EventManager : MonoBehaviour
     private bool isOnEvent = false;
     private bool isUsed = false;
     private bool canShowEventWindow = true;
-    private GameObject playerGrabber;
+    //private GameObject playerGrabber;
 
     private void Awake()
     {
@@ -45,25 +45,28 @@ public class EventManager : MonoBehaviour
         //spriteEventImg = eventWindow.GetComponentInChildren()
 
         AssignType();
+        AssignSprite();
         eventWindow.SetActive(false);
         islandManager = FindObjectOfType<IslandManager>();
     }
-
+    
+    //Určí typ eventu, Challenge sa nastavuje z inšpektora
     private void AssignType()
     {
-        if (isChallenge) this.eventType = EventType.Challenge;
+        if (isChallenge) eventType = EventType.Challenge;
         else AssignRandomType();
-        AssignSprite();
     }
-
-    public void AssignRandomType()
+    
+    //Urči náhodne typ eventu
+    private void AssignRandomType()
     {
         Array values = Enum.GetValues(typeof(EventType));
         Random random = new Random(Guid.NewGuid().GetHashCode());
-        this.eventType = (EventType) values.GetValue(random.Next(values.Length - 1));
+        eventType = (EventType) values.GetValue(random.Next(values.Length - 1));
     }
     
-    public void AssignSprite()
+    //Priradí sprite podĺa typu eventu
+    private void AssignSprite()
     {
         Image imageComponent = GetComponent<Image>();
         
@@ -97,6 +100,7 @@ public class EventManager : MonoBehaviour
     
     void Update()
     {
+        //spustenie eventu
         if (isOnEvent && islandManager.Time > 0 && !isUsed && Input.GetButtonDown("Jump"))
         {
             Time.timeScale = 0;
@@ -112,6 +116,7 @@ public class EventManager : MonoBehaviour
         }
     }
     
+    //Spustenie eventu na základe typu
     private void RecognizeAndRunEvent()
     {
         switch (eventType)
@@ -121,6 +126,8 @@ public class EventManager : MonoBehaviour
                 break;
             case EventType.Random:
                 Debug.Log("RANDOM EVENT");
+                
+                
                 break;
             case EventType.Harvest:
                 Debug.Log("HARVEST");
@@ -136,12 +143,13 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    //Nabehnutie hráča na event
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(!isUsed && islandManager.Time > 0) BtnPrompt.text = "Press SPACE to do stuff";
+        if(!isUsed && islandManager.Time > 0) btnPrompt.text = "Press SPACE to do stuff";
         isOnEvent = true;
     }
-    
+    //Odídenie hráča z eventu
     private void OnTriggerExit2D(Collider2D other)
     {
         ClearBtnPrompt();
@@ -150,15 +158,16 @@ public class EventManager : MonoBehaviour
     
     private void ClearBtnPrompt()
     {
-        BtnPrompt.text = "";
+        btnPrompt.text = "";
     }
 
     enum EventType : int
     {
-        Merchant = 1,
-        Random = 2,
-        Harvest = 3,
-
+        Random = 1,
+        Harvest = 2,
+        Merchant = 3,
+        //Sensei = 4,
+        
         Challenge = 10
     }
 }
