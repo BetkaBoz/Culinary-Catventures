@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New BuffPlayersNP", menuName = "Cards/Buff food power")]
-public class BuffPlayersNP : Card, IChangeFoodPower
+public class BuffPlayersNp : Card, IChangeFoodPower
 {
     [SerializeField] float amount;
     [SerializeField] string type;

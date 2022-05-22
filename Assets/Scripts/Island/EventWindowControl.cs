@@ -1,25 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EventWindowControl : MonoBehaviour
 {
-    private IslandManager islandManager;
     
-    private Text evtText;
 
-    private Button fstBtn;
-
-    private Button scdBtn;
-
-    private Button trdBtn;
-
-    private int timeCost = 1;
-
-    //[SerializeField] private GameObject  eventWindow;
+    
 /*
     [SerializeField] private Sprite spriteEventImg;
     [SerializeField] private TextMeshProUGUI  eventWindowName;
@@ -28,20 +15,29 @@ public class EventWindowControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI eventSecondButtonText;
     [SerializeField] private TextMeshProUGUI eventThirdButtonText;
 */
+    #region Variables and getters
+        [SerializeField] private GameObject  windowName;
+        [SerializeField] private GameObject  windowText;
+        [SerializeField] private GameObject  windowImage;
+        [SerializeField] private GameObject  firstButton;
+        [SerializeField] private GameObject  secondButton;
+        [SerializeField] private GameObject  thirdButton;
+        
+        [SerializeField] private IslandManager islandManager;
+        private int timeCost = 1;
 
-    [SerializeField] private GameObject  WindowName;
-    [SerializeField] private GameObject  WindowText;
-    [SerializeField] private GameObject  WindowImage;
-    [SerializeField] private GameObject  FirstButton;
-    [SerializeField] private GameObject  SecondButton;
-    [SerializeField] private GameObject  ThirdButton;
-
+        public GameObject FirstButton => firstButton;
+        public GameObject SecondButton => secondButton;
+        public GameObject ThirdButton => thirdButton;
+        #endregion
+   
     
+    /*
     private void Awake()
     {
         //Zbytočné, je to v prefabe
         //Prehľadá všetky child elementy a priradí ich do premenných
-        /*
+        
         foreach (Transform child in transform)
         {
             switch (child.name)
@@ -72,9 +68,9 @@ public class EventWindowControl : MonoBehaviour
             //Debug.Log(child.name);
 
         }
-       */
+      
     }
-
+ */
     void Start()
     {
         
@@ -82,9 +78,8 @@ public class EventWindowControl : MonoBehaviour
         //fstBtn = transform.Find("FirstButton").GetComponent<Button>();
         //scdBtn = transform.Find("SecondButton").GetComponent<Button>();
         //trdBtn = transform.Find("ThirdButton").GetComponent<Button>();
-
-        islandManager = FindObjectOfType<IslandManager>();
         
+        islandManager = FindObjectOfType<IslandManager>();
         // Takto vyzera pridavanie funkcii buttonom zo scriptu
         //  bude sa hodit, ak sa budu funkcie na buttonoch menit za behu hry, napriklad v reakcii na hracov input
         //fstBtn.onClick.AddListener(delegate { CloseEvent(); });
@@ -92,71 +87,86 @@ public class EventWindowControl : MonoBehaviour
         //trdBtn.onClick.AddListener(delegate { CloseEvent(); });
 
         
-        FirstButton.GetComponent<Button>().onClick.AddListener(delegate { CloseEvent(); });
-        SecondButton.GetComponent<Button>().onClick.AddListener(delegate { CloseEvent(); });
-        ThirdButton.GetComponent<Button>().onClick.AddListener(delegate { CloseEvent(); });
+        //firstButton.GetComponent<Button>().onClick.AddListener(delegate { CloseEvent(); });
+        //secondButton.GetComponent<Button>().onClick.AddListener(delegate { CloseEvent(); });
+        //thirdButton.GetComponent<Button>().onClick.AddListener(delegate { CloseEvent(); });
 
          
     }
-
-
-    void Update()
-    {
-        
-    }
-
+    
     
     public void Init(int timeCost)
     {
-        Debug.Log("TimeCost initialized to " + timeCost);
+        //Debug.Log("TimeCost initialized to " + timeCost);
         this.timeCost = timeCost;
     }
-
-    private void CloseEvent()
+    
+    
+    public void CloseEvent()
     {
+        RemoveAllListeners();
         Time.timeScale = 1;
-        islandManager.lowerTime(timeCost);
-        GameObject.FindGameObjectsWithTag("EventWindow")[0].SetActive(false);
+        islandManager.LowerTime(timeCost);
+        HideWindow();
+        Debug.Log("CLOSE");
+        //GameObject.FindGameObjectsWithTag("EventWindow")[0].SetActive(false);
+    }
+    //ZMAZE VSETKY AKCIE NA TLACIDLACH OKREM ZATVORENIE OKNA
+    //(LEBO TO JE NASTAVENE V INSPEKTOROVI)
+    public void RemoveAllListeners()
+    {
+        firstButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        secondButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        thirdButton.GetComponent<Button>().onClick.RemoveAllListeners();
     }
 
     public void SetWindowName(string text)
     {
-        WindowName.GetComponent<TMP_Text>().text = text;
+        if (!string.IsNullOrEmpty(text))
+        {
+            windowName.GetComponent<TMP_Text>().text = text;
+        }
     }
     public void SetWindowText(string text)
     {
-        WindowText.GetComponent<TMP_Text>().text = text;
+        windowText.GetComponent<TMP_Text>().text = text;
     }
     public void SetFirstButtonText(string text)
     {
-        FirstButton.GetComponentInChildren<TMP_Text>().text = text;
+        if (string.IsNullOrEmpty(text))
+        {
+            firstButton.SetActive(false);
+        }
+        else
+        {
+            firstButton.SetActive(true);
+            firstButton.GetComponentInChildren<TMP_Text>().text = text;
+        }
     }
     public void SetSecondButtonText(string text)
     {
         if (string.IsNullOrEmpty(text))
         {
-            SecondButton.SetActive(false);
+            secondButton.SetActive(false);
         }
         else
         {
-            SecondButton.SetActive(true);
-            SecondButton.GetComponentInChildren<TMP_Text>().text = text;
+            secondButton.SetActive(true);
+            secondButton.GetComponentInChildren<TMP_Text>().text = text;
         }
     }
+    
     public void SetThirdButtonText(string text)
     {
-        ThirdButton.GetComponentInChildren<TMP_Text>().text = text;
-    }
-    
-    public void ShowWindow()
-    {
-        gameObject.SetActive(true);
-        //transform.position += Vector3.forward * 2000;
-    }
-    public void HideWindow()
-    {
-        gameObject.SetActive(false);
-        //transform.position -= Vector3.forward * 2000;
+        if (string.IsNullOrEmpty(text))
+        {
+            thirdButton.SetActive(false);
+        }
+        else
+        {
+            thirdButton.SetActive(true);
+            thirdButton.GetComponentInChildren<TMP_Text>().text = text;
+        }
     }
     
     public void SetUpEventWindow(string name,string text,string firstBtn = "",string secondtBtn = "",string thirdtBtn = "")
@@ -169,4 +179,27 @@ public class EventWindowControl : MonoBehaviour
         SetThirdButtonText(thirdtBtn);
     }
     
+    public void ShowWindow()
+    {
+        gameObject.SetActive(true);
+        //transform.position += Vector3.forward * 2000;
+    }
+    public void HideWindow()
+    {
+        gameObject.SetActive(false);
+        //transform.position -= Vector3.forward * 2000;
+    }
+
+    public void Continue()
+    {
+        islandManager.LowerTime(-timeCost);
+
+        ShowWindow();
+        //ZVISI CAS,- a - je + 
+        //Time.timeScale = 0;
+
+        //transform.position += Vector3.forward * 2000;
+    }
+
+
 }

@@ -35,13 +35,13 @@ public class DiscardController : MonoBehaviour
         if (!gm.discardPhase)
         {
             this.gameObject.SetActive(true);
-            targetController.setPos(false);
+            targetController.SetPos(false);
             discardBttn.gameObject.SetActive(true);
             discardBttn.interactable = false;
         }
         else
         {
-            targetController.setPos(true);
+            targetController.SetPos(true);
             discardBttn.interactable = false;
             discardBttn.gameObject.SetActive(false);
             this.gameObject.SetActive(false);

@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] List<Card> deck = new List<Card>();
     private string className;
     private int reputation = 0;
-    private int money = 0;
+    private int money = 100 ;
     private int score;
     private int maxEnergy = 5;
     private int energy;
@@ -146,14 +146,13 @@ public class Player : MonoBehaviour, IDamageable
     }
     public int Rep
     {
-        get
-        {
-            return rep;
-        }
-        set
-        {
-            rep = value;
-        }
+        get => rep;
+        set => rep = value;
+    }
+    public int Money
+    {
+        get => money;
+        set => money = value;
     }
     #endregion
     
@@ -172,15 +171,24 @@ public class Player : MonoBehaviour, IDamageable
         this.vegetarianFoodModBonus = data.vegetarianFoodModBonus;
     }
 
-    public void changeMoney(int amount)
+    public void ChangeMoney(int amount)
     {
-        this.money += amount;
-        if (this.money <= 0)
+        money += amount;
+        if (money <= 0)
         {
             Die(false);
         }
     }
-
+    
+    //CHANGED -= TO +=, USE THIS INSTEAD
+    public void ChangeReputation(int amount)
+    {
+        rep += amount;
+        if (rep <= 0)
+        {
+            Die(true);
+        }
+    }
     public void TakeDamage(int amount)
     {
         rep -= amount;

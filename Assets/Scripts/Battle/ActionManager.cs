@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 public class ActionManager : MonoBehaviour
 {
-    [SerializeField] Image Image;
-    [SerializeField] List<Sprite> Sprites;
+    [SerializeField] Image image;
+    [SerializeField] List<Sprite> sprites;
 
     public int CurrentIndex { get; private set; }
 
     void Start()
     {
-        CurrentIndex = UnityEngine.Random.Range(0, Sprites.Count);
-        Image.sprite = Sprites[CurrentIndex];
+        CurrentIndex = UnityEngine.Random.Range(0, sprites.Count);
+        image.sprite = sprites[CurrentIndex];
     }
 }

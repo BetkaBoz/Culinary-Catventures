@@ -7,7 +7,7 @@ public class FoodBase : Card, IFeed
 {
     public override void CardEffect(GameManager gm, RaycastHit2D hit)
     {
-        Feed(hit.transform.GetComponent<Customer>(), CalculateNP(gm));
+        Feed(hit.transform.GetComponent<Customer>(), CalculateNp(gm));
     }
 
     public void Feed(Customer target, int amount)

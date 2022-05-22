@@ -78,7 +78,7 @@ public abstract class Card : ScriptableObject
     }
     #endregion
     public abstract void CardEffect(GameManager gm, RaycastHit2D hit);
-    public int CalculateNP(GameManager gm)
+    public int CalculateNp(GameManager gm)
     {
         switch (CardType)
         {

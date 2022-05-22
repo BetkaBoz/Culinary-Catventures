@@ -6,17 +6,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public enum BattleState { PLAYERTURN, ENEMYTURN, WON, LOST }
+public enum BattleState { Playerturn, Enemyturn, Won, Lost }
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Player player;
-    [SerializeField] List<Customer> customers = new List<Customer>();
-    [SerializeField] CardSlot[] cardSlots;
-    [SerializeField] bool[] availableCardSlots;
-    [SerializeField] TextMeshProUGUI energyUI;
-    [SerializeField] TextMeshProUGUI repUI;
-    [SerializeField] DiscardController discardController;
-    [SerializeField] CombineController combineController;
+    [SerializeField] private Player player;
+    [SerializeField] private List<Customer> customers = new List<Customer>();
+    [SerializeField] private CardSlot[] cardSlots;
+    [SerializeField] private bool[] availableCardSlots;
+    [SerializeField] private TextMeshProUGUI energyUI;
+    [SerializeField] private TextMeshProUGUI repUI;
+    [SerializeField] private DiscardController discardController;
+    [SerializeField] private CombineController combineController;
 
     public bool discardPhase;
     public int count;
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Card> discardPile = new List<Card>();
     [SerializeField] private List<Card> hand = new List<Card>();
     [SerializeField] private List<Card> exhaustPile = new List<Card>();
-    [SerializeField] private List<IBuffable> buffs = new List<IBuffable>();
+    [SerializeField] private List<Buffable> buffs = new List<Buffable>();
     public bool combinePhase;
     public BattleState battleState;
     public Player Player => player;      //getter
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         if (customers.Count == 0)
         {
             //if player is not dead then you won
-            battleState = BattleState.WON;
+            battleState = BattleState.Won;
             Debug.Log("YAY YOU WON!");
             //else you lose and its end of game
         }
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             combinePhase = false;
             discardPhase = false;
 
-            battleState = BattleState.PLAYERTURN;
+            battleState = BattleState.Playerturn;
         }
     }
 
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         repUI.text = $"{player.Rep}";
     }
 
-    public void BuffPlayer(IBuffable buff, bool applyNow = false)
+    public void BuffPlayer(Buffable buff, bool applyNow = false)
     {
         buff.SetTarget(player);
         buffs.Add(buff);
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             ApplyBuff(buff);
     }
     //run this at the start of Player's turn so all the buffs are added properly
-    public void ApplyBuff(IBuffable buff)
+    public void ApplyBuff(Buffable buff)
     {
         if (buff.Finished)
             buffs.Remove(buff);
@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
         player.GeneralFoodModBonus = 0;
         player.MeatFoodModBonus = 0;
         player.VegetarianFoodModBonus = 0;
-        List<IBuffable> delBuffs = new List<IBuffable>();
+        List<Buffable> delBuffs = new List<Buffable>();
         foreach (var buff in buffs)
         {
             if (buff.Finished)
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
         energyUI.text = $"{player.Energy}/{player.MaxEnergy}";
         foreach(var card in cardSlots)
         {
-            card.UpdateNP();
+            card.UpdateNp();
         }
     }
 
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
     //----------------- TURN-BASE RELATED CODE ---------------------
     public void EndPlayersTurn()
     {
-        battleState = BattleState.ENEMYTURN;
+        battleState = BattleState.Enemyturn;
         Debug.Log("ITS ENEMIES TURN");
 
         DiscardHand();
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
 
     public void EndEnemyTurn()
     {
-        battleState = BattleState.PLAYERTURN;
+        battleState = BattleState.Playerturn;
         Debug.Log("ITS PLAYERS TURN");
 
         DrawCards(5);
@@ -397,7 +397,7 @@ public class GameManager : MonoBehaviour
         ToggleCombine();
     }
 
-    public int GetComboNP(bool isPile)
+    public int GetComboNp(bool isPile)
     {
         int result = 0;
         for (int i = 0; i < cardSlots.Length; i++)
@@ -417,7 +417,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void customerListDelete(Customer customer)
+    public void CustomerListDelete(Customer customer)
     {
         customers.Remove(customer);
     }

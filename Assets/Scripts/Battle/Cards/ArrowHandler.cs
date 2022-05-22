@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ArrowHandler : MonoBehaviour
 {
-    public GameObject ArrowHeadPrefab;
-    public GameObject ArrowNodePrefab; //lol randem XD PEAK 2010 comedy
+    public GameObject arrowHeadPrefab;
+    public GameObject arrowNodePrefab; //lol randem XD PEAK 2010 comedy
     public int arrowNodeNum;
     public float scaleFactor = 1f; //scale of arrows
-    public bool isVisible { get; set; }
+    public bool IsVisible { get; set; }
 
     private RectTransform origin; //point P0
     private List<RectTransform> arrowNodes = new List<RectTransform>(); //list of arrow nodes
@@ -25,10 +25,10 @@ public class ArrowHandler : MonoBehaviour
         for (int i = 0; i < this.arrowNodeNum; ++i)
         {
             //Debug.Log("Node num " + i.ToString());
-            this.arrowNodes.Add(Instantiate(this.ArrowNodePrefab, this.transform).GetComponent<RectTransform>());
+            this.arrowNodes.Add(Instantiate(this.arrowNodePrefab, this.transform).GetComponent<RectTransform>());
         }
 
-        this.arrowNodes.Add(Instantiate(this.ArrowHeadPrefab, this.transform).GetComponent<RectTransform>());
+        this.arrowNodes.Add(Instantiate(this.arrowHeadPrefab, this.transform).GetComponent<RectTransform>());
 
         this.arrowNodes.ForEach(a => a.GetComponent<RectTransform>().position = new Vector2(-1000, -1000));
 
@@ -36,7 +36,7 @@ public class ArrowHandler : MonoBehaviour
         {
             this.controlPoints.Add(Vector2.zero);
         }
-        isVisible = false;
+        IsVisible = false;
     }
 
     public void SetOrigin(Vector2 newOrigin)
@@ -44,9 +44,9 @@ public class ArrowHandler : MonoBehaviour
         this.origin.position = newOrigin;
     }
 
-    public void setVisibile(bool isVisible)
+    public void SetVisibile(bool isVisible)
     {
-        this.isVisible = isVisible;
+        this.IsVisible = isVisible;
         this.gameObject.SetActive(isVisible);
     }
 

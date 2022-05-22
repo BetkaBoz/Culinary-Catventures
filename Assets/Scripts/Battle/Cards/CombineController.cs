@@ -116,7 +116,7 @@ public class CombineController : MonoBehaviour
                     LoadPreviewCard("FoodPile");
                     break;
             }
-            result.NutritionPoints = gm.GetComboNP(true);
+            result.NutritionPoints = gm.GetComboNp(true);
             findSlot.SetCard(result);
             //if (findSlot.gameObject.activeSelf)
             //{

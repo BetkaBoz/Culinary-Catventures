@@ -1636,7 +1636,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 35e21ca778596c0479f2647a80b969e7, type: 2}
   - {fileID: 11400000, guid: 351425e4cf2404541845611689c2d689, type: 2}
   - {fileID: 11400000, guid: 9734095e5e8ad0e45b03299dd63f33e7, type: 2}
-  - {fileID: 11400000, guid: 4dc0434742b230741a0e4aeccf53629e, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 187c0a0ff8fa3a146a10034b0fa26f25, type: 2}
   - {fileID: 11400000, guid: bd0b5a655d9fdc34b9ffb5d047f7ac05, type: 2}
   - {fileID: 11400000, guid: f65611cde29c7934a880f0cca25eb3b1, type: 2}
@@ -5226,8 +5226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b39e8c19f0e3f45a35b5ca18bcdba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowHeadPrefab: {fileID: 5727427495513789959, guid: 0b3c4c8effd693b478c975c56260f64f, type: 3}
-  ArrowNodePrefab: {fileID: 2317772978382087144, guid: 6f8d57a8969e93040b5495faf33f2d18, type: 3}
+  arrowHeadPrefab: {fileID: 5727427495513789959, guid: 0b3c4c8effd693b478c975c56260f64f, type: 3}
+  arrowNodePrefab: {fileID: 2317772978382087144, guid: 6f8d57a8969e93040b5495faf33f2d18, type: 3}
   arrowNodeNum: 8
   scaleFactor: 100
 --- !u!1 &1968061641

@@ -61,7 +61,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         }
         artworkImage.sprite = otherCard.Artwork;
         UpdateEnergy();
-        UpdateNP();
+        UpdateNp();
     }
 
     private void UpdateEnergy()
@@ -81,9 +81,9 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         }
     }
 
-    public void UpdateNP()
+    public void UpdateNp()
     {
-        int result = card.CalculateNP(gm);
+        int result = card.CalculateNp(gm);
         if(result != -1)
             nutritionalValue.text = ""+result;
     }
@@ -304,7 +304,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         {
             if (!card.CanTarget)
             {
-                targetController.setPos(false);
+                targetController.SetPos(false);
                 dragOffset = transform.position - GetMousePos();
                 //this.isDragged = true;
             }
@@ -339,9 +339,9 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             //if you are a manouver or if you have to discard a card don't use targeting arrows
             if (card.CanTarget && !gm.discardPhase)
             {
-                if (!arrowHandler.isVisible)
+                if (!arrowHandler.IsVisible)
                 {
-                    arrowHandler.setVisibile(true);
+                    arrowHandler.SetVisibile(true);
                     arrowHandler.SetOrigin(new Vector2(transform.position.x, transform.position.y)+Vector2.up);
                 }
             }
@@ -377,7 +377,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                         card.CardEffect(gm, hit);
                         MoveToDiscardPile(false);
                     }
-                    arrowHandler.setVisibile(false);
+                    arrowHandler.SetVisibile(false);
                 }
                 else
                 {
@@ -393,7 +393,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                     }
                     if (!gm.discardPhase)
                     {
-                        targetController.setPos(true);
+                        targetController.SetPos(true);
                     }
                 }
                 isDragged = false;
@@ -407,7 +407,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         {
             if (card.CanTarget && !gm.discardPhase)
             {
-                arrowHandler.setVisibile(false);
+                arrowHandler.SetVisibile(false);
             }
             isRised = false;
             transform.position = originalPos;

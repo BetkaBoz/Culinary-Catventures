@@ -31,24 +31,24 @@ public class MapManager : MonoBehaviour
         xPosRangeStart += distance;
         xPosRangeEnd -= distance;
 
-        GameObject Island = Instantiate(conf.IslandPrefab, Camera.main.ViewportToWorldPoint(new Vector3(
+        GameObject island = Instantiate(conf.IslandPrefab, Camera.main.ViewportToWorldPoint(new Vector3(
             Random.Range(xPosRangeStart, xPosRangeEnd),
             1f - (sectorNum + 0.5f) * conf.SectorDistance,
             10)), Quaternion.identity);
         switch (type)
         {
             case 0:
-                Island.GetComponent<Island>().setStartType();
+                island.GetComponent<Island>().SetStartType();
                 break;
             case 1:
-                Island.GetComponent<Island>().setFinishType();
+                island.GetComponent<Island>().SetFinishType();
                 break;
             case 2:
-                Island.GetComponent<Island>().setRandomIslandType();
+                island.GetComponent<Island>().SetRandomIslandType();
                 break;
         }
-        Island.transform.SetParent(this.gameMap.transform); // puts Island as child of the Map game object
-        Island.name = Island.GetComponent<Island>().getIslandType() + name + sectorNum + "-" + islandNum;
+        island.transform.SetParent(this.gameMap.transform); // puts Island as child of the Map game object
+        island.name = island.GetComponent<Island>().GetIslandType() + name + sectorNum + "-" + islandNum;
 
         // setting position relative to the camera (Viewport has values from bottom left corner [0,0] to top right [1,1])
         // x position randomly placed in calculated range
@@ -62,7 +62,7 @@ public class MapManager : MonoBehaviour
         // Debug.Log(Island.transform.position);
 
         // Island.transform.position = new Vector3(Island.transform.position.x, Island.transform.position.y, 0);
-        islands.Add(Island);
+        islands.Add(island);
     }
 
     /// <summary>

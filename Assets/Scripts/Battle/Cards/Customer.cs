@@ -60,7 +60,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             {
                 case 0:
                     GameObject temp = Instantiate(debuffs);
-                    gm.BuffPlayer(temp.GetComponent<IBuffable>());
+                    gm.BuffPlayer(temp.GetComponent<Buffable>());
                     satisfied = true;
                     break;
                 case 1:
@@ -141,6 +141,6 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     private void OnDestroy()
     {
-        gm.customerListDelete(this);
+        gm.CustomerListDelete(this);
     }
 }

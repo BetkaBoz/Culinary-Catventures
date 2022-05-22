@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncreaseFoodMod:IBuffable
+public class IncreaseFoodMod:Buffable
 {
     [SerializeField] float value;
     [SerializeField] string type;

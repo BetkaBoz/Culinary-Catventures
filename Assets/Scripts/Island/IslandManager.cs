@@ -7,18 +7,24 @@ using UnityEngine.SceneManagement;
 public class IslandManager : MonoBehaviour
 {
     [SerializeField] private int time;
-    [SerializeField] TextMeshProUGUI  timeText;
+    [SerializeField] private TextMeshProUGUI  timeText;
     [SerializeField] private GameObject grabberPrefab;
+    //[SerializeField] private TextMeshProUGUI  coinText;
+    //[SerializeField] private TextMeshProUGUI  repText; IN UILayer
 
-    public int Time {get => time;}
+
     
+    
+    
+    public int Time => time;
+
     void Start()
     {
         timeText.text = "Time: " + time;
     }
     
     //Znižovanie času o lowerBy
-    public void lowerTime(int lowerBy)
+    public void LowerTime(int lowerBy)
     {
         time -= lowerBy;
         
@@ -34,6 +40,10 @@ public class IslandManager : MonoBehaviour
     //Spusti scénu boja
     public void StartBattle()
     {
+        //Uloženie hodnôt do PLAYERPREFS
+        //NOT GOOD
+        //{PlayerPrefs.SetInt("reputation", 100);}
+        
         SceneManager.LoadScene("Battle", LoadSceneMode.Single);
     }
 }
