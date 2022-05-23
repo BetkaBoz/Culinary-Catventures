@@ -104,11 +104,11 @@ public class EventWindowControl : MonoBehaviour
     
     public void CloseEvent()
     {
-        RemoveAllListeners();
+        //RemoveAllListeners();
         Time.timeScale = 1;
         islandManager.LowerTime(timeCost);
         HideWindow();
-        Debug.Log("CLOSE");
+        //Debug.Log("CLOSE");
         //GameObject.FindGameObjectsWithTag("EventWindow")[0].SetActive(false);
     }
     //ZMAZE VSETKY AKCIE NA TLACIDLACH OKREM ZATVORENIE OKNA
@@ -169,14 +169,15 @@ public class EventWindowControl : MonoBehaviour
         }
     }
     
-    public void SetUpEventWindow(string name,string text,string firstBtn = "",string secondtBtn = "",string thirdtBtn = "")
+    public void SetUpEventWindow(string name,string text,string firstBtn = "",string secondBtn = "",string thirdBtn = "LEAVE")
     {
         //EventWindowControl eventWindowControl = eventWindow.GetComponent<EventWindowControl>();
         SetWindowName(name);
         SetWindowText(text);
         SetFirstButtonText(firstBtn);
-        SetSecondButtonText(secondtBtn);
-        SetThirdButtonText(thirdtBtn);
+        SetSecondButtonText(secondBtn);
+        SetThirdButtonText(thirdBtn);
+        RemoveAllListeners();
     }
     
     public void ShowWindow()
