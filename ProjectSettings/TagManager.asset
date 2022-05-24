@@ -8,6 +8,7 @@ TagManager:
   - Challenge
   - PlayerGrabber
   - UILayer
+  - Light
   layers:
   - Default
   - TransparentFX

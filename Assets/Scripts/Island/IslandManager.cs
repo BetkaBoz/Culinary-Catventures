@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,30 +12,58 @@ public class IslandManager : MonoBehaviour
     [SerializeField] private GameObject grabberPrefab;
     //[SerializeField] private TextMeshProUGUI  coinText;
     //[SerializeField] private TextMeshProUGUI  repText; IN UILayer
+    [SerializeField] private Light sun;
+    [SerializeField] private GameObject playerLight;
+    
+    [SerializeField] private GameObject lights;
+
+     public int Time => time;
 
 
-    
-    
-    
-    public int Time => time;
+
+    private void Awake()
+    {
+        timeText.text = "Time: " + time;
+        sun  = GameObject.FindGameObjectsWithTag("Light")[0].GetComponent<Light>();
+        playerLight  = GameObject.FindGameObjectsWithTag("Light")[1];
+
+        LightControl();
+    }
 
     void Start()
     {
-        timeText.text = "Time: " + time;
     }
     
-    //Znižovanie času o lowerBy
+    //ZNIŽOVANIE ČASU O LOWERBY
     public void LowerTime(int lowerBy)
     {
         time -= lowerBy;
-        
-        //Ak vyprší tak spawni ruku
+
+        LightControl();
+        //AK VYPRŠÍ TAK SPAWNI RUKU
         if (time <= 0)
         {
             time = 0;
             Instantiate(grabberPrefab);
         }
         timeText.text = "Time: " + time;
+    }
+    private void LightControl()
+    {
+        sun.intensity = time * 0.2f;
+
+        if (sun.intensity <= 0.4)
+        {
+            lights.SetActive(true);
+            playerLight.SetActive(true);
+            
+        }
+        else
+        {            
+            lights.SetActive(false);
+            playerLight.SetActive(false);
+
+        }
     }
     
     //Spusti scénu boja

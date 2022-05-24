@@ -1,12 +1,10 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EventWindowControl : MonoBehaviour
 {
-    
-
-    
 /*
     [SerializeField] private Sprite spriteEventImg;
     [SerializeField] private TextMeshProUGUI  eventWindowName;
@@ -15,6 +13,7 @@ public class EventWindowControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI eventSecondButtonText;
     [SerializeField] private TextMeshProUGUI eventThirdButtonText;
 */
+
     #region Variables and getters
         [SerializeField] private GameObject  windowName;
         [SerializeField] private GameObject  windowText;
@@ -23,85 +22,44 @@ public class EventWindowControl : MonoBehaviour
         [SerializeField] private GameObject  secondButton;
         [SerializeField] private GameObject  thirdButton;
         
-        [SerializeField] private IslandManager islandManager;
+        private IslandManager islandManager;
         private int timeCost = 1;
 
         public GameObject FirstButton => firstButton;
         public GameObject SecondButton => secondButton;
         public GameObject ThirdButton => thirdButton;
+        
+        
+        //EVENT WINDOW SPRITES
+        [SerializeField] private Sprite  homelessCatSprite;
+        [SerializeField] private Sprite  diceCatSprite;
+        [SerializeField] private Sprite  stumbleSprite;
+        [SerializeField] private Sprite  perfectTomatoesSprite;
+        [SerializeField] private Sprite  caveSprite;
+        [SerializeField] private Sprite  stuckMerchantSprite;
+        [SerializeField] private Sprite  thievesSprite;
+        [SerializeField] private Sprite  gatherSprite;
+
         #endregion
    
     
-    /*
+    
     private void Awake()
     {
-        //Zbytočné, je to v prefabe
-        //Prehľadá všetky child elementy a priradí ich do premenných
-        
-        foreach (Transform child in transform)
-        {
-            switch (child.name)
-            {
-                case "EventName":
-                    WindowName = child.gameObject;
-                    break;
-                case "EventText":
-                    WindowText = child.gameObject;
-                    break;
-                case "EventImage":
-                    WindowImage = child.gameObject;
-                    break;
-                case "FirstButton":
-                    FirstButton = child.gameObject;
-                    break;
-                case "SecondButton":
-                    SecondButton = child.gameObject;
-                    break;
-                case "ThirdButton":
-                    ThirdButton = child.gameObject;
-                    break;
-                default:
-                    Debug.Log("What are you doing here?");
-                    
-                    break;
-            }
-            //Debug.Log(child.name);
-
-        }
-      
-    }
- */
-    void Start()
-    {
-        
-        
-        //fstBtn = transform.Find("FirstButton").GetComponent<Button>();
-        //scdBtn = transform.Find("SecondButton").GetComponent<Button>();
-        //trdBtn = transform.Find("ThirdButton").GetComponent<Button>();
-        
         islandManager = FindObjectOfType<IslandManager>();
-        // Takto vyzera pridavanie funkcii buttonom zo scriptu
-        //  bude sa hodit, ak sa budu funkcie na buttonoch menit za behu hry, napriklad v reakcii na hracov input
-        //fstBtn.onClick.AddListener(delegate { CloseEvent(); });
-        //scdBtn.onClick.AddListener(delegate { CloseEvent(); });
-        //trdBtn.onClick.AddListener(delegate { CloseEvent(); });
-
-        
-        //firstButton.GetComponent<Button>().onClick.AddListener(delegate { CloseEvent(); });
-        //secondButton.GetComponent<Button>().onClick.AddListener(delegate { CloseEvent(); });
-        //thirdButton.GetComponent<Button>().onClick.AddListener(delegate { CloseEvent(); });
-
-         
     }
-    
-    
+
+
     public void Init(int timeCost)
     {
         //Debug.Log("TimeCost initialized to " + timeCost);
         this.timeCost = timeCost;
     }
-    
-    
+    //LEN PRI POKRACOVANI S 3. BUTTONOM
+    public void Continue()
+    {
+        islandManager.LowerTime(-1);
+    }
     public void CloseEvent()
     {
         //RemoveAllListeners();
@@ -109,10 +67,9 @@ public class EventWindowControl : MonoBehaviour
         islandManager.LowerTime(timeCost);
         HideWindow();
         //Debug.Log("CLOSE");
-        //GameObject.FindGameObjectsWithTag("EventWindow")[0].SetActive(false);
     }
     //ZMAZE VSETKY AKCIE NA TLACIDLACH OKREM ZATVORENIE OKNA
-    //(LEBO TO JE NASTAVENE V INSPEKTOROVI)
+    //(LEBO TO JE NASTAVENE V INSPEKTOROVI LEN NA TRETIE TLACIDLO)
     public void RemoveAllListeners()
     {
         firstButton.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -120,18 +77,19 @@ public class EventWindowControl : MonoBehaviour
         thirdButton.GetComponent<Button>().onClick.RemoveAllListeners();
     }
 
-    public void SetWindowName(string text)
+    #region EventWindowSetters
+    private void SetWindowName(string text)
     {
         if (!string.IsNullOrEmpty(text))
         {
             windowName.GetComponent<TMP_Text>().text = text;
         }
     }
-    public void SetWindowText(string text)
+    private void SetWindowText(string text)
     {
         windowText.GetComponent<TMP_Text>().text = text;
     }
-    public void SetFirstButtonText(string text)
+    private void SetFirstButtonText(string text)
     {
         if (string.IsNullOrEmpty(text))
         {
@@ -143,7 +101,7 @@ public class EventWindowControl : MonoBehaviour
             firstButton.GetComponentInChildren<TMP_Text>().text = text;
         }
     }
-    public void SetSecondButtonText(string text)
+    private void SetSecondButtonText(string text)
     {
         if (string.IsNullOrEmpty(text))
         {
@@ -156,7 +114,7 @@ public class EventWindowControl : MonoBehaviour
         }
     }
     
-    public void SetThirdButtonText(string text)
+    private void SetThirdButtonText(string text)
     {
         if (string.IsNullOrEmpty(text))
         {
@@ -168,7 +126,51 @@ public class EventWindowControl : MonoBehaviour
             thirdButton.GetComponentInChildren<TMP_Text>().text = text;
         }
     }
+    //CAKA SA NA SPRITES
+    private void AssignEventWindowSprite(String eventName)
+    {
+        if (string.IsNullOrEmpty(eventName)) return;
+        Image imageComponent = windowImage.GetComponent<Image>();
+        switch (eventName)
+        {
+            case "Homeless cat":
+                imageComponent.sprite =  homelessCatSprite;
+                break;
+            case "Dice cat":
+                imageComponent.sprite =  diceCatSprite;
+                break;
+            case "Stumble":
+                imageComponent.sprite =  stumbleSprite;
+                break;
+            case "Perfect tomatoes":
+                imageComponent.sprite =  perfectTomatoesSprite;
+                break;
+            case "Cave":
+                imageComponent.sprite =  caveSprite;
+                break;
+            case "Stuck merchant":
+                imageComponent.sprite =  stuckMerchantSprite;
+                break;
+            case "Thieves":
+                imageComponent.sprite =  thievesSprite;
+                break;
+            //TO ISTE AKO THIEVES EVENT LEN INY OBRAZOK?
+            case "Robbers":
+                imageComponent.sprite =  thievesSprite;
+                break;
+            case "Gather":
+                imageComponent.sprite =  gatherSprite;
+                break;
+            
+            default:
+                Debug.Log("What are you doing here CRIMINAL SCUM?");
+                break;
+        }
+    }
+
     
+    #endregion
+
     public void SetUpEventWindow(string name,string text,string firstBtn = "",string secondBtn = "",string thirdBtn = "LEAVE")
     {
         //EventWindowControl eventWindowControl = eventWindow.GetComponent<EventWindowControl>();
@@ -177,30 +179,22 @@ public class EventWindowControl : MonoBehaviour
         SetFirstButtonText(firstBtn);
         SetSecondButtonText(secondBtn);
         SetThirdButtonText(thirdBtn);
+        AssignEventWindowSprite(name);
         RemoveAllListeners();
+        ShowWindow();
     }
     
     public void ShowWindow()
     {
         gameObject.SetActive(true);
-        //transform.position += Vector3.forward * 2000;
     }
     public void HideWindow()
     {
         gameObject.SetActive(false);
-        //transform.position -= Vector3.forward * 2000;
     }
 
-    public void Continue()
-    {
-        islandManager.LowerTime(-timeCost);
 
-        ShowWindow();
-        //ZVISI CAS,- a - je + 
-        //Time.timeScale = 0;
-
-        //transform.position += Vector3.forward * 2000;
-    }
+    
 
 
 }

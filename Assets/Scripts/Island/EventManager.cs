@@ -11,7 +11,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] private EventType eventType;
     [SerializeField] private RandomEventType randomEventType; //FOR NOW
     [SerializeField] private TextMeshProUGUI  btnPrompt; //FOR NOW
-    [SerializeField] private int timeCost = 1;
+    //[SerializeField] private int timeCost = 1;
     
     //EVENT SPRITES
     [SerializeField] private Sprite spriteRandom;
@@ -20,15 +20,15 @@ public class EventManager : MonoBehaviour
     [SerializeField] private Sprite spriteChallenge;
     
     //EVENT WINDOW
-    [SerializeField] private GameObject  eventWindow;
+    private GameObject  eventWindow;
     //UILAYER
-    [SerializeField] private GameObject  uiLayer;
+    private GameObject  uiLayer;
 
     private IslandManager islandManager;
     
     private bool isOnEvent;
     private bool isUsed;
-    private bool canShowEventWindow = true;
+    //private bool canShowEventWindow = true;
     //private GameObject playerGrabber;
 
     private const int Minor = 5;
@@ -43,7 +43,6 @@ public class EventManager : MonoBehaviour
         uiLayer = GameObject.FindGameObjectWithTag("UILayer");
         uiLayer.GetComponent<UILayer>().UpdateUI();
         islandManager = FindObjectOfType<IslandManager>();
-
     }
 
     void Start()
@@ -53,7 +52,6 @@ public class EventManager : MonoBehaviour
         AssignRandomType();
         AssignSprite();
         eventWindow.GetComponent<EventWindowControl>().HideWindow();
-        
 
     }
 
@@ -67,7 +65,6 @@ public class EventManager : MonoBehaviour
             isUsed = true;
             ClearBtnPrompt();
             RecognizeAndRunEvent();
-
         }
     }
     //URČI TYP EVENTU, CHALLENGE SA NASTAVUJE Z INŠPEKTORA
@@ -77,7 +74,7 @@ public class EventManager : MonoBehaviour
         else {
             Array values = Enum.GetValues(typeof(EventType));
             Random random = new Random(Guid.NewGuid().GetHashCode());
-            //TODO: ZMENIT -3 NA -1 PO TESTOVANI RANDOM EVENTOV
+            //TODO: ZMENIT  NA -1 PO TESTOVANI RANDOM EVENTOV
             eventType = (EventType) values.GetValue(random.Next(values.Length - 3));
         }
     }
@@ -89,9 +86,10 @@ public class EventManager : MonoBehaviour
         randomEventType = (RandomEventType) rvalues.GetValue(random.Next(rvalues.Length ));
     }
     //ZMENÍ EVENT OKNO PODĽA TYPU RANDOM EVENTU
-    private void SwitchEventWindow()
+    private void SwitchRandomEventWindow(EventWindowControl eventWindowControl )
     {   
-        EventWindowControl eventWindowControl = eventWindow.GetComponent<EventWindowControl>();
+        //TODO: MOZNO BUDE DOBRE AK PREMENNE BUDU INDE A NECH SA NEONDIA STALE
+        //EventWindowControl eventWindowControl = eventWindow.GetComponent<EventWindowControl>();
         UILayer uiLayerControl = uiLayer.GetComponent<UILayer>();
         Button firstButtonControl = eventWindowControl.FirstButton.GetComponent<Button>();
         Button secondButtonControl = eventWindowControl.SecondButton.GetComponent<Button>();
@@ -101,6 +99,7 @@ public class EventManager : MonoBehaviour
         switch (randomEventType)
         {
             case RandomEventType.HomelessCat:
+                //HOMELESS_CAT
                 eventWindowControl.SetUpEventWindow("Homeless cat","You found homeless cat on the street.",
                     "HELP","ROB","");
                 
@@ -116,7 +115,8 @@ public class EventManager : MonoBehaviour
                 });
                 break;
             case RandomEventType.DiceCat:
-                eventWindowControl.SetUpEventWindow("Dice Cat","You see a cat playing dice. He wants to play with you.",
+                //DICE_CAT
+                eventWindowControl.SetUpEventWindow("Dice cat","You see a cat playing dice. He wants to play with you.",
                     "PLAY","DECLINE","");
                 
                 firstButtonControl.onClick.AddListener(delegate {
@@ -141,14 +141,14 @@ public class EventManager : MonoBehaviour
                 });
                 break;
             case RandomEventType.Stumble:
-                Debug.Log("Stumble");
+                //STUMBLE
                 eventWindowControl.SetUpEventWindow("Stumble","You stumbled on a small rock and lost an ingredient."
                 ,"ASK FOR HELP","SEARCH");
                 
                 Stumble(firstButtonControl,secondButtonControl ,thirdButtonControl, eventWindowControl, uiLayerControl);
                 break;
             case RandomEventType.PerfectTomatoes:
-                Debug.Log("PerfectTomatoes");
+                //PERFECT_TOMATOES
                 eventWindowControl.SetUpEventWindow("Perfect tomatoes","You see perfect tomatoes behind a fence.",
                     "CLIMB","DON'T TEMPT","");
                 firstButtonControl.onClick.AddListener(delegate {
@@ -173,7 +173,7 @@ public class EventManager : MonoBehaviour
                     });
                 break;
             case RandomEventType.Cave:
-                Debug.Log("Cave");
+                //CAVE
                 eventWindowControl.SetUpEventWindow("Cave","You see entrance to a cave and some ingredients to gather nearby.",
                     "GO IN" ,"GATHER","");
                 
@@ -216,25 +216,22 @@ public class EventManager : MonoBehaviour
                 //GATHER
                 //TODO: GET SOM INGREDIENTS
                 secondButtonControl.onClick.AddListener(delegate {
-                    eventWindowControl.SetUpEventWindow("","You picked some ingredients and went on your way");
-
-                    Debug.Log("LEAVE");
+                    Gather(eventWindowControl);
                 });
                 break;
             case RandomEventType.StuckMerchant:
-                Debug.Log("StuckMerchant");
-                eventWindowControl.SetUpEventWindow("Stuck Merchant","You see a stuck merchant on the road.",
+                //STUCK_MERCHANT
+                eventWindowControl.SetUpEventWindow("Stuck merchant","You see a stuck merchant on the road.",
                     "HELP","IGNORE","");
                 
                 firstButtonControl.onClick.AddListener(delegate {
                     //30%
                     if (RandomState(30))
                     {   //AMBUSH
-                        eventWindowControl.SetUpEventWindow("","It's a trap! You see robbers coming to you.",
+                        eventWindowControl.SetUpEventWindow("Robbers","It's a trap! You see robbers coming to you.",
                             "FIGHT","RUN","");
-                        //Debug.Log("It's a trap!");
-                        //eventWindowControl.Continue();
-                        //SAME AS THIEVES EVENT
+                        Debug.Log("It's a trap!");
+                        //SAME AS THIEVES EVENT BUT DIFFERENT
                         Thieves(firstButtonControl,secondButtonControl , eventWindowControl, uiLayerControl,"robbers");
                     }
                     else
@@ -253,7 +250,7 @@ public class EventManager : MonoBehaviour
                 });
                 break;
             case RandomEventType.Thieves:
-                Debug.Log("Thieves");
+                //THIEVES
                 eventWindowControl.SetUpEventWindow("Thieves","You see thieves trying to rob you.",
                     "FIGHT","RUN","");
                 
@@ -265,6 +262,82 @@ public class EventManager : MonoBehaviour
                 break;
         }
     }
+    private void Stumble(Button firstButtonControl,Button secondButtonControl,Button thirdButtonControl,EventWindowControl eventWindowControl,UILayer uiLayerControl)
+    {
+        //TODO: STRATIT NAHODNU INGREDIENCIU Z DECKU
+        firstButtonControl.onClick.AddListener(delegate {
+            //TODO: 35%
+            if (RandomState(35))
+            {
+                eventWindowControl.SetUpEventWindow("","Some cats heard you and decided to help you. You found your lost ingredient");
+            }
+            else
+            {
+                eventWindowControl.SetUpEventWindow("","No one is willing to help you. You can ask again."
+                    ,"ASK FOR HELP","SEARCH");
+                
+                uiLayerControl.ChangeReputation(-Minor);
+                Stumble( firstButtonControl, secondButtonControl,thirdButtonControl, eventWindowControl, uiLayerControl);
+            }
+        });
+        secondButtonControl.onClick.AddListener(delegate {
+            //TODO: 50%, VIACEJ PERCENT KED MAS HELPEROV
+            if (RandomState())
+            {               
+                eventWindowControl.SetUpEventWindow("","Some cats heard you and decided to help you. You found your lost ingredient");
+            }
+            else
+            {
+                eventWindowControl.SetUpEventWindow("","You are looking for the lost ingredient but cant find it. Other cats are looking at you..."
+                    ,"ASK FOR HELP","SEARCH");
+                uiLayerControl.ChangeReputation(-Minor);
+                Stumble( firstButtonControl,secondButtonControl,thirdButtonControl, eventWindowControl, uiLayerControl);
+            }
+        });
+        
+        thirdButtonControl.onClick.AddListener(delegate {
+            //eventWindowControl.Continue();
+            //eventWindowControl.SetUpEventWindow("","You left the place and your ingredient too.");
+        });
+    }
+    private void Thieves(Button firstButtonControl,Button secondButtonControl,EventWindowControl eventWindowControl,UILayer uiLayerControl, string who)
+    {
+        firstButtonControl.onClick.AddListener(delegate {
+            if (RandomState())
+            {
+                //YOU WON AGAINST THEM
+                eventWindowControl.SetUpEventWindow("",$"You managed to beat up the {who}. You take their coins.");
+                uiLayerControl.ChangeMoney(Moderate);
+            }
+            else
+            {
+                eventWindowControl.SetUpEventWindow("",$"The {who} beat you up and stole more money than usual.");
+                //THEY BEAT YOU UP A STOLE A LOT OF MONEY
+                uiLayerControl.ChangeMoney(-Major);
+            }
+        });
+        secondButtonControl.onClick.AddListener(delegate {
+            if (RandomState())
+            {
+                //STOLE FROM YOU
+                eventWindowControl.SetUpEventWindow("",$"The {who} catch you up and stole your money.");
+                uiLayerControl.ChangeMoney(-Moderate);
+            }
+            else
+            {
+                eventWindowControl.SetUpEventWindow("",$"You are as fast as lighting! You don't see the {who} anymore.");
+            }
+        });
+    }
+    private void Gather(EventWindowControl eventWindowControl)
+    {
+        //TODO: PRIDAT INGREDIENCIE DO DECKU,ZMENIT VSTUPNE PARAMETRE DO FUNKCIE
+        Random rnd = new Random();
+        int value = rnd.Next(3, 6);
+        eventWindowControl.SetUpEventWindow("Gather", $"You went to gather some ingredients. You found {value} ingredients.");
+    }
+
+    
     //PRIRADÍ SPRITE PODĹA TYPU EVENTU
     private void AssignSprite()
     {
@@ -272,10 +345,6 @@ public class EventManager : MonoBehaviour
         
         switch (eventType)
         {
-            case EventType.Merchant:
-                //Debug.Log("MERCHANT");
-                imageComponent.sprite  =  spriteMerchant;
-                break;
             case EventType.Random:
                 //Debug.Log("RANDOM EVENT");
                 imageComponent.sprite =  spriteRandom;
@@ -283,16 +352,22 @@ public class EventManager : MonoBehaviour
                 AssignRandomEventRandomType();
 
                 break;
-            case EventType.Harvest:
+            case EventType.Gather:
                 //Debug.Log("HARVEST");
                 imageComponent.sprite =  spriteHarvest;
                 break;
+            case EventType.Merchant:
+                //Debug.Log("MERCHANT");
+                imageComponent.sprite  =  spriteMerchant;
+                break;
+            
+            
             case EventType.Challenge:
                 //Debug.Log("CHALLENGE");
                 imageComponent.sprite =  spriteChallenge;
                 break;
             default:
-                Debug.Log("What are you doing here?");
+                Debug.Log("What are you doing here CRIMINAL SCUM?");
                 break;
         }
     }
@@ -308,21 +383,23 @@ public class EventManager : MonoBehaviour
                 break;
             case EventType.Random:
                 //Debug.Log("RANDOM EVENT");
-                SwitchEventWindow();
-
+                SwitchRandomEventWindow(eventWindowControl);
+                /*
                 if (canShowEventWindow)
                 {
                     eventWindowControl.ShowWindow();
                     eventWindowControl.Init(timeCost);
                 }
-
+*/
                 break;
-            case EventType.Harvest:
+            case EventType.Gather:
+                Gather(eventWindowControl);
+                
                 //Debug.Log("HARVEST");
                 break;
             case EventType.Challenge:
                 //Debug.Log("CHALLENGE");
-                canShowEventWindow = false;
+                //canShowEventWindow = false;
                 islandManager.StartBattle();
                 break;
             default:
@@ -359,7 +436,7 @@ public class EventManager : MonoBehaviour
     
     private enum EventType{
         Random = 1,
-        Harvest = 2,
+        Gather = 2,
         Merchant = 3,
         //Sensei = 4,
         
@@ -378,73 +455,5 @@ public class EventManager : MonoBehaviour
     }
 
 
-    private void Stumble(Button firstButtonControl,Button secondButtonControl,Button thirdButtonControl,EventWindowControl eventWindowControl,UILayer uiLayerControl)
-    {
-        //eventWindowControl.RemoveAllListeners();
-        firstButtonControl.onClick.AddListener(delegate {
-            //TODO: 65%
-            if (RandomState(65))
-            {
-                eventWindowControl.SetUpEventWindow("","No one is willing to help you. You can ask again."
-                    ,"ASK FOR HELP","SEARCH");
-                
-                uiLayerControl.ChangeReputation(-Minor);
-                Stumble( firstButtonControl, secondButtonControl,thirdButtonControl, eventWindowControl, uiLayerControl);
-            }
-            else
-            {
-                eventWindowControl.SetUpEventWindow("","Some cats heard you and decided to help you. You found your lost ingredient");
-            }
-        });
-        secondButtonControl.onClick.AddListener(delegate {
-            //TODO: 65%, VIACEJ PERCENT KED MAS HELPEROV
-            if (RandomState(65))
-            {
-                eventWindowControl.SetUpEventWindow("","You are looking for the lost ingredient but cant find it. Other cats are looking at you..."
-                    ,"ASK FOR HELP","SEARCH");
-                
-                uiLayerControl.ChangeReputation(-Minor);
-                Stumble( firstButtonControl,secondButtonControl,thirdButtonControl, eventWindowControl, uiLayerControl);
-            }
-            else
-            {
-                eventWindowControl.SetUpEventWindow("","Some cats heard you and decided to help you. You found your lost ingredient");
-            }
-        });
-        
-        thirdButtonControl.onClick.AddListener(delegate {
-            //TODO: STRATIT NAHODNU INGREDIENCIU Z DECKU
-            eventWindowControl.SetUpEventWindow("","You left the place and your ingredient too.");
-        });
-    }
-    private void Thieves(Button firstButtonControl,Button secondButtonControl,EventWindowControl eventWindowControl,UILayer uiLayerControl, string who)
-    {
-        firstButtonControl.onClick.AddListener(delegate {
-            if (RandomState())
-            {
-                //YOU WON AGAINST THEM
-                eventWindowControl.SetUpEventWindow("",$"You managed to beat up the {who}. You take their coins.");
-                uiLayerControl.ChangeMoney(Moderate);
-            }
-            else
-            {
-                eventWindowControl.SetUpEventWindow("",$"The {who} beat you up and stole more money than usual.");
-                //THEY BEAT YOU UP A STOLE A LOT OF MONEY
-                uiLayerControl.ChangeMoney(-Major);
-            }
-        });
-        secondButtonControl.onClick.AddListener(delegate {
-            if (RandomState())
-            {
-                //STOLE FROM YOU
-                eventWindowControl.SetUpEventWindow("",$"The {who} catch you up and stole your money.");
-                uiLayerControl.ChangeMoney(-Moderate);
-            }
-            else
-            {
-                eventWindowControl.SetUpEventWindow("",$"You are as fast as lighting! You don't see the {who} anymore.");
-            }
-        });
-    }
     
 }
