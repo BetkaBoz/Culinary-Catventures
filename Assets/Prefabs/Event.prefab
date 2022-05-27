@@ -71,10 +71,10 @@ MonoBehaviour:
   eventType: 0
   BtnPrompt: {fileID: 0}
   timeCost: 1
-  spriteRandom: {fileID: 21300000, guid: 5df97710e01278544bc25e1362752be9, type: 3}
-  spriteMerchant: {fileID: 21300000, guid: 3b57da7279fc7f940b8eb4dc29179269, type: 3}
-  spriteHarvest: {fileID: 21300000, guid: 79b8ec930e625dc4d846848b2b60a0ee, type: 3}
-  spriteChallenge: {fileID: 21300000, guid: 996ae53fa256f7b4b9c71ab3d6f43bce, type: 3}
+  spriteRandom: {fileID: 21300000, guid: 116d0bf87a354bc4dbac30cdc94795cc, type: 3}
+  spriteMerchant: {fileID: 21300000, guid: 52ae18701b6605f4cb691c65a7d07987, type: 3}
+  spriteHarvest: {fileID: 21300000, guid: 437eb6db38d2fb647bbf565808164c31, type: 3}
+  spriteChallenge: {fileID: 21300000, guid: f0a6d694815cfa443996bd10f88b56c7, type: 3}
   eventWindow: {fileID: 798999069868067327, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
   spriteEventImg: {fileID: 0}
   eventWindowName: {fileID: 0}
