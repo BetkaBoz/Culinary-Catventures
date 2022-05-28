@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
                 //randCard.transform.position = cardSlots[i].transform.position;
                 cardSlots[i].SetHasBeenPlayed(false);
                 HideCardSlot(i, false);
-                randCard.HandIndex = i;
+                cardSlots[i].HandIndex = i;
                 cardSlots[i].SetCard(randCard);
                 hand.Add(randCard);
                 availableCardSlots[i] = false;
@@ -249,10 +249,11 @@ public class GameManager : MonoBehaviour
 
     public void DiscardHand()
     {
-        foreach (var card in hand)
+        foreach (var card in cardSlots)
         {
             //card.MoveToDiscardPile(true);
-            SendToDiscard(card.HandIndex, true);
+            if(card.enabled)
+                SendToDiscard(card.HandIndex, true);//ARTURITO
         }
         hand.Clear();
     }
@@ -266,6 +267,7 @@ public class GameManager : MonoBehaviour
     //TODO: Find a way to move a card to the front. Z-order and Child indexes don't work
     public void MoveNeighbours(int idx, bool isReturning)
     {
+        return;
         if (isReturning)
         {
             if (idx != 0)
@@ -309,12 +311,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("idx:"+idx);
         Card card = cardSlots[idx].GetCard();
         availableCardSlots[idx] = true;
-        card.HandIndex = -1;
+        //card.HandIndex = -1;
         //card.SetHasBeenPlayed(false);
         HideCardSlot(idx, true);
-        if (!isEndTurn){
-            hand.Remove(card);
-        }
+        //if (!isEndTurn){
+        hand.Remove(card);
+        //}
         discardPile.Add(card);
         numOfCards--;
     }
@@ -322,8 +324,8 @@ public class GameManager : MonoBehaviour
     public void SendToExhaust(int idx)
     {
         Card card = cardSlots[idx].GetCard();
-        availableCardSlots[idx] = true;
-        card.HandIndex = -1;
+        availableCardSlots[idx] = true;//ARTURITOX
+        //card.HandIndex = -1;
         //card.SetHasBeenPlayed(false);
         HideCardSlot(idx, true);
         hand.Remove(card);
@@ -359,6 +361,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             StopDiscard();
+            //HurtPlayer(1000);
+            //cardSlots[2].CreateCanvas();
         }
     }
 
@@ -374,13 +378,14 @@ public class GameManager : MonoBehaviour
         discardController.Filter = filter;
     }
 
-    public void SetCard(CardSlot card)
+    public bool SetCard(CardSlot card)
     {
         if (discardPhase)
         {
             //Debug.Log("SET");
-            discardController.SelectCard(card);
+            return discardController.SelectCard(card);
         }
+        return false;
     }
     #endregion
 
@@ -425,8 +430,8 @@ public class GameManager : MonoBehaviour
                 card = cardSlots[i].GetCard();
                 //if(card.CardType != "Manoeuvre")
                 //{
-                find.Add(cardSlots[i].GetCard().CardName);
-                types.Add(cardSlots[i].GetCard().CardType);
+                find.Add(card.CardName);
+                types.Add(card.CardType);
                 //}
             }
         }
@@ -450,7 +455,7 @@ public class GameManager : MonoBehaviour
                 cardSlots[i].SetHasBeenPlayed(false);
                 cardSlots[i].gameObject.SetActive(true);
                 cardSlots[i].SetCard(target);
-                target.HandIndex = i;
+                cardSlots[i].HandIndex = i;
                 hand.Add(target);
                 availableCardSlots[i] = false;
                 break;
@@ -471,12 +476,25 @@ public class GameManager : MonoBehaviour
         }
         if (isPile)
         {
-            return result + (int)(result * 0.25f);
+            return result + (int)(result * 0.05f);
         }
         else
         {
             return result + (int)(result * 0.5f);
         }
+    }
+
+    public int GetNumOfSelected()
+    {
+        int selected = 0;
+        for (int i = 0; i < cardSlots.Length; i++)
+        {
+            if (cardSlots[i].Selected)
+            {
+                selected++;
+            }
+        }
+        return selected;
     }
     #endregion
 }
