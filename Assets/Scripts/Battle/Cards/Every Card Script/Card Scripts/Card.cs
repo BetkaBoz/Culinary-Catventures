@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public abstract class Card : ScriptableObject
 {
     #region SerializeFields
-    private int handIndex = -1;
     [SerializeField] private string cardName;
     [SerializeField] private int energyCost;
     [SerializeField] private bool canTarget = false;
@@ -31,17 +30,6 @@ public abstract class Card : ScriptableObject
         set
         {
             nutritionPoints = value;
-        }
-    }
-    public int HandIndex
-    {
-        get
-        {
-            return handIndex;
-        }
-        set
-        {
-            handIndex = value;
         }
     }
     public string CardName

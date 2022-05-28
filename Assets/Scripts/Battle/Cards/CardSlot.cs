@@ -18,7 +18,9 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     private Vector3 originalPos;
     //private Vector3 originalMousePos;
     private CanvasGroup canvasGroup;
-    private int spriteOrder;
+    private int handIndex;
+    private Canvas tempCanvas;
+    private GraphicRaycaster tempReycaster;
     #endregion
 
     #region SerializeFields
@@ -32,6 +34,17 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     #endregion
 
     #region Getters/Setters
+    public int HandIndex
+    {
+        get
+        {
+            return handIndex;
+        }
+        set
+        {
+            handIndex = value;
+        }
+    }
     public bool Selected
     {
         get
@@ -48,7 +61,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     public void SetCard(Card otherCard)
     {
         card = otherCard;
-        if (otherCard.NutritionPoints == -1)
+        if (otherCard.CardType == "Manoeuvre")
         {
             nutritionalValue.text = "";
         }
@@ -109,7 +122,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void MoveToDiscardPile(bool isEndTurn)
     {
-        gm.SendToDiscard(card.HandIndex, isEndTurn);
+        gm.SendToDiscard(handIndex, isEndTurn);
         //gameObject.SetActive(false);
     }
 
@@ -131,7 +144,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     private void Select()
     {
-        if(card.NutritionPoints == -1) { return; }
+        if(card.CardType == "Manoeuvre") { return; }
         if (!gm.discardPhase && gm.combinePhase)
         {
             if (isSelected)
@@ -142,11 +155,14 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             }
             else
             {
-                //Debug.Log("yed");
-                isSelected = true;
-                if (isRised) { return; }
-                originalPos = transform.position;
-                transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+                if (gm.GetNumOfSelected() < 5)
+                {
+                    //Debug.Log("yed");
+                    isSelected = true;
+                    if (isRised) { return; }
+                    originalPos = transform.position;
+                    transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+                }
             }
         }
     }
@@ -237,8 +253,16 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         {
             if (gm.discardPhase)
             {
-                gm.SetCard(this);
-                isSelected = true;
+                if(gm.SetCard(this))
+                    isSelected = true;
+                else
+                {
+                    isDragged = false;
+                    isSelected = false;
+                    isRised = false;
+                    transform.position = originalPos;
+                }
+
             }
             else
             {
@@ -293,19 +317,40 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         if (isRised) { return;}
         //spriteOrder = transform.GetSiblingIndex();
+
         originalPos = transform.position;
-        transform.position = transform.position + (Vector3.up*0.5f);
+        transform.localScale = new Vector2(1f, 1f);
+        transform.position += (Vector3.up * 0.5f);
+
+        //this seems kinda jank, will most likely replace it later
+        //tempCanvas = gameObject.AddComponent<Canvas>();
+        //tempCanvas.overrideSorting = true;
+        //tempCanvas.sortingOrder = 1;
+        //tempReycaster = gameObject.AddComponent<GraphicRaycaster>();
         //transform.SetAsLastSibling();
-        gm.MoveNeighbours(card.HandIndex,false);
+        gm.MoveNeighbours(handIndex,false);
         isRised = true;
+    }
+
+    public void CreateCanvas()
+    {
+        tempCanvas = gameObject.AddComponent<Canvas>();
+        tempCanvas.overrideSorting = true;
+        tempCanvas.sortingOrder = 1;
+        tempReycaster = gameObject.AddComponent<GraphicRaycaster>();
+        transform.position += (Vector3.up * 2f);
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (isDragged || isSelected) { return; }
+        //Destroy(tempReycaster);
+        //Destroy(tempCanvas);
         transform.position = originalPos;
+        transform.localScale = new Vector2(0.65f, 0.65f);
         //transform.SetSiblingIndex(spriteOrder);
-        gm.MoveNeighbours(card.HandIndex, true);
+        gm.MoveNeighbours(handIndex, true);
         isRised = false;
     }
 

@@ -52,6 +52,8 @@ public class CombineController : MonoBehaviour
 
     public void Start()
     {
+        //right now it's here because it's simple to use
+        //maybe make this more secure later
         comboList = JsonUtility.FromJson<ComboList>(comboListJson.text);
     }
 
@@ -67,14 +69,14 @@ public class CombineController : MonoBehaviour
         {
             this.gameObject.SetActive(true);
             //targetController.setPos(false);
-            combineBttn.gameObject.SetActive(true);
+            combineBttn.onClick.RemoveAllListeners();
+            combineBttn.onClick.AddListener(CombineCard);
             combineBttn.interactable = false;
         }
         else
         {
             //targetController.setPos(true);
             combineBttn.interactable = false;
-            combineBttn.gameObject.SetActive(false);
             findSlot.gameObject.SetActive(false);
             this.gameObject.SetActive(false);
         }

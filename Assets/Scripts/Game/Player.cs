@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -15,15 +16,34 @@ public class Player : MonoBehaviour, IDamageable
     private string className;
     private int reputation = 0;
     private int money = 0;
-    private int score;
     private int maxEnergy = 5;
     private int energy;
     private int maxRep = 100;
     private int rep = 100;
+    private int currExp = 400;
+    private int nextLvl = 1000;
     
     #endregion
 
     #region Getters/Setters
+    public int CurrentExp
+    {
+        get
+        {
+            return currExp;
+        }
+        set
+        {
+            currExp = value;
+        }
+    }
+    public int NextLevel
+    {
+        get
+        {
+            return nextLvl;
+        }
+    }
     public string ClassName
     {
         get
@@ -35,15 +55,11 @@ public class Player : MonoBehaviour, IDamageable
             className = value;
         }
     }
-    public int Score
+    public int Money
     {
         get
         {
-            return score;
-        }
-        set
-        {
-            score = value;
+            return money;
         }
     }
     public float GeneralFoodMod
@@ -150,10 +166,10 @@ public class Player : MonoBehaviour, IDamageable
         {
             return rep;
         }
-        set
-        {
-            rep = value;
-        }
+        //set
+        //{
+        //    rep = value;
+        //}
     }
     #endregion
     
@@ -163,7 +179,7 @@ public class Player : MonoBehaviour, IDamageable
         this.className = data.className;
         this.reputation = data.reputation;
         this.money = data.money;
-        this.score = data.score;
+        //this.score = data.score;
         this.generalFoodModBase = data.generalFoodModBase;
         this.generalFoodModBonus = data.generalFoodModBonus;
         this.meatFoodModBase = data.meatFoodModBase;
@@ -192,6 +208,16 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die(bool status)
     {
+        StartCoroutine(LoadGameOver());
+    }
+
+    IEnumerator LoadGameOver()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Game Over",LoadSceneMode.Additive);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
         Debug.Log("Oh nou I'm ded :(");
     }
 }
