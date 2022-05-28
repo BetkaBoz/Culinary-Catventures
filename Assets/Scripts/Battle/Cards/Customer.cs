@@ -13,8 +13,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     [SerializeField] Text hunger;
     [SerializeField] GameManager gm;
     [SerializeField] ActionManager ac;
-    [SerializeField] Image bubbleAwait;
-    [SerializeField] Image bubbleAction;
+    [SerializeField] Image Action;
     [SerializeField] GameObject debuffs;
     //poob
     private int currHunger;
@@ -24,23 +23,26 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     private void Start()
     {
-        bubbleAwait.gameObject.SetActive(false);
-        bubbleAction.gameObject.SetActive(true);
-
-        bubbleAction.DOFade(0f, 4f).OnComplete(() =>
-        {
-            bubbleAwait.gameObject.SetActive(true);
-            bubbleAction.gameObject.SetActive(false);
+        Action.DOFade(0f, 0f).OnComplete(() => {
+            Action.DOFade(1f, 1f); 
         });
-        //bubbleAction.DOColor(new Color(0, 0, 0, 0), 5f).OnComplete(() =>
+
+        //switch (ac.CurrentIndex)
         //{
-        //    bubbleAwait.gameObject.SetActive(true);
-        //    bubbleAction.gameObject.SetActive(false);
-        //});
+        //    case 0:
+        //        //message = "If customer won't be fed this round, they will cause less EP in next round";
+        //        //header = "Energy Debuff";
+        //        TooltipManager.Show("If customer won't be fed this round, they will cause less EP in next round", "Energy Debuff");
+        //        break;
+        //    case 1:
+        //        //message = "If customer won't be fed this round, they will take your reputation points";
+        //        //header = "Reputation Debuff";
+        //        TooltipManager.Show("If customer won't be fed this round, they will take your reputation points ", "Reputation Debuff");
+        //        break;
+        //}
     }
 
-
-    private void Awake()
+        private void Awake()
     {
         currHunger = maxHunger;
         numTurnsStunned = 0;
@@ -73,7 +75,6 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     public bool EndTurn()
     {
-        bubbleAwait.gameObject.SetActive(true);
         turnsUntilAngry--;
         if (numTurnsStunned > 0)
             numTurnsStunned--;
@@ -126,7 +127,6 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             Die(true);
             //++money and rep
         }
-        
     }
 
     public void Die(bool status)
@@ -134,7 +134,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         if (!isDead)
         {
             isDead = true;
-            bubbleAwait.DOColor(new Color(0, 0, 0, 0), 2f);
+            Action.DOColor(new Color(0, 0, 0, 0), 2f);
             GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 2f).OnComplete(() => { Destroy(gameObject); });
         }
     }
