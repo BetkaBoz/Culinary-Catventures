@@ -1809,7 +1809,7 @@ GameObject:
   - component: {fileID: 534415301}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2263,9 +2263,9 @@ RectTransform:
   m_Father: {fileID: 1667768507}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 22, y: 16}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 355, y: -104}
   m_SizeDelta: {x: 198, y: 198}
   m_Pivot: {x: 1, y: -0.5}
 --- !u!114 &810021249

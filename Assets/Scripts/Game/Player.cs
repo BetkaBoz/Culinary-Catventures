@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float meatFoodModBonus;
     [SerializeField] float vegetarianFoodModBonus;
     [SerializeField] List<Card> deck = new List<Card>();
+    private bool isDead = false;
     private string className;
     private int reputation = 0;
     private int money = 0;
@@ -172,7 +173,12 @@ public class Player : MonoBehaviour, IDamageable
         //}
     }
     #endregion
-    
+
+    public void Awake()
+    {
+        isDead = false;
+    }
+
     private void LoadPlayer()
     {
         Player data = this; //just some bs so intelisense works
@@ -208,6 +214,8 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die(bool status)
     {
+        if (isDead) { return; }
+        isDead = true;
         StartCoroutine(LoadGameOver());
     }
 

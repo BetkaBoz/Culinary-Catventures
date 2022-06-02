@@ -99,7 +99,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         {
             Die(true);
 
-            gm.Player.TakeDamage(-25);
+            gm.Player.TakeDamage(125);
 
             //Debug.Log("Fok dis shid I'm out");
             return true;
