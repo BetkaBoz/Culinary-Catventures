@@ -18,7 +18,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     //poob
     private int currHunger;
     private byte numTurnsStunned;
-    private bool satisfied;
+    private bool satisfied = false;
     private bool isDead = false;
 
     private void Start()
@@ -26,20 +26,6 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         Action.DOFade(0f, 0f).OnComplete(() => {
             Action.DOFade(1f, 1f); 
         });
-
-        //switch (ac.CurrentIndex)
-        //{
-        //    case 0:
-        //        //message = "If customer won't be fed this round, they will cause less EP in next round";
-        //        //header = "Energy Debuff";
-        //        TooltipManager.Show("If customer won't be fed this round, they will cause less EP in next round", "Energy Debuff");
-        //        break;
-        //    case 1:
-        //        //message = "If customer won't be fed this round, they will take your reputation points";
-        //        //header = "Reputation Debuff";
-        //        TooltipManager.Show("If customer won't be fed this round, they will take your reputation points ", "Reputation Debuff");
-        //        break;
-        //}
     }
 
         private void Awake()
@@ -47,6 +33,8 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         currHunger = maxHunger;
         numTurnsStunned = 0;
         hunger.text = $"{currHunger}";
+
+
     }
 
     public void Feed(int amount) 
@@ -61,13 +49,11 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             switch (ac.CurrentIndex)
             {
                 case 0:
-                    GameObject temp = Instantiate(debuffs);
-                    gm.BuffPlayer(temp.GetComponent<IBuffable>());
-                    satisfied = true;
+                    gm.HurtPlayer(5);
                     break;
                 case 1:
-                    gm.HurtPlayer(5);
-                    satisfied = true;
+                    GameObject temp = Instantiate(debuffs);
+                    gm.BuffPlayer(temp.GetComponent<IBuffable>());
                     break;
             }
         }
