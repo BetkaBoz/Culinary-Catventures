@@ -18,11 +18,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI repUI;
     [SerializeField] DiscardController discardController;
     [SerializeField] CombineController combineController;
-    [SerializeField] private List<Card> deck;
-    [SerializeField] private List<Card> discardPile = new List<Card>();
-    [SerializeField] private List<Card> hand = new List<Card>();
-    [SerializeField] private List<Card> exhaustPile = new List<Card>();
-    [SerializeField] private List<IBuffable> buffs = new List<IBuffable>();
+    [SerializeField] List<Card> deck;
+    [SerializeField] List<Card> discardPile = new List<Card>();
+    [SerializeField] List<Card> hand = new List<Card>();
+    [SerializeField] List<Card> exhaustPile = new List<Card>();
+    [SerializeField] List<IBuffable> buffs = new List<IBuffable>();
     #endregion
 
     private int numOfCards = 0;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    #region PlayerFunctions
+    #region Player Functions
     public void AddEnergy(int amount)
     {
         player.Energy += amount;
@@ -146,13 +146,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    //public void AddRep(int amount)
-    //{
-    //    player.Rep = amount;
-    //    repUI.text = $"{player.Rep}/{player.MaxRep}";
-    //}
-
-    #region Turn Related Code
+    #region Turn Base Functions
     public void EndPlayersTurn()
     {
         battleState = BattleState.ENEMYTURN;
@@ -184,6 +178,7 @@ public class GameManager : MonoBehaviour
         foreach (var customer in customers)
         {
             customer.EndTurn();
+            customer.RandomizeDebuffs();
         }
     }
     public void customerListDelete(Customer customer)

@@ -15,26 +15,17 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     [SerializeField] ActionManager ac;
     [SerializeField] Image Action;
     [SerializeField] GameObject debuffs;
-    //poob
+    
     private int currHunger;
     private byte numTurnsStunned;
     private bool satisfied = false;
     private bool isDead = false;
 
-    private void Start()
-    {
-        Action.DOFade(0f, 0f).OnComplete(() => {
-            Action.DOFade(1f, 1f); 
-        });
-    }
-
-        private void Awake()
+    private void Awake()
     {
         currHunger = maxHunger;
         numTurnsStunned = 0;
         hunger.text = $"{currHunger}";
-
-
     }
 
     public void Feed(int amount) 
@@ -42,14 +33,22 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         TakeDamage(amount);
     }
 
+    public void RandomizeDebuffs()
+    {
+        ac.Suffle();
+    }
+
     public void StartTurn()
     {
+        Action.DOFade(1f, 1f);
+
         if (!satisfied) 
         {
             switch (ac.CurrentIndex)
             {
                 case 0:
                     gm.HurtPlayer(5);
+                    
                     break;
                 case 1:
                     GameObject temp = Instantiate(debuffs);
@@ -64,7 +63,6 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         turnsUntilAngry--;
         if (numTurnsStunned > 0)
             numTurnsStunned--;
-        //Debug.Log("hunger: " + currHunger.ToString());
         if(turnsUntilAngry >= 8)
         {
             //Debug.Log("I sleep");
@@ -84,10 +82,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         else
         {
             Die(true);
-
             gm.Player.TakeDamage(125);
-
-            //Debug.Log("Fok dis shid I'm out");
             return true;
         }
 
@@ -96,7 +91,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
     public void OnDrop(PointerEventData eventData)
     {
-        //Debug.Log("ide to");
+
     }
 
     public void TakeDamage(int amount)
@@ -105,8 +100,9 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
         currHunger = currHunger >= amount ? currHunger - amount : 0;
         if (numTurnsStunned <= 0) numTurnsStunned++;
-        //Debug.Log("Yum yum " + currHunger.ToString() + " " + amount.ToString());
         hunger.text = $"{currHunger}";
+
+        Action.DOFade(0f, 1f);
 
         if (currHunger ==  0)
         {

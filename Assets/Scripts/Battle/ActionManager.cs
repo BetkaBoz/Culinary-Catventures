@@ -14,6 +14,11 @@ public class ActionManager : MonoBehaviour
 
     void Awake()
     {
+        Suffle();
+    }
+
+    public void Suffle()
+    {
         CurrentIndex = UnityEngine.Random.Range(0, Sprites.Count);
         Image.sprite = Sprites[CurrentIndex];
     }
