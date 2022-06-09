@@ -415,6 +415,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log("Stop Combine");
         combineController.ToggleCombine();
         combinePhase = false;
+        DeselectAllCards();
     }
 
     public void FindCombineTarget()
