@@ -12,7 +12,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float generalFoodModBonus;
     [SerializeField] float meatFoodModBonus;
     [SerializeField] float vegetarianFoodModBonus;
-    [SerializeField] List<Card> deck = new List<Card>();
+    [SerializeField] List<CardBaseInfo> deck = new List<CardBaseInfo>();
     private bool isDead = false;
     private string className;
     private int reputation = 0;
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour, IDamageable
             vegetarianFoodModBonus = value;
         }
     }
-    public List<Card> Deck
+    public List<CardBaseInfo> Deck
     {
         get
         {

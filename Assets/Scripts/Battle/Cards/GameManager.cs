@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI repUI;
     [SerializeField] DiscardController discardController;
     [SerializeField] CombineController combineController;
+    [SerializeField] GameObject[] cardPrefab;
     [SerializeField] List<Card> deck;
     [SerializeField] List<Card> discardPile = new List<Card>();
     [SerializeField] List<Card> hand = new List<Card>();
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<IBuffable> buffs = new List<IBuffable>();
     #endregion
 
-    private int numOfCards = 0;
+    int numOfCards = 0;//right now useless
 
     #region Public Vars
     public bool combinePhase;
@@ -47,18 +48,35 @@ public class GameManager : MonoBehaviour
             
         else
         {
-            deck = new List<Card>(player.Deck);
+            SetUpDeck();
             for (int i = 0; i < cardSlots.Length; i++)
             {
                 cardSlots[i].Hide(true);
             }
-            DrawCards(5);
+            DrawCards(10);
             AddEnergy(player.MaxEnergy);
             repUI.text = $"{player.Rep}";
             combinePhase = false;
             discardPhase = false;
 
             battleState = BattleState.PLAYERTURN;
+        }
+    }
+
+    private void SetUpDeck()
+    {
+        GameObject cardTemp;
+        deck = new List<Card>();
+        int idx = 0;
+        foreach(var card in player.Deck)
+        {
+            if (card.CardType != "Manoeuvre")
+                idx = 1;
+            else
+                idx = 0;
+            cardTemp = Instantiate(cardPrefab[idx]);
+            cardTemp.GetComponent<Card>().GetDataFromBase(card);
+            deck.Add(cardTemp.GetComponent<Card>());
         }
     }
 
@@ -145,7 +163,7 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
-
+    
     #region Turn Base Functions
     public void EndPlayersTurn()
     {
@@ -214,6 +232,8 @@ public class GameManager : MonoBehaviour
 
     public void DrawCards(int count)
     {
+        if (count > (deck.Count + hand.Count + discardPile.Count))
+            count = (deck.Count + hand.Count + discardPile.Count);
         for (int i = 0; i < count; i++)
         {
             if (deck.Count >= 1)
@@ -247,8 +267,8 @@ public class GameManager : MonoBehaviour
         foreach (var card in cardSlots)
         {
             //card.MoveToDiscardPile(true);
-            if(card.enabled)
-                SendToDiscard(card.HandIndex, true);//ARTURITO
+            if(card.gameObject.activeSelf)
+                SendToDiscard(card.HandIndex, true);
         }
         hand.Clear();
     }
@@ -319,11 +339,12 @@ public class GameManager : MonoBehaviour
     public void SendToExhaust(int idx)
     {
         Card card = cardSlots[idx].GetCard();
-        availableCardSlots[idx] = true;//ARTURITOX
+        availableCardSlots[idx] = true;
         //card.HandIndex = -1;
         //card.SetHasBeenPlayed(false);
         HideCardSlot(idx, true);
         hand.Remove(card);
+        //card.DeletionCheck(true);
         exhaustPile.Add(card);
     }
 
@@ -351,19 +372,32 @@ public class GameManager : MonoBehaviour
         //StopDiscard();
     }
 
+    //this is here for testing purposes DELETE
+    bool canvas = false;
+
     public void Update()
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            StopDiscard();
+            //StopDiscard();
             //HurtPlayer(1000);
-            //cardSlots[2].CreateCanvas();
+            canvas = !canvas;
+            cardSlots[2].CreateCanvas(canvas);
+            cardSlots[2].transform.position = new Vector2(0, 0);
         }
     }
 
     public void StopDiscard()
     {
         Debug.Log("Stop Discard");
+        for (int i = 0; i < cardSlots.Length; i++)
+        {
+            if (cardSlots[i].Selected)
+            {
+                cardSlots[i].Deselect();
+                cardSlots[i].MoveToExhaustPile();
+            }
+        }
         discardController.ToggleDiscard();
         discardPhase = false;
     }
@@ -426,6 +460,7 @@ public class GameManager : MonoBehaviour
                 card = cardSlots[i].GetCard();
                 //if(card.CardType != "Manoeuvre")
                 //{
+                Debug.Log(card.CardName);
                 find.Add(card.CardName);
                 types.Add(card.CardType);
                 //}
@@ -441,7 +476,7 @@ public class GameManager : MonoBehaviour
             if (cardSlots[i].Selected)
             {
                 cardSlots[i].Deselect();
-                SendToExhaust(i);
+                cardSlots[i].MoveToExhaustPile();
             }
         }
         for (int i = 0; i < availableCardSlots.Length; i++)
@@ -478,6 +513,22 @@ public class GameManager : MonoBehaviour
         {
             return result + (int)(result * 0.5f);
         }
+    }
+
+    public int GetComboEnergy()
+    {
+        int result = 0;
+        for (int i = 0; i < cardSlots.Length; i++)
+        {
+            if (cardSlots[i].Selected)
+            {
+                result += cardSlots[i].GetCard().EnergyCost;
+            }
+        }
+        if (result > 9)
+            return 9;//do we want to have energy cost in double digits?
+        else
+            return result;
     }
 
     public int GetNumOfSelected()

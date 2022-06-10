@@ -8,9 +8,9 @@ public interface IFeed
 {
     void Feed(Customer target, int amount);
 }
-public interface ISpendEnergy
+public interface IGainEnergy
 {
-    void SpendEnergy(GameManager gm, int amount);
+    void GainEnergy(GameManager gm, int amount);
 }
 public interface IDrawCards
 {

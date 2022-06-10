@@ -26,8 +26,8 @@ public class CardLayoutManager : MonoBehaviour
             rotationStep = maxRotation / (count / 2);
         }
         //we want the lowest possible card to be at around half the hight of this gameObject 
-        heightStep = (height / 2) / (count / 2);
-        widthStep = (width / 2) / (count / 2);
+        //heightStep = (height / 2) / (count / 2);
+        widthStep = (width / 10);
         Debug.Log(height + " " + width);
     }
 
