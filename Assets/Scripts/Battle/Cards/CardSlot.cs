@@ -202,7 +202,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         {
             if (!card.CanTarget)
             {
-                targetController.setPos(false);
+                targetController.SetPos(false);
                 dragOffset = transform.position - GetMousePos();
                 //this.isDragged = true;
             }
@@ -237,9 +237,9 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             //if you are a manouver or if you have to discard a card don't use targeting arrows
             if (card.CanTarget && !gm.discardPhase)
             {
-                if (!arrowHandler.isVisible)
+                if (!arrowHandler.IsVisible)
                 {
-                    arrowHandler.setVisibile(true);
+                    arrowHandler.SetVisibile(true);
                     arrowHandler.SetOrigin(new Vector2(transform.position.x, transform.position.y)+Vector2.up);
                 }
             }
@@ -289,7 +289,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                             card.TriggerCardEffect(gm, hit);
                         }
                     }
-                    arrowHandler.setVisibile(false);
+                    arrowHandler.SetVisibile(false);
                 }
                 else
                 {
@@ -313,7 +313,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                     }
                     if (!gm.discardPhase)
                     {
-                        targetController.setPos(true);
+                        targetController.SetPos(true);
                     }
                 }
                 isDragged = false;
@@ -326,7 +326,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         {
             if (card.CanTarget && !gm.discardPhase)
             {
-                arrowHandler.setVisibile(false);
+                arrowHandler.SetVisibile(false);
             }
             isDragged = false;
             Rise(false);

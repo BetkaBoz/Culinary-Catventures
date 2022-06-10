@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Buffable : MonoBehaviour
+public class IBuffable : MonoBehaviour
 {
     [SerializeField] int numOfTurns = 1;
     public bool Finished

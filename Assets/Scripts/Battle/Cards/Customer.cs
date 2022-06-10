@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class Customer : MonoBehaviour, IDropHandler, IDamageable
+public class Customer : MonoBehaviour, IDropHandler, IDamageable 
 {
     [SerializeField] int maxHunger = 0;
     [SerializeField] byte turnsUntilAngry = 0;
