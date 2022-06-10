@@ -24,8 +24,8 @@ public class IslandManager : MonoBehaviour
     private void Awake()
     {
         timeText.text = "Time: " + time;
-        sun  = GameObject.FindGameObjectsWithTag("Light")[0].GetComponent<Light>();
-        playerLight  = GameObject.FindGameObjectsWithTag("Light")[1];
+        sun  = GameObject.FindGameObjectWithTag("Light").GetComponent<Light>();
+        playerLight  = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
 
         LightControl();
     }

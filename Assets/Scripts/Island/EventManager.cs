@@ -59,13 +59,8 @@ public class EventManager : MonoBehaviour
     {
 
         //SPUSTENIE EVENTU AK HO AKTIVUJEME
-        if (isOnEvent && islandManager.Time > 0 && !isUsed && Input.GetButtonDown("Jump"))
-        {
-            Time.timeScale = 0;
-            isUsed = true;
-            ClearBtnPrompt();
-            RecognizeAndRunEvent();
-        }
+        ActivateEvent();
+        
     }
     //URČI TYP EVENTU, CHALLENGE SA NASTAVUJE Z INŠPEKTORA
     private void AssignRandomType()
@@ -75,7 +70,7 @@ public class EventManager : MonoBehaviour
             Array values = Enum.GetValues(typeof(EventType));
             Random random = new Random(Guid.NewGuid().GetHashCode());
             //TODO: ZMENIT  NA -1 PO TESTOVANI RANDOM EVENTOV
-            eventType = (EventType) values.GetValue(random.Next(values.Length - 3));
+            eventType = (EventType) values.GetValue(random.Next(values.Length - 1));
         }
     }
     //URČI NÁHODNÝ TYP RANDOM EVENTU
@@ -412,12 +407,17 @@ public class EventManager : MonoBehaviour
     {
         if(!isUsed && islandManager.Time > 0) btnPrompt.text = "Press SPACE to do stuff";
         isOnEvent = true;
+        ChangeEventScale();
+
+        
     }
     //ODÍDENIE HRÁČA Z EVENTU
     private void OnTriggerExit2D(Collider2D other)
     {
         ClearBtnPrompt();
         isOnEvent = false;
+        ChangeEventScale();
+
     }
     
     private void ClearBtnPrompt()
@@ -454,6 +454,37 @@ public class EventManager : MonoBehaviour
         Thieves = 7,
     }
 
+    private void ChangeEventScale( )
+    {
+        //CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
+        //circleCollider2D.enabled = false;
+        if (!isUsed)
+        {
+            if (isOnEvent)
+            {
+                transform.localScale = new Vector3(1.5f, 1.5f, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+    }
 
-    
+
+
+    private void ActivateEvent()
+    {
+        if (isOnEvent && islandManager.Time > 0 && !isUsed && Input.GetButtonDown("Jump"))
+        {
+            Time.timeScale = 0;
+            isUsed = true;
+            ClearBtnPrompt();
+            RecognizeAndRunEvent();
+            GetComponent<Image>().color = new Color32(125,125,125,255);
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        
+        
+    }
 }
