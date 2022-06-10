@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 300f693d6c1542d4a809bc7f7e7394dd, type: 3}
-  m_Name: Chicken Wings
+  m_Name: Taste the dish
   m_EditorClassIdentifier: 
-  artwork: {fileID: 21300000, guid: 2dc77d9da2ed7fa4881808e34f8dc9e5, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
-  cardName: Chicken Wings
-  cardType: Meat
-  canTarget: 1
-  energyCost: 1
-  nutritionPoints: 10
+  artwork: {fileID: 21300000, guid: ff753dad87c3d804ea1a83abde312b83, type: 3}
+  cardEffect: {fileID: -3645600918822603245, guid: e1faa52aaeb4bb4479be7fa634c5c031, type: 3}
+  cardName: Taste the dish
+  cardType: Manoeuvre
+  canTarget: 0
+  energyCost: 0
+  nutritionPoints: 0

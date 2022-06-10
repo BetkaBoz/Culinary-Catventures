@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c44d8e82a9d0e754cade3c1e69e75da9, type: 3}
+  m_Script: {fileID: 11500000, guid: 300f693d6c1542d4a809bc7f7e7394dd, type: 3}
   m_Name: VeggiePile
   m_EditorClassIdentifier: 
-  cardName: Pile of vegetables
-  energyCost: 0
-  canTarget: 1
   artwork: {fileID: 21300000, guid: 7459f809d6dff8f43bf85eaa625bf278, type: 3}
-  nutritionPoints: 0
+  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardName: Vegetable Pile
   cardType: Vegetarian
+  canTarget: 1
+  energyCost: 0
+  nutritionPoints: 0

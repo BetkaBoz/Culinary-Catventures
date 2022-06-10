@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Food", menuName ="Cards/Food")]
-public class FoodBase : Card, IFeed
+public class FoodBase : CardEffect, IFeed
 {
-    public override void CardEffect(GameManager gm, RaycastHit2D hit)
+    public override void Effect(GameManager gm, RaycastHit2D hit)
     {
-        Feed(hit.transform.GetComponent<Customer>(), CalculateNP(gm));
+        Feed(hit.transform.GetComponent<Customer>(), card.CalculateNP(gm));
     }
 
     public void Feed(Customer target, int amount)

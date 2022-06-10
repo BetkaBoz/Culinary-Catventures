@@ -1861,34 +1861,32 @@ MonoBehaviour:
   meatFoodModBonus: 0
   vegetarianFoodModBonus: 0
   deck:
-  - {fileID: 11400000, guid: 46a402b78d6f77c42ac07f8dd7c004ba, type: 2}
+  - {fileID: 11400000, guid: bb5f1cef4cbbcf542af68a9002862e83, type: 2}
   - {fileID: 11400000, guid: 35e21ca778596c0479f2647a80b969e7, type: 2}
-  - {fileID: 11400000, guid: 351425e4cf2404541845611689c2d689, type: 2}
+  - {fileID: 11400000, guid: b43c6f1212a2a924abd8e28dee0e6c97, type: 2}
   - {fileID: 11400000, guid: 9734095e5e8ad0e45b03299dd63f33e7, type: 2}
-  - {fileID: 11400000, guid: 187c0a0ff8fa3a146a10034b0fa26f25, type: 2}
+  - {fileID: 11400000, guid: e68142c1b454a6242bd3880e4f3d9773, type: 2}
   - {fileID: 11400000, guid: bd0b5a655d9fdc34b9ffb5d047f7ac05, type: 2}
   - {fileID: 11400000, guid: f65611cde29c7934a880f0cca25eb3b1, type: 2}
   - {fileID: 11400000, guid: 04cf38d94563e494396f6b153571e53f, type: 2}
   - {fileID: 11400000, guid: 734d03b68abe91d4998f7ebdab661b1a, type: 2}
-  - {fileID: 11400000, guid: da599a308f53c7e4fba177dda0e7e2c9, type: 2}
   - {fileID: 11400000, guid: 5f251d38747dee846a43cb37ead20189, type: 2}
-  - {fileID: 11400000, guid: 685da506fdbca2443802872d84070a97, type: 2}
-  - {fileID: 11400000, guid: 072f8a5fb749f9c4eaeb093373481d8e, type: 2}
   - {fileID: 11400000, guid: 4f12c29ab13959147884c0f761122fdc, type: 2}
   - {fileID: 11400000, guid: 144145c2dad2f3b419667ff0ac6ddbc9, type: 2}
+  - {fileID: 11400000, guid: 98bdc6f7efb35a541bfbe47875f9f8f7, type: 2}
   - {fileID: 11400000, guid: 79e570868a9e4144faa45b5b0e3b437b, type: 2}
   - {fileID: 11400000, guid: 51b5d22314b26e247af3925061c0edc7, type: 2}
   - {fileID: 11400000, guid: f5986a78c5ad1e546aff75a942327f8c, type: 2}
   - {fileID: 11400000, guid: 76747097478ef55438ce0728f4bebd82, type: 2}
   - {fileID: 11400000, guid: 1a1643d24f3c713458ade65358e36bfe, type: 2}
-  - {fileID: 11400000, guid: 7e2f98cc43353734c8941fe4e38359fd, type: 2}
+  - {fileID: 11400000, guid: d6f532aef60f6774da05fb802fed6564, type: 2}
   - {fileID: 11400000, guid: b6d9a3f9f208cbd429a6a905c3092245, type: 2}
-  - {fileID: 11400000, guid: a6c43d398bdd30f4daae5925752b4bf3, type: 2}
+  - {fileID: 11400000, guid: 95a71b274e37be54c919c68a2a94d77e, type: 2}
+  - {fileID: 11400000, guid: e446072749c293042a2f74cc42db60ae, type: 2}
   - {fileID: 11400000, guid: b34fdf64bf5f33341a0b862535532a3b, type: 2}
   - {fileID: 11400000, guid: e964297736755964c85230482268dd93, type: 2}
   - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
   - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
-  - {fileID: 11400000, guid: d697d8f2166824041a9a56606dd1a542, type: 2}
 --- !u!4 &534415302
 Transform:
   m_ObjectHideFlags: 0
@@ -2166,7 +2164,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1415203266}
         m_TargetAssemblyTypeName: DiscardController, Assembly-CSharp
-        m_MethodName: DiscardCard
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3410,7 +3408,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1267996932
 RectTransform:
@@ -3844,6 +3842,7 @@ MonoBehaviour:
   findSlot: {fileID: 1980041537}
   gm: {fileID: 1912536889}
   combineBttn: {fileID: 709476894}
+  cardPrefab: {fileID: 3836495396805580827, guid: b7eabd4db9bf7e040bf943b9a66dcd81, type: 3}
 --- !u!1 &1439880446
 GameObject:
   m_ObjectHideFlags: 0
@@ -5349,6 +5348,9 @@ MonoBehaviour:
   repUI: {fileID: 1753204477}
   discardController: {fileID: 1415203266}
   combineController: {fileID: 1415203271}
+  cardPrefab:
+  - {fileID: 2391064370604258347, guid: c0b561f1b88f82d4fbdc09f54a3bd8f5, type: 3}
+  - {fileID: 3836495396805580827, guid: b7eabd4db9bf7e040bf943b9a66dcd81, type: 3}
   deck: []
   discardPile: []
   hand: []
@@ -6097,8 +6099,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 32, y: -83}
-  m_SizeDelta: {x: 950, y: 345.09}
+  m_AnchoredPosition: {x: 32, y: 0}
+  m_SizeDelta: {x: 950, y: 275}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2101083056
 MonoBehaviour:

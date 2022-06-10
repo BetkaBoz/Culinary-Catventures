@@ -9,15 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d49a2b349a92dd44c842ad98ace016f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 300f693d6c1542d4a809bc7f7e7394dd, type: 3}
   m_Name: Desperate Measures
   m_EditorClassIdentifier: 
-  cardName: Desperate Measures
-  energyCost: 1
-  canTarget: 0
   artwork: {fileID: 21300000, guid: 6b14d1bfdb49a074e91bfab90d248f78, type: 3}
-  nutritionPoints: -1
+  cardEffect: {fileID: 7685918559529041284, guid: 33e246ac5a12f6a448f1d722c3ec069e, type: 3}
+  cardName: Desperate Measures
   cardType: Manoeuvre
-  drawAmount: 2
-  discardAmount: 1
-  filter: []
+  canTarget: 0
+  energyCost: 1
+  nutritionPoints: 0
