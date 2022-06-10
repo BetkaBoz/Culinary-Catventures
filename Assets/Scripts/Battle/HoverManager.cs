@@ -4,32 +4,48 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] Image bubbleAwait;
-    [SerializeField] Image bubbleAction;
+    [SerializeField] Image tooltip;
+    [SerializeField] ActionManager ac;
+    public string message, header;
+
+    private void Start()
+    {
+        switch (ac.CurrentIndex)
+        {
+            case 0:
+                message = "If customer won't be fed this round, they will take your reputation points";
+                header = "Reputation Debuff";
+                break;
+            case 1:
+                message = "If customer won't be fed this round, they will cause less EP in next round";
+                header = "Energy Debuff";
+                break;
+        }
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        bubbleAwait.DOFade(0f, 0.15f).OnComplete(() =>
-        {
-            bubbleAction.DOFade(1f, 0.15f).OnPlay(() =>
-            {
-                bubbleAction.gameObject.SetActive(true);
-            });
-        });
+        //TooltipManager.Show(message, header);
+
+        tooltip.DOFade(0.7f, 0.2f).OnPlay(() =>
+           {
+               TooltipManager.Show(message, header);
+           });
+               
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        bubbleAction.DOFade(0f, 0.15f).OnPlay(() =>
-        {
-            bubbleAwait.DOFade(1f, 0.15f).OnComplete(() =>
+        //TooltipManager.Hide();
+
+        tooltip.DOFade(0f, 0.2f).OnPlay(() =>
             {
-                bubbleAwait.gameObject.SetActive(true);
+                TooltipManager.Hide();
             });
-        });
     }
 
 }

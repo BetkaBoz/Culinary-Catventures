@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New BuffPlayersNP", menuName = "Cards/Buff food power")]
-public class BuffPlayersNp : Card, IChangeFoodPower
+public class BuffPlayersNP : CardEffect, IChangeFoodPower
 {
-    [SerializeField] float amount;
     [SerializeField] string type;
     [SerializeField] GameObject buffable;
-    public override void CardEffect(GameManager gm, RaycastHit2D hit)
+    public override void Effect(GameManager gm, RaycastHit2D hit)
     {
-        ChangeFoodPower(gm,amount, type);
+        ChangeFoodPower(gm,(float)amount/100, type);
     }
 
     public void ChangeFoodPower(GameManager gm, float amount, string type)

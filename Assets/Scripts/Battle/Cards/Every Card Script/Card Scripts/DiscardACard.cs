@@ -2,26 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New DiscardACard", menuName = "Cards/Discard a card")]
-public class DiscardACard : Card, ISpendEnergy
+public class DiscardACard : CardEffect, IGainEnergy
 {
-    [SerializeField] private int amountEnergyGained;
     [SerializeField] private string[] filter;
 
-    public override void CardEffect(GameManager gm, RaycastHit2D hit)
+    public override void Effect(GameManager gm, RaycastHit2D hit)
     {
         Discard(gm);
     }
 
-    public void SpendEnergy(GameManager gm, int amount)
+    public void GainEnergy(GameManager gm, int amount)
     {
-        gm.SpendEnergy(amount);
+        gm.AddEnergy(amount);
     }
 
     private async void Discard(GameManager gm)
     {
         gm.SetDiscardFilter(filter);
         await gm.StartDiscard();
-        SpendEnergy(gm, -amountEnergyGained);
+        GainEnergy(gm, amount);
     }
 }

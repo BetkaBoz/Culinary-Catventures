@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New DravACard", menuName = "Cards/Draw a card")]
-public class DrawACard : Card, IDrawCards
+public class DrawACard : CardEffect, IDrawCards
 {
-    public override void CardEffect(GameManager gm, RaycastHit2D hit)
+    public override void Effect(GameManager gm, RaycastHit2D hit)
     {
-        DrawCards(gm, 1);
+        DrawCards(gm, amount);
     }
 
     public void DrawCards(GameManager gm, int amount)

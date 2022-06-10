@@ -7,12 +7,13 @@ using UnityEngine.UI;
 public class CombineController : MonoBehaviour
 {
     public TextAsset comboListJson;
-    [SerializeField] private ComboList comboList = new ComboList();
-    [SerializeField] private CardSlot findSlot;
-    [SerializeField] private GameManager gm;
+    [SerializeField] ComboList comboList = new ComboList();
+    [SerializeField] CardSlot findSlot;
+    [SerializeField] GameManager gm;
     //[SerializeField] private ManouverTargetController targetController; 
-    [SerializeField] private Button combineBttn;
-    private Card result;
+    [SerializeField] Button combineBttn;
+    [SerializeField] GameObject cardPrefab;
+    Card result = null;
 
     //This class is used to load individual entries in the JSON file
     [System.Serializable]
@@ -52,6 +53,8 @@ public class CombineController : MonoBehaviour
 
     public void Start()
     {
+        //right now it's here because it's simple to use
+        //maybe make this more secure later
         comboList = JsonUtility.FromJson<ComboList>(comboListJson.text);
     }
 
@@ -67,14 +70,15 @@ public class CombineController : MonoBehaviour
         {
             this.gameObject.SetActive(true);
             //targetController.setPos(false);
-            combineBttn.gameObject.SetActive(true);
+            combineBttn.onClick.RemoveAllListeners();
+            combineBttn.onClick.AddListener(CombineCard);
             combineBttn.interactable = false;
         }
         else
         {
             //targetController.setPos(true);
             combineBttn.interactable = false;
-            combineBttn.gameObject.SetActive(false);
+            result = null;
             findSlot.gameObject.SetActive(false);
             this.gameObject.SetActive(false);
         }
@@ -116,7 +120,8 @@ public class CombineController : MonoBehaviour
                     LoadPreviewCard("FoodPile");
                     break;
             }
-            result.NutritionPoints = gm.GetComboNp(true);
+            result.NutritionPoints = gm.GetComboNP(true);
+            result.EnergyCost = gm.GetComboEnergy();
             findSlot.SetCard(result);
             //if (findSlot.gameObject.activeSelf)
             //{
@@ -128,15 +133,22 @@ public class CombineController : MonoBehaviour
 
     private void LoadPreviewCard(string target)
     {
+        if (result != null)
+            result.DeletionCheck(true);
+        GameObject cardTemp;
         Card foundCard = null;
-        //Right now we can only combine food, might change it later if we decide to combine manouvers
-        foundCard = Resources.Load<FoodBase>("Scriptable Objects/" + target);
-        if (foundCard != null)
+        CardBaseInfo foundCardBase = null;
+        //Right now we can only combine food, might change it later if we decide to combine manouvers4
+        foundCardBase = Resources.Load<CardBaseInfo>("Scriptable Objects/" + target);
+        if (foundCardBase != null)
         {
             if (!findSlot.gameObject.activeSelf)
             {
                 findSlot.gameObject.SetActive(true);
             }
+            cardTemp = Instantiate(cardPrefab);
+            foundCard = cardTemp.GetComponent<Card>();
+            foundCard.GetDataFromBase(foundCardBase);
             findSlot.SetCard(foundCard);
             combineBttn.interactable = true;
         }
@@ -149,6 +161,7 @@ public class CombineController : MonoBehaviour
             }
             combineBttn.interactable = false;
         }
+        Debug.Log(foundCard);
         result = foundCard;
     }
 
@@ -180,6 +193,7 @@ public class CombineController : MonoBehaviour
     //Apparently HashSets are the quickest way to compare arrays
     private string LookForCard(string[] find)
     {
+        return "NOTHING"; //This is here until we finish rest of combo cards
         HashSet<string> target = new HashSet<string>(find);
         HashSet<string> usedCards;
         

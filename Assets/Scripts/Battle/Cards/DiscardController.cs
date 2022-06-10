@@ -25,7 +25,7 @@ public class DiscardController : MonoBehaviour
     {
         if(selectedCard != null)
         {
-            gm.SendToDiscard(selectedCard.GetCard().HandIndex, false);
+            gm.SendToDiscard(selectedCard.HandIndex, false);
             gm.StopDiscard();
         }
     }
@@ -35,20 +35,20 @@ public class DiscardController : MonoBehaviour
         if (!gm.discardPhase)
         {
             this.gameObject.SetActive(true);
-            targetController.SetPos(false);
-            discardBttn.gameObject.SetActive(true);
+            targetController.setPos(false);
+            discardBttn.onClick.RemoveAllListeners();
+            discardBttn.onClick.AddListener(DiscardCard);
             discardBttn.interactable = false;
         }
         else
         {
-            targetController.SetPos(true);
+            targetController.setPos(true);
             discardBttn.interactable = false;
-            discardBttn.gameObject.SetActive(false);
             this.gameObject.SetActive(false);
         }
     }
 
-    public void SelectCard(CardSlot otherSelectedCard)
+    public bool SelectCard(CardSlot otherSelectedCard)
     {
         if (IsinFilter(otherSelectedCard.GetCard().CardType))
         {
@@ -59,14 +59,19 @@ public class DiscardController : MonoBehaviour
             this.selectedCard = otherSelectedCard;
             this.selectedCard.transform.position = new Vector3(this.cardSlot.position.x, this.cardSlot.position.y, this.selectedCard.transform.position.z);
             discardBttn.interactable = true;
+            return true;
         }
+        return false;
     }
 
     private bool IsinFilter(string selectedCardType)
     {
+        if (filter.Length == 0)
+            return true;
         for(int i = 0; i < filter.Length; i++)
         {
-            if(selectedCardType == filter[i])
+            Debug.Log(filter[i]);
+            if (selectedCardType == filter[i])
             {
                 return true;
             }

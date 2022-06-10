@@ -1,47 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public abstract class Card : ScriptableObject
+public class Card : MonoBehaviour
 {
     #region SerializeFields
-    private int handIndex = -1;
-    [SerializeField] private string cardName;
-    [SerializeField] private int energyCost;
-    [SerializeField] private bool canTarget = false;
-    [SerializeField] private Sprite artwork;
-    [SerializeField] private int nutritionPoints;
-    [SerializeField] private string cardType;
+    [SerializeField] Sprite artwork;
+    [SerializeField] CardEffect cardEffect = null;
+    [SerializeField] string cardName;
+    [SerializeField] string cardType;
+    [SerializeField] bool canTarget = false;
+    [SerializeField] int energyCost;
+    [SerializeField] int nutritionPoints;
+    bool deleteOnBattleEnd = false;
     #endregion
-    #region Getters/Setters
-    public string CardType
+    #region Getters/setters
+    public bool DeleteOnBattleEnd
     {
         get
         {
-            return cardType;
-        }
-    }
-    public int NutritionPoints
-    {
-        get
-        {
-            return nutritionPoints;
+            return deleteOnBattleEnd;
         }
         set
         {
-            nutritionPoints = value;
+            deleteOnBattleEnd = value;
         }
     }
-    public int HandIndex
+    public Sprite Artwork
     {
         get
         {
-            return handIndex;
+            return artwork;
         }
         set
         {
-            handIndex = value;
+            artwork = value;
+        }
+    }
+    public CardEffect CardEffect
+    {
+        get
+        {
+            return cardEffect;
+        }
+        set
+        {
+            cardEffect = value; //card effect needs reference to this card so lets set it here
+            cardEffect.Card = this;
         }
     }
     public string CardName
@@ -49,6 +54,32 @@ public abstract class Card : ScriptableObject
         get
         {
             return cardName;
+        }
+        set
+        {
+            cardName = value;
+        }
+    }
+    public string CardType
+    {
+        get
+        {
+            return cardType;
+        }
+        set
+        {
+            cardType = value;
+        }
+    }
+    public bool CanTarget
+    {
+        get
+        {
+            return canTarget;
+        }
+        set
+        {
+            canTarget = value;
         }
     }
     public int EnergyCost
@@ -62,23 +93,43 @@ public abstract class Card : ScriptableObject
             energyCost = value;
         }
     }
-    public bool CanTarget
+    public int NutritionPoints
     {
         get
         {
-            return canTarget;
+            return nutritionPoints;
         }
-    }
-    public Sprite Artwork
-    {
-        get
+        set
         {
-            return artwork;
+            nutritionPoints = value;
         }
     }
     #endregion
-    public abstract void CardEffect(GameManager gm, RaycastHit2D hit);
-    public int CalculateNp(GameManager gm)
+
+    public void GetDataFromBase(CardBaseInfo baseCard)
+    {
+        artwork = baseCard.Artwork;
+        if(baseCard.CardType == "Manoeuvre")
+            cardEffect = baseCard.CardEffect;
+        cardType = baseCard.CardType;
+        cardName = baseCard.CardName;
+        canTarget = baseCard.CanTarget;
+        energyCost = baseCard.EnergyCost;
+        nutritionPoints = baseCard.NutritionPoints;
+
+        //if(cardEffect != null)
+        //{
+        //    cardEffect.Amount = baseCard.Amount;
+        //    cardEffect.DiscardAmount = baseCard.DiscardAmount;
+        //}
+    }
+
+    public void TriggerCardEffect(GameManager gm, RaycastHit2D hit)
+    {
+        cardEffect.Effect(gm, hit);
+    }
+
+    public int CalculateNP(GameManager gm)
     {
         switch (CardType)
         {
@@ -90,6 +141,14 @@ public abstract class Card : ScriptableObject
                 return (int)(nutritionPoints * gm.Player.GeneralFoodMod);
             default:
                 return -1;
+        }
+    }
+
+    public void DeletionCheck(bool overrideVar = false)//we can use overrideVar to forcefully delete card
+    {
+        if (deleteOnBattleEnd || overrideVar)
+        {
+            Destroy(gameObject);
         }
     }
 }
