@@ -11,24 +11,24 @@ public class Island : MonoBehaviour
     { Market,Hotel,Event,Dealer,School }
     
     [SerializeField] private IslandTypes IslandType { get; set; }
-    [SerializeField] private int Sector;
+    [SerializeField] private int sector;
 
 
-    public string getIslandType()
+    public string GetIslandType()
     {
         return this.IslandType.ToString();
     }
     
-    public void setStartType( )
+    public void SetStartType( )
     {
         this.IslandType = IslandTypes.Start;
     }
-    public void setFinishType( )
+    public void SetFinishType( )
     {
         this.IslandType = IslandTypes.Finish;
     }
     
-    public void setRandomIslandType( )
+    public void SetRandomIslandType( )
     {
         IslandType = (IslandTypes) Random.Range(2, 8);
         // Debug.Log(IslandType);

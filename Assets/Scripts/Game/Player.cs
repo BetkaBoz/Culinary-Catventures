@@ -194,15 +194,24 @@ public class Player : MonoBehaviour, IDamageable
         this.vegetarianFoodModBonus = data.vegetarianFoodModBonus;
     }
 
-    public void changeMoney(int amount)
+    public void ChangeMoney(int amount)
     {
-        this.money += amount;
-        if (this.money <= 0)
+        money += amount;
+        if (money <= 0)
         {
             Die(false);
         }
     }
-
+    
+    //CHANGED -= TO +=, USE THIS INSTEAD
+    public void ChangeReputation(int amount)
+    {
+        rep += amount;
+        if (rep <= 0)
+        {
+            Die(true);
+        }
+    }
     public void TakeDamage(int amount)
     {
         rep -= amount;

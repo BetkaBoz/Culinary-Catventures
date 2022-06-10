@@ -6,7 +6,7 @@ using TMPro;
 public class OptionsMenu : MonoBehaviour
 {
 
-    public TextMeshProUGUI  FullscreenText;
+    public TextMeshProUGUI  fullscreenText;
 
 
     // Start is called before the first frame update
@@ -20,12 +20,12 @@ public class OptionsMenu : MonoBehaviour
     {
         if (Screen.fullScreen)
         {
-            FullscreenText.text = "Fullscreen: Yes";
+            fullscreenText.text = "Fullscreen: Yes";
 
         }
         else
         {
-            FullscreenText.text = "Fullscreen: No";
+            fullscreenText.text = "Fullscreen: No";
 
         }
     }

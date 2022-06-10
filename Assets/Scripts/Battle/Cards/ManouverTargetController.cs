@@ -5,24 +5,24 @@ using UnityEngine;
 public class ManouverTargetController : MonoBehaviour
 {
     private Transform pos;
-    private const int outside = -1000;
-    private const float inside = 1.7f;
+    private const int Outside = -1000;
+    private const float Inside = 1.7f;
 
     private void Awake()
     {
         pos = this.transform;
-        setPos(true);
+        SetPos(true);
     }
 
-    public void setPos(bool goOut)
+    public void SetPos(bool goOut)
     {
         if (goOut)
         {
-            pos.position = new Vector3(pos.position.x, outside, pos.position.z);
+            pos.position = new Vector3(pos.position.x, Outside, pos.position.z);
         }
         else
         {
-            pos.position = new Vector3(pos.position.x, inside, pos.position.z);
+            pos.position = new Vector3(pos.position.x, Inside, pos.position.z);
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrainEnergy : IBuffable
+public class DrainEnergy : Buffable
 {
     [SerializeField] int value;
     public void SetValue(int value)
