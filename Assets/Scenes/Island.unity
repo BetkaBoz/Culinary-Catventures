@@ -415,6 +415,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206149492}
   m_CullTransparentMesh: 1
+--- !u!114 &278483037 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1429977149473479975, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+  m_PrefabInstance: {fileID: 2137793593156915372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58205f3197f4dc0b5752971d60db007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &294778080
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,18 +1004,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 916052559}
     m_Modifications:
-    - target: {fileID: 826546655, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
-      propertyPath: caveSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 116d0bf87a354bc4dbac30cdc94795cc, type: 3}
-    - target: {fileID: 826546655, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
-      propertyPath: gatherSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 437eb6db38d2fb647bbf565808164c31, type: 3}
-    - target: {fileID: 826546655, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
-      propertyPath: stuckMerchantSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 52ae18701b6605f4cb691c65a7d07987, type: 3}
     - target: {fileID: 798999069868067327, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
       propertyPath: m_Name
       value: 'EventWindow '
@@ -1012,14 +1011,6 @@ PrefabInstance:
     - target: {fileID: 798999069868067327, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879817570924433602, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4988284391718462176, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8365468295377838716, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
       propertyPath: m_Pivot.x
@@ -1105,8 +1096,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4988284391718462176, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
 --- !u!1 &1387795970
 GameObject:
@@ -1811,6 +1801,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 916052559}
     m_Modifications:
+    - target: {fileID: 646754371594024969, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 749514106776923245, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4271418187387366641, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1899,7 +1897,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'MerchantWindow '
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4920640307446318962, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085982968440555100, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413112132167085223, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413112132167085223, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 278483037}
+    - target: {fileID: 6413112132167085223, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413112132167085223, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MerchantWindowControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413112132167085223, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 749514106776923245, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
 --- !u!224 &2805135395462102109 stripped
 RectTransform:

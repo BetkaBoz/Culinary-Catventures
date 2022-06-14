@@ -15,8 +15,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] List<CardBaseInfo> deck = new List<CardBaseInfo>();
     private bool isDead = false;
     private string className;
-    private int reputation = 0;
-    private int money = 0;
+    //private int reputation = 0;
+    private int money = 100;
     private int maxEnergy = 5;
     private int energy;
     private int maxRep = 100;
@@ -183,7 +183,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         Player data = this; //just some bs so intelisense works
         this.className = data.className;
-        this.reputation = data.reputation;
+        this.rep = data.rep;
         this.money = data.money;
         //this.score = data.score;
         this.generalFoodModBase = data.generalFoodModBase;

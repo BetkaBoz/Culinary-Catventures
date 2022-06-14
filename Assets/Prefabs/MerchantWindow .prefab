@@ -454,6 +454,7 @@ MonoBehaviour:
   - {fileID: 1899617396004051198}
   - {fileID: 2252740909579954677}
   - {fileID: 8596279051837452442}
+  allFoodScriptableObjects: []
 --- !u!1 &7352020596664229827
 GameObject:
   m_ObjectHideFlags: 0

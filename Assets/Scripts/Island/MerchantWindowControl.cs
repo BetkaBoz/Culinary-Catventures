@@ -1,82 +1,108 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class MerchantWindowControl : MonoBehaviour
 {
     [SerializeField] private List<GameObject> merchantCards;
-    [SerializeField] private List<CardBaseInfo> allScriptableObjects;
-    // Start is called before the first frame update
+    [SerializeField] private List<CardBaseInfo> allFoodScriptableObjects;
     
+    private UILayer uiLayer;
+    private Player player;
+    private IslandManager islandManager;
+
+    private void Awake()
+    {
+        islandManager = FindObjectOfType<IslandManager>();
+        uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+    
+    // Start is called before the first frame update
     void Start()
     {
         GetAllFoodCards();
-        GenerateCards();
+        //AssignMerchantCards();
     }   
-/*
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(10, 70, 150, 30), "Change texture"))
-        {
-            // change texture on cube
-            Texture2D texture = (Texture2D)textures[Random.Range(0, textures.Length)];
-            go.GetComponent<Renderer>().material.mainTexture = texture;
-        }
-    }
-    */
-    
-    // Update is called once per frame
     
     private void GetAllFoodCards()
     {
         CardBaseInfo[] allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/");
         foreach (var t in allScriptableObjectsTemp)
         {
-            if (t.CardType != "Manoeuvre" )
+            if (t.CardType != "Manoeuvre" && !t.CardName.Contains("Pile") )
             {
-                allScriptableObjects.Add(t);
+                allFoodScriptableObjects.Add(t);
             }
         }
     }
-    private void GenerateCards()
+    private void AssignMerchantCards()
     {
         foreach (GameObject card in merchantCards)
-        {
-            Sprite artwork = card.GetComponent<Image>().sprite;
+        {   
+
+            Image artwork = card.GetComponent<Image>();
             Text nutritionalValue = card.GetComponentInChildren<Text>();
             TextMeshProUGUI price = card.GetComponentInChildren<TextMeshProUGUI>();
+            Button button = card.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            artwork.color= Color.white;
 
-            //artwork = baseCard.Artwork;
-            nutritionalValue.text = "12";
-            price.text = "5";
+            CardBaseInfo randomCard = GenerateRandomIngredient();
+            artwork.sprite = randomCard.Artwork;
+            nutritionalValue.text = randomCard.NutritionPoints.ToString();
+            
+            //CARD PRICE
+            if (int.Parse(nutritionalValue.text) > 8)
+            {
+                price.text = Random.Range(10, 15).ToString();
+            }
+            else
+            {
+                price.text = Random.Range(5, 10).ToString();
+            }
+            //BUY CARD
+            button.onClick.AddListener(delegate {
+                uiLayer.ChangeMoney(- int.Parse(price.text));
+                player.Deck.Add(randomCard);
+                artwork.color= Color.gray;
+                button.onClick.RemoveAllListeners();
+            });
+
 
         }
     }
     
-    /*public void GetDataFromBase(CardBaseInfo baseCard)
+    private CardBaseInfo GenerateRandomIngredient()
     {
         
-        foreach (GameObject card in merchantCards)
-        {   
-            
-            
-            if(baseCard.CardType == "Manoeuvre")
-                cardEffect = baseCard.CardEffect;
-            cardType = baseCard.CardType;
-            cardName = baseCard.CardName;
-            canTarget = baseCard.CanTarget;
-            energyCost = baseCard.EnergyCost;
-            nutritionPoints = baseCard.NutritionPoints;
-        }
+        int random = Random.Range(0, allFoodScriptableObjects.Count);
+        return allFoodScriptableObjects[random];
         
-        
-
-        //if(cardEffect != null)
-        //{
-        //    cardEffect.Amount = baseCard.Amount;
-        //    cardEffect.DiscardAmount = baseCard.DiscardAmount;
-        //}
-    }*/
+    }
+    
+    
+    public void ShowWindow()
+    {
+        gameObject.SetActive(true);
+        AssignMerchantCards();
+    }
+    
+    //IN INSPECTOR
+    public void HideWindow()
+    {
+        gameObject.SetActive(false);
+    }
+    public void CloseEvent()
+    {
+        //RemoveAllListeners();
+        Time.timeScale = 1;
+        islandManager.LowerTime(1);
+        HideWindow();
+        //Debug.Log("CLOSE");
+    }
 }

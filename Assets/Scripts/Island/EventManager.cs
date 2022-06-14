@@ -22,7 +22,9 @@ public class EventManager : MonoBehaviour
     //EVENT WINDOW
     private GameObject  eventWindow;
     //UILAYER
-    private GameObject  uiLayer;
+    private UILayer  uiLayer;
+    //EVENT MERCHARNT WINDOW
+    private MerchantWindowControl  eventMerchantWindow;
 
     private IslandManager islandManager;
     
@@ -38,10 +40,11 @@ public class EventManager : MonoBehaviour
     #endregion
     
     private void Awake()
-    {
+    {   
         eventWindow = GameObject.FindGameObjectWithTag("EventWindow");
-        uiLayer = GameObject.FindGameObjectWithTag("UILayer");
-        uiLayer.GetComponent<UILayer>().UpdateUI();
+        eventMerchantWindow = GameObject.FindGameObjectsWithTag("EventWindow")[1].GetComponent<MerchantWindowControl>();
+        uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
+        uiLayer.UpdateUI();
         islandManager = FindObjectOfType<IslandManager>();
     }
 
@@ -52,7 +55,7 @@ public class EventManager : MonoBehaviour
         AssignRandomType();
         AssignSprite();
         eventWindow.GetComponent<EventWindowControl>().HideWindow();
-
+        eventMerchantWindow.HideWindow();
     }
 
     void Update()
@@ -85,7 +88,7 @@ public class EventManager : MonoBehaviour
     {   
         //TODO: MOZNO BUDE DOBRE AK PREMENNE BUDU INDE A NECH SA NEONDIA STALE
         //EventWindowControl eventWindowControl = eventWindow.GetComponent<EventWindowControl>();
-        UILayer uiLayerControl = uiLayer.GetComponent<UILayer>();
+        //UILayer uiLayer = uiLayer.GetComponent<UILayer>();
         Button firstButtonControl = eventWindowControl.FirstButton.GetComponent<Button>();
         Button secondButtonControl = eventWindowControl.SecondButton.GetComponent<Button>();
         Button thirdButtonControl = eventWindowControl.ThirdButton.GetComponent<Button>();
@@ -100,13 +103,13 @@ public class EventManager : MonoBehaviour
                 
                 firstButtonControl.onClick.AddListener(delegate {
                     eventWindowControl.SetUpEventWindow("","You helped the homeless cat.");
-                    uiLayerControl.ChangeMoney(-Moderate);
-                    uiLayerControl.ChangeReputation(Major);
+                    uiLayer.ChangeMoney(-Moderate);
+                    uiLayer.ChangeReputation(Major);
                 });
                 secondButtonControl.onClick.AddListener(delegate {
                     eventWindowControl.SetUpEventWindow("","You robbed the homeless cat.");
-                    uiLayerControl.ChangeMoney(Moderate);
-                    uiLayerControl.ChangeReputation(-Major);
+                    uiLayer.ChangeMoney(Moderate);
+                    uiLayer.ChangeReputation(-Major);
                 });
                 break;
             case RandomEventType.DiceCat:
@@ -119,20 +122,20 @@ public class EventManager : MonoBehaviour
                     {
                         //PREHRAL
                         eventWindowControl.SetUpEventWindow("","You lost! But at least the cat is happy.");
-                        uiLayerControl.ChangeMoney(-Moderate);
-                        uiLayerControl.ChangeReputation(Minor);
+                        uiLayer.ChangeMoney(-Moderate);
+                        uiLayer.ChangeReputation(Minor);
                     }
                     else
                     {
                         //VYHRAL
                         eventWindowControl.SetUpEventWindow("","You won! The cat is happy that someone played with him.");
-                        uiLayerControl.ChangeMoney(Moderate);
-                        uiLayerControl.ChangeReputation(Minor);
+                        uiLayer.ChangeMoney(Moderate);
+                        uiLayer.ChangeReputation(Minor);
                     }
                 });
                 secondButtonControl.onClick.AddListener(delegate {
                     eventWindowControl.SetUpEventWindow("","The cat is unhappy because you didn't play with him.");
-                    uiLayerControl.ChangeReputation(-Minor);
+                    uiLayer.ChangeReputation(-Minor);
                 });
                 break;
             case RandomEventType.Stumble:
@@ -140,7 +143,7 @@ public class EventManager : MonoBehaviour
                 eventWindowControl.SetUpEventWindow("Stumble","You stumbled on a small rock and lost an ingredient."
                 ,"ASK FOR HELP","SEARCH");
                 
-                Stumble(firstButtonControl,secondButtonControl ,thirdButtonControl, eventWindowControl, uiLayerControl);
+                Stumble(firstButtonControl,secondButtonControl ,thirdButtonControl, eventWindowControl, uiLayer);
                 break;
             case RandomEventType.PerfectTomatoes:
                 //PERFECT_TOMATOES
@@ -153,7 +156,7 @@ public class EventManager : MonoBehaviour
                     {
                         //PADOL A VSIMLI SI HO
                         eventWindowControl.SetUpEventWindow("","While climbing on the fence your tail got stuck and you fell down. Owner of the tomatoes heard you!");
-                        uiLayerControl.ChangeReputation(-Major);
+                        uiLayer.ChangeReputation(-Major);
                     }
                     else
                     {
@@ -164,7 +167,7 @@ public class EventManager : MonoBehaviour
                 });
                     secondButtonControl.onClick.AddListener(delegate {
                         eventWindowControl.SetUpEventWindow("","You did not fall into your temptation. God gave you some reputation.");
-                        uiLayerControl.ChangeReputation(Minor);
+                        uiLayer.ChangeReputation(Minor);
                     });
                 break;
             case RandomEventType.Cave:
@@ -179,13 +182,13 @@ public class EventManager : MonoBehaviour
                         if (RandomState())
                         {
                             //NASIEL PENIAZGY
-                            uiLayerControl.ChangeMoney(Moderate);
+                            uiLayer.ChangeMoney(Moderate);
                             eventWindowControl.SetUpEventWindow("","You went in and found some coins on the ground.");
                         }
                         else
                         {
                             //STRATIL PENIAZGY
-                            uiLayerControl.ChangeMoney(-Moderate);
+                            uiLayer.ChangeMoney(-Moderate);
                             eventWindowControl.SetUpEventWindow("","You went in and in the pitch darkness someone or something took your coins.");
                         }
                     }
@@ -197,12 +200,12 @@ public class EventManager : MonoBehaviour
                             "PAY","DON'T PAY","");
                         Debug.Log("YOU FOUND WITCH!");
                         firstButtonControl.onClick.AddListener(delegate {
-                            uiLayerControl.ChangeMoney(-Moderate);
+                            uiLayer.ChangeMoney(-Moderate);
                             eventWindowControl.SetUpEventWindow("","After finishing her brew the witch joined your team.");
 
                         });
                         secondButtonControl.onClick.AddListener(delegate {
-                            uiLayerControl.ChangeMoney(-Moderate);
+                            uiLayer.ChangeMoney(-Moderate);
                             //CURSE
                             eventWindowControl.SetUpEventWindow("","The witch got angry and cursed you!");
                         });
@@ -227,19 +230,19 @@ public class EventManager : MonoBehaviour
                             "FIGHT","RUN","");
                         Debug.Log("It's a trap!");
                         //SAME AS THIEVES EVENT BUT DIFFERENT
-                        Thieves(firstButtonControl,secondButtonControl , eventWindowControl, uiLayerControl,"robbers");
+                        Thieves(firstButtonControl,secondButtonControl , eventWindowControl, uiLayer,"robbers");
                     }
                     else
                     {   
                         //HELPED HIM
                         eventWindowControl.SetUpEventWindow("","You helped the merchant and he thanked you.");
-                        uiLayerControl.ChangeReputation(Major);
+                        uiLayer.ChangeReputation(Major);
                     }
                 });
                 //IGNORE
                 secondButtonControl.onClick.AddListener(delegate {
                     eventWindowControl.SetUpEventWindow("","You went the other way and ignored him.");
-                    uiLayerControl.ChangeReputation(-Minor);
+                    uiLayer.ChangeReputation(-Minor);
 
                     Debug.Log("LEAVE");
                 });
@@ -249,7 +252,7 @@ public class EventManager : MonoBehaviour
                 eventWindowControl.SetUpEventWindow("Thieves","You see thieves trying to rob you.",
                     "FIGHT","RUN","");
                 
-                Thieves(firstButtonControl,secondButtonControl, eventWindowControl, uiLayerControl,"thieves");
+                Thieves(firstButtonControl,secondButtonControl, eventWindowControl, uiLayer,"thieves");
                 break;
             
             default:
@@ -375,6 +378,7 @@ public class EventManager : MonoBehaviour
         {
             case EventType.Merchant:
                 //Debug.Log("MERCHANT");
+                eventMerchantWindow.ShowWindow();
                 break;
             case EventType.Random:
                 //Debug.Log("RANDOM EVENT");
