@@ -11,6 +11,7 @@ TagManager:
   - Light
   - Helper
   - Action
+  - Customer
   layers:
   - Default
   - TransparentFX

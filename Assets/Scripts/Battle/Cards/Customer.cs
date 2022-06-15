@@ -17,13 +17,15 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     [SerializeField] ActionManager ac;
     [SerializeField] Image Action;
     [SerializeField] GameObject debuffs;
-
     private int currHunger;
     private byte numTurnsStunned;
     private bool satisfied = false;
     private bool isDead = false;
+    public int money = 0;
+    public int rep = 0;
 
-    public int money, rep;
+    public int Money => money;
+    public int Rep => rep;
 
     private void Awake()
     {
@@ -90,6 +92,8 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             }
             Die(true);
             gm.Player.TakeDamage(25);
+            gm.Player.ChangeMoney(money);
+            gm.Player.ChangeReputation(rep);
             return true;
         }
         return false;
@@ -125,6 +129,8 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             Die(true);
             money += 50;
             rep += 50;
+            gm.Player.ChangeMoney(money);
+            gm.Player.ChangeReputation(rep);
         }
     }
 

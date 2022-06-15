@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float meatFoodModBonus;
     [SerializeField] float vegetarianFoodModBonus;
     [SerializeField] List<CardBaseInfo> deck = new List<CardBaseInfo>();
+    [SerializeField] Customer customer;
     private bool isDead;
     private bool isVictorious;
     private string className;
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour, IDamageable
     private int rep = 100;
     private int currExp = 400;
     private int nextLvl = 1000;
+    public int moneyAmount, repAmount;
     
     #endregion
 
@@ -174,6 +176,8 @@ public class Player : MonoBehaviour, IDamageable
         //    rep = value;
         //}
     }
+    public int MoneyAmount => moneyAmount;
+    public int RepAmount => repAmount;
     #endregion
 
     public void Awake()
@@ -199,6 +203,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void ChangeMoney(int amount)
     {
+        moneyAmount += amount;
         money += amount;
         if (money <= 0)
         {
@@ -209,6 +214,7 @@ public class Player : MonoBehaviour, IDamageable
     //CHANGED -= TO +=, USE THIS INSTEAD
     public void ChangeReputation(int amount)
     {
+        repAmount += amount;
         rep += amount;
         if (rep <= 0)
         {

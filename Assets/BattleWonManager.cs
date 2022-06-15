@@ -7,43 +7,29 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class BattleWonManager : MonoBehaviour//, IPointerDownHandler
+public class BattleWonManager : MonoBehaviour
 {
     [SerializeField] List<Helper> helpers = new List<Helper>();
     [SerializeField] TextMeshProUGUI reputation;
     [SerializeField] TextMeshProUGUI coins;
     [SerializeField] Button continueButton;
+    [SerializeField] Customer customer;
+    [SerializeField] Player player;
 
-    private Helper currentHelper;
-
+    //public Player Player => player;
     public void Start()
     {
         gameObject.SetActive(true);
         continueButton.onClick.AddListener(NextLevel);
 
-        for (int i = 0; i < helpers.Count; i++)
-        {
-            helpers[i].onClick.AddListener(delegate { HelperClicked(i); });
-            helpers[i].
-        }
+        player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
 
-        foreach (Helper currentHelper in helpers)
-        {
-
-        }
-
-        //reputation.text = $"{customer.rep}";
-        //coins.text = $"{customer.money}";
+        reputation.text = $"+{player.RepAmount}";
+        coins.text = $"+{player.MoneyAmount}";
     }
 
     private void NextLevel()
     {
         SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
-
-    private void HelperClicked(int index)
-    {
-        Debug.Log($"Helper with {index} index was clicked");
-    } 
-
 }
