@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: -1382971902171194464}
   - component: {fileID: 3719504316910534307}
   m_Layer: 6
-  m_Name: customer
-  m_TagString: Untagged
+  m_Name: Customer
+  m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,6 +97,8 @@ MonoBehaviour:
   ac: {fileID: 4382135650841581616}
   Action: {fileID: 4342073756633959973}
   debuffs: {fileID: 0}
+  money: 0
+  rep: 0
 --- !u!61 &3719504316910534307
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,7 +140,7 @@ GameObject:
   - component: {fileID: 5760158233723837969}
   m_Layer: 6
   m_Name: Action
-  m_TagString: Untagged
+  m_TagString: Action
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltip: {fileID: 0}
+  helper: {fileID: 0}
   ac: {fileID: 4382135650841581616}
   message: 
   header: 
