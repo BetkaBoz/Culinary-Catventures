@@ -9,6 +9,8 @@ TagManager:
   - PlayerGrabber
   - UILayer
   - Light
+  - Helper
+  - Action
   layers:
   - Default
   - TransparentFX

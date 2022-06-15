@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +14,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float meatFoodModBonus;
     [SerializeField] float vegetarianFoodModBonus;
     [SerializeField] List<CardBaseInfo> deck = new List<CardBaseInfo>();
-    private bool isDead = false;
+    private bool isDead;
+    private bool isVictorious;
     private string className;
     private int reputation = 0;
     private int money = 0;
@@ -177,6 +179,7 @@ public class Player : MonoBehaviour, IDamageable
     public void Awake()
     {
         isDead = false;
+        isVictorious = false;
     }
 
     private void LoadPlayer()
@@ -223,12 +226,24 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die(bool status)
     {
-        if (isDead) { return; }
+        if (isDead || isVictorious) return;
         isDead = true;
         StartCoroutine(LoadGameOver());
     }
 
-    IEnumerator LoadGameOver()
+    private void Win()
+    {
+        if (isDead || isVictorious) return;
+        isVictorious = true;
+        StartCoroutine(LoadBattleWon());
+    }
+
+    public void CheckCondition()
+    {
+        if(!isDead) Win();
+    }
+
+    private IEnumerator LoadGameOver()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Game Over",LoadSceneMode.Additive);
         while (!asyncLoad.isDone)
@@ -237,4 +252,22 @@ public class Player : MonoBehaviour, IDamageable
         }
         Debug.Log("Oh nou I'm ded :(");
     }
+
+    private IEnumerator LoadBattleWon()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Battle Won", LoadSceneMode.Additive);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        Debug.Log("Yay I won :)");
+    }
+
+    //private async Task LoadBattleWon()
+    //{
+    //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Battle Won", LoadSceneMode.Additive);
+    //    while (!asyncLoad.isDone)
+    //        await Task.Delay(10);
+    //    Debug.Log("Yay I won :)");
+    //}
 }

@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public enum BattleState { PLAYERTURN, ENEMYTURN, WON, LOST }
 public class GameManager : MonoBehaviour
@@ -38,29 +35,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (customers.Count == 0)
+        SetUpDeck();
+        for (int i = 0; i < cardSlots.Length; i++)
         {
-            //if player is not dead then you won
-            battleState = BattleState.WON;
-            Debug.Log("YAY YOU WON!");
-            //else you lose and its end of game
+            cardSlots[i].Hide(true);
         }
-            
-        else
-        {
-            SetUpDeck();
-            for (int i = 0; i < cardSlots.Length; i++)
-            {
-                cardSlots[i].Hide(true);
-            }
-            DrawCards(10);
-            AddEnergy(player.MaxEnergy);
-            repUI.text = $"{player.Rep}";
-            combinePhase = false;
-            discardPhase = false;
-
-            battleState = BattleState.PLAYERTURN;
-        }
+        DrawCards(10);
+        AddEnergy(player.MaxEnergy);
+        repUI.text = $"{player.Rep}";
+        combinePhase = false;
+        discardPhase = false;
     }
 
     private void SetUpDeck()
@@ -68,7 +52,7 @@ public class GameManager : MonoBehaviour
         GameObject cardTemp;
         deck = new List<Card>();
         int idx = 0;
-        foreach(var card in player.Deck)
+        foreach (var card in player.Deck)
         {
             if (card.CardType != "Manoeuvre")
                 idx = 1;
@@ -89,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     public bool SpendEnergy(int amount)
     {
-        if(player.Energy - amount < 0)
+        if (player.Energy - amount < 0)
         {
             return false;
         }
@@ -157,21 +141,20 @@ public class GameManager : MonoBehaviour
     {
         repUI.text = $"{player.Rep}";
         energyUI.text = $"{player.Energy}/{player.MaxEnergy}";
-        foreach(var card in cardSlots)
+        foreach (var card in cardSlots)
         {
             card.UpdateNP();
         }
     }
     #endregion
-    
+
     #region Turn Base Functions
     public void EndPlayersTurn()
     {
-        battleState = BattleState.ENEMYTURN;
         Debug.Log("ITS ENEMIES TURN");
 
         DiscardHand();
-        count = customers.Count-1;
+        count = customers.Count - 1;
 
         foreach (var customer in customers)
         {
@@ -188,7 +171,6 @@ public class GameManager : MonoBehaviour
 
     public void EndEnemyTurn()
     {
-        battleState = BattleState.PLAYERTURN;
         Debug.Log("ITS PLAYERS TURN");
 
         DrawCards(5);
@@ -199,7 +181,7 @@ public class GameManager : MonoBehaviour
             customer.RandomizeDebuffs();
         }
     }
-    public void customerListDelete(Customer customer)
+    public void CustomerListDelete(Customer customer)
     {
         customers.Remove(customer);
     }
@@ -267,7 +249,7 @@ public class GameManager : MonoBehaviour
         foreach (var card in cardSlots)
         {
             //card.MoveToDiscardPile(true);
-            if(card.gameObject.activeSelf)
+            if (card.gameObject.activeSelf)
                 SendToDiscard(card.HandIndex, true);
         }
         hand.Clear();
@@ -323,7 +305,7 @@ public class GameManager : MonoBehaviour
 
     public void SendToDiscard(int idx, bool isEndTurn)
     {
-        Debug.Log("idx:"+idx);
+        Debug.Log("idx:" + idx);
         Card card = cardSlots[idx].GetCard();
         availableCardSlots[idx] = true;
         //card.HandIndex = -1;
@@ -377,6 +359,8 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        if (customers.Count == 0) Player.CheckCondition();
+
         if (Input.GetKeyUp(KeyCode.Space))
         {
             //StopDiscard();
