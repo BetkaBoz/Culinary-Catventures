@@ -9,20 +9,29 @@ using UnityEngine.UI;
 
 public class BattleWonManager : MonoBehaviour
 {
-    [SerializeField] List<Helper> helpers = new List<Helper>();
+    [SerializeField] GameObject helperParent;
     [SerializeField] TextMeshProUGUI reputation;
     [SerializeField] TextMeshProUGUI coins;
     [SerializeField] Button continueButton;
-    [SerializeField] Customer customer;
-    [SerializeField] Player player;
+    [SerializeField] Canvas canvas;
+    private Player player;
+    private GameObject currentHelper;
+    private List<GameObject> helpers = new List<GameObject>();
 
-    //public Player Player => player;
     public void Start()
     {
+        canvas.worldCamera = Camera.main;
+
         gameObject.SetActive(true);
         continueButton.onClick.AddListener(NextLevel);
 
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
+
+        //cycle for dynamically getting all helpers 
+        for(int i = 0; i < helperParent.transform.childCount; i++)
+        {
+            helpers.Add(helperParent.transform.GetChild(i).gameObject);
+        } 
 
         reputation.text = $"+{player.RepAmount}";
         coins.text = $"+{player.MoneyAmount}";
@@ -30,6 +39,25 @@ public class BattleWonManager : MonoBehaviour
 
     private void NextLevel()
     {
+        if(currentHelper == null)
+        {
+            Debug.Log("You have to choose Helper ma dude");
+            return;
+        }
+
+        string helperName = currentHelper.GetComponent<ActionManager>().CurrentName;
         SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+    }
+
+    public void HelperSelected(GameObject selected)
+    {
+        currentHelper = selected;
+        currentHelper.GetComponent<HelperSelection>().Select();
+
+        foreach(GameObject helper  in helpers)
+        {
+            if(helper != currentHelper) helper.GetComponent<HelperSelection>().Deselect();
+
+        }
     }
 }

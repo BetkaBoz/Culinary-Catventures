@@ -9,7 +9,7 @@ using TMPro;
 public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image tooltip;
-    [SerializeField] Helper helper;
+    [SerializeField] HelperSelection helper;
     [SerializeField] ActionManager ac;
     public string message, header;
 
@@ -40,7 +40,7 @@ public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 tooltip.DOFade(0.7f, 0.2f).OnPlay(() => { TooltipManager.Show(message, header); });
                 break;
             case "Helper":
-                helper.transform.DOScale(1.2f, 0.5f);
+                helper.transform.DOScale(1.2f, 0.5f).OnPlay(() => { TooltipManager.Show(message, header); });
                 break;
         }
     }
@@ -53,7 +53,7 @@ public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 tooltip.DOFade(0f, 0.2f).OnPlay(() => { TooltipManager.Hide(); });
                 break;
             case "Helper":
-                helper.transform.DOScale(1f, 0.5f);
+                helper.transform.DOScale(1f, 0.5f).OnPlay(() => { TooltipManager.Hide(); });
                 break;
         }
     }

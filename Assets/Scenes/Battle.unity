@@ -1899,6 +1899,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e964297736755964c85230482268dd93, type: 2}
   - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
   - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
+  customer: {fileID: 0}
+  helpers: []
+  moneyAmount: 0
+  repAmount: 0
 --- !u!4 &534415302
 Transform:
   m_ObjectHideFlags: 0

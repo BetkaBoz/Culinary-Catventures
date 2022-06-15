@@ -26,6 +26,7 @@ public class Player : MonoBehaviour, IDamageable
     private int rep = 100;
     private int currExp = 400;
     private int nextLvl = 1000;
+    public List<string> helpers = new List<string>();
     public int moneyAmount, repAmount;
     
     #endregion
@@ -178,6 +179,7 @@ public class Player : MonoBehaviour, IDamageable
     }
     public int MoneyAmount => moneyAmount;
     public int RepAmount => repAmount;
+    public List<string> Helpers => helpers;
     #endregion
 
     public void Awake()
