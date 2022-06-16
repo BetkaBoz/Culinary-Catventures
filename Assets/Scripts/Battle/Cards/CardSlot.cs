@@ -8,10 +8,10 @@ using TMPro;
 public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     #region PrivateVars
-    bool hasBeenPlayed;
-    bool isDragged = false;
-    bool isSelected = false;
-    bool isRised = false;
+    //bool hasBeenPlayed;
+    [SerializeField] bool isDragged = false;
+    [SerializeField] bool isSelected = false;
+    [SerializeField] bool isRised = false;
     Camera cam;
     Vector3 dragOffset;
     Vector3 originalPos;
@@ -31,9 +31,12 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     [SerializeField] ManouverTargetController targetController;
     [SerializeField] Card card = null;
     [SerializeField] Text nutritionalValue;
+    [SerializeField] bool isHighlight = false;
+    [SerializeField] CardSlot highlightedSlot = null;
     #endregion
 
     #region Getters/Setters
+    public bool IsDragged => isDragged;
     public int HandIndex
     {
         get
@@ -53,10 +56,10 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         }
     }
 
-    public void SetHasBeenPlayed(bool hasBeenPlayed)
-    {
-        this.hasBeenPlayed = hasBeenPlayed;
-    }
+    //public void SetHasBeenPlayed(bool hasBeenPlayed)
+    //{
+    //    this.hasBeenPlayed = hasBeenPlayed;
+    //}
 
     public void SetCard(Card otherCard)
     {
@@ -72,6 +75,17 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         artworkImage.sprite = otherCard.Artwork;
         UpdateEnergy();
         UpdateNP();
+    }
+
+    public void SetHighlight(CardSlot otherSlot)
+    {
+        otherSlot.Rise(true);
+        handIndex = otherSlot.HandIndex;
+        Hide(false);
+        transform.position = new Vector2(otherSlot.transform.position.x, otherSlot.transform.position.y);
+        otherSlot.MakeInvisible(true);
+        SetCard(otherSlot.GetCard());
+        highlightedSlot = otherSlot;
     }
 
     public Card GetCard()
@@ -137,8 +151,11 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void ResetPos()
     {
-        transform.position = originalPos;
-        transform.localScale = new Vector2(0.65f, 0.65f);
+        if (isSelected)
+            transform.position = new Vector2(originalPos.x, transform.position.y);
+        else
+            transform.position = originalPos;
+        //transform.localScale = new Vector2(0.65f, 0.65f);
     }
 
     public void Deselect()
@@ -181,10 +198,13 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         //Debug.Log("Click");
-        Select();
-        if (gm.combinePhase)
+        if(highlightedSlot != null)
         {
-            gm.FindCombineTarget();
+            highlightedSlot.Select();
+            if (gm.combinePhase)
+            {
+                gm.FindCombineTarget();
+            }
         }
     }
 
@@ -195,8 +215,11 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         if (gm.discardPhase)
         {
             dragOffset = transform.position - GetMousePos();
-            isSelected = false;
-            isDragged = true;
+            if(highlightedSlot != null)
+            {
+                highlightedSlot.isSelected = false;
+                highlightedSlot.isDragged = true;
+            }
         }
         else
         {
@@ -275,9 +298,9 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             {
                 if (card.CanTarget)
                 {
-                    if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
+                    if ( gm.SpendEnergy(card.EnergyCost))//hasBeenPlayed == false &&
                     {
-                        hasBeenPlayed = true;
+                        //hasBeenPlayed = true;
                         if (card.CardType == "Manoeuvre")
                         {
                             MoveToDiscardPile(false);
@@ -294,9 +317,9 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                 }
                 else
                 {
-                    if (hasBeenPlayed == false && gm.SpendEnergy(card.EnergyCost))
+                    if (gm.SpendEnergy(card.EnergyCost))//hasBeenPlayed == false && 
                     {
-                        hasBeenPlayed = true;
+                        //hasBeenPlayed = true;
                         if (card.CardType == "Manoeuvre")
                         {
                             MoveToDiscardPile(false);
@@ -340,7 +363,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     #region MouseHover
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Rise(true);
+        if(!isHighlight)
+            gm.MoveNeighbours(handIndex, false);
     }
 
     public void CreateCanvas(bool enable)
@@ -369,10 +393,11 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Rise(false);
+        if(isHighlight)
+            Rise(false);
     }
 
-    private void Rise(bool willRise)
+    public void Rise(bool willRise)
     {
         if (willRise)
         {
@@ -381,7 +406,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             //spriteOrder = transform.GetSiblingIndex();
 
             originalPos = transform.position;
-            transform.localScale = new Vector2(1f, 1f);
+            //transform.localScale = new Vector2(1f, 1f);
             transform.position += (Vector3.up * 0.5f);
 
             //this seems kinda jank, will most likely replace it later
@@ -390,7 +415,6 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             //tempCanvas.sortingOrder = 1;
             //tempReycaster = gameObject.AddComponent<GraphicRaycaster>();
             //transform.SetAsLastSibling();
-            gm.MoveNeighbours(handIndex, false);
             isRised = true;
         }
         else
@@ -400,7 +424,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             //Destroy(tempCanvas);
             ResetPos();
             //transform.SetSiblingIndex(spriteOrder);
-            gm.MoveNeighbours(handIndex, true);
+            if(isHighlight)
+                gm.MoveNeighbours(handIndex, true);
             isRised = false;
         }
     }
@@ -410,17 +435,29 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         gameObject.SetActive(!isHiding);
     }
 
+    public void MakeInvisible(bool isInvisible)
+    {
+        if (isInvisible)
+        {
+            transform.position += (Vector3.down * 3f);
+        }
+        else
+        {
+            transform.position += (Vector3.up * 3f);
+        }
+    }
+
     public void MoveLeft(float amount)
     {
-        if (isRised) { return; }
-        originalPos = transform.position;
+        if (!isRised)
+            originalPos = transform.position;
         transform.position = transform.position + (Vector3.left * amount);//0.5f
     }
 
     public void MoveRight(float amount)
     {
-        if (isRised) { return; }
-        originalPos = transform.position;
+        if (!isRised)
+            originalPos = transform.position;
         transform.position = transform.position + (Vector3.right * amount);
     }
     #endregion
