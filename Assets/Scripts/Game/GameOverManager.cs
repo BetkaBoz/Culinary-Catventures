@@ -34,8 +34,8 @@ public class GameOverManager : MonoBehaviour
         scoreBoardParent.SetActive(true);
 
         //Set up scoreboard
-        score[5].text = $"{player.NextLevel - player.CurrentExp}";
-        score[0].text = $"{player.Deck.Count}";
+        score[5].text = $"{player.NextLevel - player.CurrentExp}";//exp to next level
+        score[0].text = $"{player.Deck.Count}"; 
         score[1].text = $"{player.Money}";
         score[2].text = $"{0}";
         score[3].text = $"{0}";

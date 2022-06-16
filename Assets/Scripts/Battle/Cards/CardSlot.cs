@@ -288,6 +288,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                             MoveToExhaustPile();
                             card.TriggerCardEffect(gm, hit);
                         }
+                        gm.hasCardBeenPlayed = true;
                     }
                     arrowHandler.SetVisibile(false);
                 }
@@ -304,8 +305,10 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                         else
                         {
                             MoveToExhaustPile();
-                            card.TriggerCardEffect(gm, hit);                            
+                            card.TriggerCardEffect(gm, hit);
                         }
+                        if (!gm.discardPhase)
+                            gm.hasCardBeenPlayed = true;
                     }
                     else
                     {

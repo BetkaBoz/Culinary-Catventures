@@ -31,6 +31,8 @@ public class Player : MonoBehaviour, IDamageable
     
     #endregion
 
+    public bool canCallEmergencyDelivery = true;
+    
     #region Getters/Setters
     public int CurrentExp
     {

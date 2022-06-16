@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum BattleState { PLAYERTURN, ENEMYTURN, WON, LOST }
 public class GameManager : MonoBehaviour
@@ -15,12 +16,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI repUI;
     [SerializeField] DiscardController discardController;
     [SerializeField] CombineController combineController;
-    [SerializeField] GameObject[] cardPrefab;
+    [SerializeField] Card[] cardPrefabs;
     [SerializeField] List<Card> deck;
     [SerializeField] List<Card> discardPile = new List<Card>();
     [SerializeField] List<Card> hand = new List<Card>();
     [SerializeField] List<Card> exhaustPile = new List<Card>();
     [SerializeField] List<IBuffable> buffs = new List<IBuffable>();
+    [SerializeField] Button emergencyDelivery;//emergency delivery code
     #endregion
 
     int numOfCards = 0;//right now useless
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     public int count;
     public BattleState battleState;
     public Player Player => player;      //getter
+    public bool hasCardBeenPlayed = false;//emergency delivery code
     #endregion
 
     private void Start()
@@ -49,7 +52,6 @@ public class GameManager : MonoBehaviour
 
     private void SetUpDeck()
     {
-        GameObject cardTemp;
         deck = new List<Card>();
         int idx = 0;
         foreach (var card in player.Deck)
@@ -58,12 +60,22 @@ public class GameManager : MonoBehaviour
                 idx = 1;
             else
                 idx = 0;
-            cardTemp = Instantiate(cardPrefab[idx]);
-            cardTemp.GetComponent<Card>().GetDataFromBase(card);
-            deck.Add(cardTemp.GetComponent<Card>());
+            Card cardTemp = Instantiate(cardPrefabs[idx]);
+            cardTemp.GetDataFromBase(card);
+            deck.Add(cardTemp);
         }
     }
 
+    //emergency delivery code
+    public void AddCardsToDeck(List<Card> newCards)
+    {
+        foreach(var newCard in newCards)
+        {
+            deck.Add(newCard);
+        }
+        player.canCallEmergencyDelivery = false;
+    }
+    
     #region Player Functions
     public void AddEnergy(int amount)
     {
@@ -167,6 +179,7 @@ public class GameManager : MonoBehaviour
 
         EndEnemyTurn();
         ApplyBuffables();
+        hasCardBeenPlayed = false;//emergency delivery code
     }
 
     public void EndEnemyTurn()
@@ -368,6 +381,18 @@ public class GameManager : MonoBehaviour
             canvas = !canvas;
             cardSlots[2].CreateCanvas(canvas);
             cardSlots[2].transform.position = new Vector2(0, 0);
+        }
+
+        //emergency delivery
+        if (player.canCallEmergencyDelivery)
+        {
+            if (!emergencyDelivery.interactable)
+                emergencyDelivery.interactable = true;
+        }
+        else
+        {
+            if (emergencyDelivery.interactable)
+                emergencyDelivery.interactable = false;
         }
     }
 

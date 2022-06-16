@@ -27,6 +27,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     public int rep = 0;
     public int Money => money;
     public int Rep => rep;
+    public int MaxHunger => maxHunger;
 
     private void Awake()
     {
