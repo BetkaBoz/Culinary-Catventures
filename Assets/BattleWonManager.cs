@@ -27,7 +27,7 @@ public class BattleWonManager : MonoBehaviour
 
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
 
-        //cycle for dynamically getting all helpers 
+        //cycle for dynamically getting all helpers to choose from
         for(int i = 0; i < helperParent.transform.childCount; i++)
         {
             helpers.Add(helperParent.transform.GetChild(i).gameObject);
@@ -57,7 +57,6 @@ public class BattleWonManager : MonoBehaviour
         foreach(GameObject helper  in helpers)
         {
             if(helper != currentHelper) helper.GetComponent<HelperSelection>().Deselect();
-
         }
     }
 }

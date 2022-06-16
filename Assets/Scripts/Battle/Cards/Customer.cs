@@ -16,6 +16,8 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     [SerializeField] GameManager gm;
     [SerializeField] ActionManager ac;
     [SerializeField] Image Action;
+    [SerializeField] Image States;
+    [SerializeField] List<Sprite> sprites;
     [SerializeField] GameObject debuffs;
     private int currHunger;
     private byte numTurnsStunned;
@@ -23,7 +25,6 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     private bool isDead = false;
     public int money = 0;
     public int rep = 0;
-
     public int Money => money;
     public int Rep => rep;
 
@@ -57,25 +58,24 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     {
         turnsUntilAngry--;
         if (numTurnsStunned > 0) numTurnsStunned--;
-        //if(turnsUntilAngry >= 8)
-        //{
-        //    //Debug.Log("I sleep");
-        //}
-        //else if (turnsUntilAngry >= 5)
-        //{
-        //    //Debug.Log("This is fine");
-        //}
-        //else if(turnsUntilAngry >= 3)
-        //{
-        //    //Debug.Log("Yo what up?!");
-        //}
-        //else if(turnsUntilAngry >= 1)
-        //{
-        //    //Debug.Log("I'm angeri");
-        //}
+
+        //change customers expressions based on how many turns are left till end of the battle
+        if (turnsUntilAngry >= 8)
+            States.DOFade(1, 0.2f).OnPlay(() => { States.sprite = sprites[0]; });
+        else if (turnsUntilAngry >= 5)
+            States.DOFade(1, 0.2f).OnPlay(() => { States.sprite = sprites[1]; });
+        else if (turnsUntilAngry >= 3)
+            States.DOFade(1, 0.2f).OnPlay(() => { States.sprite = sprites[2]; });
+        else if (turnsUntilAngry >= 1)
+            States.DOFade(1, 0.2f).OnPlay(() => { States.sprite = sprites[3]; });
+
+        //when there are 0 turns left, check how much was customer satisfied
+        //and based on this info add money and reputation to the player
+        //or cause reputation demage on player
         if (turnsUntilAngry == 0)
         {
-            if (currHunger >= maxHunger / 2)
+            if (currHunger >= maxHunger / 1.2f) gm.Player.TakeDamage(25); 
+            else if (currHunger >= maxHunger / 2)
             {
                 money += 5;
                 rep += 5;
@@ -91,14 +91,12 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
                 rep += 25;
             }
             Die(true);
-            gm.Player.TakeDamage(25);
             gm.Player.ChangeMoney(money);
             gm.Player.ChangeReputation(rep);
             return true;
         }
         return false;
     }
-
     public void OnDrop(PointerEventData eventData)
     {
 
@@ -107,12 +105,10 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     {
         TakeDamage(amount);
     }
-
     public void RandomizeDebuffs()
     {
         ac.Suffle();
     }
-
     public void TakeDamage(int amount)
     {
         satisfied = true;
@@ -133,17 +129,16 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             gm.Player.ChangeReputation(rep);
         }
     }
-
     public void Die(bool status)
     {
         if (!isDead)
         {
             isDead = true;
-            Action.DOColor(new Color(0, 0, 0, 0), 2f);
-            GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 2f).OnComplete(() => { Destroy(gameObject); });
+            Action.DOFade(0, 2f);
+            States.DOFade(0, 2f);
+            GetComponent<Image>().DOFade(0, 2f).OnComplete(() => { Destroy(gameObject); });
         }
     }
-
     private void OnDestroy()
     {
         gm.CustomerListDelete(this);
