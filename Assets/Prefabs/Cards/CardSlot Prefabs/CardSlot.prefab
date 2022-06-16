@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   artworkImage: {fileID: 1290662945258169807}
+  transparentImage: {fileID: 21300000, guid: 00efa0acca713184c8b896de9ef603a2, type: 3}
   energyTxt: {fileID: 1214633719447030738}
   gm: {fileID: 0}
   arrowHandler: {fileID: 0}

@@ -19,6 +19,7 @@ public class EmergencyDeliveryHandler : MonoBehaviour
 
     public void OpenDelivery()
     {
+        if (gm.discardPhase || gm.combinePhase) return;
         if (!gm.hasCardBeenPlayed)
             layer.SetActive(true);
     }
