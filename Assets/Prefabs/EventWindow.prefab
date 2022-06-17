@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8365468295377838716}
   - component: {fileID: 1336389774826383796}
-  - component: {fileID: 4988284391718462176}
   - component: {fileID: 826546655}
   m_Layer: 5
   m_Name: EventWindow
@@ -54,36 +53,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798999069868067327}
   m_CullTransparentMesh: 1
---- !u!114 &4988284391718462176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798999069868067327}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.050943315, b: 0.050943315, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &826546655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,15 +71,14 @@ MonoBehaviour:
   firstButton: {fileID: 3847630175328964674}
   secondButton: {fileID: 7761319028587943077}
   thirdButton: {fileID: 7628425723928150917}
-  dim: {fileID: 4879817570924433602}
   homelessCatSprite: {fileID: 21300000, guid: a928952c5b5b36943b7e94ce30bb127f, type: 3}
   diceCatSprite: {fileID: 21300000, guid: 0aa9dde81ab0c1e408463ba2283af057, type: 3}
   stumbleSprite: {fileID: 21300000, guid: 3131453d99608a9499412498bd12a6de, type: 3}
   perfectTomatoesSprite: {fileID: 21300000, guid: 639a54130825eb34db3e4c9298498be9, type: 3}
-  caveSprite: {fileID: 21300000, guid: 996ae53fa256f7b4b9c71ab3d6f43bce, type: 3}
-  stuckMerchantSprite: {fileID: 21300000, guid: 3b57da7279fc7f940b8eb4dc29179269, type: 3}
+  caveSprite: {fileID: 21300000, guid: 116d0bf87a354bc4dbac30cdc94795cc, type: 3}
+  stuckMerchantSprite: {fileID: 21300000, guid: 52ae18701b6605f4cb691c65a7d07987, type: 3}
   thievesSprite: {fileID: 21300000, guid: 97c03bbbc856a9c4181b18347d9de8ca, type: 3}
-  gatherSprite: {fileID: 21300000, guid: 79b8ec930e625dc4d846848b2b60a0ee, type: 3}
+  gatherSprite: {fileID: 21300000, guid: 437eb6db38d2fb647bbf565808164c31, type: 3}
 --- !u!1 &1279121534728045641
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,8 +617,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278256127
-  m_fontColor: {r: 1, g: 0.0037735105, b: 0.0037735105, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
