@@ -33,7 +33,7 @@ public class BattleWonManager : MonoBehaviour
             helpers.Add(helperParent.transform.GetChild(i).gameObject);
         } 
 
-        reputation.text = $"+{player.RepAmount}";
+        reputation.text = $"+{player.earnedRep}";
         coins.text = $"+{player.MoneyAmount}";
     }
 
@@ -46,7 +46,7 @@ public class BattleWonManager : MonoBehaviour
         }
 
         string helperName = currentHelper.GetComponent<ActionManager>().CurrentName;
-        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
     public void HelperSelected(GameObject selected)

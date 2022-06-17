@@ -9,27 +9,29 @@ using TMPro;
 public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image tooltip;
+    //[SerializeField] Image delivery;
     [SerializeField] HelperSelection helper;
     [SerializeField] ActionManager ac;
     public string message, header;
 
     private void Start()
     {
-        switch (ac.CurrentName)
-        {
-            case "rep debuff":
-                message = "If customer won't be fed this round, they will take your Reputation Points";
-                header = "Reputation Debuff";
-                break;
-            case "energy debuff":
-                message = "If customer won't be fed this round, they will cause Energy Points loss for the next round";
-                header = "Energy Debuff";
-                break;
-            case "helper_1":
-                message = "They're nothing special, good vibes only";
-                header = "Basic Helper";
-                break;
-        }
+        if (ac == null) return;
+            switch (ac.CurrentName)
+            {
+                case "rep debuff":
+                    message = "If customer won't be fed this round, they will take your Reputation Points";
+                    header = "Reputation Debuff";
+                    break;
+                case "energy debuff":
+                    message = "If customer won't be fed this round, they will cause Energy Points loss for the next round";
+                    header = "Energy Debuff";
+                    break;
+                case "helper_1":
+                    message = "They're nothing special, good vibes only";
+                    header = "Basic Helper";
+                    break;
+            }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -41,6 +43,9 @@ public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 break;
             case "Helper":
                 helper.transform.DOScale(1.2f, 0.5f).OnPlay(() => { TooltipManager.Show(message, header); });
+                break;
+            default:
+                tooltip.DOFade(0.7f, 0.2f).OnPlay(() => { TooltipManager.Show(message, header); });
                 break;
         }
     }
@@ -54,6 +59,9 @@ public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 break;
             case "Helper":
                 helper.transform.DOScale(1f, 0.5f).OnPlay(() => { TooltipManager.Hide(); });
+                break;
+            default:
+                tooltip.DOFade(0f, 0.2f).OnPlay(() => { TooltipManager.Hide(); });
                 break;
         }
     }

@@ -19,6 +19,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     [SerializeField] Image States;
     [SerializeField] List<Sprite> sprites;
     [SerializeField] GameObject debuffs;
+    [SerializeField] Player player;
     private int currHunger;
     private byte numTurnsStunned;
     private bool satisfied = false;
@@ -93,9 +94,11 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             }
             Die(true);
             gm.Player.ChangeMoney(money);
-            gm.Player.ChangeReputation(rep);
+            player.earnedRep += rep;
+            //gm.Player.ChangeReputation(rep);
             return true;
         }
+        satisfied = false;
         return false;
     }
     public void OnDrop(PointerEventData eventData)
@@ -127,7 +130,8 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             money += 50;
             rep += 50;
             gm.Player.ChangeMoney(money);
-            gm.Player.ChangeReputation(rep);
+            player.earnedRep += rep;
+            //gm.Player.ChangeReputation(rep);
         }
     }
     public void Die(bool status)

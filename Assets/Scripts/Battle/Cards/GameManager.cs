@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         {
             cardSlots[i].Hide(true);
         }
-        DrawCards(10);
+        DrawCards(5);
         AddEnergy(player.MaxEnergy);
         repUI.text = $"{player.Rep}";
         combinePhase = false;

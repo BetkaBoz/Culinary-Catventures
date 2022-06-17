@@ -27,8 +27,8 @@ public class Player : MonoBehaviour, IDamageable
     private int currExp = 400;
     private int nextLvl = 1000;
     public List<string> helpers = new List<string>();
-    public int moneyAmount, repAmount;
-    
+    public int moneyAmount, repAmount, earnedRep;
+
     #endregion
 
     public bool canCallEmergencyDelivery = true;
