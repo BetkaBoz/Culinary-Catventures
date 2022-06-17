@@ -1,45 +1,19 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MerchantWindowControl : MonoBehaviour
+public class MerchantWindowControl : WindowControl
 {
     [SerializeField] private List<GameObject> merchantCards;
-    [SerializeField] private List<CardBaseInfo> allFoodScriptableObjects;
-    
-    private UILayer uiLayer;
-    private Player player;
-    private IslandManager islandManager;
 
-    private void Awake()
-    {
-        islandManager = FindObjectOfType<IslandManager>();
-        uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-    }
+    //DONT USE AWAKE CAUSE IT WILL OVERRIDE FROM PARENT CLASS
+
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        GetAllFoodCards();
-        //AssignMerchantCards();
-    }   
     
-    private void GetAllFoodCards()
-    {
-        CardBaseInfo[] allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/");
-        foreach (var t in allScriptableObjectsTemp)
-        {
-            if (t.CardType != "Manoeuvre" && !t.CardName.Contains("Pile") )
-            {
-                allFoodScriptableObjects.Add(t);
-            }
-        }
-    }
+    
+   
     private void AssignMerchantCards()
     {
         foreach (GameObject card in merchantCards)
@@ -54,16 +28,16 @@ public class MerchantWindowControl : MonoBehaviour
 
             CardBaseInfo randomCard = GenerateRandomIngredient();
             artwork.sprite = randomCard.Artwork;
-            nutritionalValue.text = randomCard.NutritionPoints.ToString();
+            nutritionalValue.text = $"{randomCard.NutritionPoints}";
             
             //CARD PRICE
             if (int.Parse(nutritionalValue.text) > 8)
             {
-                price.text = Random.Range(10, 15).ToString();
+                price.text =  $"{Random.Range(10, 16)}"; 
             }
             else
             {
-                price.text = Random.Range(5, 10).ToString();
+                price.text =  $"{Random.Range(5, 11)}";  
             }
             //BUY CARD
             button.onClick.AddListener(delegate {
@@ -77,32 +51,16 @@ public class MerchantWindowControl : MonoBehaviour
         }
     }
     
-    private CardBaseInfo GenerateRandomIngredient()
-    {
-        
-        int random = Random.Range(0, allFoodScriptableObjects.Count);
-        return allFoodScriptableObjects[random];
-        
-    }
     
-    
-    public void ShowWindow()
+
+    public void StartWindow()
     {
-        gameObject.SetActive(true);
         AssignMerchantCards();
+        ShowWindow();
     }
+
     
-    //IN INSPECTOR
-    public void HideWindow()
-    {
-        gameObject.SetActive(false);
-    }
-    public void CloseEvent()
-    {
-        //RemoveAllListeners();
-        Time.timeScale = 1;
-        islandManager.LowerTime(1);
-        HideWindow();
-        //Debug.Log("CLOSE");
-    }
+    
+    //IN INSPECTOR 
+
 }

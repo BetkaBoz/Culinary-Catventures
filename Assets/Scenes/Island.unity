@@ -168,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3607831486186674627, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3607831486186674627, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -415,17 +415,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206149492}
   m_CullTransparentMesh: 1
---- !u!114 &278483037 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1429977149473479975, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
-  m_PrefabInstance: {fileID: 2137793593156915372}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58205f3197f4dc0b5752971d60db007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &294778080
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,7 +898,7 @@ RectTransform:
   - {fileID: 2031838479}
   - {fileID: 206149493}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1004,6 +993,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 916052559}
     m_Modifications:
+    - target: {fileID: 826546655, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
+      propertyPath: thievesSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a89e5fa26fe5c604694e0d2d03702981, type: 3}
     - target: {fileID: 798999069868067327, guid: 37eca293accf04e459ac9726ceae7ede, type: 3}
       propertyPath: m_Name
       value: 'EventWindow '
@@ -1801,14 +1794,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 916052559}
     m_Modifications:
-    - target: {fileID: 646754371594024969, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 749514106776923245, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4271418187387366641, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1855,7 +1840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4271418187387366641, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 4271418187387366641, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1897,36 +1882,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'MerchantWindow '
       objectReference: {fileID: 0}
-    - target: {fileID: 4920640307446318962, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5085982968440555100, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413112132167085223, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413112132167085223, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 278483037}
-    - target: {fileID: 6413112132167085223, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseEvent
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413112132167085223, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MerchantWindowControl, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413112132167085223, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 749514106776923245, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffbb0fa34ae57b14ca673f1d760f73de, type: 3}
 --- !u!224 &2805135395462102109 stripped
 RectTransform:
