@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public enum BattleState { PLAYERTURN, ENEMYTURN, WON, LOST }
 public class GameManager : MonoBehaviour
@@ -13,17 +11,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] List<Customer> customers = new List<Customer>();
     [SerializeField] CardSlot[] cardSlots;
+    [SerializeField] CardSlot highlightSlot;
     [SerializeField] bool[] availableCardSlots;
     [SerializeField] TextMeshProUGUI energyUI;
     [SerializeField] TextMeshProUGUI repUI;
     [SerializeField] DiscardController discardController;
     [SerializeField] CombineController combineController;
-    [SerializeField] GameObject[] cardPrefab;
+    [SerializeField] Card[] cardPrefabs;
     [SerializeField] List<Card> deck;
     [SerializeField] List<Card> discardPile = new List<Card>();
     [SerializeField] List<Card> hand = new List<Card>();
     [SerializeField] List<Card> exhaustPile = new List<Card>();
     [SerializeField] List<IBuffable> buffs = new List<IBuffable>();
+    [SerializeField] Button emergencyDelivery;//emergency delivery code
     #endregion
 
     int numOfCards = 0;//right now useless
@@ -34,52 +34,50 @@ public class GameManager : MonoBehaviour
     public int count;
     public BattleState battleState;
     public Player Player => player;      //getter
+    public bool hasCardBeenPlayed = false;//emergency delivery code
     #endregion
 
     private void Start()
     {
-        if (customers.Count == 0)
+        SetUpDeck();
+        for (int i = 0; i < cardSlots.Length; i++)
         {
-            //if player is not dead then you won
-            battleState = BattleState.WON;
-            Debug.Log("YAY YOU WON!");
-            //else you lose and its end of game
+            cardSlots[i].Hide(true);
         }
-            
-        else
-        {
-            SetUpDeck();
-            for (int i = 0; i < cardSlots.Length; i++)
-            {
-                cardSlots[i].Hide(true);
-            }
-            DrawCards(10);
-            AddEnergy(player.MaxEnergy);
-            repUI.text = $"{player.Rep}";
-            combinePhase = false;
-            discardPhase = false;
+        DrawCards(5);
+        AddEnergy(player.MaxEnergy);
+        repUI.text = $"{player.Rep}";
+        combinePhase = false;
+        discardPhase = false;
 
-            battleState = BattleState.PLAYERTURN;
-        }
     }
 
     private void SetUpDeck()
     {
-        GameObject cardTemp;
         deck = new List<Card>();
         int idx = 0;
-        foreach(var card in player.Deck)
+        foreach (var card in player.Deck)
         {
             if (card.CardType != "Manoeuvre")
                 idx = 1;
             else
                 idx = 0;
-            cardTemp = Instantiate(cardPrefab[idx]);
-            cardTemp.GetComponent<Card>().GetDataFromBase(card);
-            deck.Add(cardTemp.GetComponent<Card>());
+            Card cardTemp = Instantiate(cardPrefabs[idx]);
+            cardTemp.GetDataFromBase(card);
+            deck.Add(cardTemp);
         }
     }
 
+    //emergency delivery code
+    public void AddCardsToDeck(List<Card> newCards)
+    {
+        foreach(var newCard in newCards)
+        {
+            deck.Add(newCard);
+        }
+        player.canCallEmergencyDelivery = false;
+    }
+    
     #region Player Functions
     public void AddEnergy(int amount)
     {
@@ -89,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     public bool SpendEnergy(int amount)
     {
-        if(player.Energy - amount < 0)
+        if (player.Energy - amount < 0)
         {
             return false;
         }
@@ -157,21 +155,21 @@ public class GameManager : MonoBehaviour
     {
         repUI.text = $"{player.Rep}";
         energyUI.text = $"{player.Energy}/{player.MaxEnergy}";
-        foreach(var card in cardSlots)
+        foreach (var card in cardSlots)
         {
             card.UpdateNP();
         }
     }
     #endregion
-    
+
     #region Turn Base Functions
     public void EndPlayersTurn()
     {
-        battleState = BattleState.ENEMYTURN;
+        if (discardPhase || combinePhase) return;
         Debug.Log("ITS ENEMIES TURN");
 
         DiscardHand();
-        count = customers.Count-1;
+        count = customers.Count - 1;
 
         foreach (var customer in customers)
         {
@@ -184,11 +182,11 @@ public class GameManager : MonoBehaviour
 
         EndEnemyTurn();
         ApplyBuffables();
+        hasCardBeenPlayed = false;//emergency delivery code
     }
 
     public void EndEnemyTurn()
     {
-        battleState = BattleState.PLAYERTURN;
         Debug.Log("ITS PLAYERS TURN");
 
         DrawCards(5);
@@ -199,7 +197,7 @@ public class GameManager : MonoBehaviour
             customer.RandomizeDebuffs();
         }
     }
-    public void customerListDelete(Customer customer)
+    public void CustomerListDelete(Customer customer)
     {
         customers.Remove(customer);
     }
@@ -216,7 +214,7 @@ public class GameManager : MonoBehaviour
             {
                 //randCard.gameObject.SetActive(true);
                 //randCard.transform.position = cardSlots[i].transform.position;
-                cardSlots[i].SetHasBeenPlayed(false);
+                //cardSlots[i].SetHasBeenPlayed(false);
                 HideCardSlot(i, false);
                 cardSlots[i].HandIndex = i;
                 cardSlots[i].SetCard(randCard);
@@ -267,7 +265,7 @@ public class GameManager : MonoBehaviour
         foreach (var card in cardSlots)
         {
             //card.MoveToDiscardPile(true);
-            if(card.gameObject.activeSelf)
+            if (card.gameObject.activeSelf)
                 SendToDiscard(card.HandIndex, true);
         }
         hand.Clear();
@@ -278,30 +276,74 @@ public class GameManager : MonoBehaviour
         cardSlots[idx].Hide(isHidden);
     }
 
+    private int GetNumberOfCards()
+    {
+        int numberOfCards = 0;
+        foreach(var slot in cardSlots)
+        {
+            if (slot.gameObject.activeSelf)
+                numberOfCards++;
+        }
+        return numberOfCards;
+    }
+
     //Called when pointer hovers over a card to make it more visible
     //TODO: Find a way to move a card to the front. Z-order and Child indexes don't work
     public void MoveNeighbours(int idx, bool isReturning)
     {
-        return;
+        if (highlightSlot.IsDragged) return;
         if (isReturning)
         {
-            if (idx != 0)
-                cardSlots[idx - 1].ResetPos();
-            if (idx != (cardSlots.Length - 1))
-                cardSlots[idx + 1].ResetPos();
-            //for (int i = 0; i < cardSlots.Length; i++)
-            //{
-            //    cardSlots[i].ResetPos();
-            //}
+            highlightSlot.Hide(true);
+            cardSlots[idx].MakeInvisible(false);
+            cardSlots[idx].Rise(false);
+            for (int i = 0; i < cardSlots.Length; i++)
+            {
+                if(i != idx)
+                    cardSlots[i].ResetPos();
+            }
         }
         else
         {
-            float moveAmount = 0.25f + (0.1f * (numOfCards - 5));
-            Debug.Log(moveAmount);
-            if (idx != 0)
-                cardSlots[idx - 1].MoveLeft(moveAmount);
-            if (idx != (cardSlots.Length - 1))
-                cardSlots[idx + 1].MoveRight(moveAmount);
+            highlightSlot.SetHighlight(cardSlots[idx]);
+
+            //int count = 0;
+            for (int i = idx - 1; i >= 0; i--)
+            {
+                if (cardSlots[i].gameObject.activeSelf)
+                {
+                    //float movementAmount = 0.75f - (0.1f * count);
+                    cardSlots[i].MoveLeft(0.75f);
+                    count++;
+                }
+            }
+            //count = 0;
+            for (int i = idx + 1; i < cardSlots.Length; i++)
+            {
+                if (cardSlots[i].gameObject.activeSelf)
+                {
+                    //float movementAmount = 0.75f - (0.1f * count);
+                    cardSlots[i].MoveRight(0.75f);
+                    count++;
+                }
+            }
+        }
+        
+        //if (isReturning)
+        //{
+        //    if (idx != 0)
+        //        cardSlots[idx - 1].ResetPos();
+        //    if (idx != (cardSlots.Length - 1))
+        //        cardSlots[idx + 1].ResetPos();
+        //}
+        //else
+        //{
+        //    float moveAmount = 0.25f + (0.1f * (numOfCards - 5));
+        //    Debug.Log(moveAmount);
+        //    if (idx != 0)
+        //        cardSlots[idx - 1].MoveLeft(moveAmount);
+        //    if (idx != (cardSlots.Length - 1))
+        //        cardSlots[idx + 1].MoveRight(moveAmount);
             //Old code, reuse it!
             //int pow = 1;
             //float movementAmount;
@@ -318,12 +360,12 @@ public class GameManager : MonoBehaviour
             //    cardSlots[i].MoveRight(movementAmount);
             //    pow++;
             //}
-        }
+        //}
     }
 
     public void SendToDiscard(int idx, bool isEndTurn)
     {
-        Debug.Log("idx:"+idx);
+        Debug.Log("idx:" + idx);
         Card card = cardSlots[idx].GetCard();
         availableCardSlots[idx] = true;
         //card.HandIndex = -1;
@@ -358,6 +400,7 @@ public class GameManager : MonoBehaviour
     #region Discard Phase Functions
     public async Task StartDiscard()
     {
+        if (combinePhase) return;
         Debug.Log("Start Discard");
         discardController.ToggleDiscard();
         discardPhase = true;
@@ -377,13 +420,24 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        if (customers.Count == 0) Player.CheckCondition();
+
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            //StopDiscard();
+            StopDiscard();
             //HurtPlayer(1000);
-            canvas = !canvas;
-            cardSlots[2].CreateCanvas(canvas);
-            cardSlots[2].transform.position = new Vector2(0, 0);
+        }
+
+        //emergency delivery
+        if (player.canCallEmergencyDelivery)
+        {
+            if (!emergencyDelivery.interactable)
+                emergencyDelivery.interactable = true;
+        }
+        else
+        {
+            if (emergencyDelivery.interactable)
+                emergencyDelivery.interactable = false;
         }
     }
 
@@ -395,11 +449,16 @@ public class GameManager : MonoBehaviour
             if (cardSlots[i].Selected)
             {
                 cardSlots[i].Deselect();
-                cardSlots[i].MoveToExhaustPile();
+                cardSlots[i].MoveToDiscardPile(false);
             }
         }
         discardController.ToggleDiscard();
         discardPhase = false;
+        if (highlightSlot.gameObject.activeSelf)
+        {
+            highlightSlot.Hide(true);
+            highlightSlot.Deselect();
+        }
     }
 
     public void SetDiscardFilter(string[] filter)
@@ -433,6 +492,7 @@ public class GameManager : MonoBehaviour
 
     private void StartCombine()
     {
+        if (discardPhase) return;
         //Debug.Log("Start Combine");
         combineController.ToggleCombine();
         combinePhase = true;
@@ -483,7 +543,7 @@ public class GameManager : MonoBehaviour
         {
             if (availableCardSlots[i])
             {
-                cardSlots[i].SetHasBeenPlayed(false);
+                //cardSlots[i].SetHasBeenPlayed(false);
                 cardSlots[i].gameObject.SetActive(true);
                 cardSlots[i].SetCard(target);
                 cardSlots[i].HandIndex = i;

@@ -11,6 +11,7 @@ public class ActionManager : MonoBehaviour
     [SerializeField] List<Sprite> Sprites;
 
     public int CurrentIndex { get; private set; }
+    public string CurrentName { get; private set; }
 
     void Awake()
     {
@@ -21,5 +22,6 @@ public class ActionManager : MonoBehaviour
     {
         CurrentIndex = UnityEngine.Random.Range(0, Sprites.Count);
         Image.sprite = Sprites[CurrentIndex];
+        CurrentName = Sprites[CurrentIndex].name;
     }
 }

@@ -12,8 +12,8 @@ public class Card : MonoBehaviour
     [SerializeField] bool canTarget = false;
     [SerializeField] int energyCost;
     [SerializeField] int nutritionPoints;
-    bool deleteOnBattleEnd = false;
     #endregion
+    bool deleteOnBattleEnd = false;
     #region Getters/setters
     public bool DeleteOnBattleEnd
     {
@@ -45,8 +45,7 @@ public class Card : MonoBehaviour
         }
         set
         {
-            cardEffect = value; //card effect needs reference to this card so lets set it here
-            cardEffect.Card = this;
+            cardEffect = value;
         }
     }
     public string CardName
