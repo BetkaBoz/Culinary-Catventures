@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -273,6 +274,28 @@ public class Player : MonoBehaviour, IDamageable
         Debug.Log("Yay I won :)");
     }
 
+    //AK NIE JE POUZITY PARAMETER TAK JE TO NAHODNA KARTA
+    public void RemoveCardFromDeck(string cardName = null)
+    {
+        if (!deck.Any())
+        {
+            return ;
+        }
+        CardBaseInfo card;
+        if (string.IsNullOrEmpty(cardName) )
+        {
+            card = deck[Random.Range(0, deck.Count)];
+            Debug.Log(card.CardName);
+        }
+        else
+        {
+            card = deck.Find(x => x.CardName == cardName);
+        }
+        
+        deck.Remove(deck.Find(x => x == card));
+        //return card;
+    }
+    
     //private async Task LoadBattleWon()
     //{
     //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Battle Won", LoadSceneMode.Additive);

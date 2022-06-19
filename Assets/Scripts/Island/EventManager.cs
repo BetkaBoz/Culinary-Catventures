@@ -18,13 +18,18 @@ public class EventManager : MonoBehaviour
     [SerializeField] private Sprite spriteMerchant;
     [SerializeField] private Sprite spriteHarvest;
     [SerializeField] private Sprite spriteChallenge;
+    [SerializeField] private Sprite spriteSensei;
+
     
     //EVENT WINDOW
     private EventWindowControl  eventWindow;
-    //UILAYER
-    private UILayer  uiLayer;
     // MERCHARNT WINDOW
     private MerchantWindowControl  merchantWindow;
+    // SENSEI WINDOW
+    private SenseiWindowControl  senseiWindow;
+    //UILAYER
+    private UILayer  uiLayer;
+    
     //ISLAND MANAGER
     private IslandManager islandManager;
     
@@ -41,6 +46,8 @@ public class EventManager : MonoBehaviour
         eventWindow = FindObjectOfType<EventWindowControl>();
         //merchantWindow = GameObject.FindGameObjectsWithTag("EventWindow")[1].GetComponent<MerchantWindowControl>();
         merchantWindow = FindObjectOfType<MerchantWindowControl>();
+        senseiWindow = FindObjectOfType<SenseiWindowControl>();
+
         //uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
         uiLayer = FindObjectOfType<UILayer>();
         uiLayer.UpdateUI();
@@ -89,24 +96,21 @@ public class EventManager : MonoBehaviour
         switch (eventType)
         {
             case EventType.Random:
-                //Debug.Log("RANDOM EVENT");
                 imageComponent.sprite =  spriteRandom;
 
                 AssignRandomEventRandomType();
-
                 break;
             case EventType.Gather:
-                //Debug.Log("HARVEST");
                 imageComponent.sprite =  spriteHarvest;
                 break;
             case EventType.Merchant:
-                //Debug.Log("MERCHANT");
                 imageComponent.sprite  =  spriteMerchant;
                 break;
-            
+            case EventType.Sensei:
+                imageComponent.sprite  =  spriteSensei;
+                break;
             
             case EventType.Challenge:
-                //Debug.Log("CHALLENGE");
                 imageComponent.sprite =  spriteChallenge;
                 break;
             default:
@@ -117,8 +121,6 @@ public class EventManager : MonoBehaviour
     //SPUSTENIE EVENTU NA ZÁKLADE TYPU
     private void RecognizeAndRunEvent()
     {
-        //EventWindowControl eventWindowControl = eventWindow.GetComponent<EventWindowControl>();
-
         switch (eventType)
         {
             case EventType.Merchant:
@@ -128,18 +130,15 @@ public class EventManager : MonoBehaviour
             case EventType.Random:
                 //Debug.Log("RANDOM EVENT");
                 eventWindow.StartWindow(randomEventType);
-                /*
-                if (canShowEventWindow)
-                {
-                    eventWindowControl.ShowWindow();
-                    eventWindowControl.Init(timeCost);
-                }
-*/
+                
                 break;
             case EventType.Gather:
                 eventWindow.Gather();
                 
-                //Debug.Log("HARVEST");
+                break;
+            case EventType.Sensei:
+                senseiWindow.StartWindow();
+                
                 break;
             case EventType.Challenge:
                 //Debug.Log("CHALLENGE");
@@ -180,7 +179,7 @@ public class EventManager : MonoBehaviour
         Random = 1,
         Gather = 2,
         Merchant = 3,
-        //Sensei = 4,
+        Sensei = 4,
         
         Challenge = 10
     }

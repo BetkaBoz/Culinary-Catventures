@@ -21,11 +21,7 @@ public class EventWindowControl : WindowControl
         [SerializeField] private GameObject  firstButton;
         [SerializeField] private GameObject  secondButton;
         [SerializeField] private GameObject  thirdButton;
-        /*
-        public GameObject FirstButton => firstButton;
-        public GameObject SecondButton => secondButton;
-        public GameObject ThirdButton => thirdButton;
-        */
+
         //EVENT WINDOW SPRITES
         [SerializeField] private Sprite  homelessCatSprite;
         [SerializeField] private Sprite  diceCatSprite;
@@ -214,10 +210,23 @@ public class EventWindowControl : WindowControl
                 break;
             case EventManager.RandomEventType.Stumble:
                 //STUMBLE
-                SetUpEventWindow("Stumble","You stumbled on a small rock and lost an ingredient."
-                ,"ASK FOR HELP","SEARCH");
+                if (player.Deck.Count == 0)
+                {
+                    SetUpEventWindow("Stumble","You stumbled on a small rock. If you had an ingredient you would surely lose it, but now everyone is laughing at you!");
+                    thirdButtonControl.onClick.AddListener(delegate {
+                        uiLayer.ChangeReputation(-Minor);
+                        //eventWindowControl.Continue();
+                        //eventWindowControl.SetUpEventWindow("","You left the place and your ingredient too.");
+                    });
+                }
+                else
+                {
+                    SetUpEventWindow("Stumble","You stumbled on a small rock and lost an ingredient."
+                        ,"ASK FOR HELP","SEARCH");
                 
-                Stumble(firstButtonControl,secondButtonControl ,thirdButtonControl);
+                    Stumble(firstButtonControl,secondButtonControl ,thirdButtonControl);
+                }
+                
                 break;
             case EventManager.RandomEventType.PerfectTomatoes:
                 //PERFECT_TOMATOES
@@ -234,11 +243,14 @@ public class EventWindowControl : WindowControl
                     }
                     else
                     {
-                        //TODO: PRESKOCIL A UKRADOL 2 RAJCINY :O
+                        // PRESKOCIL A UKRADOL 2 RAJCINY :O
                         SetUpEventWindow("","You successfully climbed the fence and stole some tomatoes.");
+                        player.Deck.Add( GetIngredient("Tomatoes"));
+                        player.Deck.Add( GetIngredient("Tomatoes"));
+
                         Debug.Log("GIMME DAT GRAPES");
                     }
-                });
+                });//RESIST THE DARK SIDE!
                     secondButtonControl.onClick.AddListener(delegate {
                         SetUpEventWindow("","You did not fall into your temptation. God gave you some reputation.");
                         uiLayer.ChangeReputation(Minor);
@@ -286,7 +298,6 @@ public class EventWindowControl : WindowControl
                     }
                 });
                 //GATHER
-                //TODO: GET SOM INGREDIENTS
                 secondButtonControl.onClick.AddListener(Gather);
                 break;
             case EventManager.RandomEventType.StuckMerchant:
@@ -334,16 +345,15 @@ public class EventWindowControl : WindowControl
     }
     private void Stumble(Button firstButtonControl,Button secondButtonControl,Button thirdButtonControl)
     {
-        //TODO: STRATIT NAHODNU INGREDIENCIU Z DECKU
         firstButtonControl.onClick.AddListener(delegate {
-            //TODO: 35%
+            //35%
             if (RandomState(35))
             {
                 SetUpEventWindow("","Some cats heard you and decided to help you. You found your lost ingredient");
             }
             else
             {
-                SetUpEventWindow("","No one is willing to help you. You can ask again."
+                SetUpEventWindow("","No one is willing to help you. You can ask again..."
                     ,"ASK FOR HELP","SEARCH");
                 
                 uiLayer.ChangeReputation(-Minor);
@@ -351,21 +361,38 @@ public class EventWindowControl : WindowControl
             }
         });
         secondButtonControl.onClick.AddListener(delegate {
-            //TODO: 50%, VIACEJ PERCENT KED MAS HELPEROV
+            //TODO: 25% + 5% * HELPERS, VIACEJ PERCENT KED MAS HELPEROV
             if (RandomState())
-            {               
-                SetUpEventWindow("","Some cats heard you and decided to help you. You found your lost ingredient");
+            {
+                if (player.helpers.Count > 0)
+                {
+                    SetUpEventWindow("","Your friends found your lost ingredient.");
+                }
+                else
+                {
+                    SetUpEventWindow("","You found your lost ingredient by myself.");
+                }
             }
             else
             {
-                SetUpEventWindow("","You are looking for the lost ingredient but cant find it. Other cats are looking at you..."
-                    ,"ASK FOR HELP","SEARCH");
+                if (player.helpers.Count > 0)
+                {
+                    SetUpEventWindow("","You are looking for the lost ingredient with your friends, but you cant find it. Other cats are looking at you..."
+                        ,"ASK FOR HELP","SEARCH");
+                }
+                else
+                {
+                    SetUpEventWindow("","You are helplessly looking for the lost ingredient, but you cant find it. Other cats are looking at you..."
+                        ,"ASK FOR HELP","SEARCH");
+                }
+                
                 uiLayer.ChangeReputation(-Minor);
                 Stumble( firstButtonControl,secondButtonControl,thirdButtonControl);
             }
         });
         
         thirdButtonControl.onClick.AddListener(delegate {
+            player.RemoveCardFromDeck();
             //eventWindowControl.Continue();
             //eventWindowControl.SetUpEventWindow("","You left the place and your ingredient too.");
         });
@@ -401,11 +428,14 @@ public class EventWindowControl : WindowControl
     }
     public void Gather()
     {
-        //TODO: PRIDAT INGREDIENCIE DO DECKU,ZMENIT VSTUPNE PARAMETRE DO FUNKCIE
         Random rnd = new Random();
         //MIN INCLUSIVE MAX EXCLUSIVE
         int value = rnd.Next(3, 6);
         SetUpEventWindow("Gather", $"You went to gather some ingredients. You found {value} ingredients.");
+        for (int i = 0; i < value; i++)
+        {
+            player.Deck.Add(GetRandomIngredient()); 
+        }
     }
     
     //AK JE MENEJ/ROVNE AKO PERCENTAGE TAK VRATI TRUE

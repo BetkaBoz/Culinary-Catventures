@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,6 +9,7 @@ public abstract class WindowControl : MonoBehaviour
     [SerializeField] protected UILayer uiLayer;
     [SerializeField] protected Player player;
     [SerializeField] private List<CardBaseInfo> allFoodScriptableObjects;
+    [SerializeField] private List<CardBaseInfo> allManoeuvreScriptableObjects;
 
     [SerializeField] private int timeCost = 1;
     
@@ -21,7 +23,7 @@ public abstract class WindowControl : MonoBehaviour
     }
     void Start()
     {
-        GetAllFoodCards();
+        GetAllCards();
         HideWindow();
     }
 
@@ -32,7 +34,6 @@ public abstract class WindowControl : MonoBehaviour
         //Debug.Log("TimeCost initialized to " + timeCost);
         this.timeCost = timeCost;
     }
-    // Start is called before the first frame update
     
     private void HideWindow()
     {
@@ -50,20 +51,35 @@ public abstract class WindowControl : MonoBehaviour
         HideWindow();
         //Debug.Log("CLOSE");
     }
-    private void GetAllFoodCards()
+    private void GetAllCards()
     {
         CardBaseInfo[] allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/");
         foreach (var t in allScriptableObjectsTemp)
         {
-            if (t.CardType != "Manoeuvre" && !t.CardName.Contains("Pile") )
+            if (t.CardType == "Manoeuvre" )
+            {
+                allManoeuvreScriptableObjects.Add(t);
+            }
+            else if ( !t.CardName.Contains("Pile") )
             {
                 allFoodScriptableObjects.Add(t);
             }
         }
     }
-    protected CardBaseInfo GenerateRandomIngredient()
+    
+    protected CardBaseInfo GetRandomIngredient()
     {
         int random = Random.Range(0, allFoodScriptableObjects.Count);
         return allFoodScriptableObjects[random];
+    }
+    
+    protected CardBaseInfo GetRandomManoeuvre()
+    {
+        int random = Random.Range(0, allManoeuvreScriptableObjects.Count);
+        return allManoeuvreScriptableObjects[random];
+    }
+    protected CardBaseInfo GetIngredient(string cardName)
+    {
+        return allFoodScriptableObjects.Find(x => x.CardName == cardName);
     }
 }

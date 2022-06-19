@@ -26,7 +26,7 @@ public class MerchantWindowControl : WindowControl
             button.onClick.RemoveAllListeners();
             artwork.color= Color.white;
 
-            CardBaseInfo randomCard = GenerateRandomIngredient();
+            CardBaseInfo randomCard = GetRandomIngredient();
             artwork.sprite = randomCard.Artwork;
             nutritionalValue.text = $"{randomCard.NutritionPoints}";
             

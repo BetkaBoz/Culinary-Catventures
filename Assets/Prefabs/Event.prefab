@@ -75,6 +75,7 @@ MonoBehaviour:
   spriteMerchant: {fileID: 21300000, guid: 52ae18701b6605f4cb691c65a7d07987, type: 3}
   spriteHarvest: {fileID: 21300000, guid: 437eb6db38d2fb647bbf565808164c31, type: 3}
   spriteChallenge: {fileID: 21300000, guid: f0a6d694815cfa443996bd10f88b56c7, type: 3}
+  spriteSensei: {fileID: 21300000, guid: 64c181708031533419e914914d6ed8bd, type: 3}
 --- !u!222 &66170756714038926
 CanvasRenderer:
   m_ObjectHideFlags: 0

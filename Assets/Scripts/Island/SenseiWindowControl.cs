@@ -1,18 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SenseiWindowControl : MonoBehaviour
+public class SenseiWindowControl : WindowControl
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private List<GameObject> senseiCards;
 
-    // Update is called once per frame
-    void Update()
+    private void AssignSenseiCards()
     {
-        
+        foreach (GameObject card in senseiCards)
+        {   
+
+            Image artwork = card.GetComponent<Image>();
+            //Text nutritionalValue = card.GetComponentInChildren<Text>();
+            TextMeshProUGUI price = card.GetComponentInChildren<TextMeshProUGUI>();
+            Button button = card.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            artwork.color= Color.white;
+
+            CardBaseInfo randomCard = GetRandomManoeuvre();
+            artwork.sprite = randomCard.Artwork;
+            //nutritionalValue.text = $"{randomCard.NutritionPoints}";
+            
+            //CARD PRICE
+            price.text =  $"{Random.Range(20, 41)}"; 
+
+            //BUY CARD
+            button.onClick.AddListener(delegate {
+                uiLayer.ChangeMoney(- int.Parse(price.text));
+                player.Deck.Add(randomCard);
+                artwork.color= Color.gray;
+                button.onClick.RemoveAllListeners();
+            });
+
+
+        }
+    }
+    public void StartWindow()
+    {
+        AssignSenseiCards();
+        ShowWindow();
     }
 }
