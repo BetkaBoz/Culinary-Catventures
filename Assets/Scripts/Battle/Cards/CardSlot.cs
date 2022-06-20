@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
+
 public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     #region PrivateVars
@@ -21,6 +22,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     Canvas tempCanvas;
     GraphicRaycaster tempReycaster;
     int originalSiblingIndex;
+    GameObject notification;
     #endregion
 
     #region SerializeFields
@@ -311,8 +313,14 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                             MoveToExhaustPile();
                             card.TriggerCardEffect(gm, hit);
                         }
+                        
                         gm.hasCardBeenPlayed = true;
                     }
+                    else
+                    {
+                        gm.ShowNotification();
+                    }
+                    
                     arrowHandler.SetVisibile(false);
                 }
                 else

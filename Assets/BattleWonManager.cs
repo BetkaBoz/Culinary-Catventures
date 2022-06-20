@@ -14,6 +14,7 @@ public class BattleWonManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI coins;
     [SerializeField] Button continueButton;
     [SerializeField] Canvas canvas;
+    [SerializeField] Text notification;
     private Player player;
     private GameObject currentHelper;
     private List<GameObject> helpers = new List<GameObject>();
@@ -42,11 +43,12 @@ public class BattleWonManager : MonoBehaviour
         if(currentHelper == null)
         {
             Debug.Log("You have to choose Helper ma dude");
+            notification.gameObject.SetActive(true);
             return;
         }
 
         string helperName = currentHelper.GetComponent<ActionManager>().CurrentName;
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene(3, LoadSceneMode.Single);
     }
 
     public void HelperSelected(GameObject selected)
@@ -54,7 +56,9 @@ public class BattleWonManager : MonoBehaviour
         currentHelper = selected;
         currentHelper.GetComponent<HelperSelection>().Select();
 
-        foreach(GameObject helper  in helpers)
+        notification.gameObject.SetActive(false);
+
+        foreach (GameObject helper  in helpers)
         {
             if(helper != currentHelper) helper.GetComponent<HelperSelection>().Deselect();
         }
