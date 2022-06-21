@@ -13,12 +13,13 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     [SerializeField] bool isDragged = false;
     [SerializeField] bool isSelected = false;
     [SerializeField] bool isRised = false;
+    public bool hasMoved = false;
     Camera cam;
     Vector3 dragOffset;
     Vector3 originalPos;
     //private Vector3 originalMousePos;
     CanvasGroup canvasGroup;
-    int handIndex;
+    [SerializeField] int handIndex;
     Canvas tempCanvas;
     GraphicRaycaster tempReycaster;
     int originalSiblingIndex;
@@ -81,6 +82,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void SetHighlight(CardSlot otherSlot)
     {
+        if (handIndex != -1)
+            gm.MoveNeighbours(handIndex, true);
         otherSlot.Rise(true);
         handIndex = otherSlot.HandIndex;
         Hide(false);
@@ -126,7 +129,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        originalSiblingIndex = transform.GetSiblingIndex();
+        //originalSiblingIndex = transform.GetSiblingIndex();
         //gm = FindObjectOfType<GameManager>();
         cam = Camera.main;
         isDragged = false;
@@ -153,11 +156,22 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void ResetPos()
     {
-        if (isSelected)
-            transform.position = new Vector2(originalPos.x, transform.position.y);
-        else
+        //if (isSelected)
+        //    transform.position = new Vector2(originalPos.x, transform.position.y);
+        //else
             transform.position = originalPos;
-        //transform.localScale = new Vector2(0.65f, 0.65f);
+            hasMoved = false;
+        if(!isHighlight && !isSelected)
+            transform.localScale = new Vector2(0.65f, 0.65f);
+    }
+
+    private void StorePos()
+    {
+        if (!hasMoved)
+        {
+            originalPos = transform.position;
+            hasMoved = true;
+        }
     }
 
     public void Deselect()
@@ -375,29 +389,29 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             gm.MoveNeighbours(handIndex, false);
     }
 
-    public void CreateCanvas(bool enable)
-    {
-        if (enable)
-        {
+    //public void CreateCanvas(bool enable)
+    //{
+    //   if (enable)
+    //    {
             //tempCanvas = gameObject.AddComponent<Canvas>();
             //tempCanvas.overrideSorting = true;
             //tempCanvas.sortingOrder = 1;
             //tempReycaster = gameObject.AddComponent<GraphicRaycaster>();
             //transform.position += (Vector3.up * 2f);
-            originalPos = transform.localPosition;
-            Debug.Log("transform: " + transform.position + " original: " + originalPos);
-            transform.SetAsLastSibling();
-            transform.position += (Vector3.up * 0.5f);
-            Debug.Log("transform: " + transform.position + " original: " + originalPos);
-        }
-        else
-        {
-            transform.SetSiblingIndex(originalSiblingIndex);
+    //        originalPos = transform.localPosition;
+    //        Debug.Log("transform: " + transform.position + " original: " + originalPos);
+    //        transform.SetAsLastSibling();
+    //        transform.position += (Vector3.up * 0.5f);
+    //        Debug.Log("transform: " + transform.position + " original: " + originalPos);
+    //    }
+    //    else
+    //    {
+    //        transform.SetSiblingIndex(originalSiblingIndex);
             //Destroy(tempReycaster);
             //Destroy(tempCanvas);
-        }
+    //    }
 
-    }
+    //}
 
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -409,12 +423,16 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         if (willRise)
         {
+            //Debug.Log("Start Of Rise " + card.name + " " + handIndex);
             //Debug.Log(card.CardEffect.Card);
             if (isRised) { return; }
             //spriteOrder = transform.GetSiblingIndex();
 
-            originalPos = transform.position;
-            //transform.localScale = new Vector2(1f, 1f);
+            //originalPos = transform.position;
+            //Debug.Log("Before StorePos " + card.name + " " + handIndex);
+            StorePos();
+            transform.localScale = new Vector2(1f, 1f);
+            //Debug.Log("before transform " + card.name + " " + handIndex);
             transform.position += (Vector3.up * 0.5f);
 
             //this seems kinda jank, will most likely replace it later
@@ -423,18 +441,28 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             //tempCanvas.sortingOrder = 1;
             //tempReycaster = gameObject.AddComponent<GraphicRaycaster>();
             //transform.SetAsLastSibling();
+            //Debug.Log("End Of DeRise " + card.name + " " + handIndex);
             isRised = true;
         }
         else
         {
-            if (isDragged || isSelected) { return; }
+            //Debug.Log("Start Of DeRise " + card.name + " " + handIndex);
+            if (isDragged || isSelected) {
+                //Debug.Log(card.name + " " + handIndex + " rised "+isRised+" selected "+isSelected+" dragged "+isDragged);
+                return;
+            }
             //Destroy(tempReycaster);
             //Destroy(tempCanvas);
+            //Debug.Log("Before Reset "+ card.name + " " + handIndex);
             ResetPos();
             //transform.SetSiblingIndex(spriteOrder);
-            if(isHighlight)
+            if (isHighlight)
+            {
+                //Debug.Log("In Move " + card.name + " " + handIndex);
                 gm.MoveNeighbours(handIndex, true);
+            }
             isRised = false;
+            //Debug.Log("End Of DeRise " + card.name + " " + handIndex);
         }
     }
 
@@ -447,25 +475,27 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         if (isInvisible)
         {
-            transform.position += (Vector3.down * 3f);
+            transform.position += (Vector3.down * 4f);
         }
         else
         {
-            transform.position += (Vector3.up * 3f);
+            transform.position += (Vector3.up * 4f);
         }
     }
 
     public void MoveLeft(float amount)
     {
         if (!isRised)
-            originalPos = transform.position;
+            StorePos();
+            //originalPos = transform.position;
         transform.position = transform.position + (Vector3.left * amount);//0.5f
     }
 
     public void MoveRight(float amount)
     {
         if (!isRised)
-            originalPos = transform.position;
+            StorePos();
+            //originalPos = transform.position;
         transform.position = transform.position + (Vector3.right * amount);
     }
     #endregion

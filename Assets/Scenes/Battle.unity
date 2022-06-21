@@ -7877,6 +7877,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1912536889}
     - target: {fileID: 7035721363036107428, guid: 88fa943755599bf428f91877c0cef97a, type: 3}
+      propertyPath: handIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7035721363036107428, guid: 88fa943755599bf428f91877c0cef97a, type: 3}
       propertyPath: arrowHandler
       value: 
       objectReference: {fileID: 1958059601}

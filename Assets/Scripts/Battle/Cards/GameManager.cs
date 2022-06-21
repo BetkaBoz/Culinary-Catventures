@@ -308,6 +308,7 @@ public class GameManager : MonoBehaviour
         if (isReturning)
         {
             highlightSlot.Hide(true);
+            highlightSlot.HandIndex = -1;
             cardSlots[idx].MakeInvisible(false);
             cardSlots[idx].Rise(false);
             for (int i = 0; i < cardSlots.Length; i++)
