@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: 2279914b894697848997ae9b7328d56a, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Toast
-  cardType: Vegetarian
+  cardType: Mix
   canTarget: 1
   energyCost: 1
   nutritionPoints: 5
