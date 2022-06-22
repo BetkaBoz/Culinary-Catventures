@@ -152,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 857187733}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: maxHunger
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: states.Array.size
@@ -1452,7 +1452,7 @@ PrefabInstance:
       objectReference: {fileID: 857187733}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: maxHunger
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: states.Array.size
@@ -1658,7 +1658,7 @@ PrefabInstance:
       objectReference: {fileID: 857187733}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: maxHunger
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: sprites.Array.size
@@ -3788,6 +3788,7 @@ GameObject:
   - component: {fileID: 1193486886}
   - component: {fileID: 1193486888}
   - component: {fileID: 1193486887}
+  - component: {fileID: 1193486889}
   m_Layer: 5
   m_Name: Energy
   m_TagString: Untagged
@@ -3854,6 +3855,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193486885}
   m_CullTransparentMesh: 1
+--- !u!114 &1193486889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193486885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53cfff5d9a0951469b2186dc56543f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 857187733}
+  helper: {fileID: 0}
+  ac: {fileID: 0}
+  message: Represents how much Energy Poins you have left
+  header: Energy
 --- !u!1 &1222542382
 GameObject:
   m_ObjectHideFlags: 0
@@ -6881,6 +6899,7 @@ GameObject:
   - component: {fileID: 2053219797}
   - component: {fileID: 2053219799}
   - component: {fileID: 2053219798}
+  - component: {fileID: 2053219800}
   m_Layer: 5
   m_Name: Rep
   m_TagString: Untagged
@@ -6946,6 +6965,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053219796}
   m_CullTransparentMesh: 1
+--- !u!114 &2053219800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053219796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53cfff5d9a0951469b2186dc56543f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 857187733}
+  helper: {fileID: 0}
+  ac: {fileID: 0}
+  message: Represents customers satisfaction. If you lose all Reputation Points it's
+    Game Over!
+  header: Reputation
 --- !u!224 &2054681349 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7251360434902969133, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
@@ -7506,7 +7543,7 @@ PrefabInstance:
       objectReference: {fileID: 857187733}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: maxHunger
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: sprites.Array.size
