@@ -13,7 +13,7 @@ public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] ActionManager ac;
     public string message, header;
 
-    private void Start()
+    private void Update()
     {
         if (ac == null) return;
             switch (ac.CurrentName)
