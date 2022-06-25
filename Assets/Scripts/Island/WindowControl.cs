@@ -49,7 +49,6 @@ public abstract class WindowControl : MonoBehaviour
         Time.timeScale = 1;
         islandManager.LowerTime(timeCost);
         HideWindow();
-        //Debug.Log("CLOSE");
     }
     private void GetAllCards()
     {

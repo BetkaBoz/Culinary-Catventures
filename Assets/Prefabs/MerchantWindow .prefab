@@ -416,6 +416,7 @@ MonoBehaviour:
   uiLayer: {fileID: 0}
   player: {fileID: 0}
   allFoodScriptableObjects: []
+  allManoeuvreScriptableObjects: []
   timeCost: 1
   merchantCards:
   - {fileID: 2137793594037746352}

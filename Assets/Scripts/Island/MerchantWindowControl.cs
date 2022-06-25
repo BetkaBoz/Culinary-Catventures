@@ -11,9 +11,6 @@ public class MerchantWindowControl : WindowControl
     //DONT USE AWAKE CAUSE IT WILL OVERRIDE FROM PARENT CLASS
 
     
-    
-    
-   
     private void AssignMerchantCards()
     {
         foreach (GameObject card in merchantCards)
@@ -41,10 +38,14 @@ public class MerchantWindowControl : WindowControl
             }
             //BUY CARD
             button.onClick.AddListener(delegate {
-                uiLayer.ChangeMoney(- int.Parse(price.text));
-                player.Deck.Add(randomCard);
-                artwork.color= Color.gray;
-                button.onClick.RemoveAllListeners();
+                if (player.HaveMoney(int.Parse(price.text)))
+                {
+                    uiLayer.ChangeMoney(- int.Parse(price.text));
+                    player.Deck.Add(randomCard);
+                    artwork.color= Color.gray;
+                    button.onClick.RemoveAllListeners();
+                }
+                
             });
 
 

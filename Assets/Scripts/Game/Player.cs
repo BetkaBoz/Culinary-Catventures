@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -210,9 +212,10 @@ public class Player : MonoBehaviour, IDamageable
     {
         moneyAmount += amount;
         money += amount;
-        if (money <= 0)
+
+        if (money<0)
         {
-            Die(false);
+            money = 0;
         }
     }
     
@@ -235,6 +238,13 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public bool HaveMoney(int amount)
+    {
+        return money >= amount;
+    }         
+    
+
+    
     public void Die(bool status)
     {
         if (isDead || isVictorious) return;
@@ -295,7 +305,54 @@ public class Player : MonoBehaviour, IDamageable
         deck.Remove(deck.Find(x => x == card));
         //return card;
     }
-    
+    public CardBaseInfo FindCardFromDeck(string cardName = null)
+    {
+        if (!deck.Any())
+        {
+            Debug.Log("EMPTY DECK");
+            return null;
+        }
+        CardBaseInfo card = null;
+        
+            //NAJDI NAHODNU INGREDIENCIU Z DECKU
+            if (string.IsNullOrEmpty(cardName) )
+            {
+                foreach (CardBaseInfo tmpCard in deck)
+                {
+                    if (tmpCard.CardType == "Vegetarian"||tmpCard.CardType == "Meat")
+                    {
+                        card = tmpCard;
+                        return card;
+
+                    }
+                }
+            }
+            //NAJDI VYBRANU KARTU Z DECKU
+            else
+            {
+                card = deck.Find(x => x.CardName == cardName);
+            }
+        
+        
+        return card;
+        //return card;
+    }
+    public bool CheckIfDeckHasIngredient()
+    {
+        if (!Deck.Any())
+        {
+            Debug.Log("EMPTY DECK");
+            return false;
+        }
+        foreach (CardBaseInfo tmpCard in deck)
+        {
+            if (tmpCard.CardType == "Vegetarian"||tmpCard.CardType == "Meat"   )
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     //private async Task LoadBattleWon()
     //{
     //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Battle Won", LoadSceneMode.Additive);

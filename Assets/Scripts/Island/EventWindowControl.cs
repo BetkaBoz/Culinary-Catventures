@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,7 @@ public class EventWindowControl : WindowControl
         [SerializeField] private GameObject  firstButton;
         [SerializeField] private GameObject  secondButton;
         [SerializeField] private GameObject  thirdButton;
+        [SerializeField] private List<GameObject> eventCards;
 
         //EVENT WINDOW SPRITES
         [SerializeField] private Sprite  homelessCatSprite;
@@ -153,6 +155,7 @@ public class EventWindowControl : WindowControl
         SetThirdButtonText(thirdBtn);
         AssignEventWindowSprite(name);
         RemoveAllListeners();
+        HideEventCards();
         ShowWindow();
     }
     
@@ -163,7 +166,7 @@ public class EventWindowControl : WindowControl
         Button firstButtonControl = firstButton.GetComponent<Button>();
         Button secondButtonControl = secondButton.GetComponent<Button>();
         Button thirdButtonControl = thirdButton.GetComponent<Button>();
-
+        
         switch (randomEventType)
         {
             case EventManager.RandomEventType.HomelessCat:
@@ -210,7 +213,7 @@ public class EventWindowControl : WindowControl
                 break;
             case EventManager.RandomEventType.Stumble:
                 //STUMBLE
-                if (player.Deck.Count == 0)
+                if (!player.CheckIfDeckHasIngredient())
                 {
                     SetUpEventWindow("Stumble","You stumbled on a small rock. If you had an ingredient you would surely lose it, but now everyone is laughing at you!");
                     thirdButtonControl.onClick.AddListener(delegate {
@@ -223,8 +226,9 @@ public class EventWindowControl : WindowControl
                 {
                     SetUpEventWindow("Stumble","You stumbled on a small rock and lost an ingredient."
                         ,"ASK FOR HELP","SEARCH");
-                
-                    Stumble(firstButtonControl,secondButtonControl ,thirdButtonControl);
+                    CardBaseInfo randomCard = player.FindCardFromDeck();
+
+                    Stumble(firstButtonControl,secondButtonControl ,thirdButtonControl,randomCard);
                 }
                 
                 break;
@@ -245,8 +249,16 @@ public class EventWindowControl : WindowControl
                     {
                         // PRESKOCIL A UKRADOL 2 RAJCINY :O
                         SetUpEventWindow("","You successfully climbed the fence and stole some tomatoes.");
-                        player.Deck.Add( GetIngredient("Tomatoes"));
-                        player.Deck.Add( GetIngredient("Tomatoes"));
+                        
+                        for (int i = 0; i < 2; i++)
+                        {
+                            CardBaseInfo randomCard = GetIngredient("Tomatoes");
+                            player.Deck.Add(randomCard); 
+                            eventCards[i].SetActive(true);
+                            eventCards[i].GetComponent<Image>().sprite = randomCard.Artwork;    
+                            eventCards[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{randomCard.NutritionPoints}";
+
+                        }
 
                         Debug.Log("GIMME DAT GRAPES");
                     }
@@ -343,8 +355,13 @@ public class EventWindowControl : WindowControl
                 break;
         }
     }
-    private void Stumble(Button firstButtonControl,Button secondButtonControl,Button thirdButtonControl)
+    private void Stumble(Button firstButtonControl,Button secondButtonControl,Button thirdButtonControl,CardBaseInfo card)
     {
+        eventCards[0].SetActive(true);
+        eventCards[0].GetComponent<Image>().sprite = card.Artwork;   
+        eventCards[0].GetComponentInChildren<TextMeshProUGUI>().text = $"{card.NutritionPoints}";
+
+
         firstButtonControl.onClick.AddListener(delegate {
             //35%
             if (RandomState(35))
@@ -357,7 +374,7 @@ public class EventWindowControl : WindowControl
                     ,"ASK FOR HELP","SEARCH");
                 
                 uiLayer.ChangeReputation(-Minor);
-                Stumble( firstButtonControl, secondButtonControl,thirdButtonControl);
+                Stumble( firstButtonControl, secondButtonControl,thirdButtonControl,card);
             }
         });
         secondButtonControl.onClick.AddListener(delegate {
@@ -387,12 +404,13 @@ public class EventWindowControl : WindowControl
                 }
                 
                 uiLayer.ChangeReputation(-Minor);
-                Stumble( firstButtonControl,secondButtonControl,thirdButtonControl);
+                Stumble( firstButtonControl,secondButtonControl,thirdButtonControl,card);
             }
         });
         
         thirdButtonControl.onClick.AddListener(delegate {
-            player.RemoveCardFromDeck();
+            player.Deck.Remove(player.Deck.Find(x => x == card));
+
             //eventWindowControl.Continue();
             //eventWindowControl.SetUpEventWindow("","You left the place and your ingredient too.");
         });
@@ -434,7 +452,12 @@ public class EventWindowControl : WindowControl
         SetUpEventWindow("Gather", $"You went to gather some ingredients. You found {value} ingredients.");
         for (int i = 0; i < value; i++)
         {
-            player.Deck.Add(GetRandomIngredient()); 
+            CardBaseInfo randomCard = GetRandomIngredient();
+            player.Deck.Add(randomCard); 
+            eventCards[i].SetActive(true);
+            eventCards[i].GetComponent<Image>().sprite = randomCard.Artwork;    
+            eventCards[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{randomCard.NutritionPoints}";
+
         }
     }
     
@@ -447,7 +470,13 @@ public class EventWindowControl : WindowControl
         return value <= percentage;
     }
 
-    
+    public void HideEventCards()
+    {
+        foreach (GameObject card in eventCards)
+        {
+            card.SetActive(false);
+        }
+    }
 
 
 }
