@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3540633893248519306}
+  - component: {fileID: 1087782752828155293}
   - component: {fileID: 8575847236975576997}
-  - component: {fileID: -1601706553860605112}
   - component: {fileID: 66170756714038926}
   - component: {fileID: 5129210470418818252}
   m_Layer: 0
   m_Name: Event
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,6 +39,18 @@ RectTransform:
   m_AnchoredPosition: {x: -4.22, y: 5.4799995}
   m_SizeDelta: {x: 138, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1087782752828155293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2429101186762805143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9b54a997567a844b6d86076ac915a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &8575847236975576997
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -55,27 +67,6 @@ CircleCollider2D:
   m_Offset: {x: -0.0051116943, y: 0.85588074}
   serializedVersion: 2
   m_Radius: 73.385025
---- !u!114 &-1601706553860605112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2429101186762805143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e14f683a147a47c4caf86e01351b1e95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isChallenge: 0
-  eventType: 0
-  randomEventType: 0
-  btnPrompt: {fileID: 0}
-  spriteRandom: {fileID: 21300000, guid: 116d0bf87a354bc4dbac30cdc94795cc, type: 3}
-  spriteMerchant: {fileID: 21300000, guid: 52ae18701b6605f4cb691c65a7d07987, type: 3}
-  spriteHarvest: {fileID: 21300000, guid: 437eb6db38d2fb647bbf565808164c31, type: 3}
-  spriteChallenge: {fileID: 21300000, guid: f0a6d694815cfa443996bd10f88b56c7, type: 3}
-  spriteSensei: {fileID: 21300000, guid: 64c181708031533419e914914d6ed8bd, type: 3}
 --- !u!222 &66170756714038926
 CanvasRenderer:
   m_ObjectHideFlags: 0

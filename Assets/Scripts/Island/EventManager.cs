@@ -1,40 +1,49 @@
-using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using Random = System.Random;
+using Random = UnityEngine.Random;
+
 
 public class EventManager : MonoBehaviour
 {
     #region Private Vars
-    [SerializeField] private bool isChallenge;
-    [SerializeField] private EventType eventType;
-    [SerializeField] private RandomEventType randomEventType; //FOR NOW
-    [SerializeField] private TextMeshProUGUI  btnPrompt; //FOR NOW
+    //[SerializeField] private bool isChallenge;
+    //[SerializeField] private EventType eventType;
+    //[SerializeField] private RandomEventType randomEventType; 
+    [SerializeField] public TextMeshProUGUI  btnPrompt; //FOR NOW
     //[SerializeField] private int timeCost = 1;
     
     //EVENT SPRITES
-    [SerializeField] private Sprite spriteRandom;
-    [SerializeField] private Sprite spriteMerchant;
-    [SerializeField] private Sprite spriteHarvest;
-    [SerializeField] private Sprite spriteChallenge;
-    [SerializeField] private Sprite spriteSensei;
+    [SerializeField] public Sprite spriteRandom;
+    [SerializeField] public Sprite spriteMerchant;
+    [SerializeField] public Sprite spriteHarvest;
+    [SerializeField] public Sprite spriteChallenge;
+    [SerializeField] public Sprite spriteSensei;
 
-    
+    [SerializeField] public List<Event> allEvents;
     //EVENT WINDOW
     private EventWindowControl  eventWindow;
     // MERCHARNT WINDOW
     private MerchantWindowControl  merchantWindow;
     // SENSEI WINDOW
     private SenseiWindowControl  senseiWindow;
-    //UILAYER
-    private UILayer  uiLayer;
+    
     
     //ISLAND MANAGER
-    private IslandManager islandManager;
+    public IslandManager islandManager;
     
-    private bool isOnEvent;
-    private bool isUsed;
+    //private bool isOnEvent;
+    
+    public int merchantCount ;
+    public int senseiCount;
+    public int gatherCount;
+
+    //CONSTANTS
+    public const int MaxMerchantCount = 1;
+    public const int MaxSenseiCount = 1;
+    public const int MaxGatherCount = 2;
+
+
     //private bool canShowEventWindow = true;
 
     
@@ -44,51 +53,127 @@ public class EventManager : MonoBehaviour
     private void Awake()
     {   
         eventWindow = FindObjectOfType<EventWindowControl>();
-        //merchantWindow = GameObject.FindGameObjectsWithTag("EventWindow")[1].GetComponent<MerchantWindowControl>();
         merchantWindow = FindObjectOfType<MerchantWindowControl>();
         senseiWindow = FindObjectOfType<SenseiWindowControl>();
-
-        //uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
-        uiLayer = FindObjectOfType<UILayer>();
-        uiLayer.UpdateUI();
+        
         islandManager = FindObjectOfType<IslandManager>();
+
     }
 
     void Start()
     {
-        AssignRandomType();
-        AssignSprite();
+        AssignRandomTypes();
+        ClearBtnPrompt();
+        //AssignRandomType();
+        //AssignSprite();
     }
 
-    void Update()
+
+    //NACITANIE VSETKYCH EVENTOV DO LISTU PODLA TAGU
+    private void GetAllEvents()
     {
-
-        //SPUSTENIE EVENTU AK HO AKTIVUJEME
-        ActivateEvent();
-        
-    }
-    //URČI TYP EVENTU, CHALLENGE SA NASTAVUJE Z INŠPEKTORA
-    private void AssignRandomType()
-    {   
-        if (isChallenge) eventType = EventType.Challenge;
-        else {
-            Array values = Enum.GetValues(typeof(EventType));
-            Random random = new Random(Guid.NewGuid().GetHashCode());
-            //TODO: ZMENIT  NA -1 PO TESTOVANI RANDOM EVENTOV
-            eventType = (EventType) values.GetValue(random.Next(values.Length - 1));
+        GameObject[] tmpEvents = GameObject.FindGameObjectsWithTag("Event");
+        foreach (GameObject eventik in tmpEvents)
+        {
+            Event @event = eventik.GetComponent<Event>();
+            allEvents.Add(@event);
         }
     }
+    //VYBERA NAHODNY EVENT NA MAPE A PRIDAVAMU TYP A SPRITE
+    private void AssignRandomTypes()
+    {
+        int iterations = allEvents.Count;
+        for (int i = 0; i < iterations; i++)
+        {
+            //Debug.Log("TOLKOTO KRAT: "+ i);
+            //Debug.Log("VELKOST: "+ allEvents.Count);
+            
+            int random = Random.Range(0, allEvents.Count);
+            Event @event = allEvents[random];
+            @event.AssignRandomType(); 
+            @event.AssignSprite();
+
+            allEvents.RemoveAt(random);
+        }
+        GetAllEvents();
+    }
+    //SPUSTENIE EVENTU PODLA TYPU
+    public void RecognizeAndRunEvent(Event eventt)
+    {
+        switch (eventt.eventType)
+        {
+            case Event.EventType.Merchant:
+                //Debug.Log("MERCHANT");
+                merchantWindow.StartWindow();
+                break;
+            case Event.EventType.Random:
+                //Debug.Log("RANDOM EVENT");
+                eventWindow.StartWindow(eventt.randomEventType);
+                
+                break;
+            case Event.EventType.Gather:
+                eventWindow.Gather();
+                
+                break;
+            case Event.EventType.Sensei:
+                senseiWindow.StartWindow();
+                
+                break;
+            case Event.EventType.Challenge:
+                //Debug.Log("CHALLENGE");
+                //canShowEventWindow = false;
+                islandManager.StartBattle();
+                break;
+            default:
+                Debug.Log("What are you doing here?");
+                break;
+        }
+    }
+    
+    public void ClearBtnPrompt()
+    {
+        btnPrompt.text = "";
+    }
+
+    #region USELESS CODE
+            //URČI TYP EVENTU, CHALLENGE SA NASTAVUJE Z INŠPEKTORA
+    /*
+    private void AssignRandomType()
+    {
+        foreach (Event oneEvent in allEvents)
+        {
+            if (isChallenge) eventType = EventType.Challenge;
+            else if(merchantCount < MaxMerchantCount )
+            {
+                merchantCount++;
+                eventType = EventType.Merchant;
+            }
+            else if(senseiCount < MaxSenseiCount )
+            {
+                senseiCount++;
+                eventType = EventType.Sensei;
+            }
+            else {
+                Array values = Enum.GetValues(typeof(EventType));
+                Random random = new Random(Guid.NewGuid().GetHashCode());
+                //TODO: ZMENIT  NA -1 PO TESTOVANI RANDOM EVENTOV
+                eventType = (EventType) values.GetValue(random.Next(values.Length - 3));
+            }
+        }
+    }*/
     //URČI NÁHODNÝ TYP RANDOM EVENTU
+    /*
     private void AssignRandomEventRandomType()
     {
         Array rvalues = Enum.GetValues(typeof(RandomEventType));
         Random random = new Random(Guid.NewGuid().GetHashCode());
         randomEventType = (RandomEventType) rvalues.GetValue(random.Next(rvalues.Length ));
     }
-   
+   */
 
     
     //PRIRADÍ SPRITE PODĹA TYPU EVENTU
+    /*
     private void AssignSprite()
     {
         Image imageComponent = GetComponent<Image>();
@@ -117,40 +202,12 @@ public class EventManager : MonoBehaviour
                 Debug.Log("What are you doing here CRIMINAL SCUM?");
                 break;
         }
-    }
+    }*/
+    
     //SPUSTENIE EVENTU NA ZÁKLADE TYPU
-    private void RecognizeAndRunEvent()
-    {
-        switch (eventType)
-        {
-            case EventType.Merchant:
-                //Debug.Log("MERCHANT");
-                merchantWindow.StartWindow();
-                break;
-            case EventType.Random:
-                //Debug.Log("RANDOM EVENT");
-                eventWindow.StartWindow(randomEventType);
-                
-                break;
-            case EventType.Gather:
-                eventWindow.Gather();
-                
-                break;
-            case EventType.Sensei:
-                senseiWindow.StartWindow();
-                
-                break;
-            case EventType.Challenge:
-                //Debug.Log("CHALLENGE");
-                //canShowEventWindow = false;
-                islandManager.StartBattle();
-                break;
-            default:
-                Debug.Log("What are you doing here?");
-                break;
-        }
-    }
+
     //NABEHNUTIE HRÁČA NA EVENT
+    /*
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(!isUsed && islandManager.Time > 0) btnPrompt.text = "Press SPACE to do stuff";
@@ -167,15 +224,12 @@ public class EventManager : MonoBehaviour
         ChangeEventScale();
 
     }
-    
-    private void ClearBtnPrompt()
-    {
-        btnPrompt.text = "";
-    }
+    */
     
     
     
-    private enum EventType{
+    /*
+    public enum EventType{
         Random = 1,
         Gather = 2,
         Merchant = 3,
@@ -194,7 +248,8 @@ public class EventManager : MonoBehaviour
         StuckMerchant = 6,
         Thieves = 7,
     }
-
+*/
+    /*
     private void ChangeEventScale( )
     {
         //CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
@@ -211,8 +266,8 @@ public class EventManager : MonoBehaviour
             }
         }
     }
-
-
+*/
+/*
     private void ActivateEvent()
     {
         if (isOnEvent && islandManager.Time > 0 && !isUsed && Input.GetButtonDown("Jump"))
@@ -224,7 +279,9 @@ public class EventManager : MonoBehaviour
             GetComponent<Image>().color = new Color32(125,125,125,255);
             transform.localScale = new Vector3(1, 1, 1);
         }
-        
-        
-    }
+    }*/
+    
+
+    #endregion
+
 }

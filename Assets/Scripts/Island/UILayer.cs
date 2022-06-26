@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -38,12 +35,7 @@ public class UILayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateUI();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

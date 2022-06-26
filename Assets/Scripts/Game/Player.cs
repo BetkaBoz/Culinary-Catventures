@@ -289,20 +289,22 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (!deck.Any())
         {
-            return ;
+            return;
         }
-        CardBaseInfo card;
         if (string.IsNullOrEmpty(cardName) )
         {
-            card = deck[Random.Range(0, deck.Count)];
+            CardBaseInfo card = deck[Random.Range(0, deck.Count)];
+            deck.Remove(deck.Find(x =>  x.CardName == card.CardName));
+
             Debug.Log(card.CardName);
-        }
+            return;
+        }/*
         else
         {
             card = deck.Find(x => x.CardName == cardName);
-        }
+        }*/
         
-        deck.Remove(deck.Find(x => x == card));
+        deck.Remove(deck.Find(x =>  x.CardName == cardName));
         //return card;
     }
     public CardBaseInfo FindCardFromDeck(string cardName = null)

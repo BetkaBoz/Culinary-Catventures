@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,17 +19,17 @@ public class PlayerGrabber : MonoBehaviour
     {
         hand = GetComponent<SpriteRenderer>();
         hand.sprite = handOpen;
-        
-        challengePosition = GameObject.FindGameObjectsWithTag("Challenge")[0].transform.position;
-        playerTransform = GameObject.FindGameObjectsWithTag("Player")[0].transform;
+
+        challengePosition = GameObject.FindGameObjectWithTag("Challenge").transform.position;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         transform.position = challengePosition;
 
         lr = GetComponent<LineRenderer>();
         
         Gradient gradient = new Gradient();
         gradient.SetKeys(
-            new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.white, 1.0f) },
-            new GradientAlphaKey[] { new GradientAlphaKey(0.7f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
+            new[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.white, 1.0f) },
+            new[] { new GradientAlphaKey(0.7f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
         );
         lr.colorGradient = gradient;
     }
@@ -61,7 +59,12 @@ public class PlayerGrabber : MonoBehaviour
 
     private void CatchPlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+        var position = transform.position;
+        position = Vector2.MoveTowards(position, playerTransform.position, speed * Time.deltaTime);
+        //ABY BOLA VIDITELNA RUKA
+        position = new Vector3(position.x,position.y,20);
+        transform.position = position;
+
         if (Vector2.Distance(transform.position, playerTransform.position) < 0.5)
         {
             hand.sprite = handClosed;

@@ -12,6 +12,7 @@ TagManager:
   - Helper
   - Action
   - Customer
+  - Event
   layers:
   - Default
   - TransparentFX

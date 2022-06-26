@@ -144,23 +144,23 @@ public class EventWindowControl : WindowControl
     
     #endregion
 
-    //DONT USE AWAKE CAUSE IT WILL OVERRIDE FROM PARENT CLASS
+    //DONT USE AWAKE CAUSE IT WILL OVERRIDE FUNCTION FROM PARENT CLASS
 
-    private void SetUpEventWindow(string name,string text,string firstBtn = "",string secondBtn = "",string thirdBtn = "LEAVE")
+    private void SetUpEventWindow(string title,string text,string firstBtn = "",string secondBtn = "",string thirdBtn = "LEAVE")
     {
-        SetWindowName(name);
+        SetWindowName(title);
         SetWindowText(text);
         SetFirstButtonText(firstBtn);
         SetSecondButtonText(secondBtn);
         SetThirdButtonText(thirdBtn);
-        AssignEventWindowSprite(name);
+        AssignEventWindowSprite(title);
         RemoveAllListeners();
         HideEventCards();
         ShowWindow();
     }
     
     //ZMENÍ EVENT OKNO PODĽA TYPU RANDOM EVENTU
-    public void StartWindow(EventManager.RandomEventType randomEventType )
+    public void StartWindow(Event.RandomEventType randomEventType )
     {   
         //TODO: MOZNO BUDE DOBRE AK PREMENNE BUDU INDE A NECH SA NEONDIA STALE
         Button firstButtonControl = firstButton.GetComponent<Button>();
@@ -169,7 +169,7 @@ public class EventWindowControl : WindowControl
         
         switch (randomEventType)
         {
-            case EventManager.RandomEventType.HomelessCat:
+            case Event.RandomEventType.HomelessCat:
                 //HOMELESS_CAT
                 SetUpEventWindow("Homeless cat","You found homeless cat on the street.",
                     "HELP","ROB","");
@@ -185,7 +185,7 @@ public class EventWindowControl : WindowControl
                     uiLayer.ChangeReputation(-Major);
                 });
                 break;
-            case EventManager.RandomEventType.DiceCat:
+            case Event.RandomEventType.DiceCat:
                 //DICE_CAT
                     SetUpEventWindow("Dice cat","You see a cat playing dice. He wants to play with you.",
                     "PLAY","DECLINE","");
@@ -211,7 +211,7 @@ public class EventWindowControl : WindowControl
                     uiLayer.ChangeReputation(-Minor);
                 });
                 break;
-            case EventManager.RandomEventType.Stumble:
+            case Event.RandomEventType.Stumble:
                 //STUMBLE
                 if (!player.CheckIfDeckHasIngredient())
                 {
@@ -232,7 +232,7 @@ public class EventWindowControl : WindowControl
                 }
                 
                 break;
-            case EventManager.RandomEventType.PerfectTomatoes:
+            case Event.RandomEventType.PerfectTomatoes:
                 //PERFECT_TOMATOES
                 SetUpEventWindow("Perfect tomatoes","You see perfect tomatoes behind a fence.",
                     "CLIMB","DON'T TEMPT","");
@@ -268,7 +268,7 @@ public class EventWindowControl : WindowControl
                         uiLayer.ChangeReputation(Minor);
                     });
                 break;
-            case EventManager.RandomEventType.Cave:
+            case Event.RandomEventType.Cave:
                 //CAVE
                 SetUpEventWindow("Cave","You see entrance to a cave and some ingredients to gather nearby.",
                     "GO IN" ,"GATHER","");
@@ -312,7 +312,7 @@ public class EventWindowControl : WindowControl
                 //GATHER
                 secondButtonControl.onClick.AddListener(Gather);
                 break;
-            case EventManager.RandomEventType.StuckMerchant:
+            case Event.RandomEventType.StuckMerchant:
                 //STUCK_MERCHANT
                     SetUpEventWindow("Stuck merchant","You see a stuck merchant on the road.",
                     "HELP","IGNORE","");
@@ -342,7 +342,7 @@ public class EventWindowControl : WindowControl
                     Debug.Log("LEAVE");
                 });
                 break;
-            case EventManager.RandomEventType.Thieves:
+            case Event.RandomEventType.Thieves:
                 //THIEVES
                 SetUpEventWindow("Thieves","You see thieves trying to rob you.",
                     "FIGHT","RUN","");
@@ -358,7 +358,7 @@ public class EventWindowControl : WindowControl
     private void Stumble(Button firstButtonControl,Button secondButtonControl,Button thirdButtonControl,CardBaseInfo card)
     {
         eventCards[0].SetActive(true);
-        eventCards[0].GetComponent<Image>().sprite = card.Artwork;   
+        eventCards[0].GetComponent<Image>().sprite = card.Artwork;
         eventCards[0].GetComponentInChildren<TextMeshProUGUI>().text = $"{card.NutritionPoints}";
 
 
@@ -409,8 +409,8 @@ public class EventWindowControl : WindowControl
         });
         
         thirdButtonControl.onClick.AddListener(delegate {
-            player.Deck.Remove(player.Deck.Find(x => x == card));
-
+            //player.Deck.Remove(player.Deck.Find(x => x == card));
+            player.RemoveCardFromDeck(card.CardName);
             //eventWindowControl.Continue();
             //eventWindowControl.SetUpEventWindow("","You left the place and your ingredient too.");
         });
