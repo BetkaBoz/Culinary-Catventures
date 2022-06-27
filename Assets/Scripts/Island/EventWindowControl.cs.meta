@@ -3,7 +3,24 @@ guid: f2debf8d4e3046a4c810486812c44703
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - islandManager: {instanceID: 0}
+  - uiLayer: {instanceID: 0}
+  - player: {instanceID: 0}
+  - windowName: {instanceID: 0}
+  - windowText: {instanceID: 0}
+  - windowImage: {instanceID: 0}
+  - firstButton: {instanceID: 0}
+  - secondButton: {instanceID: 0}
+  - thirdButton: {instanceID: 0}
+  - homelessCatSprite: {instanceID: 0}
+  - diceCatSprite: {instanceID: 0}
+  - stumbleSprite: {instanceID: 0}
+  - perfectTomatoesSprite: {instanceID: 0}
+  - caveSprite: {instanceID: 0}
+  - stuckMerchantSprite: {instanceID: 0}
+  - thievesSprite: {fileID: 21300000, guid: a89e5fa26fe5c604694e0d2d03702981, type: 3}
+  - gatherSprite: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

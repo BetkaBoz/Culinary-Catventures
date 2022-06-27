@@ -2,40 +2,30 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
-public class MerchantWindowControl : WindowControl
+public class SenseiWindowControl : WindowControl
 {
-    [SerializeField] private List<GameObject> merchantCards;
+    [SerializeField] private List<GameObject> senseiCards;
 
-    //DONT USE AWAKE CAUSE IT WILL OVERRIDE FROM PARENT CLASS
-
-    
-    private void AssignMerchantCards()
+    private void AssignSenseiCards()
     {
-        foreach (GameObject card in merchantCards)
+        foreach (GameObject card in senseiCards)
         {   
 
             Image artwork = card.GetComponent<Image>();
-            Text nutritionalValue = card.GetComponentInChildren<Text>();
+            //Text nutritionalValue = card.GetComponentInChildren<Text>();
             TextMeshProUGUI price = card.GetComponentInChildren<TextMeshProUGUI>();
             Button button = card.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
             artwork.color= Color.white;
 
-            CardBaseInfo randomCard = GetRandomIngredient();
+            CardBaseInfo randomCard = GetRandomManoeuvre();
             artwork.sprite = randomCard.Artwork;
-            nutritionalValue.text = $"{randomCard.NutritionPoints}";
+            //nutritionalValue.text = $"{randomCard.NutritionPoints}";
             
             //CARD PRICE
-            if (int.Parse(nutritionalValue.text) > 8)
-            {
-                price.text =  $"{Random.Range(10, 16)}"; 
-            }
-            else
-            {
-                price.text =  $"{Random.Range(5, 11)}";  
-            }
+            price.text =  $"{Random.Range(20, 41)}"; 
+
             //BUY CARD
             button.onClick.AddListener(delegate {
                 if (player.HaveMoney(int.Parse(price.text)))
@@ -51,17 +41,9 @@ public class MerchantWindowControl : WindowControl
 
         }
     }
-    
-    
-
     public void StartWindow()
     {
-        AssignMerchantCards();
+        AssignSenseiCards();
         ShowWindow();
     }
-
-    
-    
-    //IN INSPECTOR 
-
 }

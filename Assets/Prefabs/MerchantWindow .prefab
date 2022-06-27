@@ -276,14 +276,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a3b36c35024b0994db16b11d5294d3e5, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 3
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &6413112132167085223
@@ -412,6 +412,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58205f3197f4dc0b5752971d60db007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  islandManager: {fileID: 0}
+  uiLayer: {fileID: 0}
+  player: {fileID: 0}
+  allFoodScriptableObjects: []
+  allManoeuvreScriptableObjects: []
+  timeCost: 1
   merchantCards:
   - {fileID: 2137793594037746352}
   - {fileID: 7788694357937481785}
@@ -423,7 +429,6 @@ MonoBehaviour:
   - {fileID: 1899617396004051198}
   - {fileID: 2252740909579954677}
   - {fileID: 8596279051837452442}
-  allFoodScriptableObjects: []
 --- !u!1 &7352020596664229827
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,14 +487,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.050943315, b: 0.050943315, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 78015a64409edea47be2db721f061dc5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
