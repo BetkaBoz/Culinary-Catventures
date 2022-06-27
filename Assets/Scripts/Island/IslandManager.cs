@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class IslandManager : MonoBehaviour
 {
-    [SerializeField] private int time;
+    [SerializeField] public int time;
     [SerializeField] private TextMeshProUGUI  timeText;
     [SerializeField] private GameObject grabberPrefab;
     //[SerializeField] private TextMeshProUGUI  coinText;
@@ -18,7 +18,7 @@ public class IslandManager : MonoBehaviour
     //EVENT MANAGER
     private EventManager eventManager;
     
-     public int Time => time;
+     //public int Time => time;
 
 
 
@@ -33,7 +33,7 @@ public class IslandManager : MonoBehaviour
     }
 
 
-    public void LockAllEvents()
+    private void LockAllEvents()
     {
         //List<GameObject>;
         //GameObject[] tmpEvents = GameObject.FindGameObjectsWithTag("Event");

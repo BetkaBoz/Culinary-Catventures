@@ -12,15 +12,15 @@ public class Event : MonoBehaviour
     [SerializeField] public bool isChallenge;
     [SerializeField] public EventType eventType;
     [SerializeField] public RandomEventType randomEventType; //FOR NOW
-    [SerializeField] private int timeCost = 1;
+    [SerializeField] public int timeCost = 1;
 
     public bool isUsed;
     private bool isOnEvent;
 
     //EVENT MANAGER
-    private EventManager eventManager;
+    [SerializeField]private EventManager eventManager;
     //ISLAND MANAGER
-    private IslandManager islandManager;
+    [SerializeField]private IslandManager islandManager;
     
     #endregion
 
@@ -29,7 +29,7 @@ public class Event : MonoBehaviour
 
         eventManager = FindObjectOfType<EventManager>();
         //islandManager = FindObjectOfType<IslandManager>();
-        islandManager = eventManager.islandManager;
+        islandManager = FindObjectOfType<IslandManager>();
 
         
     }
@@ -78,7 +78,6 @@ public class Event : MonoBehaviour
                     }
                 }
             }
-        
     }
     
     //URČI NÁHODNÝ TYP RANDOM EVENTU
@@ -138,14 +137,16 @@ public class Event : MonoBehaviour
     }
     
     //NABEHNUTIE HRÁČA NA EVENT
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(!isUsed && islandManager.Time > 0) eventManager.btnPrompt.text = "Press SPACE to do stuff";
+        //if(!isUsed && islandManager.time > 0) eventManager.btnPrompt.text = "Press SPACE to do stuff";
+        if (isUsed) return;
+        eventManager.btnPrompt.text = "Press SPACE to do stuff"; 
         isOnEvent = true;
         ChangeEventScale();
-
-        
     }
+   
     //ODÍDENIE HRÁČA Z EVENTU
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -156,7 +157,7 @@ public class Event : MonoBehaviour
     
     private void ActivateEvent()
     {
-        if (isOnEvent && !isUsed && Input.GetButtonDown("Jump") && (islandManager.Time > 0  || eventType == EventType.Challenge))
+        if (isOnEvent && !isUsed && Input.GetButtonDown("Jump") && (islandManager.time > 0  || eventType == EventType.Challenge))
         {
             Time.timeScale = 0;
             isUsed = true;

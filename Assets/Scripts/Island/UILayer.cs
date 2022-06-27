@@ -24,7 +24,7 @@ public class UILayer : MonoBehaviour
         UpdateUI();
     }
     
-    public void UpdateUI()
+    private void UpdateUI()
     {
         repUI.text = $"{player.Rep}";
         coinUI.text = $"{player.Money}";

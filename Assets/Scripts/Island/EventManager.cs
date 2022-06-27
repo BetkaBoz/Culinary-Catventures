@@ -55,9 +55,7 @@ public class EventManager : MonoBehaviour
         eventWindow = FindObjectOfType<EventWindowControl>();
         merchantWindow = FindObjectOfType<MerchantWindowControl>();
         senseiWindow = FindObjectOfType<SenseiWindowControl>();
-        
         islandManager = FindObjectOfType<IslandManager>();
-
     }
 
     void Start()
@@ -100,22 +98,32 @@ public class EventManager : MonoBehaviour
     //SPUSTENIE EVENTU PODLA TYPU
     public void RecognizeAndRunEvent(Event eventt)
     {
+        //WindowControl windowControl = FindObjectOfType<WindowControl>();
+        //windowControl.Init(eventt.timeCost);
+        //WindowControl.TimeCost = eventt.timeCost;
         switch (eventt.eventType)
         {
+
+                
             case Event.EventType.Merchant:
                 //Debug.Log("MERCHANT");
+                //merchantWindow.Init(eventt.timeCost);
                 merchantWindow.StartWindow();
+                
                 break;
             case Event.EventType.Random:
                 //Debug.Log("RANDOM EVENT");
+                //eventWindow.Init(eventt.timeCost);
                 eventWindow.StartWindow(eventt.randomEventType);
                 
                 break;
             case Event.EventType.Gather:
+                //eventWindow.Init(eventt.timeCost);
                 eventWindow.Gather();
                 
                 break;
             case Event.EventType.Sensei:
+                //senseiWindow.Init(eventt.timeCost);
                 senseiWindow.StartWindow();
                 
                 break;
