@@ -9,12 +9,11 @@ using TMPro;
 public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image tooltip;
-    //[SerializeField] Image delivery;
     [SerializeField] HelperSelection helper;
     [SerializeField] ActionManager ac;
     public string message, header;
 
-    private void Start()
+    private void Update()
     {
         if (ac == null) return;
             switch (ac.CurrentName)

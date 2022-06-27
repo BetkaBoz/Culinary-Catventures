@@ -152,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 857187733}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: maxHunger
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: states.Array.size
@@ -1452,7 +1452,7 @@ PrefabInstance:
       objectReference: {fileID: 857187733}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: maxHunger
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: states.Array.size
@@ -1658,7 +1658,7 @@ PrefabInstance:
       objectReference: {fileID: 857187733}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: maxHunger
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: sprites.Array.size
@@ -2469,6 +2469,7 @@ GameObject:
   - component: {fileID: 644089709}
   - component: {fileID: 644089708}
   - component: {fileID: 644089707}
+  - component: {fileID: 644089710}
   m_Layer: 5
   m_Name: Meat Delivery Button
   m_TagString: Untagged
@@ -2485,15 +2486,15 @@ RectTransform:
   m_GameObject: {fileID: 644089705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 510039379}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -300, y: 60}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: -400, y: 0}
+  m_SizeDelta: {x: 315, y: 265}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &644089707
 MonoBehaviour:
@@ -2571,7 +2572,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 435c5845d0d22bd4e90352f6ea3fa4fc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4571429aed722e64fa401405b51d16ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2589,6 +2590,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644089705}
   m_CullTransparentMesh: 1
+--- !u!114 &644089710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644089705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07697e2ef39e41a45b53f7a11a7bd3b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &706703491 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 819210364646571906, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
@@ -3775,6 +3788,7 @@ GameObject:
   - component: {fileID: 1193486886}
   - component: {fileID: 1193486888}
   - component: {fileID: 1193486887}
+  - component: {fileID: 1193486889}
   m_Layer: 5
   m_Name: Energy
   m_TagString: Untagged
@@ -3794,6 +3808,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1229504366}
+  - {fileID: 1934651659}
   m_Father: {fileID: 1692129003}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3840,6 +3855,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193486885}
   m_CullTransparentMesh: 1
+--- !u!114 &1193486889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193486885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53cfff5d9a0951469b2186dc56543f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 857187733}
+  helper: {fileID: 0}
+  ac: {fileID: 0}
+  message: Represents how much Energy Poins you have left
+  header: Energy
 --- !u!1 &1222542382
 GameObject:
   m_ObjectHideFlags: 0
@@ -3936,7 +3968,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3131453d99608a9499412498bd12a6de, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 61ae85ef11f86084886dce2c0c2b89e9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3970,8 +4002,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -150.00012, y: -50.00006}
-  m_SizeDelta: {x: 99, y: 99}
+  m_AnchoredPosition: {x: -227, y: -50}
+  m_SizeDelta: {x: 129, y: 81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1222542387
 MonoBehaviour:
@@ -4050,8 +4082,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10/10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4803,6 +4835,7 @@ GameObject:
   - component: {fileID: 1451387534}
   - component: {fileID: 1451387533}
   - component: {fileID: 1451387532}
+  - component: {fileID: 1451387535}
   m_Layer: 5
   m_Name: Mix Delivery Button
   m_TagString: Untagged
@@ -4819,15 +4852,15 @@ RectTransform:
   m_GameObject: {fileID: 1451387530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 510039379}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 300, y: 60}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 400, y: 0}
+  m_SizeDelta: {x: 315, y: 265}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1451387532
 MonoBehaviour:
@@ -4905,7 +4938,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9ee4d352297f93b4ebb388aae4d20642, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5590ee87888e2c4ab7a7ae539046222, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4923,6 +4956,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451387530}
   m_CullTransparentMesh: 1
+--- !u!114 &1451387535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451387530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07697e2ef39e41a45b53f7a11a7bd3b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1484089932
 GameObject:
   m_ObjectHideFlags: 0
@@ -5701,8 +5746,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5827,7 +5872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 0.9137255}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6033,6 +6078,7 @@ GameObject:
   - component: {fileID: 1867017093}
   - component: {fileID: 1867017092}
   - component: {fileID: 1867017091}
+  - component: {fileID: 1867017094}
   m_Layer: 5
   m_Name: Veggie Delivery Button
   m_TagString: Untagged
@@ -6049,15 +6095,15 @@ RectTransform:
   m_GameObject: {fileID: 1867017089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 510039379}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 315, y: 265}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1867017091
 MonoBehaviour:
@@ -6135,7 +6181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a5d138e883ebc5a4997dcb159ce24033, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c9b68d371f798ec4a9882f7d2007bc59, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6153,6 +6199,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867017089}
   m_CullTransparentMesh: 1
+--- !u!114 &1867017094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867017089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07697e2ef39e41a45b53f7a11a7bd3b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1879272006
 GameObject:
   m_ObjectHideFlags: 0
@@ -6435,6 +6493,7 @@ MonoBehaviour:
   exhaustPile: []
   buffs: []
   emergencyDelivery: {fileID: 1222542383}
+  energyNotification: {fileID: 1934651660}
   combinePhase: 0
   discardPhase: 0
   count: 0
@@ -6454,6 +6513,81 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1934651658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1934651659}
+  - component: {fileID: 1934651661}
+  - component: {fileID: 1934651660}
+  m_Layer: 5
+  m_Name: Energy Notification
+  m_TagString: Notification
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1934651659
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934651658}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1193486886}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 139.16998, y: -32}
+  m_SizeDelta: {x: 290, y: 122}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1934651660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934651658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: cfb4448d9b058c340976cf3913d5b799, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1934651661
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934651658}
+  m_CullTransparentMesh: 1
 --- !u!114 &1934935300 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
@@ -6765,6 +6899,7 @@ GameObject:
   - component: {fileID: 2053219797}
   - component: {fileID: 2053219799}
   - component: {fileID: 2053219798}
+  - component: {fileID: 2053219800}
   m_Layer: 5
   m_Name: Rep
   m_TagString: Untagged
@@ -6830,6 +6965,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053219796}
   m_CullTransparentMesh: 1
+--- !u!114 &2053219800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053219796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53cfff5d9a0951469b2186dc56543f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 857187733}
+  helper: {fileID: 0}
+  ac: {fileID: 0}
+  message: Represents customers satisfaction. If you lose all Reputation Points it's
+    Game Over!
+  header: Reputation
 --- !u!224 &2054681349 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7251360434902969133, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
@@ -7390,7 +7543,7 @@ PrefabInstance:
       objectReference: {fileID: 857187733}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: maxHunger
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -1382971902171194464, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
       propertyPath: sprites.Array.size
@@ -7760,6 +7913,10 @@ PrefabInstance:
       propertyPath: gm
       value: 
       objectReference: {fileID: 1912536889}
+    - target: {fileID: 7035721363036107428, guid: 88fa943755599bf428f91877c0cef97a, type: 3}
+      propertyPath: handIndex
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7035721363036107428, guid: 88fa943755599bf428f91877c0cef97a, type: 3}
       propertyPath: arrowHandler
       value: 

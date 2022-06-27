@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public enum BattleState { PLAYERTURN, ENEMYTURN, WON, LOST }
 public class GameManager : MonoBehaviour
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<Card> exhaustPile = new List<Card>();
     [SerializeField] List<IBuffable> buffs = new List<IBuffable>();
     [SerializeField] Button emergencyDelivery;//emergency delivery code
+    [SerializeField] Image energyNotification;
     #endregion
 
     int numOfCards = 0;//right now useless
@@ -76,6 +78,17 @@ public class GameManager : MonoBehaviour
             deck.Add(newCard);
         }
         player.canCallEmergencyDelivery = false;
+    }
+
+    public void ShowNotification()
+    {
+        energyNotification.gameObject.SetActive(true);
+        energyNotification.DOFade(1f, 1f).OnComplete(() => {
+            energyNotification.DOFade(0, 2f).OnComplete(() =>
+            {
+                energyNotification.gameObject.SetActive(false);
+            });
+        });
     }
     
     #region Player Functions
@@ -295,6 +308,7 @@ public class GameManager : MonoBehaviour
         if (isReturning)
         {
             highlightSlot.Hide(true);
+            highlightSlot.HandIndex = -1;
             cardSlots[idx].MakeInvisible(false);
             cardSlots[idx].Rise(false);
             for (int i = 0; i < cardSlots.Length; i++)

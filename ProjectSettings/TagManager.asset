@@ -13,6 +13,7 @@ TagManager:
   - Action
   - Customer
   - Event
+  - Notification
   layers:
   - Default
   - TransparentFX
