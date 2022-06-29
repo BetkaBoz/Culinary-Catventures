@@ -34,9 +34,9 @@ public class EventManager : MonoBehaviour
     
     //private bool isOnEvent;
     
-    public int merchantCount ;
-    public int senseiCount;
-    public int gatherCount;
+    [HideInInspector]public int merchantCount ;
+    [HideInInspector]public int senseiCount;
+    [HideInInspector]public int gatherCount;
 
     //CONSTANTS
     public const int MaxMerchantCount = 1;

@@ -13,6 +13,7 @@ public class Event : MonoBehaviour
     [SerializeField] public EventType eventType;
     [SerializeField] public RandomEventType randomEventType; //FOR NOW
     [SerializeField] public int timeCost = 1;
+    [SerializeField] private CircleCollider2D circleCollider2D;
 
     public bool isUsed;
     private bool isOnEvent;
@@ -30,7 +31,7 @@ public class Event : MonoBehaviour
         eventManager = FindObjectOfType<EventManager>();
         //islandManager = FindObjectOfType<IslandManager>();
         islandManager = FindObjectOfType<IslandManager>();
-
+        circleCollider2D = GetComponentInChildren<CircleCollider2D>();
         
     }
     // Start is called before the first frame update
@@ -121,8 +122,10 @@ public class Event : MonoBehaviour
     //ZMENENIE VELKOSTI SPRITU EVENTU
     private void ChangeEventScale( )
     {
-        //CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
-        //circleCollider2D.enabled = false;
+        CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
+        Debug.Log("TUUU");
+        circleCollider2D.isTrigger = false;
+        //circleCollider2D.enabled = !circleCollider2D.enabled;
         if (!isUsed)
         {
             if (isOnEvent)
@@ -134,12 +137,18 @@ public class Event : MonoBehaviour
                 transform.localScale = new Vector3(1, 1, 1);
             }
         }
+        //circleCollider2D.enabled =!circleCollider2D.enabled;
+        circleCollider2D.isTrigger = true;
+
+        //Debug.Log("TUUU");
+
     }
     
     //NABEHNUTIE HRÁČA NA EVENT
     
     private void OnTriggerEnter2D(Collider2D col)
     {
+        Debug.Log("dsds");
         //if(!isUsed && islandManager.time > 0) eventManager.btnPrompt.text = "Press SPACE to do stuff";
         if (isUsed) return;
         eventManager.btnPrompt.text = "Press SPACE to do stuff"; 

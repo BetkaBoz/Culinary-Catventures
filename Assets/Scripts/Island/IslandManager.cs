@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class IslandManager : MonoBehaviour
     [SerializeField] private GameObject grabberPrefab;
     //[SerializeField] private TextMeshProUGUI  coinText;
     //[SerializeField] private TextMeshProUGUI  repText; IN UILayer
-    [SerializeField] private Light sun;
+    [SerializeField] private Light2D sun;
     [SerializeField] private GameObject playerLight;
     
     [SerializeField] private GameObject lights;
@@ -25,8 +26,9 @@ public class IslandManager : MonoBehaviour
     private void Awake()
     {
         timeText.text = "Time: " + time;
-        sun  = GameObject.FindGameObjectWithTag("Light").GetComponent<Light>();
-        playerLight  = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
+        sun  = GameObject.FindGameObjectWithTag("Light").GetComponent<Light2D>();
+        //playerLight  = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
+        //playerLight = FindObjectOfType<Player>().GetComponentInChildren<Light2D>().gameObject;
         eventManager = FindObjectOfType<EventManager>();
 
         LightControl();
@@ -67,6 +69,7 @@ public class IslandManager : MonoBehaviour
         }
         timeText.text = "Time: " + time;
     }
+    
     private void StartGrabber()
     {
         //GameObject grabber = Instantiate(grabberPrefab, transform.position, Quaternion.identity) as GameObject;
@@ -82,26 +85,26 @@ public class IslandManager : MonoBehaviour
         Debug.Log(nameof(EasterEgg)+"!");
     }
 
-    
+    //MENENIE SVETIEL PODLA CASU NA MAPE
     private void LightControl()
     {
-        sun.intensity = time * 0.2f;
+        sun.intensity = 0.2f + time * 0.2f ;
 
-        if (sun.intensity <= 0.4)
+        if (sun.intensity < 0.6)
         {
             lights.SetActive(true);
-            playerLight.SetActive(true);
+            //playerLight.SetActive(true);
             
         }
         else
         {            
             lights.SetActive(false);
-            playerLight.SetActive(false);
+            //playerLight.SetActive(false);
 
         }
     }
     
-    //Spusti scénu boja
+    //SPUSTI SCÉNU BOJA
     public void StartBattle()
     {
         //Uloženie hodnôt do PLAYERPREFS
