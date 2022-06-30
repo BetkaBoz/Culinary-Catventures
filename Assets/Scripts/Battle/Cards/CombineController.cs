@@ -13,6 +13,7 @@ public class CombineController : MonoBehaviour
     //[SerializeField] private ManouverTargetController targetController; 
     [SerializeField] Button combineBttn;
     [SerializeField] GameObject cardPrefab;
+    [SerializeField] Text combineText;
     Card result = null;
 
     //This class is used to load individual entries in the JSON file
@@ -69,6 +70,7 @@ public class CombineController : MonoBehaviour
         if (!gm.combinePhase)
         {
             this.gameObject.SetActive(true);
+            combineText.gameObject.SetActive(true);
             //targetController.setPos(false);
             combineBttn.onClick.RemoveAllListeners();
             combineBttn.onClick.AddListener(CombineCard);
@@ -81,6 +83,7 @@ public class CombineController : MonoBehaviour
             result = null;
             findSlot.gameObject.SetActive(false);
             this.gameObject.SetActive(false);
+            combineText.gameObject.SetActive(false);
         }
     }
 

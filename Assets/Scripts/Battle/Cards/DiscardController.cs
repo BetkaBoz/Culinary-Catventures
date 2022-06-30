@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DiscardController : MonoBehaviour
 {
     [SerializeField] private ManouverTargetController targetController;
-    [SerializeField] private Text header;
+    [SerializeField] private Text discardText;
     [SerializeField] private Transform cardSlot;
     [SerializeField] private GameManager gm;
     [SerializeField] private Button discardBttn;
@@ -35,6 +35,7 @@ public class DiscardController : MonoBehaviour
         if (!gm.discardPhase)
         {
             this.gameObject.SetActive(true);
+            discardText.gameObject.SetActive(true);
             targetController.SetPos(false);
             discardBttn.onClick.RemoveAllListeners();
             discardBttn.onClick.AddListener(DiscardCard);
@@ -45,6 +46,7 @@ public class DiscardController : MonoBehaviour
             targetController.SetPos(true);
             discardBttn.interactable = false;
             this.gameObject.SetActive(false);
+            discardText.gameObject.SetActive(false);
         }
     }
 
