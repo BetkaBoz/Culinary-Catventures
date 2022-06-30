@@ -1107,7 +1107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &392254305
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4710,7 +4710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1415203266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4724,7 +4724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetController: {fileID: 87699217}
-  header: {fileID: 0}
+  discardText: {fileID: 392254306}
   cardSlot: {fileID: 340902559}
   gm: {fileID: 1912536889}
   discardBttn: {fileID: 709476894}
@@ -4833,6 +4833,7 @@ MonoBehaviour:
   gm: {fileID: 1912536889}
   combineBttn: {fileID: 709476894}
   cardPrefab: {fileID: 3836495396805580827, guid: b7eabd4db9bf7e040bf943b9a66dcd81, type: 3}
+  combineText: {fileID: 1998711993}
 --- !u!1 &1439880446
 GameObject:
   m_ObjectHideFlags: 0
@@ -7066,7 +7067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1998711992
 RectTransform:
   m_ObjectHideFlags: 0
