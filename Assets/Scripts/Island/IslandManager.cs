@@ -46,7 +46,7 @@ public class IslandManager : MonoBehaviour
             if (!@event.isChallenge)
             {
                 @event.isUsed = true;
-                @event.GetComponent<Image>().color = new Color32(125,125,125,255);
+                @event.GetComponentInChildren<Image>().color = new Color32(125,125,125,255);
             }
         }
     }
