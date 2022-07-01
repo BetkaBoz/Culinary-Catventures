@@ -9,13 +9,14 @@ public class IslandManager : MonoBehaviour
     [SerializeField] public int time;
     [SerializeField] private TextMeshProUGUI  timeText;
     [SerializeField] private GameObject grabberPrefab;
+    [SerializeField] private GameObject easterEggGrabberPrefab;
+
     //[SerializeField] private TextMeshProUGUI  coinText;
     //[SerializeField] private TextMeshProUGUI  repText; IN UILayer
     [SerializeField] private Light2D sun;
     [SerializeField] private GameObject playerLight;
     
     [SerializeField] private GameObject lights;
-
     //EVENT MANAGER
     private EventManager eventManager;
     
@@ -37,6 +38,7 @@ public class IslandManager : MonoBehaviour
 
     private void LockAllEvents()
     {
+        
         //List<GameObject>;
         //GameObject[] tmpEvents = GameObject.FindGameObjectsWithTag("Event");
         //List<EventManager> Events = new List<EventManager>();
@@ -63,7 +65,7 @@ public class IslandManager : MonoBehaviour
         {
             time = 0;
             LockAllEvents();
-            Invoke(nameof(StartGrabber),20f);
+            Invoke(nameof(StartGrabber),2f);
            
             
         }
@@ -76,13 +78,17 @@ public class IslandManager : MonoBehaviour
         //grabber.transform.position = new Vector3(grabber.transform.position.x, grabber.transform.position.y, 20);
         //Debug.Log(grabber.transform.position.z);
         Instantiate(grabberPrefab);
-        Invoke(nameof(EasterEgg),20f);
+        Invoke(nameof(GrabberEasterEgg),2f);
     }
 
-    private void EasterEgg()
+    private void GrabberEasterEgg()
     {
         //TODO EASTER EGG
-        Debug.Log(nameof(EasterEgg)+"!");
+        Debug.Log(nameof(GrabberEasterEgg)+"!");
+        Instantiate(easterEggGrabberPrefab);
+        Invoke(nameof(StartBattle),2f);
+
+        
     }
 
     //MENENIE SVETIEL PODLA CASU NA MAPE
