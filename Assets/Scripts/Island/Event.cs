@@ -14,6 +14,8 @@ public class Event : MonoBehaviour
     [SerializeField] public RandomEventType randomEventType; //FOR NOW
     [SerializeField] public int timeCost = 1;
     [SerializeField] private Image imageComponent;
+    [SerializeField] private Material eventGlowMaterial;
+
     //[SerializeField] private CircleCollider2D circleCollider2D;
     
     public bool isUsed;
@@ -126,11 +128,14 @@ public class Event : MonoBehaviour
         if (isOnEvent)
         {
             imageComponent.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1);
+            imageComponent.material = eventGlowMaterial;
 
         }
         else
         {
             imageComponent.gameObject.transform.localScale = new Vector3(1, 1, 1);
+            imageComponent.material = null;
+
         }
         
     }
@@ -167,6 +172,8 @@ public class Event : MonoBehaviour
             eventManager.RecognizeAndRunEvent(this);
             imageComponent.color = new Color32(125,125,125,255);
             imageComponent.gameObject.transform.localScale = new Vector3(1, 1, 1);
+            imageComponent.material = null;
+
         }
     }
     
