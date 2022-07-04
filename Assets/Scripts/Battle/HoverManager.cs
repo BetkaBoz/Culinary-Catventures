@@ -18,6 +18,10 @@ public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (ac == null) return;
             switch (ac.CurrentName)
             {
+                case "leave debuff":
+                    message = "Customer will leave next round!";
+                header = "";
+                break;
                 case "rep debuff":
                     message = "If customer won't be fed this round, they will take your Reputation Points";
                     header = "Reputation Debuff";

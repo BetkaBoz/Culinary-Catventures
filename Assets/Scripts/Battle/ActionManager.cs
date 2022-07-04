@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class ActionManager : MonoBehaviour
 {
-    public Image Image;
     [SerializeField] List<Sprite> Sprites;
-
+    [SerializeField] Customer customer;
+    public Image Image;
     public int CurrentIndex { get; private set; }
     public string CurrentName { get; private set; }
 
@@ -20,8 +20,18 @@ public class ActionManager : MonoBehaviour
 
     public void Suffle()
     {
-        CurrentIndex = UnityEngine.Random.Range(0, Sprites.Count);
-        Image.sprite = Sprites[CurrentIndex];
-        CurrentName = Sprites[CurrentIndex].name;
+        Debug.Log(customer.TurnsLeft);
+        if(customer.TurnsLeft == 1)
+        {
+            Image.sprite = Sprites[0];
+            CurrentName = Sprites[0].name;
+        }
+        else
+        {
+            CurrentIndex = UnityEngine.Random.Range(1, Sprites.Count);
+            Image.sprite = Sprites[CurrentIndex];
+            CurrentName = Sprites[CurrentIndex].name;
+            
+        }
     }
 }

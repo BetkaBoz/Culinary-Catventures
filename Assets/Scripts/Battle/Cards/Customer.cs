@@ -19,16 +19,16 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     [SerializeField] Image States;
     [SerializeField] List<Sprite> sprites;
     [SerializeField] GameObject debuffs;
-    [SerializeField] Player player;
-    private int currHunger;
-    private byte numTurnsStunned;
-    private bool satisfied = false;
-    private bool isDead = false;
+    int currHunger;
+    byte numTurnsStunned;
+    bool satisfied = false;
+    bool isDead = false;
     public int money = 0;
     public int rep = 0;
     public int Money => money;
     public int Rep => rep;
     public int MaxHunger => maxHunger;
+    public byte TurnsLeft => turnsUntilAngry;
 
     private void Awake()
     {
@@ -45,10 +45,10 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         {
             switch (ac.CurrentIndex)
             {
-                case 0:
+                case 1:
                     gm.HurtPlayer(5);
                     break;
-                case 1:
+                case 2:
                     GameObject temp = Instantiate(debuffs);
                     gm.BuffPlayer(temp.GetComponent<IBuffable>());
                     break;
@@ -76,11 +76,10 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
         //or cause reputation demage on player
         if (turnsUntilAngry == 0)
         {
-            if (currHunger >= maxHunger / 1.2f) gm.Player.TakeDamage(25); 
-            else if (currHunger >= maxHunger / 2)
+            if (currHunger >= maxHunger / 2)
             {
-                money += 5;
-                rep += 5;
+                gm.Player.TakeDamage(50);
+                money -= 50;
             }
             else if (currHunger >= maxHunger / 3)
             {
@@ -94,7 +93,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             }
             Die(true);
             gm.Player.ChangeMoney(money);
-            player.earnedRep += rep;
+            gm.Player.earnedRep += rep;
             //gm.Player.ChangeReputation(rep);
             return true;
         }
@@ -130,7 +129,7 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
             money += 50;
             rep += 50;
             gm.Player.ChangeMoney(money);
-            player.earnedRep += rep;
+            gm.Player.earnedRep += rep;
             //gm.Player.ChangeReputation(rep);
         }
     }
