@@ -10,7 +10,7 @@ public abstract class WindowControl : MonoBehaviour
     [SerializeField] private List<CardBaseInfo> allFoodScriptableObjects;
     [SerializeField] private List<CardBaseInfo> allManoeuvreScriptableObjects;
 
-     public static int TimeCost = 1;
+     private static int TimeCost = 1;
     
     //DONT USE AWAKE IN CHILDREN CLASS CAUSE IT WILL OVERRIDE METHOD IN PARENT
     private void Awake()
@@ -31,7 +31,7 @@ public abstract class WindowControl : MonoBehaviour
     public void Init(int timeCost)
     {
         //Debug.Log("TimeCost initialized to " + timeCost);
-        WindowControl.TimeCost = timeCost;
+        TimeCost = timeCost;
     }
     
     private void HideWindow()
@@ -46,8 +46,10 @@ public abstract class WindowControl : MonoBehaviour
     public void CloseEvent()
     {
         Time.timeScale = 1;
+        EventManager.IsInEvent = false;
         islandManager.LowerTime(TimeCost);
         HideWindow();
+        
     }
     private void GetAllCards()
     {
