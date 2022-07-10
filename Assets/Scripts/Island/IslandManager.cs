@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,25 +10,27 @@ public class IslandManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timeText;
 
     [SerializeField] private GameObject grabberPrefab;
+    [SerializeField] private GameObject easterEggGrabberPrefab;
 
     //[SerializeField] private TextMeshProUGUI  coinText;
     //[SerializeField] private TextMeshProUGUI  repText; IN UILayer
-    [SerializeField] private Light sun;
+    [SerializeField] private Light2D sun;
     [SerializeField] private GameObject playerLight;
-
+    
     [SerializeField] private GameObject lights;
-
     //EVENT MANAGER
     private EventManager eventManager;
+    
+     //public int Time => time;
 
-    //public int Time => time;
 
 
     private void Awake()
     {
         timeText.text = "Time: " + time;
-        sun = GameObject.FindGameObjectWithTag("Light").GetComponent<Light>();
-        playerLight = GameObject.FindGameObjectWithTag("PlayerCharacter").transform.GetChild(0).gameObject;
+        sun  = GameObject.FindGameObjectWithTag("Light").GetComponent<Light2D>();
+        //playerLight  = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
+        //playerLight = FindObjectOfType<Player>().GetComponentInChildren<Light2D>().gameObject;
         eventManager = FindObjectOfType<EventManager>();
 
         LightControl();
@@ -36,6 +39,7 @@ public class IslandManager : MonoBehaviour
 
     private void LockAllEvents()
     {
+        
         //List<GameObject>;
         //GameObject[] tmpEvents = GameObject.FindGameObjectsWithTag("Event");
         //List<EventManager> Events = new List<EventManager>();
@@ -45,7 +49,7 @@ public class IslandManager : MonoBehaviour
             if (!@event.isChallenge)
             {
                 @event.isUsed = true;
-                @event.GetComponent<Image>().color = new Color32(125, 125, 125, 255);
+                @event.GetComponentInChildren<Image>().color = new Color32(125,125,125,255);
             }
         }
     }
@@ -62,45 +66,52 @@ public class IslandManager : MonoBehaviour
         {
             time = 0;
             LockAllEvents();
-            Invoke(nameof(StartGrabber), 20f);
+            Invoke(nameof(StartGrabber),2f);
+           
         }
 
         timeText.text = "Time: " + time;
     }
-
+    
     private void StartGrabber()
     {
         //GameObject grabber = Instantiate(grabberPrefab, transform.position, Quaternion.identity) as GameObject;
         //grabber.transform.position = new Vector3(grabber.transform.position.x, grabber.transform.position.y, 20);
         //Debug.Log(grabber.transform.position.z);
         Instantiate(grabberPrefab);
-        Invoke(nameof(EasterEgg), 20f);
+        Invoke(nameof(GrabberEasterEgg),2f);
     }
 
-    private void EasterEgg()
+    private void GrabberEasterEgg()
     {
         //TODO EASTER EGG
-        Debug.Log(nameof(EasterEgg) + "!");
+        Debug.Log(nameof(GrabberEasterEgg)+"!");
+        Instantiate(easterEggGrabberPrefab);
+        Invoke(nameof(StartBattle),2f);
+
+        
     }
 
-
+    //MENENIE SVETIEL PODLA CASU NA MAPE
     private void LightControl()
     {
-        sun.intensity = time * 0.2f;
+        sun.intensity = 0.2f + time * 0.2f ;
 
-        if (sun.intensity <= 0.4)
+        if (sun.intensity < 0.6)
         {
             lights.SetActive(true);
-            playerLight.SetActive(true);
+            //playerLight.SetActive(true);
+            
         }
         else
-        {
+        {            
             lights.SetActive(false);
-            playerLight.SetActive(false);
+            //playerLight.SetActive(false);
+
         }
     }
-
-    //Spusti scénu boja
+    
+    //SPUSTI SCÉNU BOJA
     public void StartBattle()
     {
         //Uloženie hodnôt do PLAYERPREFS

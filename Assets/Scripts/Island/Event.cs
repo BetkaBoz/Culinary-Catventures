@@ -13,7 +13,11 @@ public class Event : MonoBehaviour
     [SerializeField] public EventType eventType;
     [SerializeField] public RandomEventType randomEventType; //FOR NOW
     [SerializeField] public int timeCost = 1;
+    [SerializeField] private Image imageComponent;
+    [SerializeField] private Material eventGlowMaterial;
 
+    //[SerializeField] private CircleCollider2D circleCollider2D;
+    
     public bool isUsed;
     private bool isOnEvent;
 
@@ -26,11 +30,10 @@ public class Event : MonoBehaviour
 
     private void Awake()
     {
+        imageComponent = GetComponentInChildren<Image>();
 
         eventManager = FindObjectOfType<EventManager>();
-        //islandManager = FindObjectOfType<IslandManager>();
         islandManager = FindObjectOfType<IslandManager>();
-
         
     }
     // Start is called before the first frame update
@@ -91,8 +94,8 @@ public class Event : MonoBehaviour
     //PRIRADÍ SPRITE PODĹA TYPU EVENTU
     public void AssignSprite()
     {
-        Image imageComponent = GetComponent<Image>();
-        
+        //Image imageComponent = GetComponent<Image>();
+
         switch (eventType)
         {
             case EventType.Random:
@@ -121,25 +124,28 @@ public class Event : MonoBehaviour
     //ZMENENIE VELKOSTI SPRITU EVENTU
     private void ChangeEventScale( )
     {
-        //CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
-        //circleCollider2D.enabled = false;
-        if (!isUsed)
+        //if (!isUsed)  return;
+        if (isOnEvent)
         {
-            if (isOnEvent)
-            {
-                transform.localScale = new Vector3(1.5f, 1.5f, 1);
-            }
-            else
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
+            imageComponent.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1);
+            imageComponent.material = eventGlowMaterial;
+
         }
+        else
+        {
+            imageComponent.gameObject.transform.localScale = new Vector3(1, 1, 1);
+            imageComponent.material = null;
+
+        }
+        
     }
     
     //NABEHNUTIE HRÁČA NA EVENT
     
     private void OnTriggerEnter2D(Collider2D col)
     {
+        //Debug.Log(gameObject.name + " Collided");
+
         //if(!isUsed && islandManager.time > 0) eventManager.btnPrompt.text = "Press SPACE to do stuff";
         if (isUsed) return;
         eventManager.btnPrompt.text = "Press SPACE to do stuff"; 
@@ -148,8 +154,9 @@ public class Event : MonoBehaviour
     }
    
     //ODÍDENIE HRÁČA Z EVENTU
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D col)
     {
+        //Debug.Log(gameObject.name + " Leaved");
         eventManager.ClearBtnPrompt();
         isOnEvent = false;
         ChangeEventScale();
@@ -163,8 +170,10 @@ public class Event : MonoBehaviour
             isUsed = true;
             eventManager.ClearBtnPrompt();
             eventManager.RecognizeAndRunEvent(this);
-            GetComponent<Image>().color = new Color32(125,125,125,255);
-            transform.localScale = new Vector3(1, 1, 1);
+            imageComponent.color = new Color32(125,125,125,255);
+            imageComponent.gameObject.transform.localScale = new Vector3(1, 1, 1);
+            imageComponent.material = null;
+
         }
     }
     

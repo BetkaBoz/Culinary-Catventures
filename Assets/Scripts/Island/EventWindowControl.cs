@@ -339,7 +339,7 @@ public class EventWindowControl : WindowControl
                     SetUpEventWindow("","You went the other way and ignored him.");
                     uiLayer.ChangeReputation(-Minor);
 
-                    Debug.Log("LEAVE");
+                    //Debug.Log("LEAVE");
                 });
                 break;
             case Event.RandomEventType.Thieves:
