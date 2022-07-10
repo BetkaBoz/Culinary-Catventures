@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class EventManager : MonoBehaviour
 {
-    #region Private Vars
+    #region Vars
     //[SerializeField] private bool isChallenge;
     //[SerializeField] private EventType eventType;
     //[SerializeField] private RandomEventType randomEventType; 
@@ -32,18 +32,20 @@ public class EventManager : MonoBehaviour
     //ISLAND MANAGER
     public IslandManager islandManager;
     
-    //private bool isOnEvent;
+    public static bool IsInEvent;
     
     [HideInInspector]public int merchantCount ;
     [HideInInspector]public int senseiCount;
     [HideInInspector]public int gatherCount;
-
+    
+    
+    
     //CONSTANTS
     public const int MaxMerchantCount = 1;
     public const int MaxSenseiCount = 1;
     public const int MaxGatherCount = 2;
 
-
+    
     //private bool canShowEventWindow = true;
 
     
@@ -62,8 +64,6 @@ public class EventManager : MonoBehaviour
     {
         AssignRandomTypes();
         ClearBtnPrompt();
-        //AssignRandomType();
-        //AssignSprite();
     }
 
 

@@ -18,13 +18,17 @@ public class Event : MonoBehaviour
 
     //[SerializeField] private CircleCollider2D circleCollider2D;
     
-    public bool isUsed;
+    private bool isUsed;
     private bool isOnEvent;
+
+
 
     //EVENT MANAGER
     [SerializeField]private EventManager eventManager;
     //ISLAND MANAGER
     [SerializeField]private IslandManager islandManager;
+    //PLAYER CHARACTER
+    [SerializeField]private GameObject playerCharacter;
     
     #endregion
 
@@ -34,6 +38,8 @@ public class Event : MonoBehaviour
 
         eventManager = FindObjectOfType<EventManager>();
         islandManager = FindObjectOfType<IslandManager>();
+        playerCharacter = GameObject.FindGameObjectWithTag("PlayerCharacter");
+
         
     }
     // Start is called before the first frame update
@@ -47,8 +53,11 @@ public class Event : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if ( Input.GetButtonDown("Jump"))
+        {
+            ActivateEvent();
+        }
         //SPUSTENIE EVENTU AK HO AKTIVUJEME
-        ActivateEvent();
     }
     
     //URČI TYP EVENTU, CHALLENGE SA NASTAVUJE Z INŠPEKTORA
@@ -124,12 +133,10 @@ public class Event : MonoBehaviour
     //ZMENENIE VELKOSTI SPRITU EVENTU
     private void ChangeEventScale( )
     {
-        //if (!isUsed)  return;
         if (isOnEvent)
         {
             imageComponent.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1);
             imageComponent.material = eventGlowMaterial;
-
         }
         else
         {
@@ -137,11 +144,9 @@ public class Event : MonoBehaviour
             imageComponent.material = null;
 
         }
-        
     }
     
     //NABEHNUTIE HRÁČA NA EVENT
-    
     private void OnTriggerEnter2D(Collider2D col)
     {
         //Debug.Log(gameObject.name + " Collided");
@@ -161,21 +166,78 @@ public class Event : MonoBehaviour
         isOnEvent = false;
         ChangeEventScale();
     }
-    
+
+    private void OnMouseUp()
+    {
+        if (EventManager.IsInEvent) return;
+        ActivateEvent();
+    }
+
+    private void OnMouseEnter()
+    {
+        if (isUsed || EventManager.IsInEvent ) return;
+        isOnEvent = true;
+        ChangeEventScale();
+
+    }
+
+    private void OnMouseExit()
+    {
+        isOnEvent = false;
+        ChangeEventScale();
+
+    }
+
+
     private void ActivateEvent()
     {
-        if (isOnEvent && !isUsed && Input.GetButtonDown("Jump") && (islandManager.time > 0  || eventType == EventType.Challenge))
+        if (isOnEvent && !isUsed  && (islandManager.time > 0  || eventType == EventType.Challenge))
         {
+            EventManager.IsInEvent = true;
             Time.timeScale = 0;
-            isUsed = true;
             eventManager.ClearBtnPrompt();
             eventManager.RecognizeAndRunEvent(this);
-            imageComponent.color = new Color32(125,125,125,255);
-            imageComponent.gameObject.transform.localScale = new Vector3(1, 1, 1);
-            imageComponent.material = null;
-
+            LockEvent();
+            MoveCharacterToEvent();
         }
     }
+    //ZAMKNUTIE EVENTU / NEMOZE SA UZ SPUSTIT
+    public void LockEvent()
+    {
+        isUsed = true;
+        imageComponent.color = new Color32(125,125,125,255);
+        imageComponent.gameObject.transform.localScale = new Vector3(1, 1, 1);
+        imageComponent.material = null;
+    }
+    //OBJAVENIE HRACA PRI POUZITOM EVENTE
+    private void MoveCharacterToEvent()
+    {
+        Vector3 position = transform.position;
+        Vector3 scale = playerCharacter.transform.localScale;
+
+        //AK JE EVENT NA PRAVEJ STRANE OSTROVA
+        if (transform.position.x >= 0)
+        {
+            position.x -= 0.60f;
+            //POZERA SA DO PRAVA
+            if (playerCharacter.transform.localScale.x < 0)
+            {
+                scale.x *= -1;
+            }
+        }
+        else
+        {
+            position.x += 0.60f;
+
+            if (playerCharacter.transform.localScale.x > 0)
+            {
+                scale.x *= -1;
+            }
+        }
+        playerCharacter.transform.position = position;
+        playerCharacter.transform.localScale = scale;
+    }
+    
     
     public enum EventType{
         Random = 1,

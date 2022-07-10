@@ -294,7 +294,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             foreach (CardBaseInfo tmpCard in deck)
             {
-                if (tmpCard.CardType == "Vegetarian" || tmpCard.CardType == "Meat")
+                if (tmpCard.CardType == "Vegetarian" || tmpCard.CardType == "Meat"|| tmpCard.CardType == "Mix" )
                 {
                     card = tmpCard;
                     return card;
@@ -322,7 +322,7 @@ public class Player : MonoBehaviour, IDamageable
 
         foreach (CardBaseInfo tmpCard in deck)
         {
-            if (tmpCard.CardType == "Vegetarian" || tmpCard.CardType == "Meat")
+            if (tmpCard.CardType == "Vegetarian" || tmpCard.CardType == "Meat" || tmpCard.CardType == "Mix"  )
             {
                 return true;
             }

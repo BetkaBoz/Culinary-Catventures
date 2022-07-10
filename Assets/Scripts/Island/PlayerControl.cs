@@ -7,7 +7,6 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D body;
     private bool isDisabled = false;
     private Transform challengePosition;
-    private Vector3 newPosition;
     
     private void Awake()
     {
@@ -21,40 +20,38 @@ public class PlayerControl : MonoBehaviour
     private bool moving = false;
 
 
-    private void Start()
-    {
-        newPosition = transform.position;
 
+    
+    
+    private void FixedUpdate()
+    {
+        if(!isDisabled) MovePlayer();
         
-        //Time.timeScale = 1;
+       
+    }
+    
+    //HÝBANIE HRÁČOM
+    private void MovePlayer()
+    {
+        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputY = Input.GetAxisRaw("Vertical");
+        FlipSprite(inputX);
+        body.velocity = new Vector2(inputX * movementSpeed, inputY * movementSpeed);
+    }
+    //OTÁČANIE SPRITU HRÁČA PODĽA HÝBANIA
+    private void FlipSprite(float inputX)
+    {
+        if (inputX != 0 && inputX != transform.localScale.x)
+        {
+            var localScale = transform.localScale;
+            localScale = new Vector3(inputX * Math.Abs(localScale.x) , localScale.y, localScale.z);
+            transform.localScale = localScale;
+        }
     }
 
-    private void Update()
+    
+    private void MovePlayerByMouse()
     {
-        /*
-        if (Input.GetMouseButtonDown(0))
-        {
-            //Debug.Log("MovePlayer");
-
-            RaycastHit hit = default;
-            if (!Camera.main)
-            {
-                Debug.Log("CAMERA NULL");
-                return;   
-            }
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.Log("Ray"+ ray);
-            Debug.Log("hit"+ hit.transform);
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                Debug.Log("Raycast");
-
-                newPosition = hit.point;
-                transform.position = newPosition;
-            }
-        }*/
-        
         if(Input.GetMouseButtonDown(0))
         {
             lastClickedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -70,32 +67,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
     
-    
-    private void FixedUpdate()
-    {
-        if(!isDisabled) MovePlayer();
-        
-       
-    }
-    
-    //Hýbanie hráčom
-    private void MovePlayer()
-    {
-        float inputX = Input.GetAxisRaw("Horizontal");
-        float inputY = Input.GetAxisRaw("Vertical");
-        FlipSprite(inputX);
-        body.velocity = new Vector2(inputX * movementSpeed, inputY * movementSpeed);
-    }
-    //Otáčanie spritu hráča podľa hýbania
-    private void FlipSprite(float inputX)
-    {
-        if (inputX != 0 && inputX != transform.localScale.x)
-        {
-            transform.localScale = new Vector3(inputX * Math.Abs(transform.localScale.x) , transform.localScale.y, transform.localScale.z);
-        }
-    }
-    
-    //Nehýbanie hráča, keď ho berie ruka
+    //NEHÝBANIE HRÁČA, KEĎ HO BERIE RUKA
     public void DragPlayer(float speed)
     {
         isDisabled = true;
