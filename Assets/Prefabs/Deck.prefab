@@ -196,7 +196,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1495006789235466186}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: WindowControl, Assembly-CSharp
         m_MethodName: CloseEvent
         m_Mode: 1
@@ -352,7 +352,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4332524762010643996}
   - component: {fileID: 6535824959481980372}
-  - component: {fileID: 1495006789235466186}
   m_Layer: 5
   m_Name: Deck
   m_TagString: EventWindow
@@ -367,7 +366,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4841009152457770399}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -400,34 +399,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4841009152457770399}
   m_CullTransparentMesh: 1
---- !u!114 &1495006789235466186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4841009152457770399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58205f3197f4dc0b5752971d60db007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  islandManager: {fileID: 0}
-  uiLayer: {fileID: 0}
-  player: {fileID: 0}
-  allFoodScriptableObjects: []
-  allManoeuvreScriptableObjects: []
-  merchantCards:
-  - {fileID: 1931463248672864349}
-  - {fileID: 7741714308967721684}
-  - {fileID: 5146753728164312493}
-  - {fileID: 8202383605900707916}
-  - {fileID: 1071414977546231699}
-  - {fileID: 6396903823404104216}
-  - {fileID: 4480057228745649031}
-  - {fileID: 2106509866685094419}
-  - {fileID: 1739602831283284760}
-  - {fileID: 8082560715258376823}
 --- !u!1 &7016757352315575598
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,6 +481,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332524762010643996}
     m_Modifications:
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995806973889494954, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1998997
+      objectReference: {fileID: 0}
     - target: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -610,13 +593,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MerchantCard (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5943146385568405015, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.2061996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
---- !u!1 &4480057228745649031 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
-  m_PrefabInstance: {fileID: 1327176545884268312}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4480057228745649030 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
@@ -629,6 +611,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332524762010643996}
     m_Modifications:
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995806973889494954, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1998997
+      objectReference: {fileID: 0}
     - target: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -729,13 +723,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MerchantCard (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5943146385568405015, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.2061996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
---- !u!1 &1071414977546231699 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
-  m_PrefabInstance: {fileID: 2493066094978945804}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1071414977546231698 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
@@ -748,6 +741,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332524762010643996}
     m_Modifications:
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995806973889494954, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1998997
+      objectReference: {fileID: 0}
     - target: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -848,13 +853,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MerchantCard (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5943146385568405015, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.2061996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
---- !u!1 &2106509866685094419 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
-  m_PrefabInstance: {fileID: 3565896294054073996}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2106509866685094418 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
@@ -867,6 +871,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332524762010643996}
     m_Modifications:
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995806973889494954, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1998997
+      objectReference: {fileID: 0}
     - target: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -967,13 +983,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MerchantCard (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5943146385568405015, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.2061996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
---- !u!1 &1739602831283284760 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
-  m_PrefabInstance: {fileID: 3774869535610382215}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1739602831283284761 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
@@ -986,6 +1001,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332524762010643996}
     m_Modifications:
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995806973889494954, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1998997
+      objectReference: {fileID: 0}
     - target: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1074,13 +1101,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MerchantCard
       objectReference: {fileID: 0}
+    - target: {fileID: 5943146385568405015, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.2061996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
---- !u!1 &1931463248672864349 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
-  m_PrefabInstance: {fileID: 3930138128688968898}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1931463248672864348 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
@@ -1093,6 +1119,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332524762010643996}
     m_Modifications:
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995806973889494954, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1998997
+      objectReference: {fileID: 0}
     - target: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1193,13 +1231,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MerchantCard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5943146385568405015, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.2061996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
---- !u!1 &7741714308967721684 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
-  m_PrefabInstance: {fileID: 5131658797373400651}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7741714308967721685 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
@@ -1212,6 +1249,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332524762010643996}
     m_Modifications:
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995806973889494954, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1998997
+      objectReference: {fileID: 0}
     - target: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1312,16 +1361,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: MerchantCard (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 5943146385568405015, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.2061996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
 --- !u!224 &8082560715258376822 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
-  m_PrefabInstance: {fileID: 6659784247549099752}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8082560715258376823 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
   m_PrefabInstance: {fileID: 6659784247549099752}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6742997186962015443
@@ -1331,6 +1379,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332524762010643996}
     m_Modifications:
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995806973889494954, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1998997
+      objectReference: {fileID: 0}
     - target: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1431,13 +1491,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MerchantCard (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5943146385568405015, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.2061996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
---- !u!1 &8202383605900707916 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
-  m_PrefabInstance: {fileID: 6742997186962015443}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8202383605900707917 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
@@ -1450,6 +1509,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332524762010643996}
     m_Modifications:
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995806973889494954, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1998997
+      objectReference: {fileID: 0}
     - target: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1550,16 +1621,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: MerchantCard (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5943146385568405015, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.2061996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
 --- !u!224 &5146753728164312492 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
-  m_PrefabInstance: {fileID: 7722469833908025650}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5146753728164312493 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
   m_PrefabInstance: {fileID: 7722469833908025650}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8395015901676680839
@@ -1569,6 +1639,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332524762010643996}
     m_Modifications:
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341284258953588018, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995806973889494954, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1998997
+      objectReference: {fileID: 0}
     - target: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1669,13 +1751,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MerchantCard (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5943146385568405015, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.2061996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
---- !u!1 &6396903823404104216 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
-  m_PrefabInstance: {fileID: 8395015901676680839}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6396903823404104217 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3190598409302527134, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}

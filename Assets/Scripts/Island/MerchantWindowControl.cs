@@ -18,15 +18,18 @@ public class MerchantWindowControl : WindowControl
 
             Image artwork = card.GetComponent<Image>();
             Text nutritionalValue = card.GetComponentInChildren<Text>();
-            TextMeshProUGUI price = card.GetComponentInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI energyCost = card.transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI price = card.transform.Find("Coin").gameObject.GetComponentInChildren<TextMeshProUGUI>();
+
             Button button = card.GetComponent<Button>();
+            
             button.onClick.RemoveAllListeners();
             artwork.color= Color.white;
 
             CardBaseInfo randomCard = GetRandomIngredient();
             artwork.sprite = randomCard.Artwork;
             nutritionalValue.text = $"{randomCard.NutritionPoints}";
-            
+            energyCost.text =  $"{randomCard.EnergyCost}";
             //CARD PRICE
             if (int.Parse(nutritionalValue.text) > 8)
             {

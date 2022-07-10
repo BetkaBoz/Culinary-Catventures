@@ -67,7 +67,7 @@ public class IslandManager : MonoBehaviour
         {
             time = 0;
             LockAllEvents();
-            Invoke(nameof(StartGrabber),2f);
+            Invoke(nameof(StartGrabber),20f);
            
         }
 
@@ -88,7 +88,7 @@ public class IslandManager : MonoBehaviour
         //TODO EASTER EGG
         Debug.Log(nameof(GrabberEasterEgg)+"!");
         Instantiate(easterEggGrabberPrefab);
-        Invoke(nameof(StartBattle),2f);
+        Invoke(nameof(StartBattle),10f);
 
         
     }
