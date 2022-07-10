@@ -21,7 +21,7 @@ public class PlayerGrabber : MonoBehaviour
         hand.sprite = handOpen;
 
         challengePosition = GameObject.FindGameObjectWithTag("Challenge").transform.position;
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.FindGameObjectWithTag("PlayerCharacter").transform;
         transform.position = challengePosition;
 
         lr = GetComponent<LineRenderer>();

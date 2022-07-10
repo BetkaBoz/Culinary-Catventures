@@ -9,7 +9,11 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour, IDamageable
 {
+    // TODO: script should be renamed to PlayerData, PlayerDataSingleton or similiar to convey it only carries variables
+    //  ^in case of name change, the Player tag should probably also be renamed
+    
     #region Private Vars
+    public static Player Instance { get; set; }
     [SerializeField] float generalFoodModBase;
     [SerializeField] float meatFoodModBase;
     [SerializeField] float vegetarianFoodModBase;
@@ -18,182 +22,146 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float vegetarianFoodModBonus;
     [SerializeField] List<CardBaseInfo> deck = new List<CardBaseInfo>();
     [SerializeField] Customer customer;
-    private bool isDead;
-    private bool isVictorious;
-    private string className;
-    //private int reputation = 0;
-    private int money = 100;
-    private int maxEnergy = 5;
-    private int energy;
-    private int maxRep = 100;
-    private int rep = 100;
-    private int currExp = 400;
-    private int nextLvl = 1000;
+    bool isDead;
+    bool isVictorious;
+    string className;
+    // int reputation = 0;
+    int money = 100; 
+    int maxEnergy = 5;
+    int energy;
+    int maxRep = 100;
+    int rep = 100;
+    int currExp = 400;
+    int nextLvl = 1000;
     public List<string> helpers = new List<string>();
     public int moneyAmount, repAmount, earnedRep;
 
     #endregion
 
     public bool canCallEmergencyDelivery = true;
-    
+
     #region Getters/Setters
+
     public int CurrentExp
     {
-        get
-        {
-            return currExp;
-        }
-        set
-        {
-            currExp = value;
-        }
+        get { return currExp; }
+        set { currExp = value; }
     }
+
     public int NextLevel
     {
-        get
-        {
-            return nextLvl;
-        }
+        get { return nextLvl; }
     }
+
     public string ClassName
     {
-        get
-        {
-            return className;
-        }
-        set
-        {
-            className = value;
-        }
+        get { return className; }
+        set { className = value; }
     }
+
     public int Money
     {
-        get
-        {
-            return money;
-        }
+        get { return money; }
     }
+
     public float GeneralFoodMod
     {
-        get
-        {
-            return generalFoodModBase + generalFoodModBonus;
-        }
+        get { return generalFoodModBase + generalFoodModBonus; }
     }
+
     public float GeneralFoodModBonus
     {
-        get
-        {
-            return generalFoodModBonus;
-        }
-        set
-        {
-            generalFoodModBonus = value;
-        }
+        get { return generalFoodModBonus; }
+        set { generalFoodModBonus = value; }
     }
+
     public float MeatFoodMod
     {
-        get
-        {
-            return meatFoodModBase+meatFoodModBonus;
-        }
+        get { return meatFoodModBase + meatFoodModBonus; }
     }
+
     public float MeatFoodModBonus
     {
-        get
-        {
-            return meatFoodModBonus;
-        }
-        set
-        {
-            meatFoodModBonus = value;
-        }
+        get { return meatFoodModBonus; }
+        set { meatFoodModBonus = value; }
     }
+
     public float VegetarianFoodMod
     {
-        get
-        {
-            return vegetarianFoodModBase + vegetarianFoodModBonus;
-        }
+        get { return vegetarianFoodModBase + vegetarianFoodModBonus; }
     }
+
     public float VegetarianFoodModBonus
     {
-        get
-        {
-            return vegetarianFoodModBonus;
-        }
-        set
-        {
-            vegetarianFoodModBonus = value;
-        }
+        get { return vegetarianFoodModBonus; }
+        set { vegetarianFoodModBonus = value; }
     }
+
     public List<CardBaseInfo> Deck
     {
-        get
-        {
-            return deck;
-        }
-        set
-        {
-            deck = value;
-        }
+        get { return deck; }
+        set { deck = value; }
     }
+
     public int MaxEnergy
     {
-        get
-        {
-            return maxEnergy;
-        }
-        set
-        {
-            maxEnergy = value;
-        }
+        get { return maxEnergy; }
+        set { maxEnergy = value; }
     }
+
     public int Energy
     {
-        get
-        {
-            return energy;
-        }
-        set
-        {
-            energy = value;
-        }
+        get { return energy; }
+        set { energy = value; }
     }
+
     public int MaxRep
     {
-        get
-        {
-            return maxRep;
-        }
-        set
-        {
-            maxRep = value;
-        }
+        get { return maxRep; }
+        set { maxRep = value; }
     }
+
     public int Rep
     {
-        get
-        {
-            return rep;
-        }
+        get { return rep; }
         //set
         //{
         //    rep = value;
         //}
     }
+
     public int MoneyAmount => moneyAmount;
     public int RepAmount => repAmount;
     public List<string> Helpers => helpers;
+
     #endregion
 
     public void Awake()
     {
-        isDead = false;
-        isVictorious = false;
+        // singleton pattern
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject); 
+        }
+        else
+        {
+            Instance = this;
+            isDead = false;
+            isVictorious = false;
+        
+            DontDestroyOnLoad(this.gameObject);
+            // StartCoroutine(Test());
+        }
     }
 
-    private void LoadPlayer()
+    // // TODO: Testing method for loading scenes after 10 seconds, DELETE WHEN NOT NEEDED
+    // IEnumerator Test()
+    // {
+    //     yield return new WaitForSeconds(10);
+    //     SceneManager.LoadScene(3);
+    // }
+
+    void LoadPlayer()
     {
         Player data = this; //just some bs so intelisense works
         this.className = data.className;
@@ -213,12 +181,12 @@ public class Player : MonoBehaviour, IDamageable
         moneyAmount += amount;
         money += amount;
 
-        if (money<0)
+        if (money < 0)
         {
             money = 0;
         }
     }
-    
+
     //CHANGED -= TO +=, USE THIS INSTEAD
     public void ChangeReputation(int amount)
     {
@@ -229,6 +197,7 @@ public class Player : MonoBehaviour, IDamageable
             Die(true);
         }
     }
+
     public void TakeDamage(int amount)
     {
         rep -= amount;
@@ -241,10 +210,9 @@ public class Player : MonoBehaviour, IDamageable
     public bool HaveMoney(int amount)
     {
         return money >= amount;
-    }         
-    
+    }
 
-    
+
     public void Die(bool status)
     {
         if (isDead || isVictorious) return;
@@ -252,7 +220,7 @@ public class Player : MonoBehaviour, IDamageable
         StartCoroutine(LoadGameOver());
     }
 
-    private void Win()
+    void Win()
     {
         if (isDead || isVictorious) return;
         isVictorious = true;
@@ -261,26 +229,28 @@ public class Player : MonoBehaviour, IDamageable
 
     public void CheckCondition()
     {
-        if(!isDead) Win();
+        if (!isDead) Win();
     }
 
-    private IEnumerator LoadGameOver()
+    IEnumerator LoadGameOver()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Game Over",LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Game Over", LoadSceneMode.Additive);
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
+
         Debug.Log("Oh nou I'm ded :(");
     }
 
-    private IEnumerator LoadBattleWon()
+    IEnumerator LoadBattleWon()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Battle Won", LoadSceneMode.Additive);
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
+
         Debug.Log("Yay I won :)");
     }
 
@@ -291,22 +261,24 @@ public class Player : MonoBehaviour, IDamageable
         {
             return;
         }
-        if (string.IsNullOrEmpty(cardName) )
+
+        if (string.IsNullOrEmpty(cardName))
         {
             CardBaseInfo card = deck[Random.Range(0, deck.Count)];
-            deck.Remove(deck.Find(x =>  x.CardName == card.CardName));
+            deck.Remove(deck.Find(x => x.CardName == card.CardName));
 
             Debug.Log(card.CardName);
             return;
-        }/*
+        } /*
         else
         {
             card = deck.Find(x => x.CardName == cardName);
         }*/
-        
-        deck.Remove(deck.Find(x =>  x.CardName == cardName));
+
+        deck.Remove(deck.Find(x => x.CardName == cardName));
         //return card;
     }
+
     public CardBaseInfo FindCardFromDeck(string cardName = null)
     {
         if (!deck.Any())
@@ -314,31 +286,32 @@ public class Player : MonoBehaviour, IDamageable
             Debug.Log("EMPTY DECK");
             return null;
         }
-        CardBaseInfo card = null;
-        
-            //NAJDI NAHODNU INGREDIENCIU Z DECKU
-            if (string.IsNullOrEmpty(cardName) )
-            {
-                foreach (CardBaseInfo tmpCard in deck)
-                {
-                    if (tmpCard.CardType == "Vegetarian"||tmpCard.CardType == "Meat")
-                    {
-                        card = tmpCard;
-                        return card;
 
-                    }
+        CardBaseInfo card = null;
+
+        //NAJDI NAHODNU INGREDIENCIU Z DECKU
+        if (string.IsNullOrEmpty(cardName))
+        {
+            foreach (CardBaseInfo tmpCard in deck)
+            {
+                if (tmpCard.CardType == "Vegetarian" || tmpCard.CardType == "Meat")
+                {
+                    card = tmpCard;
+                    return card;
                 }
             }
-            //NAJDI VYBRANU KARTU Z DECKU
-            else
-            {
-                card = deck.Find(x => x.CardName == cardName);
-            }
-        
-        
+        }
+        //NAJDI VYBRANU KARTU Z DECKU
+        else
+        {
+            card = deck.Find(x => x.CardName == cardName);
+        }
+
+
         return card;
         //return card;
     }
+
     public bool CheckIfDeckHasIngredient()
     {
         if (!Deck.Any())
@@ -346,16 +319,18 @@ public class Player : MonoBehaviour, IDamageable
             Debug.Log("EMPTY DECK");
             return false;
         }
+
         foreach (CardBaseInfo tmpCard in deck)
         {
-            if (tmpCard.CardType == "Vegetarian"||tmpCard.CardType == "Meat"   )
+            if (tmpCard.CardType == "Vegetarian" || tmpCard.CardType == "Meat")
             {
                 return true;
             }
         }
+
         return false;
     }
-    //private async Task LoadBattleWon()
+    // async Task LoadBattleWon()
     //{
     //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Battle Won", LoadSceneMode.Additive);
     //    while (!asyncLoad.isDone)

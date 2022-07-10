@@ -232,6 +232,97 @@ PrefabInstance:
       objectReference: {fileID: 68607489}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
+--- !u!1 &61695348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 61695350}
+  - component: {fileID: 61695349}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &61695349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61695348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46f97db0a95acf246b5cd98c87e2ad82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generalFoodModBase: 1
+  meatFoodModBase: 1
+  vegetarianFoodModBase: 1
+  generalFoodModBonus: 0
+  meatFoodModBonus: 0
+  vegetarianFoodModBonus: 0
+  deck:
+  - {fileID: 11400000, guid: bb5f1cef4cbbcf542af68a9002862e83, type: 2}
+  - {fileID: 11400000, guid: 35e21ca778596c0479f2647a80b969e7, type: 2}
+  - {fileID: 11400000, guid: b43c6f1212a2a924abd8e28dee0e6c97, type: 2}
+  - {fileID: 11400000, guid: 9734095e5e8ad0e45b03299dd63f33e7, type: 2}
+  - {fileID: 11400000, guid: e68142c1b454a6242bd3880e4f3d9773, type: 2}
+  - {fileID: 11400000, guid: bd0b5a655d9fdc34b9ffb5d047f7ac05, type: 2}
+  - {fileID: 11400000, guid: f65611cde29c7934a880f0cca25eb3b1, type: 2}
+  - {fileID: 11400000, guid: 04cf38d94563e494396f6b153571e53f, type: 2}
+  - {fileID: 11400000, guid: 734d03b68abe91d4998f7ebdab661b1a, type: 2}
+  - {fileID: 11400000, guid: 5f251d38747dee846a43cb37ead20189, type: 2}
+  - {fileID: 11400000, guid: 4f12c29ab13959147884c0f761122fdc, type: 2}
+  - {fileID: 11400000, guid: 144145c2dad2f3b419667ff0ac6ddbc9, type: 2}
+  - {fileID: 11400000, guid: 98bdc6f7efb35a541bfbe47875f9f8f7, type: 2}
+  - {fileID: 11400000, guid: 79e570868a9e4144faa45b5b0e3b437b, type: 2}
+  - {fileID: 11400000, guid: 51b5d22314b26e247af3925061c0edc7, type: 2}
+  - {fileID: 11400000, guid: f5986a78c5ad1e546aff75a942327f8c, type: 2}
+  - {fileID: 11400000, guid: 76747097478ef55438ce0728f4bebd82, type: 2}
+  - {fileID: 11400000, guid: 1a1643d24f3c713458ade65358e36bfe, type: 2}
+  - {fileID: 11400000, guid: d6f532aef60f6774da05fb802fed6564, type: 2}
+  - {fileID: 11400000, guid: b6d9a3f9f208cbd429a6a905c3092245, type: 2}
+  - {fileID: 11400000, guid: 95a71b274e37be54c919c68a2a94d77e, type: 2}
+  - {fileID: 11400000, guid: e446072749c293042a2f74cc42db60ae, type: 2}
+  - {fileID: 11400000, guid: b34fdf64bf5f33341a0b862535532a3b, type: 2}
+  - {fileID: 11400000, guid: e964297736755964c85230482268dd93, type: 2}
+  - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
+  - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
+  - {fileID: 11400000, guid: bb5f1cef4cbbcf542af68a9002862e83, type: 2}
+  - {fileID: 11400000, guid: 35e21ca778596c0479f2647a80b969e7, type: 2}
+  - {fileID: 11400000, guid: b43c6f1212a2a924abd8e28dee0e6c97, type: 2}
+  - {fileID: 11400000, guid: 9734095e5e8ad0e45b03299dd63f33e7, type: 2}
+  - {fileID: 11400000, guid: e68142c1b454a6242bd3880e4f3d9773, type: 2}
+  - {fileID: 11400000, guid: 79e570868a9e4144faa45b5b0e3b437b, type: 2}
+  - {fileID: 11400000, guid: 51b5d22314b26e247af3925061c0edc7, type: 2}
+  - {fileID: 11400000, guid: f5986a78c5ad1e546aff75a942327f8c, type: 2}
+  - {fileID: 11400000, guid: 1a1643d24f3c713458ade65358e36bfe, type: 2}
+  customer: {fileID: 0}
+  helpers: []
+  moneyAmount: 0
+  repAmount: 0
+  earnedRep: 0
+  canCallEmergencyDelivery: 1
+--- !u!4 &61695350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61695348}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &68607487
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,11 +494,10 @@ GameObject:
   - component: {fileID: 294778083}
   - component: {fileID: 294778082}
   - component: {fileID: 294778081}
-  - component: {fileID: 294778086}
   - component: {fileID: 294778085}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: PlayerCharacter
+  m_TagString: PlayerCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -528,31 +618,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &294778086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294778080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46f97db0a95acf246b5cd98c87e2ad82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generalFoodModBase: 1
-  meatFoodModBase: 1
-  vegetarianFoodModBase: 1
-  generalFoodModBonus: 0
-  meatFoodModBonus: 0
-  vegetarianFoodModBonus: 0
-  deck: []
-  customer: {fileID: 0}
-  helpers: []
-  moneyAmount: 0
-  repAmount: 0
-  earnedRep: 0
-  canCallEmergencyDelivery: 1
 --- !u!1 &491819889
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   repUI: {fileID: 1649004528}
   coinUI: {fileID: 1387795972}
-  player: {fileID: 294778086}
+  player: {fileID: 61695349}
 --- !u!1 &979559344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,8 +1190,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1384,8 +1449,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
