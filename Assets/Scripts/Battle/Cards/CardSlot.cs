@@ -40,6 +40,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     #region Getters/Setters
     public bool IsDragged => isDragged;
+    public int SlotIndex;//this is used in layout manager
     public int HandIndex
     {
         get
@@ -83,7 +84,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     public void SetHighlight(CardSlot otherSlot)
     {
         if (handIndex != -1)
-            gm.MoveNeighbours(handIndex, true);
+            gm.MoveNeighbours(SlotIndex, true);
         otherSlot.Rise(true);
         handIndex = otherSlot.HandIndex;
         Hide(false);
@@ -385,8 +386,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     #region MouseHover
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(!isHighlight)
-            gm.MoveNeighbours(handIndex, false);
+        //if(!isHighlight)
+            gm.MoveNeighbours(SlotIndex, false);
     }
 
     //public void CreateCanvas(bool enable)
@@ -415,7 +416,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if(isHighlight)
+        //if(isHighlight)
             Rise(false);
     }
 
@@ -430,10 +431,10 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
             //originalPos = transform.position;
             //Debug.Log("Before StorePos " + card.name + " " + handIndex);
-            StorePos();
-            transform.localScale = new Vector2(1f, 1f);
+            //StorePos();
+            //transform.localScale = new Vector2(1f, 1f);
             //Debug.Log("before transform " + card.name + " " + handIndex);
-            transform.position += (Vector3.up * 0.5f);
+            //transform.position += (Vector3.up * 0.5f);
 
             //this seems kinda jank, will most likely replace it later
             //tempCanvas = gameObject.AddComponent<Canvas>();
@@ -454,13 +455,13 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             //Destroy(tempReycaster);
             //Destroy(tempCanvas);
             //Debug.Log("Before Reset "+ card.name + " " + handIndex);
-            ResetPos();
+            //ResetPos();
             //transform.SetSiblingIndex(spriteOrder);
-            if (isHighlight)
-            {
+            //if (isHighlight)
+            //{
                 //Debug.Log("In Move " + card.name + " " + handIndex);
                 gm.MoveNeighbours(handIndex, true);
-            }
+            //}
             isRised = false;
             //Debug.Log("End Of DeRise " + card.name + " " + handIndex);
         }

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<IBuffable> buffs = new List<IBuffable>();
     [SerializeField] Button emergencyDelivery;//emergency delivery code
     [SerializeField] Image energyNotification;
+    [SerializeField] CardLayoutManager layoutManager;//card layout
     #endregion
 
     int numOfCards = 0;//right now useless
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
         {
             cardSlots[i].Hide(true);
         }
-        DrawCards(5);
+        DrawCards(10);
         AddEnergy(player.MaxEnergy);
         repUI.text = $"{player.Rep}";
         combinePhase = false;
@@ -287,6 +288,10 @@ public class GameManager : MonoBehaviour
     public void HideCardSlot(int idx, bool isHidden)
     {
         cardSlots[idx].Hide(isHidden);
+        if (isHidden)//card layout
+            layoutManager.RemoveChild(cardSlots[idx]);
+        else
+            layoutManager.AddChild(cardSlots[idx]);
     }
 
     private int GetNumberOfCards()
@@ -304,77 +309,27 @@ public class GameManager : MonoBehaviour
     //TODO: Find a way to move a card to the front. Z-order and Child indexes don't work
     public void MoveNeighbours(int idx, bool isReturning)
     {
-        if (highlightSlot.IsDragged) return;
+        foreach(var card in cardSlots)
+        {
+            if (card.IsDragged) return;
+        }
         if (isReturning)
         {
-            highlightSlot.Hide(true);
-            highlightSlot.HandIndex = -1;
-            cardSlots[idx].MakeInvisible(false);
-            cardSlots[idx].Rise(false);
-            for (int i = 0; i < cardSlots.Length; i++)
-            {
-                if(i != idx)
-                    cardSlots[i].ResetPos();
-            }
+            layoutManager.OrderChildren();
+            //highlightSlot.Hide(true);
+            //highlightSlot.HandIndex = -1;
+            //cardSlots[idx].MakeInvisible(false);
+            //cardSlots[idx].Rise(false);
+            //for (int i = 0; i < cardSlots.Length; i++)
+            //{
+            //    if(i != idx)
+            //        cardSlots[i].ResetPos();
+            //}
         }
         else
         {
-            highlightSlot.SetHighlight(cardSlots[idx]);
-
-            //int count = 0;
-            for (int i = idx - 1; i >= 0; i--)
-            {
-                if (cardSlots[i].gameObject.activeSelf)
-                {
-                    //float movementAmount = 0.75f - (0.1f * count);
-                    cardSlots[i].MoveLeft(0.75f);
-                    count++;
-                }
-            }
-            //count = 0;
-            for (int i = idx + 1; i < cardSlots.Length; i++)
-            {
-                if (cardSlots[i].gameObject.activeSelf)
-                {
-                    //float movementAmount = 0.75f - (0.1f * count);
-                    cardSlots[i].MoveRight(0.75f);
-                    count++;
-                }
-            }
+           layoutManager.HighlightChild(idx);
         }
-        
-        //if (isReturning)
-        //{
-        //    if (idx != 0)
-        //        cardSlots[idx - 1].ResetPos();
-        //    if (idx != (cardSlots.Length - 1))
-        //        cardSlots[idx + 1].ResetPos();
-        //}
-        //else
-        //{
-        //    float moveAmount = 0.25f + (0.1f * (numOfCards - 5));
-        //    Debug.Log(moveAmount);
-        //    if (idx != 0)
-        //        cardSlots[idx - 1].MoveLeft(moveAmount);
-        //    if (idx != (cardSlots.Length - 1))
-        //        cardSlots[idx + 1].MoveRight(moveAmount);
-            //Old code, reuse it!
-            //int pow = 1;
-            //float movementAmount;
-            //for (int i = idx - 1; i >= 0; i--)
-            //{
-            //    movementAmount = (float)1 / Mathf.Pow(2, pow);
-            //    cardSlots[i].MoveLeft(movementAmount);
-            //    pow++;
-            //}
-            //pow = 1;
-            //for (int i = idx + 1; i < cardSlots.Length; i++)
-            //{
-            //    movementAmount = (float)1 / Mathf.Pow(2, pow);
-            //    cardSlots[i].MoveRight(movementAmount);
-            //    pow++;
-            //}
-        //}
     }
 
     public void SendToDiscard(int idx, bool isEndTurn)
