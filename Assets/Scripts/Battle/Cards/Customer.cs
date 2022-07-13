@@ -8,97 +8,62 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
-public class Customer : MonoBehaviour, IDropHandler, IDamageable 
+public abstract class Customer : IDamageable
 {
-    [SerializeField] int maxHunger = 0;
-    [SerializeField] byte turnsUntilAngry = 0;
-    [SerializeField] Text hunger;
-    [SerializeField] GameManager gm;
-    [SerializeField] ActionManager ac;
-    [SerializeField] Image Action;
-    [SerializeField] Image States;
-    [SerializeField] List<Sprite> sprites;
-    [SerializeField] GameObject debuffs;
+    GameManager gm;
+    CustomerData _customerData;
     int currHunger;
     byte numTurnsStunned;
     bool satisfied = false;
     bool isDead = false;
-    public int money = 0;
-    public int rep = 0;
-    public int Money => money;
-    public int Rep => rep;
-    public int MaxHunger => maxHunger;
-    public byte TurnsLeft => turnsUntilAngry;
 
-    private void Awake()
+    public abstract string Name { get; }
+    public int finalMoney = 0;
+    public int finalRep = 0;
+    public event Action OnDamageTaken;
+    public event Action OnDied;
+    public event Action OnTurnStarted;
+    public int CurrentAction { get; private set; }
+    public int Money => finalMoney;
+    public int Rep => finalRep;
+    public int MaxHunger => _customerData.MaxHunger;
+    public int TurnsLeft => _customerData.TurnsUntilAngry;
+    public int CurrentHunger => currHunger;
+    public bool Satisfied => satisfied;
+    
+
+    public void SetUp(GameManager gameManager, CustomerData customerData)
     {
-        currHunger = maxHunger;
+        gm = gameManager;
+        _customerData = customerData;
+        currHunger = customerData.MaxHunger;
         numTurnsStunned = 0;
-        hunger.text = $"{currHunger}";
     }
 
-    public void StartTurn()
+    public virtual void StartTurn()
     {
-        Action.DOFade(1f, 1f);
-
         if (!satisfied) 
         {
-            switch (ac.CurrentIndex)
+            switch (CurrentAction)
             {
                 case 1:
                     gm.HurtPlayer(5);
                     break;
                 case 2:
-                    GameObject temp = Instantiate(debuffs);
-                    gm.BuffPlayer(temp.GetComponent<IBuffable>());
+                    //GameObject temp = Instantiate(debuffs);
+                    //gm.BuffPlayer(temp.GetComponent<IBuffable>());
                     break;
             }
         }
     }
 
-    public bool EndTurn()
+    public abstract bool EndTurn();
+
+    public abstract void ChangeExpressions();
+    public virtual void RandomizeDebuffs()
     {
-        turnsUntilAngry--;
-        if (numTurnsStunned > 0) numTurnsStunned--;
-
-        //change customers expressions based on how many turns are left till end of the battle
-        if (turnsUntilAngry >= 8)
-            States.DOFade(1, 0.2f).OnPlay(() => { States.sprite = sprites[0]; });
-        else if (turnsUntilAngry >= 5)
-            States.DOFade(1, 0.2f).OnPlay(() => { States.sprite = sprites[1]; });
-        else if (turnsUntilAngry >= 3)
-            States.DOFade(1, 0.2f).OnPlay(() => { States.sprite = sprites[2]; });
-        else if (turnsUntilAngry >= 1)
-            States.DOFade(1, 0.2f).OnPlay(() => { States.sprite = sprites[3]; });
-
-        //when there are 0 turns left, check how much was customer satisfied
-        //and based on this info add money and reputation to the player
-        //or cause reputation demage on player
-        if (turnsUntilAngry == 0)
-        {
-            if (currHunger >= maxHunger / 2)
-            {
-                gm.Player.TakeDamage(50);
-                money -= 50;
-            }
-            else if (currHunger >= maxHunger / 3)
-            {
-                money += 10;
-                rep += 10;
-            }
-            else if (currHunger >= maxHunger / 4)
-            {
-                money += 25;
-                rep += 25;
-            }
-            Die(true);
-            gm.Player.ChangeMoney(money);
-            gm.Player.earnedRep += rep;
-            //gm.Player.ChangeReputation(rep);
-            return true;
-        }
-        satisfied = false;
-        return false;
+        if (TurnsLeft == 1) CurrentAction = 0;
+        else CurrentAction = UnityEngine.Random.Range(1, _customerData.Sprites.Count);
     }
     public void OnDrop(PointerEventData eventData)
     {
@@ -108,10 +73,6 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
     {
         TakeDamage(amount);
     }
-    public void RandomizeDebuffs()
-    {
-        ac.Suffle();
-    }
     public void TakeDamage(int amount)
     {
         satisfied = true;
@@ -119,32 +80,20 @@ public class Customer : MonoBehaviour, IDropHandler, IDamageable
 
         if (numTurnsStunned <= 0) numTurnsStunned++;
 
-        hunger.text = $"{currHunger}";
-
-        Action.DOFade(0f, 1f);
-
         if (currHunger ==  0)
         {
             Die(true);
-            money += 50;
-            rep += 50;
-            gm.Player.ChangeMoney(money);
-            gm.Player.earnedRep += rep;
-            //gm.Player.ChangeReputation(rep);
+            finalMoney += 50;
+            finalRep += 50;
+            gm.Player.ChangeMoney(finalMoney);
+            gm.Player.earnedRep += finalRep;
         }
+        OnDamageTaken?.Invoke();    //if(OnDamageTaken != null) OnDamageTaken.Invoke(); -> null conditional operator
     }
     public void Die(bool status)
     {
-        if (!isDead)
-        {
-            isDead = true;
-            Action.DOFade(0, 2f);
-            States.DOFade(0, 2f);
-            GetComponent<Image>().DOFade(0, 2f).OnComplete(() => { Destroy(gameObject); });
-        }
-    }
-    private void OnDestroy()
-    {
+        isDead = true;
         gm.CustomerListDelete(this);
+        OnDied?.Invoke();
     }
 }
