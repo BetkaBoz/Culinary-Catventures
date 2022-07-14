@@ -7,19 +7,18 @@ using UnityEngine.UI;
 
 public class CustomerView : MonoBehaviour, IDropHandler
 {
-    [SerializeField] Text hunger;
     [SerializeField] Image Action;
-    [SerializeField] Image Faces;
     [SerializeField] Image Body;
-    [SerializeField] List<Sprite> sprites;
     [SerializeField] GameObject debuffs;
     Customer _customer;
 
-    public void SetUp(Customer customer)
+    public void SetUp(Customer customer, CustomerSetUp customerSetUp)
     {
         _customer = customer;
 
-        UpdateTexts();
+        (transform as RectTransform).anchoredPosition = customerSetUp.customerPosition;
+
+        Body.sprite = customer.Data.Sprites[0];     //set Element 0 as default sprite 
 
         //subscribtion on events from Customer class -> Observer
         customer.OnDamageTaken += TakeDemage; 
@@ -27,7 +26,7 @@ public class CustomerView : MonoBehaviour, IDropHandler
         customer.OnTurnStarted += StartTurn;
     }
 
-    public virtual void StartTurn()
+    private void StartTurn()
     {
         Action.DOFade(1f, 1f);
 
@@ -49,25 +48,25 @@ public class CustomerView : MonoBehaviour, IDropHandler
 
     private void TakeDemage()
     {
-        UpdateTexts();
         Action.DOFade(0f, 1f);
     }
 
-    private void UpdateTexts()
-    {
-        hunger.text = $"{_customer.CurrentHunger}";
-    }
     public void OnDrop(PointerEventData eventData)
     {
         
     }
-    public void Die()
+
+    private void ChangeExpressions()
+    {
+        float t = (float)_customer.TurnsLeft / _customer.Data.Turns;        //ratio of two variables
+        int spriteIndex = (int) Mathf.Lerp(0, (float)_customer.Data.Sprites.Count-1, t);
+        Body.DOFade(1, 0.2f).OnPlay(() => { Body.sprite = _customer.Data.Sprites[spriteIndex]; });
+    }
+
+    private void Die()
     {
         Action.DOFade(0, 2f);
-        Faces.DOFade(0, 2f).OnPlay(() => { Body.DOFade(0, 2f); }).OnComplete(() => 
-        {
-            Destroy(gameObject); 
-        });
+        Body.DOFade(0, 2f).OnComplete(() => { Destroy(gameObject); });
     }
 
     private void OnDestroy()

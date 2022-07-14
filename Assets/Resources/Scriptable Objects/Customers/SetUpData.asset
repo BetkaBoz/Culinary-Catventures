@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09b7c808118067408f3c54d3be542c3, type: 3}
+  m_Name: SetUpData
+  m_EditorClassIdentifier: 
+  customerSetUps:
+  - customerPosition: {x: -355, y: 160}
+    notePosition: {x: -550, y: 267}
+    noteYRotate: 0
+  - customerPosition: {x: 70, y: 160}
+    notePosition: {x: 313, y: 267}
+    noteYRotate: 180
+  - customerPosition: {x: -765, y: -85}
+    notePosition: {x: -534, y: -85}
+    noteYRotate: 180
+  - customerPosition: {x: 655, y: -85}
+    notePosition: {x: 416, y: -85}
+    noteYRotate: 0
+  customerDatas:
+  - {fileID: 11400000, guid: dcb517b9d4960e845a94049e5218de7a, type: 2}
+  - {fileID: 11400000, guid: 435c693fc46460f4092ed40450b84f99, type: 2}

@@ -11,7 +11,6 @@ public class CustomerFactory
 
     public CustomerFactory()
     {
-
         var customerTypes = Assembly.GetAssembly(typeof(Customer)).GetTypes()
             .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Customer)));
 

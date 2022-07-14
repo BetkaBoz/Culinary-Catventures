@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 public abstract class Customer : IDamageable
 {
-    GameManager gm;
     CustomerData _customerData;
-    int currHunger;
-    byte numTurnsStunned;
-    bool satisfied = false;
-    bool isDead = false;
+
+    protected GameManager gm;
+    protected int turnsLeft;
+    protected int numTurnsStunned;
+    protected int currHunger;
+    protected bool satisfied = false;
 
     public abstract string Name { get; }
     public int finalMoney = 0;
@@ -23,20 +24,21 @@ public abstract class Customer : IDamageable
     public event Action OnDamageTaken;
     public event Action OnDied;
     public event Action OnTurnStarted;
+    public event Action OnTurnEnded;
     public int CurrentAction { get; private set; }
     public int Money => finalMoney;
     public int Rep => finalRep;
-    public int MaxHunger => _customerData.MaxHunger;
-    public int TurnsLeft => _customerData.TurnsUntilAngry;
     public int CurrentHunger => currHunger;
     public bool Satisfied => satisfied;
-    
+    public int TurnsLeft => turnsLeft;
+    public CustomerData Data => _customerData;
 
     public void SetUp(GameManager gameManager, CustomerData customerData)
     {
         gm = gameManager;
         _customerData = customerData;
         currHunger = customerData.MaxHunger;
+        turnsLeft = customerData.TurnsLeft;
         numTurnsStunned = 0;
     }
 
@@ -57,12 +59,14 @@ public abstract class Customer : IDamageable
         }
     }
 
-    public abstract bool EndTurn();
+    public virtual void EndTurn()
+    {
+        OnTurnEnded?.Invoke();
+    }
 
-    public abstract void ChangeExpressions();
     public virtual void RandomizeDebuffs()
     {
-        if (TurnsLeft == 1) CurrentAction = 0;
+        if (turnsLeft == 1) CurrentAction = 0;
         else CurrentAction = UnityEngine.Random.Range(1, _customerData.Sprites.Count);
     }
     public void OnDrop(PointerEventData eventData)
@@ -92,7 +96,6 @@ public abstract class Customer : IDamageable
     }
     public void Die(bool status)
     {
-        isDead = true;
         gm.CustomerListDelete(this);
         OnDied?.Invoke();
     }

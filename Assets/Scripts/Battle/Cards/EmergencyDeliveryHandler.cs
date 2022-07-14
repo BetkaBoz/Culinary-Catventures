@@ -14,7 +14,7 @@ public class EmergencyDeliveryHandler : MonoBehaviour
 
     void Awake()
     {
-        npLimit = GameObject.FindGameObjectsWithTag("Customer")[0].GetComponent<Customer>().MaxHunger * 2;
+        npLimit = GameObject.FindGameObjectsWithTag("Customer")[0].GetComponent<Customer>().Data.MaxHunger * 2;
     }
 
     public void OpenDelivery()
