@@ -155,7 +155,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         gm.SendToExhaust(handIndex);
     }
 
-    public void ResetPos()
+    public void ResetPos()//potentially pointless
     {
         //if (isSelected)
         //    transform.position = new Vector2(originalPos.x, transform.position.y);
@@ -166,7 +166,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             transform.localScale = new Vector2(0.65f, 0.65f);
     }
 
-    private void StorePos()
+    private void StorePos()//potentially pointless
     {
         if (!hasMoved)
         {
@@ -179,10 +179,10 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         if (isSelected)
         {
-            ResetPos();
             isDragged = false;
             isSelected = false;
             isRised = false;
+            gm.MoveNeighbours(SlotIndex, true);
         }
     }
 
@@ -214,14 +214,10 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     #region DragNDrop
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Debug.Log("Click");
-        if(highlightedSlot != null)
+        Select();
+        if (gm.combinePhase)
         {
-            highlightedSlot.Select();
-            if (gm.combinePhase)
-            {
-                gm.FindCombineTarget();
-            }
+            gm.FindCombineTarget();
         }
     }
 
@@ -229,14 +225,21 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         //Debug.Log("DOWN");
         //Debug.Log(canTarget.ToString());
-        if (gm.discardPhase)
+        if (gm.discardPhase)//ARTURITO
         {
-            dragOffset = transform.position - GetMousePos();
-            if(highlightedSlot != null)
+            if (gm.SetCard(this))
+                isSelected = true;
+            else
             {
-                highlightedSlot.isSelected = false;
-                highlightedSlot.isDragged = true;
+                isSelected = true;
+                Deselect();
             }
+            //dragOffset = transform.position - GetMousePos();
+            //if(highlightedSlot != null)
+            //{
+            //    highlightedSlot.isSelected = false;
+            //    highlightedSlot.isDragged = true;
+            //}
         }
         else
         {
@@ -254,8 +257,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //you can only select cards (by clicking) during select phase
-        if (gm.combinePhase) { return; }
+        //during the combine and discard phases you can only select cards by clicking
+        if (gm.combinePhase || gm.discardPhase) { return; }
         canvasGroup.blocksRaycasts = false;
         //originalPos = this.transform.position;
         //Debug.Log("idx:" + card.HandIndex);
@@ -266,110 +269,87 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     public void OnDrag(PointerEventData eventData)
     {
         //Debug.Log("DRAG");
-        if (gm.combinePhase) { return; }
-        //if (this.isSelected && (originalMousePos != GetMousePos()))
-        //{
-        //the whole isDragged thing might be useless now
+        if (gm.combinePhase || gm.discardPhase) { return; }//ARTURITO (maybe pointless?)
         isDragged = true;
-        //}
-        if (isDragged)
+        //if you are a manouver or if you have to discard a card don't use targeting arrows
+        if (card.CanTarget && !gm.discardPhase)
         {
-            //if you are a manouver or if you have to discard a card don't use targeting arrows
-            if (card.CanTarget && !gm.discardPhase)
+            if (!arrowHandler.IsVisible)
             {
-                if (!arrowHandler.IsVisible)
-                {
-                    arrowHandler.SetVisibile(true);
-                    arrowHandler.SetOrigin(new Vector2(transform.position.x, transform.position.y)+Vector2.up);
-                }
+                arrowHandler.SetVisibile(true);
+                arrowHandler.SetOrigin(new Vector2(transform.position.x, transform.position.y)+Vector2.up);
             }
-            else
-            {
-                transform.position = GetMousePos() + dragOffset;
-            }
-
+        }
+        else
+        {
+            transform.position = GetMousePos() + dragOffset;
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (gm.combinePhase) { return; }
+        if (gm.combinePhase || gm.discardPhase) { return; }//ARTURITO (maybe pointless?)
         canvasGroup.blocksRaycasts = true;
         //Debug.Log("END");
         LayerMask dragTarget = LayerMask.GetMask("DragTarget");
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 1, dragTarget.value);
         if (hit.collider != null)
         {
-            if (gm.discardPhase)
+            if (card.CanTarget)
             {
-                if(gm.SetCard(this))
-                    isSelected = true;
+                if ( gm.SpendEnergy(card.EnergyCost))//hasBeenPlayed == false &&
+                {
+                    //hasBeenPlayed = true;
+                    if (card.CardType == "Manoeuvre")
+                    {
+                        MoveToDiscardPile(false);
+                        card.TriggerCardEffect(gm, hit);
+                    }
+                    else
+                    {
+                        MoveToExhaustPile();
+                        card.TriggerCardEffect(gm, hit);
+                    }
+                        
+                    gm.hasCardBeenPlayed = true;
+                }
                 else
                 {
-                    isSelected = true;
-                    Deselect();
+                    gm.ShowNotification();
                 }
-
+                    
+                arrowHandler.SetVisibile(false);
             }
             else
             {
-                if (card.CanTarget)
+                if ((hit.transform.gameObject.tag != "Customer") && gm.SpendEnergy(card.EnergyCost))//hasBeenPlayed == false && 
                 {
-                    if ( gm.SpendEnergy(card.EnergyCost))//hasBeenPlayed == false &&
+                    //hasBeenPlayed = true;
+                    if (card.CardType == "Manoeuvre")
                     {
-                        //hasBeenPlayed = true;
-                        if (card.CardType == "Manoeuvre")
-                        {
-                            MoveToDiscardPile(false);
-                            card.TriggerCardEffect(gm, hit);
-                        }
-                        else
-                        {
-                            MoveToExhaustPile();
-                            card.TriggerCardEffect(gm, hit);
-                        }
-                        
-                        gm.hasCardBeenPlayed = true;
+                        MoveToDiscardPile(false);
+                        card.TriggerCardEffect(gm, hit);
                     }
                     else
                     {
-                        gm.ShowNotification();
+                        MoveToExhaustPile();
+                        card.TriggerCardEffect(gm, hit);
                     }
-                    
-                    arrowHandler.SetVisibile(false);
+                    if (!gm.discardPhase)
+                        gm.hasCardBeenPlayed = true;
                 }
                 else
                 {
-                    if (gm.SpendEnergy(card.EnergyCost))//hasBeenPlayed == false && 
-                    {
-                        //hasBeenPlayed = true;
-                        if (card.CardType == "Manoeuvre")
-                        {
-                            MoveToDiscardPile(false);
-                            card.TriggerCardEffect(gm, hit);
-                        }
-                        else
-                        {
-                            MoveToExhaustPile();
-                            card.TriggerCardEffect(gm, hit);
-                        }
-                        if (!gm.discardPhase)
-                            gm.hasCardBeenPlayed = true;
-                    }
-                    else
-                    {
-                        transform.position = originalPos;
-                    }
-                    if (!gm.discardPhase)
-                    {
-                        targetController.SetPos(true);
-                    }
+                    transform.position = originalPos;
                 }
-                isDragged = false;
-                isSelected = false;
-                Rise(false);
+                if (!gm.discardPhase)
+                {
+                    targetController.SetPos(true);
+                }
             }
-
+            isDragged = false;
+            isSelected = false;
+            Rise(false);
         }
         else
         {

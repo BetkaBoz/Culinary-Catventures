@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ManouverTargetController : MonoBehaviour
 {
-    private Transform pos;
-    private const int Outside = -1000;
-    private const float Inside = 1.7f;
+    Transform pos;
+    [SerializeField] int Outside = -1000;
+    [SerializeField] float Inside = 3f;
 
     private void Awake()
     {

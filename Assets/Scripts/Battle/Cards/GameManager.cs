@@ -513,7 +513,7 @@ public class GameManager : MonoBehaviour
             if (availableCardSlots[i])
             {
                 //cardSlots[i].SetHasBeenPlayed(false);
-                cardSlots[i].gameObject.SetActive(true);
+                HideCardSlot(i, false);
                 cardSlots[i].SetCard(target);
                 cardSlots[i].HandIndex = i;
                 hand.Add(target);
@@ -536,7 +536,7 @@ public class GameManager : MonoBehaviour
         }
         if (isPile)
         {
-            return result + (int)(result * 0.05f);
+            return result + (int)(result * 0.2f);
         }
         else
         {
@@ -546,7 +546,7 @@ public class GameManager : MonoBehaviour
 
     public int GetComboEnergy()
     {
-        int result = 0;
+        int result = -1;
         for (int i = 0; i < cardSlots.Length; i++)
         {
             if (cardSlots[i].Selected)

@@ -19,10 +19,12 @@ public class CardLayoutManager : MonoBehaviour
         {
             if (point.PointsToCardSlot)
             {
-                point.ResetCardSlotPos();
-                point.ResetCardSlotSiblingIdx();
-                if(!point.CardSlot.Selected)
+                if (!point.CardSlot.Selected)
+                {
+                    point.ResetCardSlotPos();
                     point.CardSlot.transform.localScale = new Vector3(defaultZoom, defaultZoom, 1);
+                }
+                point.ResetCardSlotSiblingIdx();
             }
         }
     }
@@ -93,77 +95,38 @@ public class CardLayoutManager : MonoBehaviour
             Debug.Log("Success childIdx: "+childIdx);
             int removeIdx = childIdx;
             Debug.Log(numOfLeft + " " + numOfRight);
-            //if (childIdx < 5)
-            //{
-                if(numOfLeft < numOfRight)
+            if(numOfLeft < numOfRight)
+            {
+                Debug.Log("Move Right to Left");
+                numOfRight--;
+                for(int i = childIdx; i < transformPoints.Count-1; i++)
                 {
-                    Debug.Log("Move Right to Left");
-                    numOfRight--;
-                    for(int i = childIdx; i < transformPoints.Count-1; i++)
+                    if (!transformPoints[i+1].PointsToCardSlot)
                     {
-                        if (!transformPoints[i+1].PointsToCardSlot)
-                        {
-                            Debug.Log(i);
-                            break;
-                        }
-                        transformPoints[i].CardSlot = transformPoints[i+1].CardSlot;
-                        transformPoints[i].CardSlot.SlotIndex = i;
-                        removeIdx = i+1;
+                        Debug.Log(i);
+                        break;
                     }
+                    transformPoints[i].CardSlot = transformPoints[i+1].CardSlot;
+                    transformPoints[i].CardSlot.SlotIndex = i;
+                    removeIdx = i+1;
                 }
-                else
+            }
+            else
+            {
+                Debug.Log("Move Left");
+                numOfLeft--;
+                for (int i = childIdx; i > 0; i--)
                 {
-                    Debug.Log("Move Left");
-                    numOfLeft--;
-                    for (int i = childIdx; i > 0; i--)
+                    if (!transformPoints[i-1].PointsToCardSlot)
                     {
-                        if (!transformPoints[i-1].PointsToCardSlot)
-                        {
-                            Debug.Log(i);
-                            break;
-                        }
-                        transformPoints[i].CardSlot = transformPoints[i-1].CardSlot;
-                        transformPoints[i].CardSlot.SlotIndex = i;
-                        removeIdx = i-1;
+                        Debug.Log(i);
+                        break;
                     }
+                    transformPoints[i].CardSlot = transformPoints[i-1].CardSlot;
+                    transformPoints[i].CardSlot.SlotIndex = i;
+                    removeIdx = i-1;
                 }
-            //}
-            //else
-            //{
-            //    if (numOfLeft < numOfRight)
-            //    {
-            //        Debug.Log("Move Left to Right");
-            //        numOfLeft--;
-            //        numOfRight++;
-            //        for (int i = childIdx - 1; i < transformPoints.Count; i++)
-            //        {
-            //            if (!transformPoints[i].PointsToCardSlot)
-            //            {
-            //                Debug.Log(i);
-            //                removeIdx = i + 1;
-            //                break;
-            //            }
-            //            transformPoints[i + 1].CardSlot = transformPoints[i].CardSlot;
-            //        }
-            //        if (removeIdx == -1) { removeIdx = 9; }
-            //    }
-            //    else
-            //    {
-            //        Debug.Log("Move Right");
-            //        numOfRight--;
-            //        for (int i = childIdx + 1; i > 0; i--)
-            //        {
-            //            if (!transformPoints[i].PointsToCardSlot)
-            //            {
-            //                Debug.Log(i);
-            //                removeIdx = i - 1;
-            //                break;
-            //            }
-            //            transformPoints[i - 1].CardSlot = transformPoints[i].CardSlot;
-            //        }
-            //        if (removeIdx == -1) { removeIdx = 0; }
-            //    }
-            //}
+            }
             Debug.Log(numOfLeft + " " + numOfRight + " removeIdx" + removeIdx);
             transformPoints[removeIdx].RemoveCardSlot();
         }
@@ -186,8 +149,11 @@ public class CardLayoutManager : MonoBehaviour
                 }                                                                                   // (s-5) (s-4) (s-3) (s-2) (s-1) (s) (s-1) (s-2) (s-3) (s-4)
             }
         }
-        transformPoints[idx].CardSlot.transform.localScale = new Vector3(maxZoom, maxZoom, 1f);
-        transformPoints[idx].CardSlot.transform.position += Vector3.up * 0.25f;
+        if (!transformPoints[idx].CardSlot.Selected)
+        {
+            transformPoints[idx].CardSlot.transform.localScale = new Vector3(maxZoom, maxZoom, 1f);
+            transformPoints[idx].CardSlot.transform.position += Vector3.up * 0.25f;
+        }
     }
 
     //I honestly don't know if this is even needed
