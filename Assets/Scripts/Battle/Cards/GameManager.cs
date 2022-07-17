@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 {
     #region SerializeFields
     [SerializeField] Player player;
-    [SerializeField] List<Customer> customers = new List<Customer>();
     [SerializeField] CardSlot[] cardSlots;
     [SerializeField] CardSlot highlightSlot;
     [SerializeField] bool[] availableCardSlots;
@@ -30,6 +29,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     int numOfCards = 0;//right now useless
+    List<Customer> customers = new List<Customer>();
 
     #region Public Vars
     public bool combinePhase;
@@ -210,6 +210,10 @@ public class GameManager : MonoBehaviour
             customer.EndTurn();
             customer.RandomizeDebuffs();
         }
+    }
+    public void CustomerListAdd(Customer customer)
+    {
+        customers.Add(customer);
     }
     public void CustomerListDelete(Customer customer)
     {

@@ -7,19 +7,19 @@ using UnityEngine;
 
 public class CustomerFactory
 {
-    private static Dictionary<string, Type> customersByName;
+    private Dictionary<string, Type> customersByName;
 
-    public CustomerFactory()
+    public CustomerFactory(CustomerSetUpData customerSetUpData)
     {
         var customerTypes = Assembly.GetAssembly(typeof(Customer)).GetTypes()
             .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Customer)));
 
         customersByName = new Dictionary<string, Type>();
 
-        foreach (var type in customerTypes)
+        //get number of customer types and add their names
+        for (int i = 0; i < customerTypes.Count(); i++)
         {
-            var customer = Activator.CreateInstance(type) as Customer;
-            customersByName.Add(customer.Name, type);
+            customersByName.Add(customerSetUpData.customerDatas[i].Name, customerTypes.ElementAt(i));
         }
     }
 
@@ -34,7 +34,7 @@ public class CustomerFactory
         return null;
     }
 
-    internal static IEnumerable<string> GetCustomerNames()
+    internal IEnumerable<string> GetCustomerNames()
     {
         return customersByName.Keys;
     }

@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class Chungus : Customer
 {
-    public List<Sprite> sprites;
-
-    public override string Name => throw new System.NotImplementedException();
-
     public override void EndTurn()
     {
         turnsLeft--;
         if (numTurnsStunned > 0) numTurnsStunned--;
-
-        //change customers expressions based on how many turns are left till end of the battle
 
         //when there are 0 turns left, check how much was customer satisfied
         //and based on this info add money and reputation to the player
@@ -23,7 +17,7 @@ public class Chungus : Customer
             if (currHunger >= Data.MaxHunger / 2)
             {
                 gm.Player.TakeDamage(50);
-                finalMoney -= Data.Money + 40;
+                finalMoney -= 50;
             }
             else if (currHunger >= Data.MaxHunger / 3)
             {
@@ -38,7 +32,6 @@ public class Chungus : Customer
             Die(true);
             gm.Player.ChangeMoney(finalMoney);
             gm.Player.earnedRep += finalRep;
-            //gm.Player.ChangeReputation(rep);
             return;
         }
         satisfied = false;

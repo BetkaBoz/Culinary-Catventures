@@ -21,9 +21,10 @@ public class CustomerView : MonoBehaviour, IDropHandler
         Body.sprite = customer.Data.Sprites[0];     //set Element 0 as default sprite 
 
         //subscribtion on events from Customer class -> Observer
-        customer.OnDamageTaken += TakeDemage; 
+        customer.OnDamageTaken += TakeDamage; 
         customer.OnDied += Die;
         customer.OnTurnStarted += StartTurn;
+        customer.OnTurnEnded += ChangeExpressions;
     }
 
     private void StartTurn()
@@ -46,7 +47,7 @@ public class CustomerView : MonoBehaviour, IDropHandler
         
     }
 
-    private void TakeDemage()
+    private void TakeDamage()
     {
         Action.DOFade(0f, 1f);
     }
@@ -72,8 +73,9 @@ public class CustomerView : MonoBehaviour, IDropHandler
     private void OnDestroy()
     {
         //unsubscribe from events
-        _customer.OnDamageTaken -= TakeDemage;  
+        _customer.OnDamageTaken -= TakeDamage;  
         _customer.OnDied -= Die;
         _customer.OnTurnStarted -= StartTurn;
+        _customer.OnTurnEnded -= ChangeExpressions;
     }
 }

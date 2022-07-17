@@ -11,14 +11,12 @@ using System.Threading.Tasks;
 public abstract class Customer : IDamageable
 {
     CustomerData _customerData;
-
     protected GameManager gm;
     protected int turnsLeft;
     protected int numTurnsStunned;
     protected int currHunger;
     protected bool satisfied = false;
 
-    public abstract string Name { get; }
     public int finalMoney = 0;
     public int finalRep = 0;
     public event Action OnDamageTaken;
@@ -40,6 +38,7 @@ public abstract class Customer : IDamageable
         currHunger = customerData.MaxHunger;
         turnsLeft = customerData.TurnsLeft;
         numTurnsStunned = 0;
+        gm.CustomerListAdd(this);
     }
 
     public virtual void StartTurn()
