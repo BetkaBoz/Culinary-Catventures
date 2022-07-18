@@ -13,6 +13,7 @@ public class CustomerSetUpData : ScriptableObject
 public struct CustomerSetUp
 {
     public Vector2 customerPosition;
+    public int customerYRotate;
     public Vector2 notePosition;
     public int noteYRotate;
 }

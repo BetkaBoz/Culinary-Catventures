@@ -13,16 +13,20 @@ MonoBehaviour:
   m_Name: SetUpData
   m_EditorClassIdentifier: 
   customerSetUps:
-  - customerPosition: {x: -355, y: 160}
+  - customerPosition: {x: -330, y: 145}
+    customerYRotate: 0
     notePosition: {x: -550, y: 267}
     noteYRotate: 0
-  - customerPosition: {x: 70, y: 160}
+  - customerPosition: {x: 70, y: 145}
+    customerYRotate: 180
     notePosition: {x: 313, y: 267}
     noteYRotate: 180
-  - customerPosition: {x: -765, y: -85}
+  - customerPosition: {x: -795, y: -115}
+    customerYRotate: 0
     notePosition: {x: -534, y: -85}
     noteYRotate: 180
-  - customerPosition: {x: 655, y: -85}
+  - customerPosition: {x: 660, y: -115}
+    customerYRotate: 180
     notePosition: {x: 416, y: -85}
     noteYRotate: 0
   customerDatas:

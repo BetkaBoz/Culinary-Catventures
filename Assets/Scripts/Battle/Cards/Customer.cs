@@ -8,7 +8,7 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
-public abstract class Customer : IDamageable
+public abstract class Customer : MonoBehaviour, IDamageable
 {
     CustomerData _customerData;
     protected GameManager gm;

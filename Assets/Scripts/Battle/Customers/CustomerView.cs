@@ -19,6 +19,12 @@ public class CustomerView : MonoBehaviour, IDropHandler
         (transform as RectTransform).anchoredPosition = customerSetUp.customerPosition;
 
         Body.sprite = customer.Data.Sprites[0];     //set Element 0 as default sprite 
+        Body.SetNativeSize();
+        (transform as RectTransform).sizeDelta = new Vector2(Body.rectTransform.rect.width, Body.rectTransform.rect.height);
+
+        //rotating customer
+        Vector3 target = new Vector3(transform.rotation.x, customerSetUp.customerYRotate, transform.rotation.z);
+        Body.transform.Rotate(target);
 
         //subscribtion on events from Customer class -> Observer
         customer.OnDamageTaken += TakeDamage; 

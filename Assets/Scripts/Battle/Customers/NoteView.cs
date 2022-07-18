@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class NoteView : MonoBehaviour
 {
     [SerializeField] Text hunger;
+    [SerializeField] Image note;
     Customer _customer;
 
     public void SetUp(Customer customer, CustomerSetUp customerSetUp)
@@ -17,7 +18,7 @@ public class NoteView : MonoBehaviour
 
         //rotating notes
         Vector3 target = new Vector3(transform.rotation.x, customerSetUp.noteYRotate, transform.rotation.z);
-        transform.Rotate(target);
+        note.transform.Rotate(target);
 
         UpdateTexts();
 
