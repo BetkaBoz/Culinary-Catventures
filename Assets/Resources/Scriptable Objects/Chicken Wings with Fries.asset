@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 300f693d6c1542d4a809bc7f7e7394dd, type: 3}
-  m_Name: Avocado Egg Toast
+  m_Name: Chicken Wings with Fries
   m_EditorClassIdentifier: 
-  artwork: {fileID: 21300000, guid: 40bec7a75f2bddf45bc5ca29ef69736c, type: 3}
+  artwork: {fileID: 21300000, guid: 6e98d2d6cc44ebb4499c1c888c63083d, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
-  cardName: Avocado Egg Toast
-  cardType: Vegetarian
+  cardName: Chicken Wings with Fries
+  cardType: Meat
   canTarget: 1
-  energyCost: 2
-  nutritionPoints: 48
+  energyCost: 1
+  nutritionPoints: 36

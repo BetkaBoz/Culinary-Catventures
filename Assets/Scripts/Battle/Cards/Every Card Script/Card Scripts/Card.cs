@@ -138,6 +138,8 @@ public class Card : MonoBehaviour
                 return (int)(nutritionPoints * gm.Player.MeatFoodMod);
             case "Mix":
                 return (int)(nutritionPoints * gm.Player.GeneralFoodMod);
+            case "Neutral":
+                return (int)(nutritionPoints * gm.Player.GeneralFoodMod);
             default:
                 return -1;
         }

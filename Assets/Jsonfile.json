@@ -1,59 +1,224 @@
 {
 	"comboInfo": [
 		{
-			"numOfCards": 5,
-			"cardsUsed": ["Pepper","Batatas","Sausage","Spaghetti","Broccoli"],
-			"cardProduced": "EnergyShit"
-		},
-		{
-			"numOfCards": 4,
-			"cardsUsed": ["Chicken Legs","Batatas","Rice","Avocado"],
-			"cardProduced": "Pepper"
+			"numOfCards": 3,
+			"cardsUsed": ["Toast","Egg","Avocado"],
+			"cardProduced": "Avocado Egg Toast"
 		},
 		{
 			"numOfCards": 3,
-			"cardsUsed": ["Broccoli","Egg","Chicken Wings"],
-			"cardProduced": "Sausage"
+			"cardsUsed": ["Toast","Salmon","Avocado"],
+			"cardProduced": "Avocado Salmon Toast"
 		},
 		{
 			"numOfCards": 2,
-			"cardsUsed": ["Avocado","Broccoli"],
-			"cardProduced": "Batatas"
+			"cardsUsed": ["Toast","Avocado"],
+			"cardProduced": "Avocado Toast"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Toast","Avocado","Salad"],
+			"cardProduced": "Avocado Toast with Salad"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Beef","Tortilla","Salad","Tomatoes"],
+			"cardProduced": "Beef Taco"
 		},
 		{
 			"numOfCards": 2,
-			"cardsUsed": ["Batatas","Rice"],
-			"cardProduced": "Spaghetti"
+			"cardsUsed": ["Pepper","Sausage"],
+			"cardProduced": "Brani-Dog"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Egg","Buns","Salad","Tomatoes"],
+			"cardProduced": "Breakfast Burger"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Beef","Buns","Salad","Tomatoes"],
+			"cardProduced": "Burger"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Chicken","Tortilla","Salad","Rice"],
+			"cardProduced": "Burrito"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Beef","Tortilla","Salad","Rice"],
+			"cardProduced": "Burrito"
 		},
 		{
 			"numOfCards": 2,
-			"cardsUsed": ["Chicken Legs","Chicken Wings"],
-			"cardProduced": "Egg"
+			"cardsUsed": ["Shrimps","Spaghetti"],
+			"cardProduced": "Creamy Shrimp Spaghetti"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Shrimps","Spaghetti","Broccoli"],
+			"cardProduced": "Shrimp Spaghetti with Broccoli"
 		},
 		{
 			"numOfCards": 2,
-			"cardsUsed": ["Egg","Chicken Legs"],
-			"cardProduced": "Rice"
+			"cardsUsed": ["Toast","Egg"],
+			"cardProduced": "Egg Toast"
 		},
 		{
 			"numOfCards": 2,
-			"cardsUsed": ["Chicken Legs","Sausage"],
-			"cardProduced": "Rice"
+			"cardsUsed": ["Toast","Salmon"],
+			"cardProduced": "Salmon Toast"
 		},
 		{
 			"numOfCards": 2,
-			"cardsUsed": ["Egg","Avocado"],
-			"cardProduced": "Rice"
+			"cardsUsed": ["Beef","Buns"],
+			"cardProduced": "Hamburger"
 		},
 		{
 			"numOfCards": 2,
-			"cardsUsed": ["Avocado","Sausage"],
-			"cardProduced": "Rice"
+			"cardsUsed": ["Sausage","Roll"],
+			"cardProduced": "Hot-Dog"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Sausage","Roll","Potatoes"],
+			"cardProduced": "Hot-Dog with Fries"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Sausage","Roll","Batatas"],
+			"cardProduced": "Hot-Dog with Fries"
 		},
 		{
 			"numOfCards": 2,
-			"cardsUsed": ["Broccoli","Sausage"],
-			"cardProduced": "Rice"
+			"cardsUsed": ["Chicken Legs","Potatoes"],
+			"cardProduced": "Chicken Legs with Fries"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Chicken Legs","Batatas"],
+			"cardProduced": "Chicken Legs with Fries"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Chicken","Rice"],
+			"cardProduced": "Chicken Risotto"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Chicken","Rice","Broccoli"],
+			"cardProduced": "Chicken Risotto with Broccoli"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Chicken","Salad","Tomatoes"],
+			"cardProduced": "Chicken Salad"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Chicken","Tortilla","Salad","Tomatoes"],
+			"cardProduced": "Chicken Taco"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Chicken Wings","Potatoes"],
+			"cardProduced": "Chicken Wings with Fries"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Chicken Wings","Batatas"],
+			"cardProduced": "Chicken Wings with Fries"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Beef","Rice","Tortilla"],
+			"cardProduced": "Sad Burito"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Shrimps","Salad","Tomatoes","Broccoli"],
+			"cardProduced": "Seafood Salad"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Spaghetti","Tomatoes","Beef"],
+			"cardProduced": "Spaghetti Bolognese"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Spaghetti","Tomatoes","Tofu"],
+			"cardProduced": "Spaghetti Bolognese with Tofu"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Spaghetti","Tomatoes"],
+			"cardProduced": "Spaghetti with Tomato Sauce"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Beef","Potatoes"],
+			"cardProduced": "Steak with Fries"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Beef","Batatas"],
+			"cardProduced": "Steak with Fries"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Beef","Potatoes","Salad"],
+			"cardProduced": "Steak with Fries and Salad"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Beef","Batatas","Salad"],
+			"cardProduced": "Steak with Fries and Salad"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Toast","Avocado","Salad","Tomatoes"],
+			"cardProduced": "Toast with Veggies"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Tofu","Salad","Tomatoes","Pepper"],
+			"cardProduced": "Tofu Salad"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Rice","Tomatoes","Chicken"],
+			"cardProduced": "Tomatoe Chicken Risotto"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Rice","Tomatoes","Chicken","Broccoli"],
+			"cardProduced": "Tomatoe Chicken Risotto with Broccoli"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Rice","Tomatoes","Broccoli"],
+			"cardProduced": "Tomatoe Risotto with Broccoli"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Toast","Avocado","Salad","Egg"],
+			"cardProduced": "Ultimate Breakfast Toast"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Tofu","Buns","Salad","Tomatoes"],
+			"cardProduced": "Veggie Burger"
+		},
+		{
+			"numOfCards": 5,
+			"cardsUsed": ["Tortilla","Rice","Tomatoes","Salad","Tofu"],
+			"cardProduced": "Veggie Burrito"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Tortilla","Salad","Tomatoes"],
+			"cardProduced": "Veggie Taco"
 		}
 	]
 }

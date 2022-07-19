@@ -196,7 +196,7 @@ public class CombineController : MonoBehaviour
     //Apparently HashSets are the quickest way to compare arrays
     private string LookForCard(string[] find)
     {
-        return "NOTHING"; //This is here until we finish rest of combo cards
+        //return "NOTHING"; //This is here until we finish rest of combo cards
         HashSet<string> target = new HashSet<string>(find);
         HashSet<string> usedCards;
         

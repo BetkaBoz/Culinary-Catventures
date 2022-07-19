@@ -530,13 +530,17 @@ public class GameManager : MonoBehaviour
     public int GetComboNP(bool isPile)
     {
         int result = 0;
+        int highest = 0;
         for (int i = 0; i < cardSlots.Length; i++)
         {
             if (cardSlots[i].Selected)
             {
-                result += cardSlots[i].GetCard().NutritionPoints;
+                result += 8;
+                if (cardSlots[i].GetCard().NutritionPoints > highest)
+                    highest = cardSlots[i].GetCard().NutritionPoints;
             }
         }
+        result = highest + result;
         if (isPile)
         {
             return result + (int)(result * 0.2f);
