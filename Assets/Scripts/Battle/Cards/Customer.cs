@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 public abstract class Customer : IDamageable
 {
+    //[SerializeField] GameObject debuffs;
     CustomerData _customerData;
     int currentAction;
 
@@ -26,7 +27,6 @@ public abstract class Customer : IDamageable
     public event Action OnTurnStarted;
     public event Action OnTurnEnded;
     public event Action OnActionChanged;
-
     public int CurrentAction 
     {   
         get
@@ -51,7 +51,7 @@ public abstract class Customer : IDamageable
         gm = gameManager;
         _customerData = customerData;
         currHunger = customerData.MaxHunger;
-        turnsLeft = customerData.TurnsLeft;
+        turnsLeft = customerData.Turns;
         numTurnsStunned = 0;
         gm.CustomerListAdd(this);
     }
@@ -66,11 +66,13 @@ public abstract class Customer : IDamageable
                     gm.HurtPlayer(5);
                     break;
                 case 2:
+                    gm.Player.Energy -= 1;
                     //GameObject temp = UnityEngine.Object.Instantiate(debuffs);
                     //gm.BuffPlayer(temp.GetComponent<IBuffable>());
                     break;
             }
         }
+        OnTurnStarted?.Invoke();
     }
 
     public virtual void EndTurn()

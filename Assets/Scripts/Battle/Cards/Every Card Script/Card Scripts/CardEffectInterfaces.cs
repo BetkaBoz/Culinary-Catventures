@@ -6,7 +6,7 @@ using UnityEngine;
 //I'm not happy with this code will change it after presentation
 public interface IFeed
 {
-    void Feed(Customer target, int amount);
+    void Feed(CustomerView target, int amount);
 }
 public interface IGainEnergy
 {

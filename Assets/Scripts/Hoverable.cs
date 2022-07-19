@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class Hoverable: MonoBehaviour
 {
+    bool tooltipEnabled;
     string _message;
     string _header;
     public string Message => _message;
     public string Header => _header;
+
+    public bool TooltipEnabled => tooltipEnabled;
 
     public event Action OnTooltipChanged;
 
@@ -18,5 +21,10 @@ public class Hoverable: MonoBehaviour
         _header = header;
 
         OnTooltipChanged?.Invoke();
+    }
+
+    public void SetTooltipEnabled(bool value)
+    {
+        tooltipEnabled = value;
     }
 }

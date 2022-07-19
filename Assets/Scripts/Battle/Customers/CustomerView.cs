@@ -13,6 +13,7 @@ public class CustomerView : MonoBehaviour, IDropHandler
     [SerializeField] GameObject debuffs;
     [SerializeField] Hoverable hoverable;
     Customer _customer;
+    public Customer Customer => _customer;
     string message, header;
 
     public void SetUp(Customer customer, CustomerSetUp customerSetUp)
@@ -36,11 +37,15 @@ public class CustomerView : MonoBehaviour, IDropHandler
         customer.OnActionChanged += ActionChange;
 
         customer.RandomizeDebuffs();
+
+        StartTurn();
     }
 
     private void StartTurn()
     {
         Action.DOFade(1f, 1f);
+
+        hoverable.SetTooltipEnabled(true);
     }
 
     private void ActionChange()
@@ -68,6 +73,8 @@ public class CustomerView : MonoBehaviour, IDropHandler
     private void TakeDamage()
     {
         Action.DOFade(0f, 1f);
+
+        hoverable.SetTooltipEnabled(false);
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -77,7 +84,7 @@ public class CustomerView : MonoBehaviour, IDropHandler
 
     private void ChangeExpressions()
     {
-        float t = (float)_customer.TurnsLeft / _customer.Data.Turns;        //ratio of two variables
+        float t = 1f - (float)_customer.TurnsLeft / _customer.Data.Turns;        //ratio of two variables
         int spriteIndex = (int) Mathf.Lerp(0, (float)_customer.Data.Sprites.Count-1, t);
         Body.DOFade(1, 0.2f).OnPlay(() => { Body.sprite = _customer.Data.Sprites[spriteIndex]; });
     }

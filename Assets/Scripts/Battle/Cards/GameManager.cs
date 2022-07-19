@@ -184,15 +184,15 @@ public class GameManager : MonoBehaviour
         DiscardHand();
         count = customers.Count - 1;
 
+        SpendEnergy(player.Energy);
+        AddEnergy(player.MaxEnergy);
+
         foreach (var customer in customers)
         {
             customer.StartTurn();
         }
-
+        
         //hand.Clear();
-        SpendEnergy(player.Energy);
-        AddEnergy(player.MaxEnergy);
-
         EndEnemyTurn();
         ApplyBuffables();
         hasCardBeenPlayed = false;//emergency delivery code
@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
 
         DrawCards(5);
 
-        foreach (var customer in customers)
+        foreach (var customer in customers.ToArray())
         {
             customer.EndTurn();
             customer.RandomizeDebuffs();

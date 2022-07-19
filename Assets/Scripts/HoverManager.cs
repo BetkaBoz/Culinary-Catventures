@@ -24,10 +24,6 @@ public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private void Update()
     {
         UpdateMessage();
-                //case "helper_1":
-                //    message = "They're nothing special, good vibes only";
-                //    header = "Basic Helper";
-                //    break;
     }
 
     private void UpdateMessage()
@@ -37,10 +33,19 @@ public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             message = hoverable.Message;
             header = hoverable.Header;
         }
+
+        switch(gameObject.name)
+        {
+            case "helper_1":
+                message = "They're nothing special, good vibes only";
+                header = "Basic Helper";
+                break;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (hoverable != null && !hoverable.TooltipEnabled) return;
         switch (gameObject.tag)
         {
             case "Action":
