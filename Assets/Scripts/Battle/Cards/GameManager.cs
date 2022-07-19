@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 {
     #region SerializeFields
     [SerializeField] Player player;
-    [SerializeField] List<Customer> customers = new List<Customer>();
     [SerializeField] CardSlot[] cardSlots;
     [SerializeField] CardSlot highlightSlot;
     [SerializeField] bool[] availableCardSlots;
@@ -30,6 +29,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     int numOfCards = 0;//right now useless
+    List<Customer> customers = new List<Customer>();
 
     #region Public Vars
     public bool combinePhase;
@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour
         repUI.text = $"{player.Rep}";
         combinePhase = false;
         discardPhase = false;
-
     }
 
     private void SetUpDeck()
@@ -185,15 +184,15 @@ public class GameManager : MonoBehaviour
         DiscardHand();
         count = customers.Count - 1;
 
+        SpendEnergy(player.Energy);
+        AddEnergy(player.MaxEnergy);
+
         foreach (var customer in customers)
         {
             customer.StartTurn();
         }
-
+        
         //hand.Clear();
-        SpendEnergy(player.Energy);
-        AddEnergy(player.MaxEnergy);
-
         EndEnemyTurn();
         ApplyBuffables();
         hasCardBeenPlayed = false;//emergency delivery code
@@ -205,11 +204,15 @@ public class GameManager : MonoBehaviour
 
         DrawCards(5);
 
-        foreach (var customer in customers)
+        foreach (var customer in customers.ToArray())
         {
             customer.EndTurn();
             customer.RandomizeDebuffs();
         }
+    }
+    public void CustomerListAdd(Customer customer)
+    {
+        customers.Add(customer);
     }
     public void CustomerListDelete(Customer customer)
     {

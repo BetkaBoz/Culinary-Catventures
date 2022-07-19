@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78931f0386aa2f4b8c3ad2ae87e24e9, type: 3}
+  m_Name: Chad
+  m_EditorClassIdentifier: 
+  Name: Chad
+  MaxHunger: 60
+  TurnsLeft: 0
+  Turns: 0
+  Money: 10
+  Reputation: 10
+  Sprites:
+  - {fileID: 21300000, guid: 7eeaaa8bb102f25489277af371e0999f, type: 3}
+  - {fileID: 21300000, guid: 70635937629a8094faa4c4292c0b15e5, type: 3}
+  - {fileID: 21300000, guid: 44d3e0f0afaa1cf4998695a37ea64a05, type: 3}
+  - {fileID: 21300000, guid: 18bcd872a53df0847bec73f5e1f8fb61, type: 3}
+  ActionSprites:
+  - {fileID: 21300000, guid: 80610fc619d39f045abafb060fcef784, type: 3}
+  - {fileID: 21300000, guid: ab4b2396d24a22b4cb89634bb733d598, type: 3}
+  - {fileID: 21300000, guid: a42112c070b3b9446ab2ad70b431a0a2, type: 3}

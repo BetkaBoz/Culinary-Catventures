@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 [ExecuteInEditMode()]
 public class Tooltip : MonoBehaviour
@@ -12,10 +13,12 @@ public class Tooltip : MonoBehaviour
     public LayoutElement layoutElement;
     public int characterWrapLimit;
     public RectTransform rectTransform;
+    public Image image;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        image = GetComponent<Image>();
     }
 
     private void Update()
