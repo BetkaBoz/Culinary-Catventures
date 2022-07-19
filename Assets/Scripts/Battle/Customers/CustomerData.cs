@@ -12,4 +12,5 @@ public class CustomerData : ScriptableObject
     public int Money;
     public int Reputation;
     public List<Sprite> Sprites;
+    public List<Sprite> ActionSprites;
 }

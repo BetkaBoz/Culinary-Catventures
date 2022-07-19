@@ -16,16 +16,16 @@ public class TooltipManager : MonoBehaviour
         tooltip.gameObject.SetActive(false);
     }
 
-    public static void Show(string message, string header)
+    public static void Show(string message, string header, float endValue, float duration)
     {
         tm.tooltip.SetText(message, header);
         tm.tooltip.gameObject.SetActive(true);
-        tm.tooltip.image.DOFade(0.7f, 0.2f);
+        tm.tooltip.image.DOFade(endValue, duration);
     }
 
-    public static void Hide()
+    public static void Hide(float duration = 0.2f)
     {
         tm.tooltip.gameObject.SetActive(false);
-        tm.tooltip.image.DOFade(0f, 0.2f);
+        tm.tooltip.image.DOFade(0f, duration);
     }
 }

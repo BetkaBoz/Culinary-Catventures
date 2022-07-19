@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour
         repUI.text = $"{player.Rep}";
         combinePhase = false;
         discardPhase = false;
-
     }
 
     private void SetUpDeck()

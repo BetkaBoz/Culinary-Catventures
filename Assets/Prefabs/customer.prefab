@@ -64,6 +64,7 @@ MonoBehaviour:
   Action: {fileID: 4342073756633959973}
   Body: {fileID: 1170266702434521995}
   debuffs: {fileID: 5392355283522671463}
+  hoverable: {fileID: 1704784635844631275}
 --- !u!61 &3719504316910534307
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -177,6 +178,7 @@ GameObject:
   - component: {fileID: 7153527720582513259}
   - component: {fileID: 4342073756633959973}
   - component: {fileID: 5760158233723837969}
+  - component: {fileID: 1704784635844631275}
   m_Layer: 6
   m_Name: Action
   m_TagString: Action
@@ -254,9 +256,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helper: {fileID: 0}
-  customer: {fileID: 0}
+  hoverable: {fileID: 1704784635844631275}
   message: 
   header: 
+--- !u!114 &1704784635844631275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392355283522671463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d55030168ba75d4c916dd81c3e609cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6321039819743662631
 GameObject:
   m_ObjectHideFlags: 0

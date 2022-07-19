@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,18 +11,19 @@ public class CustomerView : MonoBehaviour, IDropHandler
     [SerializeField] Image Action;
     [SerializeField] Image Body;
     [SerializeField] GameObject debuffs;
+    [SerializeField] Hoverable hoverable;
     Customer _customer;
+    string message, header;
 
     public void SetUp(Customer customer, CustomerSetUp customerSetUp)
     {
         _customer = customer;
-
+        //set customer to given position
         (transform as RectTransform).anchoredPosition = customerSetUp.customerPosition;
-
+        //show customer
         Body.sprite = customer.Data.Sprites[0];     //set Element 0 as default sprite 
         Body.SetNativeSize();
         (transform as RectTransform).sizeDelta = new Vector2(Body.rectTransform.rect.width, Body.rectTransform.rect.height);
-
         //rotating customer
         Vector3 target = new Vector3(transform.rotation.x, customerSetUp.customerYRotate, transform.rotation.z);
         Body.transform.Rotate(target);
@@ -31,26 +33,36 @@ public class CustomerView : MonoBehaviour, IDropHandler
         customer.OnDied += Die;
         customer.OnTurnStarted += StartTurn;
         customer.OnTurnEnded += ChangeExpressions;
+        customer.OnActionChanged += ActionChange;
+
+        customer.RandomizeDebuffs();
     }
 
     private void StartTurn()
     {
         Action.DOFade(1f, 1f);
+    }
 
-        //if (!customer.Satisfied)
-        //{
-        //    switch (ac.CurrentIndex)
-        //    {
-        //        case 1:
-        //            gm.HurtPlayer(5);
-        //            break;
-        //        case 2:
-        //            GameObject temp = Instantiate(debuffs);
-        //            gm.BuffPlayer(temp.GetComponent<IBuffable>());
-        //            break;
-        //    }
-        //}
-        
+    private void ActionChange()
+    {
+        Action.sprite = _customer.Data.ActionSprites[_customer.CurrentAction];
+
+        switch (_customer.CurrentAction)
+        {
+            case 0:
+                message = "Customer will leave next round!";
+                header = "";
+                break;
+            case 1:
+                message = "If customer won't be fed this round, they will take your Reputation Points";
+                header = "Reputation Debuff";
+                break;
+            case 2:
+                message = "If customer won't be fed this round, they will cause Energy Points loss for the next round";
+                header = "Energy Debuff";
+                break;
+        }
+        hoverable.SetMessageHeader(message, header);
     }
 
     private void TakeDamage()
@@ -83,5 +95,6 @@ public class CustomerView : MonoBehaviour, IDropHandler
         _customer.OnDied -= Die;
         _customer.OnTurnStarted -= StartTurn;
         _customer.OnTurnEnded -= ChangeExpressions;
+        _customer.OnActionChanged -= ActionChange;
     }
 }

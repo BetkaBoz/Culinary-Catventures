@@ -23,3 +23,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 70635937629a8094faa4c4292c0b15e5, type: 3}
   - {fileID: 21300000, guid: 44d3e0f0afaa1cf4998695a37ea64a05, type: 3}
   - {fileID: 21300000, guid: 18bcd872a53df0847bec73f5e1f8fb61, type: 3}
+  ActionSprites:
+  - {fileID: 21300000, guid: 80610fc619d39f045abafb060fcef784, type: 3}
+  - {fileID: 21300000, guid: ab4b2396d24a22b4cb89634bb733d598, type: 3}
+  - {fileID: 21300000, guid: a42112c070b3b9446ab2ad70b431a0a2, type: 3}

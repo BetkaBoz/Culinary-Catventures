@@ -8,9 +8,11 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
-public abstract class Customer : MonoBehaviour, IDamageable
+public abstract class Customer : IDamageable
 {
     CustomerData _customerData;
+    int currentAction;
+
     protected GameManager gm;
     protected int turnsLeft;
     protected int numTurnsStunned;
@@ -23,7 +25,20 @@ public abstract class Customer : MonoBehaviour, IDamageable
     public event Action OnDied;
     public event Action OnTurnStarted;
     public event Action OnTurnEnded;
-    public int CurrentAction { get; private set; }
+    public event Action OnActionChanged;
+
+    public int CurrentAction 
+    {   
+        get
+        {
+            return currentAction;
+        } 
+        private set
+        {
+            currentAction = value;
+            OnActionChanged?.Invoke();
+        } 
+    }
     public int Money => finalMoney;
     public int Rep => finalRep;
     public int CurrentHunger => currHunger;
@@ -51,7 +66,7 @@ public abstract class Customer : MonoBehaviour, IDamageable
                     gm.HurtPlayer(5);
                     break;
                 case 2:
-                    //GameObject temp = Instantiate(debuffs);
+                    //GameObject temp = UnityEngine.Object.Instantiate(debuffs);
                     //gm.BuffPlayer(temp.GetComponent<IBuffable>());
                     break;
             }
@@ -66,7 +81,7 @@ public abstract class Customer : MonoBehaviour, IDamageable
     public virtual void RandomizeDebuffs()
     {
         if (turnsLeft == 1) CurrentAction = 0;
-        else CurrentAction = UnityEngine.Random.Range(1, _customerData.Sprites.Count);
+        else CurrentAction = UnityEngine.Random.Range(1, _customerData.ActionSprites.Count);
     }
     public void OnDrop(PointerEventData eventData)
     {

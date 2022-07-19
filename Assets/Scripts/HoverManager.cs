@@ -5,36 +5,38 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using System;
 
 public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] HelperSelection helper;
-    //[SerializeField] CustomerView customerView;
-    [SerializeField] Customer customer;
-    public string message, header;
+    [SerializeField] Hoverable hoverable;
+    public string message = "", header = "";
 
+    private void Start()
+    {
+        if(hoverable != null)
+        {
+            hoverable.OnTooltipChanged += UpdateMessage;
+        }
+    }
+    
     private void Update()
     {
-        if (customer == null) return;
-            switch (customer.CurrentAction)
-            {
-                case 0:
-                    message = "Customer will leave next round!";
-                    header = "";
-                break;
-                case 1:
-                    message = "If customer won't be fed this round, they will take your Reputation Points";
-                    header = "Reputation Debuff";
-                    break;
-                case 2:
-                    message = "If customer won't be fed this round, they will cause Energy Points loss for the next round";
-                    header = "Energy Debuff";
-                    break;
+        UpdateMessage();
                 //case "helper_1":
                 //    message = "They're nothing special, good vibes only";
                 //    header = "Basic Helper";
                 //    break;
-            }
+    }
+
+    private void UpdateMessage()
+    {
+        if (hoverable != null)
+        {
+            message = hoverable.Message;
+            header = hoverable.Header;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -42,12 +44,13 @@ public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         switch (gameObject.tag)
         {
             case "Action":
-                TooltipManager.Show(message, header);
+                TooltipManager.Show(message, header, 0.7f, 0.2f);
                 break;
             case "Helper":
-                helper.transform.DOScale(1.2f, 0.5f).OnPlay(() => { TooltipManager.Show(message, header); });
+                helper.transform.DOScale(1.2f, 0.5f).OnPlay(() => { TooltipManager.Show(message, header, 0.7f, 0.2f); });
                 break;
             default:
+                TooltipManager.Show(message, header, 0.7f, 0.2f);
                 break;
         }
     }
@@ -63,7 +66,15 @@ public class HoverManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 helper.transform.DOScale(1f, 0.5f).OnPlay(() => { TooltipManager.Hide(); });
                 break;
             default:
+                TooltipManager.Hide();
                 break;
+        }
+    }
+    private void OnDestroy()
+    {
+        if(hoverable != null)
+        {
+            hoverable.OnTooltipChanged -= UpdateMessage;
         }
     }
 }
