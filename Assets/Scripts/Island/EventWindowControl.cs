@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -256,7 +257,9 @@ public class EventWindowControl : WindowControl
                             player.Deck.Add(randomCard); 
                             eventCards[i].SetActive(true);
                             eventCards[i].GetComponent<Image>().sprite = randomCard.Artwork;    
-                            eventCards[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{randomCard.NutritionPoints}";
+                            //eventCards[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{randomCard.NutritionPoints}";
+                            eventCards[i].GetComponentInChildren<Text>().text = $"{randomCard.NutritionPoints}";
+                            eventCards[i].transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{randomCard.EnergyCost}";;
 
                         }
 
@@ -357,9 +360,11 @@ public class EventWindowControl : WindowControl
     }
     private void Stumble(Button firstButtonControl,Button secondButtonControl,Button thirdButtonControl,CardBaseInfo card)
     {
-        eventCards[0].SetActive(true);
-        eventCards[0].GetComponent<Image>().sprite = card.Artwork;
-        eventCards[0].GetComponentInChildren<TextMeshProUGUI>().text = $"{card.NutritionPoints}";
+        eventCards.First().SetActive(true);
+        eventCards.First().GetComponent<Image>().sprite = card.Artwork;
+        eventCards.First().transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{card.EnergyCost}";
+        eventCards.First().GetComponentInChildren<Text>().text = $"{card.NutritionPoints}";
+        
 
 
         firstButtonControl.onClick.AddListener(delegate {
@@ -455,12 +460,17 @@ public class EventWindowControl : WindowControl
             CardBaseInfo randomCard = GetRandomIngredient();
             player.Deck.Add(randomCard); 
             eventCards[i].SetActive(true);
+            eventCards[i].transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{randomCard.EnergyCost}";;
             eventCards[i].GetComponent<Image>().sprite = randomCard.Artwork;    
-            eventCards[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{randomCard.NutritionPoints}";
+            eventCards[i].GetComponentInChildren<Text>().text = $"{randomCard.NutritionPoints}";
 
         }
     }
-    
+    /*
+    private void ShowCards()
+    {
+    }
+    */
     //AK JE MENEJ/ROVNE AKO PERCENTAGE TAK VRATI TRUE
     private bool RandomState(int percentage = 50)
     {
