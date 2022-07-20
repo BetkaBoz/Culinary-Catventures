@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: d46ebdc5f9bd31a41976d0ca14a755d4, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Egg
-  cardType: Mix
+  cardType: Neutral
   canTarget: 1
   energyCost: 1
   nutritionPoints: 8
