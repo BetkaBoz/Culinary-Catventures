@@ -12,35 +12,9 @@ public class Deck : MonoBehaviour
     [SerializeField] private GameObject panel;
 
 
-    //List<CardBaseInfo> playerDeck;
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        
-
-        //List<CardBaseInfo> playerDeck =player.Deck;
-    }
-    void Start()
-    {
-        //GenerateDeck();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void GenerateDeck(List<CardBaseInfo> deck )
     {
         Debug.Log("GenerateDeck!");
-
-        //GameObject panel = gameObject.GetComponentInChildren<GridLayoutGroup>().gameObject;
-        if (panel == null)
-        {
-            return;
-        }
         foreach (CardBaseInfo card in deck)
         {
             //Debug.Log(card);
@@ -66,20 +40,13 @@ public class Deck : MonoBehaviour
             }
         }
     }
-/*
-    public void ShowDeck(List<CardBaseInfo> deck)
-    {
-        Instantiate(deckPrefab,uiLayer.transform);
-    }
-    public void ShowPlayerDeck()
-    {
-        Debug.Log("ShowPlayerDeck!");
 
-        Instantiate(deckPrefab,uiLayer.transform);
-    }*/
     public void Destroy()
     {
         Destroy(gameObject);
+        Time.timeScale = 1;
+        EventManager.IsInEvent = false;
+
     }
     
     private void OnDestroy()

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class DeckButton : MonoBehaviour
 {
     [SerializeField] private Button button;
-    [SerializeField] private GameObject deckPrefab;
+    [SerializeField] private Deck deckPrefab;
 
     private Player player;
     private UILayer uiLayer;
@@ -17,23 +17,45 @@ public class DeckButton : MonoBehaviour
         uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
         button = GetComponent<Button>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowPlayerDeckInIsland()
     {
-        
+        Debug.Log("Show Deck!");
+        Deck deckGameObject = Instantiate(deckPrefab,uiLayer.transform);
+
+        deckGameObject.GenerateDeck(player.Deck);
+        Adjust();
+
+
+    }
+    //TODO PRIDAT LISTY PODLA KTORYCH SA MA GENEROVAT DECK
+    public void ShowPlayerDeckInBattle()
+    {
+      
+        Debug.Log("Show Deck!");
+        Deck deckGameObject = Instantiate(deckPrefab,uiLayer.transform);
+
+        deckGameObject.GenerateDeck(player.Deck);
+        Adjust();
+
+
     }
     
-    public void ShowPlayerDeck()
+    public void ShowPlayerDiscardInBattle()
     {
-        Debug.Log("ShowPlayerDeck!");
-        GameObject deckGameObject = Instantiate(deckPrefab,uiLayer.transform);
+        Debug.Log("Show Discard!");
+        Deck deckGameObject = Instantiate(deckPrefab,uiLayer.transform);
 
-        deckGameObject.GetComponent<Deck>().GenerateDeck(player.Deck);
+        deckGameObject.GenerateDeck(player.Deck);
+        Adjust();
+
     }
+
+    private void Adjust()
+    {
+        Time.timeScale = 0;
+        EventManager.IsInEvent = true;
+
+    }
+    
 }
