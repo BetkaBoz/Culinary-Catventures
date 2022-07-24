@@ -9,6 +9,7 @@ public abstract class DiscardCardEffect : CardEffect
 
     protected async void Discard(GameManager gm, Action discardSuccessfulCallback = null)
     {
+        // Tento IF sa sem vrati, ked sa spravi "pouch" na handlovanie selectnutej karty
         // if (CanBeUsed(gm))
         // {
             gm.SetDiscardFilter(filter);
