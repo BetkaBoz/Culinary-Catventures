@@ -70,6 +70,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool IsEnoughCardsOnHand(int requiredAmount)
+    {
+        return hand.Count > requiredAmount;
+    }
+    
+    public bool IsEnoughFoodOnHand(int requiredAmount)
+    {
+        return hand.FindAll(card => card.CardType == "Vegetarian" || card.CardType == "Meat" || card.CardType == "Mix" || card.CardType == "Neutral").Count >= requiredAmount;
+    }
+
     //emergency delivery code
     public void AddCardsToDeck(List<Card> newCards)
     {
@@ -432,7 +442,7 @@ public class GameManager : MonoBehaviour
             highlightSlot.Deselect();
         }
     }
-
+    
     public void SetDiscardFilter(string[] filter)
     {
         discardController.Filter = filter;

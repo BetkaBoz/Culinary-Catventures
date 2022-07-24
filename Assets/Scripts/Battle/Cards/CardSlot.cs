@@ -327,8 +327,14 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                     //hasBeenPlayed = true;
                     if (card.CardType == "Manoeuvre")
                     {
-                        MoveToDiscardPile(false);
-                        card.TriggerCardEffect(gm, hit);
+                        if(
+                            !(card.CardEffect is DiscardCardEffect) 
+                            || (card.CardEffect is DiscardCardEffect 
+                                && (card.CardEffect as DiscardCardEffect).CanBeUsed(gm)))
+                        {
+                            MoveToDiscardPile(false);
+                            card.TriggerCardEffect(gm, hit);
+                        }
                     }
                     else
                     {
