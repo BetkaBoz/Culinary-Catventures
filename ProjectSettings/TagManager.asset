@@ -15,6 +15,7 @@ TagManager:
   - Event
   - Notification
   - PlayerCharacter
+  - GameManager
   layers:
   - Default
   - TransparentFX

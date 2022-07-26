@@ -6,56 +6,52 @@ using UnityEngine.UI;
 
 public class DeckButton : MonoBehaviour
 {
-    [SerializeField] private Button button;
+    //[SerializeField] private Button button;
     [SerializeField] private Deck deckPrefab;
 
-    private Player player;
-    private UILayer uiLayer;
-    private void Awake()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
-        button = GetComponent<Button>();
-    }
+    //private Player player;
 
     public void ShowPlayerDeckInIsland()
     {
         Debug.Log("Show Deck!");
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        UILayer uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
+
         Deck deckGameObject = Instantiate(deckPrefab,uiLayer.transform);
 
         deckGameObject.GenerateDeck(player.Deck);
         Adjust();
-
-
     }
     //TODO PRIDAT LISTY PODLA KTORYCH SA MA GENEROVAT DECK
     public void ShowPlayerDeckInBattle()
     {
-      
         Debug.Log("Show Deck!");
-        Deck deckGameObject = Instantiate(deckPrefab,uiLayer.transform);
 
-        deckGameObject.GenerateDeck(player.Deck);
+        GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        GameObject toolTipLayer = GameObject.Find("Card Layer");
+        Deck deckGameObject = Instantiate(deckPrefab,toolTipLayer.transform);
+
+        deckGameObject.GenerateDeckInBattle(gameManager.deck);
         Adjust();
-
-
     }
     
     public void ShowPlayerDiscardInBattle()
-    {
+    {        
         Debug.Log("Show Discard!");
-        Deck deckGameObject = Instantiate(deckPrefab,uiLayer.transform);
 
-        deckGameObject.GenerateDeck(player.Deck);
+        GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        GameObject toolTipLayer = GameObject.Find("Card Layer");
+
+        Deck deckGameObject = Instantiate(deckPrefab,toolTipLayer.transform);
+
+        deckGameObject.GenerateDeckInBattle(gameManager.discardPile);
         Adjust();
-
     }
 
     private void Adjust()
     {
         Time.timeScale = 0;
         EventManager.IsInEvent = true;
-
     }
     
 }

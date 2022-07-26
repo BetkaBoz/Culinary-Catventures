@@ -18,10 +18,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] DiscardController discardController;
     [SerializeField] CombineController combineController;
     [SerializeField] Card[] cardPrefabs;
-    [SerializeField] List<Card> deck;
-    [SerializeField] List<Card> discardPile = new List<Card>();
+    [SerializeField] public List<Card> deck;
+    [SerializeField] public List<Card> discardPile = new List<Card>();
     [SerializeField] List<Card> hand = new List<Card>();
-    [SerializeField] List<Card> exhaustPile = new List<Card>();
+    [SerializeField] public List<Card> exhaustPile = new List<Card>();
     [SerializeField] List<IBuffable> buffs = new List<IBuffable>();
     [SerializeField] Button emergencyDelivery;//emergency delivery code
     [SerializeField] Image energyNotification;
