@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Chad
   MaxHunger: 60
-  TurnsLeft: 0
-  Turns: 0
+  Turns: 12
   Money: 10
   Reputation: 10
   Sprites:
