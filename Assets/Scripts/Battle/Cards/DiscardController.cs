@@ -25,7 +25,7 @@ public class DiscardController : MonoBehaviour
     {
         if(selectedCard != null)
         {
-            gm.SendToDiscard(selectedCard.HandIndex, false);
+            //gm.SendToDiscard(selectedCard.HandIndex, false);
             gm.StopDiscard();
         }
     }
