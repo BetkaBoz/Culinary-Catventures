@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 5399595339633185638}
   - component: {fileID: 1290662945258169807}
   - component: {fileID: 4611943657041114149}
+  - component: {fileID: -6392733890007988503}
   m_Layer: 0
   m_Name: CardSlot
   m_TagString: Untagged
@@ -146,6 +147,7 @@ MonoBehaviour:
   nutritionalValue: {fileID: 1863598012971351994}
   isHighlight: 0
   highlightedSlot: {fileID: 0}
+  SlotIndex: 0
 --- !u!222 &5399595339633185638
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -166,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 9cb532f66bcef314595b9ebf323bee13, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -196,6 +198,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &-6392733890007988503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4566925227505613918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a39bf789c29db4b46a6e5ce26062226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 0}
+  highlightImage: {fileID: 0}
 --- !u!1 &5256676323158397452
 GameObject:
   m_ObjectHideFlags: 0

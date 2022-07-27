@@ -24,6 +24,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     GraphicRaycaster tempReycaster;
     int originalSiblingIndex;
     GameObject notification;
+    HighlightObjectController highlightController;
     #endregion
 
     #region SerializeFields
@@ -39,6 +40,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     #endregion
 
     #region Getters/Setters
+    public bool IsRised => isRised;
     public bool IsDragged => isDragged;
     public int SlotIndex;//this is used in layout manager
     public int HandIndex
@@ -130,6 +132,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+        highlightController = GetComponent<HighlightObjectController>();
         //originalSiblingIndex = transform.GetSiblingIndex();
         //gm = FindObjectOfType<GameManager>();
         cam = Camera.main;
@@ -183,6 +186,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             isSelected = false;
             isRised = false;
             gm.MoveNeighbours(SlotIndex, true);
+            highlightController.ToggleHighlight(isSelected);
         }
     }
 
@@ -205,6 +209,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                     //Debug.Log("yed");
                     isSelected = true;
                     Rise(true);
+                    highlightController.ToggleHighlight(isSelected);
                 }
             }
         }
@@ -434,7 +439,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         else
         {
             //Debug.Log("Start Of DeRise " + card.name + " " + handIndex);
-            if (isDragged || isSelected) {
+            if (isDragged || (isSelected && gm.discardPhase)) { //THIS IS SO BAD FIX LATER!!!
                 //Debug.Log(card.name + " " + handIndex + " rised "+isRised+" selected "+isSelected+" dragged "+isDragged);
                 return;
             }
@@ -446,9 +451,9 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             //if (isHighlight)
             //{
                 //Debug.Log("In Move " + card.name + " " + handIndex);
-                gm.MoveNeighbours(handIndex, true);
             //}
             isRised = false;
+            gm.MoveNeighbours(handIndex, true);
             //Debug.Log("End Of DeRise " + card.name + " " + handIndex);
         }
     }

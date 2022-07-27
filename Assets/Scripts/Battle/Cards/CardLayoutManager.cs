@@ -19,7 +19,7 @@ public class CardLayoutManager : MonoBehaviour
         {
             if (point.PointsToCardSlot)
             {
-                if (!point.CardSlot.Selected)
+                if (!point.CardSlot.IsRised)
                 {
                     point.ResetCardSlotPos();
                     point.CardSlot.transform.localScale = new Vector3(defaultZoom, defaultZoom, 1);

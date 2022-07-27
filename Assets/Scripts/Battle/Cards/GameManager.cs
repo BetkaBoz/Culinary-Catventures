@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button emergencyDelivery;//emergency delivery code
     [SerializeField] Image energyNotification;
     [SerializeField] CardLayoutManager layoutManager;//card layout
+    [SerializeField] HighlightObjectController bellHighlight;
     #endregion
 
     int numOfCards = 0;//right now useless
@@ -106,6 +107,7 @@ public class GameManager : MonoBehaviour
     {
         player.Energy += amount;
         energyUI.text = $"{player.Energy}/{player.MaxEnergy}";
+        bellHighlight.ToggleHighlight(false);
     }
 
     public bool SpendEnergy(int amount)
@@ -420,6 +422,11 @@ public class GameManager : MonoBehaviour
         {
             if (emergencyDelivery.interactable)
                 emergencyDelivery.interactable = false;
+        }
+
+        if(player.Energy == 0)
+        {
+            bellHighlight.ToggleHighlight(true);
         }
     }
 
