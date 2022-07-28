@@ -42,7 +42,10 @@ public class Player : MonoBehaviour, IDamageable
     public bool canCallEmergencyDelivery = true;
 
     #region Getters/Setters
-
+    public bool IsVictorious
+    {
+        get { return isVictorious; }
+    }
     public int CurrentExp
     {
         get { return currExp; }

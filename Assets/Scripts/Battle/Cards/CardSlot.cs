@@ -13,6 +13,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     [SerializeField] bool isDragged = false;
     [SerializeField] bool isSelected = false;
     [SerializeField] bool isRised = false;
+    public bool isSelectedForDiscard = false;
     public bool hasMoved = false;
     Camera cam;
     Vector3 dragOffset;
@@ -185,6 +186,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             isDragged = false;
             isSelected = false;
             isRised = false;
+            isSelectedForDiscard = false;
             gm.MoveNeighbours(SlotIndex, true);
             highlightController.ToggleHighlight(isSelected);
         }
@@ -204,9 +206,9 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             }
             else
             {
-                if (gm.GetNumOfSelected() < 5)
-                {
+                if (gm.GetNumOfSelected() < 5)                {
                     //Debug.Log("yed");
+
                     isSelected = true;
                     Rise(true);
                     highlightController.ToggleHighlight(isSelected);
@@ -232,8 +234,11 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         //Debug.Log(canTarget.ToString());
         if (gm.discardPhase)//ARTURITO
         {
+            isSelectedForDiscard = true;//Horrible jank FIX LATER!
             if (gm.SetCard(this))
+            {
                 isSelected = true;
+            }
             else
             {
                 isSelected = true;
@@ -439,7 +444,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         else
         {
             //Debug.Log("Start Of DeRise " + card.name + " " + handIndex);
-            if (isDragged || (isSelected && gm.discardPhase)) { //THIS IS SO BAD FIX LATER!!!
+            if (isDragged || isSelectedForDiscard) { //THIS IS SO BAD FIX LATER!!!
                 //Debug.Log(card.name + " " + handIndex + " rised "+isRised+" selected "+isSelected+" dragged "+isDragged);
                 return;
             }

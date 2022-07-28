@@ -73,6 +73,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void RemoveExhaustedCards()
+    {
+        if (player.IsVictorious) { return; }
+        foreach(var exhaustedCard in exhaustPile)
+        {
+            Debug.Log("deleting" + exhaustedCard.CardName);
+            CardBaseInfo foundCard = null;
+           foreach(var card in player.Deck)
+            {
+                if(card.CardName == exhaustedCard.CardName)
+                {
+                    foundCard = card;
+                }
+            }
+            if(foundCard != null) player.Deck.Remove(foundCard);
+        }
+    }
+
     public bool IsEnoughCardsOnHand(int requiredAmount)
     {
         return hand.Count > requiredAmount;
@@ -406,7 +424,11 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        if (customers.Count == 0) Player.CheckCondition();
+        if (customers.Count == 0)
+        {
+            RemoveExhaustedCards();
+            Player.CheckCondition();
+        }
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
