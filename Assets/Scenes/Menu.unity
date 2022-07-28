@@ -2913,6 +2913,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f769650bd57225b47b33bb9979d2aa12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deck:
+  - {fileID: 11400000, guid: bb5f1cef4cbbcf542af68a9002862e83, type: 2}
+  - {fileID: 11400000, guid: b43c6f1212a2a924abd8e28dee0e6c97, type: 2}
+  - {fileID: 11400000, guid: 9734095e5e8ad0e45b03299dd63f33e7, type: 2}
+  - {fileID: 11400000, guid: 04cf38d94563e494396f6b153571e53f, type: 2}
+  - {fileID: 11400000, guid: 5f251d38747dee846a43cb37ead20189, type: 2}
+  - {fileID: 11400000, guid: 4f12c29ab13959147884c0f761122fdc, type: 2}
+  - {fileID: 11400000, guid: 144145c2dad2f3b419667ff0ac6ddbc9, type: 2}
+  - {fileID: 11400000, guid: 79e570868a9e4144faa45b5b0e3b437b, type: 2}
+  - {fileID: 11400000, guid: f5986a78c5ad1e546aff75a942327f8c, type: 2}
+  - {fileID: 11400000, guid: 76747097478ef55438ce0728f4bebd82, type: 2}
+  - {fileID: 11400000, guid: 1a1643d24f3c713458ade65358e36bfe, type: 2}
+  - {fileID: 11400000, guid: d6f532aef60f6774da05fb802fed6564, type: 2}
+  - {fileID: 11400000, guid: b6d9a3f9f208cbd429a6a905c3092245, type: 2}
+  - {fileID: 11400000, guid: b34fdf64bf5f33341a0b862535532a3b, type: 2}
+  - {fileID: 11400000, guid: e964297736755964c85230482268dd93, type: 2}
+  - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
+  - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
+  - {fileID: 11400000, guid: 1a1643d24f3c713458ade65358e36bfe, type: 2}
+  - {fileID: 11400000, guid: b6d9a3f9f208cbd429a6a905c3092245, type: 2}
+  - {fileID: 11400000, guid: b34fdf64bf5f33341a0b862535532a3b, type: 2}
+  - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
+  - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
+  - {fileID: 11400000, guid: f65611cde29c7934a880f0cca25eb3b1, type: 2}
+  - {fileID: 11400000, guid: bd0b5a655d9fdc34b9ffb5d047f7ac05, type: 2}
+  - {fileID: 11400000, guid: 734d03b68abe91d4998f7ebdab661b1a, type: 2}
+  - {fileID: 11400000, guid: 98bdc6f7efb35a541bfbe47875f9f8f7, type: 2}
+  - {fileID: 11400000, guid: 95a71b274e37be54c919c68a2a94d77e, type: 2}
+  - {fileID: 11400000, guid: e446072749c293042a2f74cc42db60ae, type: 2}
 --- !u!1 &1249764265
 GameObject:
   m_ObjectHideFlags: 0
@@ -4305,7 +4334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4dbce3c9a36f44a8badea77e58f2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FullscreenText: {fileID: 1894912747}
+  fullscreenText: {fileID: 0}
 --- !u!224 &1995443067
 RectTransform:
   m_ObjectHideFlags: 0

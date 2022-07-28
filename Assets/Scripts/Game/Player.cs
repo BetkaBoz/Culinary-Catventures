@@ -22,8 +22,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float vegetarianFoodModBonus;
     [SerializeField] List<CardBaseInfo> deck = new List<CardBaseInfo>();
     [SerializeField] Customer customer;
-    bool isDead;
-    bool isVictorious;
+    public bool isDead;
+    public bool isVictorious;
     string className;
     // int reputation = 0;
     int money; 
@@ -42,10 +42,6 @@ public class Player : MonoBehaviour, IDamageable
     public bool canCallEmergencyDelivery = true;
 
     #region Getters/Setters
-    public bool IsVictorious
-    {
-        get { return isVictorious; }
-    }
     public int CurrentExp
     {
         get { return currExp; }
@@ -66,6 +62,7 @@ public class Player : MonoBehaviour, IDamageable
     public int Money
     {
         get { return money; }
+        set { money = value; }
     }
 
     public float GeneralFoodMod

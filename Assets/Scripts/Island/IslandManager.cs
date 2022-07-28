@@ -118,7 +118,12 @@ public class IslandManager : MonoBehaviour
         //Uloženie hodnôt do PLAYERPREFS
         //NOT GOOD
         //{PlayerPrefs.SetInt("reputation", 100);}
-
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if (player != null)
+        {
+            player.isDead = false;
+            player.isVictorious = false;
+        }
         SceneManager.LoadScene("Battle", LoadSceneMode.Single);
     }
 }

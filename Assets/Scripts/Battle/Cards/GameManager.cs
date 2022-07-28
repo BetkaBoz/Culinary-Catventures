@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     private void RemoveExhaustedCards()
     {
-        if (player.IsVictorious) { return; }
+        if (player.isVictorious) { return; }
         foreach(var exhaustedCard in exhaustPile)
         {
             Debug.Log("deleting" + exhaustedCard.CardName);

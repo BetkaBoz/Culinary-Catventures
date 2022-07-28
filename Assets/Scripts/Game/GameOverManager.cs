@@ -55,23 +55,31 @@ public class GameOverManager : MonoBehaviour
         int remainingExp = expToFill;
         while(remainingExp > 0)
         {
+            Debug.Log("While "+ remainingExp);
             if(remainingExp - 5 > 0)
             {
+                Debug.Log("While2 " + remainingExp);
                 expTillNextLvl += 5;
                 remainingExp -= 5;
             }
             else
             {
+                Debug.Log("While2.5 " + remainingExp);
                 expTillNextLvl += remainingExp;
                 remainingExp -= remainingExp;
             }
             if(expTillNextLvl> player.NextLevel)
             {
+                Debug.Log("While3 " + remainingExp);
                 //TODO: add level up logic for player
                 expTillNextLvl -= player.NextLevel;
             }
+            Debug.Log("While4 " + remainingExp);
             progressBar.fillAmount = (float)expTillNextLvl / player.NextLevel;
+            Debug.Log("While5 " + remainingExp);
             score[5].text = $"{player.NextLevel - expTillNextLvl}";
+            Debug.Log("While6 " + remainingExp);
+            if(remainingExp <= 0) { break; } //for some reason the code gets stuck here
             yield return new WaitForSeconds(0.025f);
         }
         Debug.Log("I'm done");
