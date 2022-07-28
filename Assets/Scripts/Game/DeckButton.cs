@@ -10,7 +10,19 @@ public class DeckButton : MonoBehaviour
     //[SerializeField] private Button button;
     [SerializeField] private Deck deckPrefab;
     [SerializeField] TextMeshProUGUI number;
+    [SerializeField] private GameManager gameManager;
     //private Player player;
+
+
+    private void Awake()
+    {
+        //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+    }
+    private void Update()
+    {
+        UpdateNumber();
+    }
 
     public void ShowPlayerDeckInIsland()
     {
@@ -28,7 +40,7 @@ public class DeckButton : MonoBehaviour
     {
         Debug.Log("Show Deck!");
 
-        GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         GameObject toolTipLayer = GameObject.Find("Card Layer");
         Deck deckGameObject = Instantiate(deckPrefab,toolTipLayer.transform);
 
@@ -40,7 +52,7 @@ public class DeckButton : MonoBehaviour
     {        
         Debug.Log("Show Discard!");
 
-        GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         GameObject toolTipLayer = GameObject.Find("Card Layer");
 
         Deck deckGameObject = Instantiate(deckPrefab,toolTipLayer.transform);
@@ -54,5 +66,22 @@ public class DeckButton : MonoBehaviour
         Time.timeScale = 0;
         EventManager.IsInEvent = true;
     }
-    
+
+    private void UpdateNumber()
+    {
+        //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+        if (gameObject.name == "DeckButton")
+        {
+            TextMeshProUGUI text = GetComponentInChildren<TextMeshProUGUI>();
+            text.text = $"{gameManager.deck.Count}";
+            
+        }
+        if (gameObject.name == "DiscardButton")
+        {
+
+            TextMeshProUGUI text = GetComponentInChildren<TextMeshProUGUI>();
+            text.text = $"{gameManager.discardPile.Count}";
+        }
+    }
 }
