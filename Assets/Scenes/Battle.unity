@@ -1494,22 +1494,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e964297736755964c85230482268dd93, type: 2}
   - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
   - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
-  - {fileID: 11400000, guid: bb5f1cef4cbbcf542af68a9002862e83, type: 2}
-  - {fileID: 11400000, guid: 35e21ca778596c0479f2647a80b969e7, type: 2}
-  - {fileID: 11400000, guid: b43c6f1212a2a924abd8e28dee0e6c97, type: 2}
-  - {fileID: 11400000, guid: 9734095e5e8ad0e45b03299dd63f33e7, type: 2}
-  - {fileID: 11400000, guid: e68142c1b454a6242bd3880e4f3d9773, type: 2}
-  - {fileID: 11400000, guid: 04cf38d94563e494396f6b153571e53f, type: 2}
-  - {fileID: 11400000, guid: 144145c2dad2f3b419667ff0ac6ddbc9, type: 2}
-  - {fileID: 11400000, guid: 79e570868a9e4144faa45b5b0e3b437b, type: 2}
-  - {fileID: 11400000, guid: 51b5d22314b26e247af3925061c0edc7, type: 2}
-  - {fileID: 11400000, guid: f5986a78c5ad1e546aff75a942327f8c, type: 2}
-  - {fileID: 11400000, guid: 76747097478ef55438ce0728f4bebd82, type: 2}
   - {fileID: 11400000, guid: 1a1643d24f3c713458ade65358e36bfe, type: 2}
-  - {fileID: 11400000, guid: d6f532aef60f6774da05fb802fed6564, type: 2}
   - {fileID: 11400000, guid: b6d9a3f9f208cbd429a6a905c3092245, type: 2}
   - {fileID: 11400000, guid: b34fdf64bf5f33341a0b862535532a3b, type: 2}
-  - {fileID: 11400000, guid: e964297736755964c85230482268dd93, type: 2}
   - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
   - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
   - {fileID: 11400000, guid: 734d03b68abe91d4998f7ebdab661b1a, type: 2}
@@ -1522,6 +1509,7 @@ MonoBehaviour:
   moneyAmount: 0
   repAmount: 0
   earnedRep: 0
+  rep: 100
   canCallEmergencyDelivery: 1
 --- !u!4 &534415302
 Transform:
@@ -2683,9 +2671,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1354.488, y: -563.14954}
+  m_AnchoredPosition: {x: 51.023598, y: 667.55896}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: -0.1, y: 0}
+  m_Pivot: {x: 1.01, y: 1}
 --- !u!114 &857187732
 MonoBehaviour:
   m_ObjectHideFlags: 0
