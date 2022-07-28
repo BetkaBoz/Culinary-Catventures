@@ -104,7 +104,7 @@ public abstract class Customer : IDamageable
         {
             Die(true);
             finalMoney += 50;
-            finalRep += 50;
+            finalRep += 30;
             gm.Player.ChangeMoney(finalMoney);
             gm.Player.earnedRep += finalRep;
         }
@@ -114,5 +114,6 @@ public abstract class Customer : IDamageable
     {
         gm.CustomerListDelete(this);
         OnDied?.Invoke();
+
     }
 }

@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
         SetUpDeck();
         for (int i = 0; i < cardSlots.Length; i++)
         {
@@ -50,7 +52,7 @@ public class GameManager : MonoBehaviour
         }
         DrawCards(5);
         AddEnergy(player.MaxEnergy);
-        repUI.text = $"{player.Rep}";
+        repUI.text = $"{player.rep}";
         combinePhase = false;
         discardPhase = false;
     }
@@ -127,7 +129,7 @@ public class GameManager : MonoBehaviour
     public void HurtPlayer(int amount)
     {
         player.TakeDamage(amount);
-        repUI.text = $"{player.Rep}";
+        repUI.text = $"{player.rep}";
     }
 
     public void BuffPlayer(IBuffable buff, bool applyNow = false)
@@ -178,7 +180,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        repUI.text = $"{player.Rep}";
+        repUI.text = $"{player.rep}";
         energyUI.text = $"{player.Energy}/{player.MaxEnergy}";
         foreach (var card in cardSlots)
         {

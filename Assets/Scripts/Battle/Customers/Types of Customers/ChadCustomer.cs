@@ -16,18 +16,18 @@ public class ChadCustomer : Customer
         {
             if (currHunger >= Data.MaxHunger / 2)
             {
-                gm.Player.TakeDamage(50);
+                gm.Player.TakeDamage(100);
                 finalMoney -= 60;
             }
             else if (currHunger >= Data.MaxHunger / 3)
             {
+                gm.Player.TakeDamage(50);
                 finalMoney += Data.Money + 15;
-                finalRep += Data.Reputation + 15;
             }
             else if (currHunger >= Data.MaxHunger / 4)
             {
+                gm.Player.TakeDamage(25);
                 finalMoney += Data.Money + 30;
-                finalRep += Data.Reputation + 30;
             }
             Die(true);
             gm.Player.ChangeMoney(finalMoney);

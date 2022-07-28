@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Chungus
   MaxHunger: 50
-  TurnsLeft: 0
-  Turns: 10
+  Turns: 5
   Money: 5
   Reputation: 5
   Sprites:

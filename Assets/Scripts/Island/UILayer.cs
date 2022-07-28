@@ -29,7 +29,7 @@ public class UILayer : MonoBehaviour
 
     private void UpdateUI()
     {
-        repUI.text = $"{player.Rep}";
+        repUI.text = $"{player.rep}";
         coinUI.text = $"{player.Money}";
     }
 

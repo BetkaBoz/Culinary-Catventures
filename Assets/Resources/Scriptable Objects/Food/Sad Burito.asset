@@ -16,6 +16,6 @@ MonoBehaviour:
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Sad Burito
   cardType: Meat
-  canTarget: 0
+  canTarget: 1
   energyCost: 2
   nutritionPoints: 48

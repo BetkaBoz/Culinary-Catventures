@@ -26,15 +26,16 @@ public class Player : MonoBehaviour, IDamageable
     bool isVictorious;
     string className;
     // int reputation = 0;
-    int money = 100; 
+    int money; 
     int maxEnergy = 5;
     int energy;
-    int maxRep = 100;
-    int rep = 100;
+    int maxRep = 150;
+    
     int currExp = 400;
     int nextLvl = 1000;
     public List<string> helpers = new List<string>();
     public int moneyAmount, repAmount, earnedRep;
+    public int rep = 150;
 
     #endregion
 
@@ -119,15 +120,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         get { return maxRep; }
         set { maxRep = value; }
-    }
-
-    public int Rep
-    {
-        get { return rep; }
-        //set
-        //{
-        //    rep = value;
-        //}
     }
 
     public int MoneyAmount => moneyAmount;

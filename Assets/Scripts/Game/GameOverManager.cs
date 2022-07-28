@@ -44,7 +44,7 @@ public class GameOverManager : MonoBehaviour
         progressBar.fillAmount = (float)expTillNextLvl / player.NextLevel;
         finalScore = (player.Deck.Count + player.Money + 50)*10;
 
-        StartCoroutine(FillBar(finalScore));
+        StartCoroutine(FillBar(1));
 
         //Make the continue button send you to main menu
         continueBtn.onClick.RemoveListener(GoToScore);

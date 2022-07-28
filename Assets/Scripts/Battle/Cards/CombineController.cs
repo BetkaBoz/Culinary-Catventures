@@ -142,7 +142,7 @@ public class CombineController : MonoBehaviour
         Card foundCard = null;
         CardBaseInfo foundCardBase = null;
         //Right now we can only combine food, might change it later if we decide to combine manouvers4
-        foundCardBase = Resources.Load<CardBaseInfo>("Scriptable Objects/" + target);
+        foundCardBase = Resources.Load<CardBaseInfo>("Scriptable Objects/Food/" + target);
         if (foundCardBase != null)
         {
             if (!findSlot.gameObject.activeSelf)

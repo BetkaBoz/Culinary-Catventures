@@ -15,9 +15,9 @@ public class BattleWonManager : MonoBehaviour
     [SerializeField] Button continueButton;
     [SerializeField] Canvas canvas;
     [SerializeField] Text notification;
-    private Player player;
-    private GameObject currentHelper;
-    private List<GameObject> helpers = new List<GameObject>();
+    Player player;
+    GameObject currentHelper;
+    List<GameObject> helpers = new List<GameObject>();
 
     public void Start()
     {
@@ -46,6 +46,11 @@ public class BattleWonManager : MonoBehaviour
             notification.gameObject.SetActive(true);
             return;
         }
+
+        if (player.earnedRep + player.rep > player.MaxRep) player.rep = player.MaxRep;
+        else player.rep += player.earnedRep;
+
+        player.Energy = 0;
 
         //string helperName = currentHelper.GetComponent<ActionManager>().CurrentName;
         SceneManager.LoadScene(3, LoadSceneMode.Single);
