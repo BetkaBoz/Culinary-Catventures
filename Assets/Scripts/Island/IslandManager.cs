@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -124,6 +125,8 @@ public class IslandManager : MonoBehaviour
             player.isDead = false;
             player.isVictorious = false;
         }
+
+        Time.timeScale = 1;
         SceneManager.LoadScene("Battle", LoadSceneMode.Single);
     }
 }
