@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         {
             cardSlots[i].Hide(true);
         }
-        DrawCards(10);
+        DrawCards(5);
         AddEnergy(player.MaxEnergy);
         repUI.text = $"{player.Rep}";
         combinePhase = false;
@@ -558,14 +558,7 @@ public class GameManager : MonoBehaviour
             }
         }
         result = highest + result;
-        if (isPile)
-        {
-            return result + (int)(result * 0.2f);
-        }
-        else
-        {
-            return result + (int)(result * 0.5f);
-        }
+        return result + (int)(result * 0.08f);
     }
 
     public int GetComboEnergy()

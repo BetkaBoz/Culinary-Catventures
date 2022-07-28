@@ -47,7 +47,7 @@ public class BattleWonManager : MonoBehaviour
             return;
         }
 
-        string helperName = currentHelper.GetComponent<ActionManager>().CurrentName;
+        //string helperName = currentHelper.GetComponent<ActionManager>().CurrentName;
         SceneManager.LoadScene(3, LoadSceneMode.Single);
     }
 

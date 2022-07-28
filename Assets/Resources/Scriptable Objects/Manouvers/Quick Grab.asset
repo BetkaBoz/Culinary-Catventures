@@ -18,4 +18,4 @@ MonoBehaviour:
   cardType: Manoeuvre
   canTarget: 0
   energyCost: 1
-  nutritionPoints: -1
+  nutritionPoints: 0
