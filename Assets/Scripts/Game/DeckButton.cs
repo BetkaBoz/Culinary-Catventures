@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class DeckButton : MonoBehaviour
 {
     //[SerializeField] private Button button;
     [SerializeField] private Deck deckPrefab;
-
+    [SerializeField] TextMeshProUGUI number;
     //private Player player;
 
     public void ShowPlayerDeckInIsland()
