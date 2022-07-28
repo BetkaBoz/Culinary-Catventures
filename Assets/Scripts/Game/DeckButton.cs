@@ -74,12 +74,12 @@ public class DeckButton : MonoBehaviour
         if (gameObject.name == "DeckButton")
         {
             TextMeshProUGUI text = GetComponentInChildren<TextMeshProUGUI>();
-            text.text = $"{gameManager.deck.Count}";
+            
+            if(text != null) text.text = $"{gameManager.deck.Count}";
             
         }
         if (gameObject.name == "DiscardButton")
         {
-
             TextMeshProUGUI text = GetComponentInChildren<TextMeshProUGUI>();
             text.text = $"{gameManager.discardPile.Count}";
         }

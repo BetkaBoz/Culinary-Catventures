@@ -2671,9 +2671,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 642.5346, y: 1317.7682}
+  m_AnchoredPosition: {x: -960, y: -539.99994}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1.01, y: 1}
+  m_Pivot: {x: -0.1, y: 0}
 --- !u!114 &857187732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6254,6 +6254,7 @@ GameObject:
   - component: {fileID: 1907528046}
   - component: {fileID: 1907528044}
   - component: {fileID: 1907528043}
+  - component: {fileID: 1907528045}
   m_Layer: 5
   m_Name: DeckButton
   m_TagString: Untagged
@@ -6353,6 +6354,22 @@ MonoBehaviour:
   deckPrefab: {fileID: 3057833653451349594, guid: 76eb670d25812f54cb3dd30cf26fa2e2, type: 3}
   number: {fileID: 1158704911}
   gameManager: {fileID: 1912536889}
+--- !u!114 &1907528045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907528041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53cfff5d9a0951469b2186dc56543f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helper: {fileID: 0}
+  hoverable: {fileID: 0}
+  message: 
+  header: Deck Pile
 --- !u!222 &1907528046
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6661,6 +6678,7 @@ GameObject:
   - component: {fileID: 1952777086}
   - component: {fileID: 1952777085}
   - component: {fileID: 1952777084}
+  - component: {fileID: 1952777088}
   m_Layer: 5
   m_Name: DiscardButton
   m_TagString: Untagged
@@ -6797,6 +6815,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952777082}
   m_CullTransparentMesh: 1
+--- !u!114 &1952777088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952777082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53cfff5d9a0951469b2186dc56543f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helper: {fileID: 0}
+  hoverable: {fileID: 0}
+  message: 
+  header: Discard Pile
 --- !u!1 &1958059599
 GameObject:
   m_ObjectHideFlags: 0
