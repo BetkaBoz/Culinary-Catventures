@@ -72,7 +72,7 @@ public class CustomerView : MonoBehaviour, IDropHandler
 
     private void TakeDamage()
     {
-        Action.DOFade(0f, 1f);
+        if(_customer.CurrentAction != 0) Action.DOFade(0f, 1f);
 
         hoverable.SetTooltipEnabled(false);
     }
