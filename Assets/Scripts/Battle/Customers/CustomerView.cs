@@ -27,7 +27,7 @@ public class CustomerView : MonoBehaviour, IDropHandler
         (transform as RectTransform).sizeDelta = new Vector2(Body.rectTransform.rect.width, Body.rectTransform.rect.height);
         //rotating customer
         Vector3 target = new Vector3(transform.rotation.x, customerSetUp.customerYRotate, transform.rotation.z);
-        Body.transform.Rotate(target);
+        Body.transform.Rotate(target);        
 
         //subscribtion on events from Customer class -> Observer
         customer.OnDamageTaken += TakeDamage; 
@@ -39,6 +39,11 @@ public class CustomerView : MonoBehaviour, IDropHandler
         customer.RandomizeDebuffs();
 
         StartTurn();
+    }
+
+    private void Awake()
+    {
+        Action.transform.DOScale(1.07f, 0.85f).SetLoops(-1, LoopType.Yoyo);
     }
 
     private void StartTurn()
@@ -72,7 +77,9 @@ public class CustomerView : MonoBehaviour, IDropHandler
 
     private void TakeDamage()
     {
-        if(_customer.CurrentAction != 0) Action.DOFade(0f, 1f);
+        Body.transform.DOShakeScale(0.5f, 0.1f, 8, 40, true);
+
+        if (_customer.CurrentAction != 0) Action.DOFade(0f, 1f);
 
         hoverable.SetTooltipEnabled(false);
     }
