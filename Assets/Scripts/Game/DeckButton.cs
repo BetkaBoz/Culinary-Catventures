@@ -33,6 +33,8 @@ public class DeckButton : MonoBehaviour
         Deck deckGameObject = Instantiate(deckPrefab,uiLayer.transform);
 
         deckGameObject.GenerateDeck(player.Deck);
+        deckGameObject.ChangeName("DECK");
+        
         Adjust();
     }
     //TODO PRIDAT LISTY PODLA KTORYCH SA MA GENEROVAT DECK
@@ -45,6 +47,8 @@ public class DeckButton : MonoBehaviour
         Deck deckGameObject = Instantiate(deckPrefab,toolTipLayer.transform);
 
         deckGameObject.GenerateDeckInBattle(gameManager.deck);
+        deckGameObject.ChangeName("DECK");
+
         Adjust();
     }
     
@@ -58,6 +62,8 @@ public class DeckButton : MonoBehaviour
         Deck deckGameObject = Instantiate(deckPrefab,toolTipLayer.transform);
 
         deckGameObject.GenerateDeckInBattle(gameManager.discardPile);
+        deckGameObject.ChangeName("DISCARD");
+
         Adjust();
     }
 
@@ -75,10 +81,11 @@ public class DeckButton : MonoBehaviour
         {
             TextMeshProUGUI text = GetComponentInChildren<TextMeshProUGUI>();
             
-            if(text != null) text.text = $"{gameManager.deck.Count}";
-            
+            //if(text != null) text.text = $"{gameManager.deck.Count}";
+            text.text = $"{gameManager.deck.Count}";
+
         }
-        if (gameObject.name == "DiscardButton")
+        else if (gameObject.name == "DiscardButton")
         {
             TextMeshProUGUI text = GetComponentInChildren<TextMeshProUGUI>();
             text.text = $"{gameManager.discardPile.Count}";

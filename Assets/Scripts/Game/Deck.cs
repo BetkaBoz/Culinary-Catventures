@@ -11,6 +11,7 @@ public class Deck : MonoBehaviour
 {
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject panel;
+    [SerializeField] private TextMeshProUGUI name;
 
 
     public void GenerateDeck(List<CardBaseInfo> deck)
@@ -77,6 +78,12 @@ public class Deck : MonoBehaviour
         {
             Debug.Log(deck.GetType() );
         }
+    }
+
+
+    public void ChangeName(string input)
+    {
+        name.text = $"{input}";
     }
     
     public void Destroy()
