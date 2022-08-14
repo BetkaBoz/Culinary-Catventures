@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -39,14 +37,6 @@ public class Event : MonoBehaviour
         eventManager = FindObjectOfType<EventManager>();
         islandManager = FindObjectOfType<IslandManager>();
         playerCharacter = GameObject.FindGameObjectWithTag("PlayerCharacter");
-
-        
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        //AssignRandomType();
-        //AssignSprite();
 
     }
 
