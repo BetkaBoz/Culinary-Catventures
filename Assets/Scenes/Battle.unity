@@ -2673,7 +2673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1262.3176, y: 2078.6694}
+  m_AnchoredPosition: {x: 1279.2173, y: 2095.569}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1.01, y: 1}
 --- !u!114 &857187732
@@ -6439,7 +6439,7 @@ MonoBehaviour:
   energyNotification: {fileID: 1934651660}
   layoutManager: {fileID: 775778436}
   bellHighlight: {fileID: 1484089937}
-  bellRingCooldown: 5
+  bellRingCooldown: 1
   combinePhase: 0
   discardPhase: 0
   count: 0
