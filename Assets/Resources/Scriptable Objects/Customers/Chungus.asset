@@ -18,7 +18,7 @@ MonoBehaviour:
   Money: 5
   Reputation: 5
   Sprites:
-  - {fileID: 21300000, guid: 6cd256a8b6c9c8249a596e3280149b7e, type: 3}
+  - {fileID: 21300000, guid: 2d184816056b23243aec3f50d5c99f33, type: 3}
   - {fileID: 21300000, guid: 11b173d56bcbc2745b8d10b586adaa15, type: 3}
   - {fileID: 21300000, guid: c0cefc79e4358ba4da593d53d59a67bc, type: 3}
   - {fileID: 21300000, guid: b005a8b1969992140b73c18edc24414f, type: 3}
