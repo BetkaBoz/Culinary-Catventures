@@ -7,9 +7,6 @@ using Random = UnityEngine.Random;
 public class EventManager : MonoBehaviour
 {
     #region Vars
-    //[SerializeField] private bool isChallenge;
-    //[SerializeField] private EventType eventType;
-    //[SerializeField] private RandomEventType randomEventType; 
     [SerializeField] public TextMeshProUGUI  btnPrompt; //FOR NOW
     //[SerializeField] private int timeCost = 1;
     
@@ -30,7 +27,7 @@ public class EventManager : MonoBehaviour
     
     
     //ISLAND MANAGER
-    public IslandManager islandManager;
+    private IslandManager islandManager;
     
     public static bool IsInEvent;
     
@@ -47,9 +44,6 @@ public class EventManager : MonoBehaviour
 
     
     //private bool canShowEventWindow = true;
-
-    
-
     #endregion
     
     private void Awake()
@@ -110,8 +104,6 @@ public class EventManager : MonoBehaviour
         //WindowControl.TimeCost = eventt.timeCost;
         switch (eventt.eventType)
         {
-
-                
             case Event.EventType.Merchant:
                 //Debug.Log("MERCHANT");
                 //merchantWindow.Init(eventt.timeCost);

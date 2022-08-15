@@ -24,7 +24,7 @@ public class EventWindowControl : WindowControl
         [SerializeField] private GameObject  secondButton;
         [SerializeField] private GameObject  thirdButton;
         [SerializeField] private List<GameObject> eventCards;
-
+        private List<CardBaseInfo> tmpCards = new List<CardBaseInfo>();
         //EVENT WINDOW SPRITES
         [SerializeField] private Sprite  homelessCatSprite;
         [SerializeField] private Sprite  diceCatSprite;
@@ -219,8 +219,6 @@ public class EventWindowControl : WindowControl
                     SetUpEventWindow("Stumble","You stumbled on a small rock. If you had an ingredient you would surely lose it, but now everyone is laughing at you!");
                     thirdButtonControl.onClick.AddListener(delegate {
                         uiLayer.ChangeReputation(-Minor);
-                        //eventWindowControl.Continue();
-                        //eventWindowControl.SetUpEventWindow("","You left the place and your ingredient too.");
                     });
                 }
                 else
@@ -255,14 +253,9 @@ public class EventWindowControl : WindowControl
                         {
                             CardBaseInfo randomCard = GetIngredient("Tomatoes");
                             player.Deck.Add(randomCard); 
-                            eventCards[i].SetActive(true);
-                            eventCards[i].GetComponent<Image>().sprite = randomCard.Artwork;    
-                            //eventCards[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{randomCard.NutritionPoints}";
-                            eventCards[i].GetComponentInChildren<Text>().text = $"{randomCard.NutritionPoints}";
-                            eventCards[i].transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{randomCard.EnergyCost}";;
-
+                            tmpCards.Add(randomCard);
                         }
-
+                        ShowCards(tmpCards);
                         Debug.Log("GIMME DAT GRAPES");
                     }
                 });//RESIST THE DARK SIDE!
@@ -295,7 +288,7 @@ public class EventWindowControl : WindowControl
                     }
                     else
                     {
-                        //TODO: DOKONCIT EVENT CHAIN, CURSE
+                        //TODO: DOKONCIT EVENT CHAIN, CURSE, POTREBOVANIE INGREDIENCII NA SECRET BREW
                         //NASIEL RARE HELPERA: WITCH
                         SetUpEventWindow("","You found a witch cooking a special brew. She is willing to join your team , after you pay her with some ingredients",
                             "PAY","DON'T PAY","");
@@ -306,7 +299,7 @@ public class EventWindowControl : WindowControl
 
                         });
                         secondButtonControl.onClick.AddListener(delegate {
-                            uiLayer.ChangeMoney(-Moderate);
+                            uiLayer.ChangeReputation(-Minor);
                             //CURSE
                             SetUpEventWindow("","The witch got angry and cursed you!");
                         });
@@ -341,8 +334,6 @@ public class EventWindowControl : WindowControl
                 secondButtonControl.onClick.AddListener(delegate {
                     SetUpEventWindow("","You went the other way and ignored him.");
                     uiLayer.ChangeReputation(-Minor);
-
-                    //Debug.Log("LEAVE");
                 });
                 break;
             case Event.RandomEventType.Thieves:
@@ -360,13 +351,10 @@ public class EventWindowControl : WindowControl
     }
     private void Stumble(Button firstButtonControl,Button secondButtonControl,Button thirdButtonControl,CardBaseInfo card)
     {
-        eventCards.First().SetActive(true);
-        eventCards.First().GetComponent<Image>().sprite = card.Artwork;
-        eventCards.First().transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{card.EnergyCost}";
-        eventCards.First().GetComponentInChildren<Text>().text = $"{card.NutritionPoints}";
-        
+        tmpCards.Add(card);
+        ShowCards(tmpCards);
 
-
+        //STUMBLE
         firstButtonControl.onClick.AddListener(delegate {
             //35%
             if (RandomState(35))
@@ -414,38 +402,40 @@ public class EventWindowControl : WindowControl
         });
         
         thirdButtonControl.onClick.AddListener(delegate {
-            //player.Deck.Remove(player.Deck.Find(x => x == card));
             player.RemoveCardFromDeck(card.CardName);
-            //eventWindowControl.Continue();
-            //eventWindowControl.SetUpEventWindow("","You left the place and your ingredient too.");
         });
     }
     private void Thieves(Button firstButtonControl,Button secondButtonControl , string who)
     {
+        //THIEVES
         firstButtonControl.onClick.AddListener(delegate {
-            if (RandomState())
+            //40% + HELPERS * 20%
+            if (RandomState(40 + player.helpers.Count * 20))
             {
                 //YOU WON AGAINST THEM
                 SetUpEventWindow("",$"You managed to beat up the {who}. You take their coins.");
                 uiLayer.ChangeMoney(Moderate);
+                uiLayer.ChangeReputation(Moderate);
             }
             else
             {
-                SetUpEventWindow("",$"The {who} beat you up and stole more money than usual.");
+                SetUpEventWindow("",$"The {who} beat you up and stole your money.");
                 //THEY BEAT YOU UP A STOLE A LOT OF MONEY
                 uiLayer.ChangeMoney(-Major);
             }
         });
         secondButtonControl.onClick.AddListener(delegate {
-            if (RandomState())
+            //90% - HELPERS * 20%
+            if (RandomState(90 - player.helpers.Count * 20))
             {
-                //STOLE FROM YOU
-                SetUpEventWindow("",$"The {who} catch you up and stole your money.");
-                uiLayer.ChangeMoney(-Moderate);
+                SetUpEventWindow("",$"You are as fast as lighting! You don't see the {who} anymore. You tell the police cats what happened and they thanked you...");
+                uiLayer.ChangeReputation(Minor);
             }
             else
             {
-                SetUpEventWindow("",$"You are as fast as lighting! You don't see the {who} anymore.");
+                //STOLE FROM YOU
+                SetUpEventWindow("",$"The {who} catch you up and stole your money.");
+                uiLayer.ChangeMoney(-Major);
             }
         });
     }
@@ -459,18 +449,25 @@ public class EventWindowControl : WindowControl
         {
             CardBaseInfo randomCard = GetRandomIngredient();
             player.Deck.Add(randomCard); 
+            tmpCards.Add(randomCard);
+        }
+        ShowCards(tmpCards);
+    }
+    
+    private void ShowCards(List<CardBaseInfo> cards)
+    {
+        int i = 0;
+        foreach (CardBaseInfo card in cards)
+        {
             eventCards[i].SetActive(true);
-            eventCards[i].transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{randomCard.EnergyCost}";;
-            eventCards[i].GetComponent<Image>().sprite = randomCard.Artwork;    
-            eventCards[i].GetComponentInChildren<Text>().text = $"{randomCard.NutritionPoints}";
+            eventCards[i].transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{card.EnergyCost}";;
+            eventCards[i].GetComponent<Image>().sprite = card.Artwork;    
+            eventCards[i].GetComponentInChildren<Text>().text = $"{card.NutritionPoints}";
 
+            i++;
         }
     }
-    /*
-    private void ShowCards()
-    {
-    }
-    */
+    
     //AK JE MENEJ/ROVNE AKO PERCENTAGE TAK VRATI TRUE
     private bool RandomState(int percentage = 50)
     {
@@ -480,13 +477,14 @@ public class EventWindowControl : WindowControl
         return value <= percentage;
     }
 
-    public void HideEventCards()
+    private void HideEventCards()
     {
         foreach (GameObject card in eventCards)
         {
             card.SetActive(false);
         }
+        tmpCards?.Clear();
     }
-
+    
 
 }
