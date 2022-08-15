@@ -53,9 +53,7 @@ public abstract class WindowControl : MonoBehaviour
     }
     private void GetAllCards()
     {
-        CardBaseInfo[] allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/");
-        foreach (var t in allScriptableObjectsTemp)
-        {
+        /*
             if (t.CardType == "Manoeuvre" )
             {
                 allManoeuvreScriptableObjects.Add(t);
@@ -63,7 +61,16 @@ public abstract class WindowControl : MonoBehaviour
             else if ( !t.CardName.Contains("Pile") )
             {
                 allFoodScriptableObjects.Add(t);
-            }
+            }*/
+        CardBaseInfo[] allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/Manouvers");
+        foreach (CardBaseInfo t in allScriptableObjectsTemp)
+        {
+            allManoeuvreScriptableObjects.Add(t);
+        }
+        allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/Ingredients");
+        foreach (CardBaseInfo t in allScriptableObjectsTemp)
+        {
+            allFoodScriptableObjects.Add(t);
         }
     }
     
