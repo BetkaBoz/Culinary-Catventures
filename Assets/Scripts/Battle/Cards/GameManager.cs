@@ -27,8 +27,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image energyNotification;
     [SerializeField] CardLayoutManager layoutManager;//card layout
     [SerializeField] HighlightObjectController bellHighlight;
+    [SerializeField] private float bellRingCooldown;
     #endregion
 
+    private float lastBellRingTimestamp;
     int numOfCards = 0;//right now useless
     List<Customer> customers = new List<Customer>();
 
@@ -210,24 +212,28 @@ public class GameManager : MonoBehaviour
     #region Turn Base Functions
     public void EndPlayersTurn()
     {
-        if (discardPhase || combinePhase) return;
-        Debug.Log("ITS ENEMIES TURN");
-
-        DiscardHand();
-        count = customers.Count - 1;
-
-        SpendEnergy(player.Energy);
-        AddEnergy(player.MaxEnergy);
-
-        foreach (var customer in customers)
+        if (Time.time >= (lastBellRingTimestamp + bellRingCooldown))
         {
-            customer.StartTurn();
+            lastBellRingTimestamp = Time.time;
+            if (discardPhase || combinePhase) return;
+            Debug.Log("ITS ENEMIES TURN");
+
+            DiscardHand();
+            count = customers.Count - 1;
+
+            SpendEnergy(player.Energy);
+            AddEnergy(player.MaxEnergy);
+
+            foreach (var customer in customers)
+            {
+                customer.StartTurn();
+            }
+
+            //hand.Clear();
+            EndEnemyTurn();
+            ApplyBuffables();
+            hasCardBeenPlayed = false; //emergency delivery code
         }
-        
-        //hand.Clear();
-        EndEnemyTurn();
-        ApplyBuffables();
-        hasCardBeenPlayed = false;//emergency delivery code
     }
 
     public void EndEnemyTurn()

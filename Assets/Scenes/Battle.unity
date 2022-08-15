@@ -1505,6 +1505,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e446072749c293042a2f74cc42db60ae, type: 2}
   - {fileID: 11400000, guid: bd0b5a655d9fdc34b9ffb5d047f7ac05, type: 2}
   - {fileID: 11400000, guid: f65611cde29c7934a880f0cca25eb3b1, type: 2}
+  isDead: 0
+  isVictorious: 0
   helpers: []
   moneyAmount: 0
   repAmount: 0
@@ -2671,9 +2673,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -960, y: -539.99994}
+  m_AnchoredPosition: {x: 1262.3176, y: 2078.6694}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: -0.1, y: 0}
+  m_Pivot: {x: 1.01, y: 1}
 --- !u!114 &857187732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6437,6 +6439,7 @@ MonoBehaviour:
   energyNotification: {fileID: 1934651660}
   layoutManager: {fileID: 775778436}
   bellHighlight: {fileID: 1484089937}
+  bellRingCooldown: 5
   combinePhase: 0
   discardPhase: 0
   count: 0
