@@ -58,6 +58,13 @@ public class EventManager : MonoBehaviour
         merchantWindow = FindObjectOfType<MerchantWindowControl>();
         senseiWindow = FindObjectOfType<SenseiWindowControl>();
         islandManager = FindObjectOfType<IslandManager>();
+        ResetScene();
+    }
+
+    private void ResetScene()
+    {
+        Time.timeScale = 1;
+        EventManager.IsInEvent = false;
     }
 
     void Start()

@@ -74,5 +74,10 @@ public class PlayerControl : MonoBehaviour
         body.velocity = Vector2.zero;
         transform.position = Vector2.MoveTowards(transform.position, challengePosition.position, speed * Time.deltaTime);
     }
+
+    public void ReleasePlayer()
+    {
+        isDisabled = false;
+    }
 }
 

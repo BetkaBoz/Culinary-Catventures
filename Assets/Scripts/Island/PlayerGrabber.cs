@@ -47,6 +47,7 @@ public class PlayerGrabber : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, challengePosition) < battleThreshold)
         {
+            playerTransform.gameObject.GetComponent<PlayerControl>().ReleasePlayer();
             SceneManager.LoadScene("Battle", LoadSceneMode.Single);
         }
     }
