@@ -19,11 +19,11 @@ public class EventManager : MonoBehaviour
 
     [SerializeField] public List<Event> allEvents;
     //EVENT WINDOW
-    private EventWindowControl  eventWindow;
+    [SerializeField] private EventWindowControl  eventWindow;
     // MERCHARNT WINDOW
-    private MerchantWindowControl  merchantWindow;
+    [SerializeField] private MerchantWindowControl  merchantWindow;
     // SENSEI WINDOW
-    private SenseiWindowControl  senseiWindow;
+    [SerializeField] private SenseiWindowControl  senseiWindow;
     
     
     //ISLAND MANAGER
@@ -48,9 +48,10 @@ public class EventManager : MonoBehaviour
     
     private void Awake()
     {   
-        eventWindow = FindObjectOfType<EventWindowControl>();
-        merchantWindow = FindObjectOfType<MerchantWindowControl>();
-        senseiWindow = FindObjectOfType<SenseiWindowControl>();
+        
+        //eventWindow = FindObjectOfType<EventWindowControl>();
+        //merchantWindow = FindObjectOfType<MerchantWindowControl>();
+        //senseiWindow = FindObjectOfType<SenseiWindowControl>();
         islandManager = FindObjectOfType<IslandManager>();
         ResetScene();
     }
@@ -58,7 +59,7 @@ public class EventManager : MonoBehaviour
     private void ResetScene()
     {
         Time.timeScale = 1;
-        EventManager.IsInEvent = false;
+        IsInEvent = false;
     }
 
     void Start()

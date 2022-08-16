@@ -38,6 +38,10 @@ public class SenseiWindowControl : WindowControl
                     artwork.color= Color.gray;
                     button.onClick.RemoveAllListeners();
                 }
+                else
+                {
+                    uiLayer.ShowNotification();
+                }
                 
             });
 
@@ -46,7 +50,8 @@ public class SenseiWindowControl : WindowControl
     }
     public void StartWindow()
     {
-        AssignSenseiCards();
         ShowWindow();
+
+        AssignSenseiCards();
     }
 }

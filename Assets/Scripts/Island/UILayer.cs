@@ -1,11 +1,15 @@
 using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UILayer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI repUI;
     [SerializeField] private TextMeshProUGUI coinUI;
+    [SerializeField] Image coinNotification;
+
     private Player player;
 
 
@@ -33,7 +37,17 @@ public class UILayer : MonoBehaviour
         coinUI.text = $"{player.Money}";
     }
 
-
+    public void ShowNotification()
+    {
+        coinNotification.gameObject.SetActive(true);
+        coinNotification.DOFade(1f, 1f).OnComplete(() => {
+            coinNotification.DOFade(0, 2f).OnComplete(() =>
+            {
+                coinNotification.gameObject.SetActive(false);
+            });
+        });
+    }
+    
     // Start is called before the first frame update
     void Start()
     {

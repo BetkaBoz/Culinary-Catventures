@@ -48,6 +48,10 @@ public class MerchantWindowControl : WindowControl
                     artwork.color= Color.gray;
                     button.onClick.RemoveAllListeners();
                 }
+                else
+                {
+                    uiLayer.ShowNotification();
+                }
                 
             });
 
@@ -59,8 +63,8 @@ public class MerchantWindowControl : WindowControl
 
     public void StartWindow()
     {
-        AssignMerchantCards();
         ShowWindow();
+        AssignMerchantCards();
     }
 
     

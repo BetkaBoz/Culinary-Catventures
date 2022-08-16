@@ -18,12 +18,13 @@ public abstract class WindowControl : MonoBehaviour
         islandManager = FindObjectOfType<IslandManager>();
         uiLayer = FindObjectOfType<UILayer>();
         player = FindObjectOfType<Player>();
+        GetAllCards();
 
     }
     void Start()
     {
-        GetAllCards();
-        HideWindow();
+
+        //HideWindow();
     }
 
    
@@ -51,6 +52,7 @@ public abstract class WindowControl : MonoBehaviour
         HideWindow();
         
     }
+    //TODO PREMIESTNIT KOD ABY SA NEOPAKOVAL V OKNACH
     private void GetAllCards()
     {
         /*

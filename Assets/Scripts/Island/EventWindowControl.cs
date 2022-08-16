@@ -463,7 +463,6 @@ public class EventWindowControl : WindowControl
             eventCards[i].transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{card.EnergyCost}";;
             eventCards[i].GetComponent<Image>().sprite = card.Artwork;    
             eventCards[i].GetComponentInChildren<Text>().text = $"{card.NutritionPoints}";
-
             i++;
         }
     }
