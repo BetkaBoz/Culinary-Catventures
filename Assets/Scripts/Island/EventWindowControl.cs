@@ -214,6 +214,7 @@ public class EventWindowControl : WindowControl
                 break;
             case Event.RandomEventType.Stumble:
                 //STUMBLE
+                player = FindObjectOfType<Player>();
                 if (!player.CheckIfDeckHasIngredient())
                 {
                     SetUpEventWindow("Stumble","You stumbled on a small rock. If you had an ingredient you would surely lose it, but now everyone is laughing at you!");
