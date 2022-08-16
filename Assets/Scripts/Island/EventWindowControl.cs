@@ -24,6 +24,10 @@ public class EventWindowControl : WindowControl
         [SerializeField] private GameObject  secondButton;
         [SerializeField] private GameObject  thirdButton;
         [SerializeField] private List<GameObject> eventCards;
+        [SerializeField] private GameObject coinUI;
+        [SerializeField] private GameObject repUI;
+
+
         private List<CardBaseInfo> tmpCards = new List<CardBaseInfo>();
         //EVENT WINDOW SPRITES
         [SerializeField] private Sprite  homelessCatSprite;
@@ -156,7 +160,7 @@ public class EventWindowControl : WindowControl
         SetThirdButtonText(thirdBtn);
         AssignEventWindowSprite(title);
         RemoveAllListeners();
-        HideEventCards();
+        HideEventCardsAndCurrencies();
         ShowWindow();
     }
     
@@ -177,13 +181,13 @@ public class EventWindowControl : WindowControl
                 
                 firstButtonControl.onClick.AddListener(delegate {
                     SetUpEventWindow("","You helped the homeless cat.");
-                    uiLayer.ChangeMoney(-Moderate);
-                    uiLayer.ChangeReputation(Major);
+                    ChangeMoney(-Moderate);
+                    ChangeReputation(Major);
                 });
                 secondButtonControl.onClick.AddListener(delegate {
                     SetUpEventWindow("","You robbed the homeless cat.");
-                    uiLayer.ChangeMoney(Moderate);
-                    uiLayer.ChangeReputation(-Major);
+                    ChangeMoney(Moderate);
+                    ChangeReputation(-Major);
                 });
                 break;
             case Event.RandomEventType.DiceCat:
@@ -195,21 +199,21 @@ public class EventWindowControl : WindowControl
                     if (RandomState())
                     {
                         //PREHRAL
-                        SetUpEventWindow("","You lost! But at least the cat is happy.");
-                        uiLayer.ChangeMoney(-Moderate);
-                        uiLayer.ChangeReputation(Minor);
+                        SetUpEventWindow("","You lost! At least the cat is happy...");
+                        ChangeMoney(-Moderate);
+                        ChangeReputation(Minor);
                     }
                     else
                     {
                         //VYHRAL
-                        SetUpEventWindow("","You won! The cat is happy that someone played with him.");
-                        uiLayer.ChangeMoney(Moderate);
-                        uiLayer.ChangeReputation(Minor);
+                        SetUpEventWindow("","You won and the cat is happy that someone played with him.");
+                        ChangeMoney(Moderate);
+                        ChangeReputation(Minor);
                     }
                 });
                 secondButtonControl.onClick.AddListener(delegate {
                     SetUpEventWindow("","The cat is unhappy because you didn't play with him.");
-                    uiLayer.ChangeReputation(-Minor);
+                    ChangeReputation(-Minor);
                 });
                 break;
             case Event.RandomEventType.Stumble:
@@ -219,7 +223,7 @@ public class EventWindowControl : WindowControl
                 {
                     SetUpEventWindow("Stumble","You stumbled on a small rock. If you had an ingredient you would surely lose it, but now everyone is laughing at you!");
                     thirdButtonControl.onClick.AddListener(delegate {
-                        uiLayer.ChangeReputation(-Minor);
+                        ChangeReputation(-Minor);
                     });
                 }
                 else
@@ -243,7 +247,7 @@ public class EventWindowControl : WindowControl
                     {
                         //PADOL A VSIMLI SI HO
                         SetUpEventWindow("","While climbing on the fence your tail got stuck and you fell down. Owner of the tomatoes heard you!");
-                        uiLayer.ChangeReputation(-Major);
+                        ChangeReputation(-Major);
                     }
                     else
                     {
@@ -262,7 +266,7 @@ public class EventWindowControl : WindowControl
                 });//RESIST THE DARK SIDE!
                     secondButtonControl.onClick.AddListener(delegate {
                         SetUpEventWindow("","You did not fall into your temptation. God gave you some reputation.");
-                        uiLayer.ChangeReputation(Minor);
+                        ChangeReputation(Minor);
                     });
                 break;
             case Event.RandomEventType.Cave:
@@ -277,14 +281,14 @@ public class EventWindowControl : WindowControl
                         if (RandomState())
                         {
                             //NASIEL PENIAZGY
-                            uiLayer.ChangeMoney(Moderate);
                             SetUpEventWindow("","You went in and found some coins on the ground.");
+                            ChangeMoney(Moderate);
                         }
                         else
                         {
                             //STRATIL PENIAZGY
-                            uiLayer.ChangeMoney(-Moderate);
                             SetUpEventWindow("","You went in and in the pitch darkness someone or something took your coins.");
+                            ChangeMoney(-Moderate);
                         }
                     }
                     else
@@ -295,14 +299,14 @@ public class EventWindowControl : WindowControl
                             "PAY","DON'T PAY","");
                         Debug.Log("YOU FOUND WITCH!");
                         firstButtonControl.onClick.AddListener(delegate {
-                            uiLayer.ChangeMoney(-Moderate);
                             SetUpEventWindow("","After finishing her brew the witch joined your team.");
+                            ChangeMoney(-Moderate);
 
                         });
                         secondButtonControl.onClick.AddListener(delegate {
-                            uiLayer.ChangeReputation(-Minor);
-                            //CURSE
                             SetUpEventWindow("","The witch got angry and cursed you!");
+                            ChangeReputation(-Minor);
+                            //CURSE
                         });
                     }
                 });
@@ -328,13 +332,13 @@ public class EventWindowControl : WindowControl
                     {   
                         //HELPED HIM
                         SetUpEventWindow("","You helped the merchant and he thanked you.");
-                        uiLayer.ChangeReputation(Major);
+                        ChangeReputation(Major);
                     }
                 });
                 //IGNORE
                 secondButtonControl.onClick.AddListener(delegate {
                     SetUpEventWindow("","You went the other way and ignored him.");
-                    uiLayer.ChangeReputation(-Minor);
+                    ChangeReputation(-Minor);
                 });
                 break;
             case Event.RandomEventType.Thieves:
@@ -367,7 +371,7 @@ public class EventWindowControl : WindowControl
                 SetUpEventWindow("","No one is willing to help you. You can ask again..."
                     ,"ASK FOR HELP","SEARCH");
                 
-                uiLayer.ChangeReputation(-Minor);
+                ChangeReputation(-Minor);
                 Stumble( firstButtonControl, secondButtonControl,thirdButtonControl,card);
             }
         });
@@ -397,7 +401,7 @@ public class EventWindowControl : WindowControl
                         ,"ASK FOR HELP","SEARCH");
                 }
                 
-                uiLayer.ChangeReputation(-Minor);
+                ChangeReputation(-Minor);
                 Stumble( firstButtonControl,secondButtonControl,thirdButtonControl,card);
             }
         });
@@ -415,14 +419,14 @@ public class EventWindowControl : WindowControl
             {
                 //YOU WON AGAINST THEM
                 SetUpEventWindow("",$"You managed to beat up the {who}. You take their coins.");
-                uiLayer.ChangeMoney(Moderate);
-                uiLayer.ChangeReputation(Moderate);
+                ChangeMoney(Moderate);
+                ChangeReputation(Moderate);
             }
             else
             {
                 SetUpEventWindow("",$"The {who} beat you up and stole your money.");
                 //THEY BEAT YOU UP A STOLE A LOT OF MONEY
-                uiLayer.ChangeMoney(-Major);
+                ChangeMoney(-Major);
             }
         });
         secondButtonControl.onClick.AddListener(delegate {
@@ -430,13 +434,13 @@ public class EventWindowControl : WindowControl
             if (RandomState(90 - player.helpers.Count * 20))
             {
                 SetUpEventWindow("",$"You are as fast as lighting! You don't see the {who} anymore. You tell the police cats what happened and they thanked you...");
-                uiLayer.ChangeReputation(Minor);
+                ChangeReputation(Minor);
             }
             else
             {
                 //STOLE FROM YOU
                 SetUpEventWindow("",$"The {who} catch you up and stole your money.");
-                uiLayer.ChangeMoney(-Major);
+                ChangeMoney(-Major);
             }
         });
     }
@@ -477,14 +481,53 @@ public class EventWindowControl : WindowControl
         return value <= percentage;
     }
 
-    private void HideEventCards()
+    private void HideEventCardsAndCurrencies()
     {
         foreach (GameObject card in eventCards)
         {
             card.SetActive(false);
         }
         tmpCards?.Clear();
+        repUI.SetActive(false);
+        coinUI.SetActive(false);
     }
-    
 
+    private void ChangeMoney(int coin)
+    {
+        coinUI.SetActive(true);
+        TextMeshProUGUI text = coinUI.GetComponentInChildren<TextMeshProUGUI>();
+        if (coin>0)
+        {
+            text.text = $"+{coin}";
+            text.color = Color.green;
+
+        }
+        else
+        {
+            text.text = $"{coin}";
+            text.color = Color.red;
+
+        }
+        Debug.Log("COIN: " + coin);
+        uiLayer.ChangeMoney(coin);
+    }
+    private void ChangeReputation(int rep)
+    {
+        repUI.SetActive(true);
+        TextMeshProUGUI text = repUI.GetComponentInChildren<TextMeshProUGUI>();
+        if (rep>0)
+        {
+            text.text = $"+{rep}";
+            text.color = Color.green;
+
+        }
+        else
+        {
+            text.text = $"{rep}";
+            text.color = Color.red;
+
+        }
+        Debug.Log("REP: " + rep);
+        uiLayer.ChangeReputation(rep);
+    }
 }
