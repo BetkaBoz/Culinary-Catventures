@@ -85,6 +85,7 @@ public class Event : MonoBehaviour
     //URČI NÁHODNÝ TYP RANDOM EVENTU
     private void AssignRandomEventRandomType()
     {
+        //TODO NASTAVIT TAK ABY SA NEMOHLI DAT ROVNAKE EVENTY NA OSTROVE
         Array rvalues = Enum.GetValues(typeof(RandomEventType));
         Random random = new Random(Guid.NewGuid().GetHashCode());
         randomEventType = (RandomEventType) rvalues.GetValue(random.Next(rvalues.Length ));
@@ -247,6 +248,13 @@ public class Event : MonoBehaviour
         Cave = 5,
         StuckMerchant = 6,
         Thieves = 7,
+        
+        ShrineOfWealth = 8,
+        ShrineOfFood = 9,
+        FallenNest = 10,
+        DrowningCat = 11,
+        Maze = 12,
+        SlotMachine = 13,    
     }
     
     

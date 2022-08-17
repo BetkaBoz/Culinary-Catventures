@@ -10,6 +10,7 @@ public class EventWindowControl : WindowControl
 {
     #region Variables and getters
     /*
+        //TODO SPRAVIT GLOBALNE TLACIDLA AJ VSETKO ANO
         [SerializeField] private Sprite spriteEventImg;
         [SerializeField] private TextMeshProUGUI  eventWindowName;
         [SerializeField] private TextMeshProUGUI  eventWindowText;
@@ -37,6 +38,14 @@ public class EventWindowControl : WindowControl
         [SerializeField] private Sprite  caveSprite;
         [SerializeField] private Sprite  stuckMerchantSprite;
         [SerializeField] private Sprite  thievesSprite;
+        
+        [SerializeField] private Sprite  shrineOfWealthSprite;
+        [SerializeField] private Sprite  shrineOfFoodSprite;
+        [SerializeField] private Sprite  fallenNestSprite;
+        [SerializeField] private Sprite  drowningCatSprite;
+        [SerializeField] private Sprite  mazeSprite;
+        [SerializeField] private Sprite  slotMachineSprite;
+        
         [SerializeField] private Sprite  gatherSprite;
         
         //Constants
@@ -136,6 +145,26 @@ public class EventWindowControl : WindowControl
             case "Robbers":
                 imageComponent.sprite =  thievesSprite;
                 break;
+            
+            case "Shrine of wealth":
+                imageComponent.sprite =  shrineOfWealthSprite;
+                break;
+            case "Shrine of food":
+                imageComponent.sprite =  shrineOfFoodSprite;
+                break;
+            case "Fallen nest":
+                imageComponent.sprite =  fallenNestSprite;
+                break;
+            case "Drowning cat":
+                imageComponent.sprite =  drowningCatSprite;
+                break;
+            case "Maze":
+                imageComponent.sprite =  mazeSprite;
+                break;
+            case "Slot machine":
+                imageComponent.sprite =  slotMachineSprite;
+                break;
+            
             case "Gather":
                 imageComponent.sprite =  gatherSprite;
                 break;
@@ -241,7 +270,6 @@ public class EventWindowControl : WindowControl
                 SetUpEventWindow("Perfect tomatoes","You see perfect tomatoes behind a fence.",
                     "CLIMB","DON'T TEMPT","");
                 firstButtonControl.onClick.AddListener(delegate {
-                    //eventWindowControl.RemoveAllListeners();
                     //30%
                     if (RandomState(30))
                     {
@@ -260,7 +288,7 @@ public class EventWindowControl : WindowControl
                             player.Deck.Add(randomCard); 
                             tmpCards.Add(randomCard);
                         }
-                        ShowCards(tmpCards);
+                        ShowCards(tmpCards,1);
                         Debug.Log("GIMME DAT GRAPES");
                     }
                 });//RESIST THE DARK SIDE!
@@ -348,7 +376,98 @@ public class EventWindowControl : WindowControl
                 
                 Thieves(firstButtonControl,secondButtonControl,"thieves");
                 break;
-            
+            case Event.RandomEventType.ShrineOfWealth:
+                //SHRINE
+                SetUpEventWindow("Shrine of wealth","You encounter a sacred shrine dedicated to god of wealth and riches. Everyone should pray here ...",
+                    "PRAY","DESECRATE","");
+                
+                firstButtonControl.onClick.AddListener(delegate {
+                    SetUpEventWindow("","You prayed to god of wealth, he rewarded you with good luck.");
+                    ChangeReputation(Moderate);
+                });
+                secondButtonControl.onClick.AddListener(delegate {
+                    SetUpEventWindow("","You desecrated this holy place. The god is angry at you!");
+                    ChangeMoney(Major);
+                    ChangeReputation(-Major);
+                });
+                break;
+            case Event.RandomEventType.ShrineOfFood:
+                //SHRINE
+                SetUpEventWindow("Shrine of food","You encounter a sacred shrine dedicated to god of food and cooking. Everyone should pray here ...",
+                    "PRAY","DESECRATE","");
+                
+                firstButtonControl.onClick.AddListener(delegate {
+                    SetUpEventWindow("","You prayed to god of food, he rewarded you with good luck.");
+                    ChangeReputation(Moderate);
+                });
+                secondButtonControl.onClick.AddListener(delegate {
+                    SetUpEventWindow("","You desecrated this holy place. The god is angry at you!");
+                    for (int i = 0; i < 2; i++)
+                    {
+                        CardBaseInfo randomFood = GetRandomFood();
+                        player.Deck.Add(randomFood); 
+                        tmpCards.Add(randomFood);
+                    }
+                    ShowCards(tmpCards,1);
+                    ChangeReputation(-Major);
+                });
+                break;    
+            case Event.RandomEventType.FallenNest:
+                //FALLEN NEST
+                SetUpEventWindow("Fallen nest","In the woods you find a fallen bird nest with eggs inside. You can save the eggs or take them...",
+                    "SAVE","TAKE","");
+                
+                firstButtonControl.onClick.AddListener(delegate {
+                    SetUpEventWindow("","You put the nest back in the tree.");
+                    ChangeReputation(Moderate);
+                });
+                secondButtonControl.onClick.AddListener(delegate {
+                    SetUpEventWindow("","You take the eggs into your bag without thinking...");
+                    for (int i = 0; i < 2; i++)
+                    {
+                        CardBaseInfo randomFood = GetIngredient("Egg");
+                        player.Deck.Add(randomFood); 
+                        tmpCards.Add(randomFood);
+                    }
+                    ShowCards(tmpCards,1);
+                    ChangeReputation(-Major);
+                });
+                break;
+            case Event.RandomEventType.DrowningCat:
+                //DROWNING CAT
+                SetUpEventWindow("Drowning cat","You see a drowning cat in the nearby lake!",
+                    "SAVE","IGNORE","");
+                firstButtonControl.onClick.AddListener(delegate {
+                    if (RandomState())
+                    {
+                        SetUpEventWindow("","You saved the cat from certain death! The cat thanked you...");
+                        ChangeReputation(Minor);
+                    }
+                    else
+                    {
+                        SetUpEventWindow("","You saved the cat from certain death! You lost some coins in the water but the cat thanked you...");
+                        ChangeMoney(-Minor);
+                        ChangeReputation(Minor);
+                    }
+                });
+                secondButtonControl.onClick.AddListener(delegate {
+                    SetUpEventWindow("","You are scared of deep water, you looked the other way...");
+                    ChangeReputation(-Moderate);
+                });
+                
+                break;
+            case Event.RandomEventType.Maze:
+                SetUpEventWindow("Maze","You find a maze in the forest, maybe there is a treasure in the end. You can go left, right or just leave."
+                    ,"LEFT","RIGHT");
+
+                Maze(firstButtonControl,secondButtonControl);
+                break;
+            case Event.RandomEventType.SlotMachine:
+                SetUpEventWindow("Slot machine","You find a abandoned slot machine, you need to pay in order to play."
+                    ,"PLAY");
+
+                SlotMachine(firstButtonControl);
+                break;
             default:
                 Debug.Log("What are you doing here CRIMINAL SCUM?");
                 break;
@@ -356,8 +475,7 @@ public class EventWindowControl : WindowControl
     }
     private void Stumble(Button firstButtonControl,Button secondButtonControl,Button thirdButtonControl,CardBaseInfo card)
     {
-        tmpCards.Add(card);
-        ShowCards(tmpCards);
+        ShowOneCard(card,0);
 
         //STUMBLE
         firstButtonControl.onClick.AddListener(delegate {
@@ -414,6 +532,7 @@ public class EventWindowControl : WindowControl
     {
         //THIEVES
         firstButtonControl.onClick.AddListener(delegate {
+            //PEACE WAS NEVER AN OPTION
             //40% + HELPERS * 20%
             if (RandomState(40 + player.helpers.Count * 20))
             {
@@ -456,11 +575,104 @@ public class EventWindowControl : WindowControl
             player.Deck.Add(randomCard); 
             tmpCards.Add(randomCard);
         }
-        ShowCards(tmpCards);
+        ShowCards(tmpCards,1);
     }
-    
-    private void ShowCards(List<CardBaseInfo> cards)
+    private void Maze(Button firstButtonControl,Button secondButtonControl)
     {
+        //MAZE
+        firstButtonControl.onClick.AddListener(delegate {
+            //20%
+            if (RandomState(20))
+            {
+                SetUpEventWindow("","You fell in the mud...","LEFT","RIGHT");
+                Maze( firstButtonControl, secondButtonControl);
+                ChangeReputation(-Minor);
+            }
+            else
+            {
+                //25%
+                if (RandomState(25))
+                {
+                    //GRAND PRIZE
+                    SetUpEventWindow("","You find treasure in the middle of the maze!");
+                    Maze( firstButtonControl, secondButtonControl);
+                    ChangeMoney(Major*5);
+                    
+                }
+                else
+                {
+                    SetUpEventWindow("","You did not find anything.","LEFT","RIGHT");
+                    Maze( firstButtonControl, secondButtonControl);
+                }
+            }
+        });
+        secondButtonControl.onClick.AddListener(delegate {
+            //20%
+            if (RandomState(20))
+            {
+                SetUpEventWindow("","You fell in the mud...","LEFT","RIGHT");
+                Maze( firstButtonControl, secondButtonControl);
+                ChangeReputation(-Minor);
+            }
+            else
+            {
+                //25%
+                if (RandomState(25))
+                {
+                    //GRAND PRIZE
+                    SetUpEventWindow("","You find treasure in the middle of the maze!");
+                    Maze( firstButtonControl, secondButtonControl);
+                    ChangeMoney(Major*5);
+                }
+                else
+                {
+                    SetUpEventWindow("","You did not find anything.","LEFT","RIGHT");
+                    Maze( firstButtonControl, secondButtonControl);
+
+                }
+            }
+        });
+    }
+    private void SlotMachine(Button firstButtonControl)
+    {
+        //SLOT MACHINE
+        firstButtonControl.onClick.AddListener(delegate {
+            //5%
+            if (player.Money<5)
+            {
+                SetUpEventWindow("","You don't have enough coins to play!.");
+
+            }
+            else if (RandomState(5))
+            {
+                SetUpEventWindow("","You break the machine! Some coins fall on the ground but you can't play anymore.");
+                ChangeMoney(Minor);
+            }
+            else
+            {
+                //25%
+                if (RandomState(20))
+                {
+                    SetUpEventWindow("","You won! You can play again...","PLAY");
+                    SlotMachine( firstButtonControl);
+                    ChangeMoney(Major);
+                    
+                }
+                else
+                {
+                    SetUpEventWindow("","You lost! You can play again...","PLAY");
+                    ChangeMoney(-Minor);
+                    SlotMachine( firstButtonControl);
+
+                }
+            }
+        });
+    }
+
+    
+    private void ShowCards(List<CardBaseInfo> cards,int color)
+    {
+        Color32 imageColor = ChangeColor(color);
         int i = 0;
         foreach (CardBaseInfo card in cards)
         {
@@ -468,16 +680,48 @@ public class EventWindowControl : WindowControl
             eventCards[i].transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{card.EnergyCost}";;
             eventCards[i].GetComponent<Image>().sprite = card.Artwork;    
             eventCards[i].GetComponentInChildren<Text>().text = $"{card.NutritionPoints}";
+            eventCards[i].GetComponent<Image>().color = imageColor;
             i++;
         }
     }
-    
+    private void ShowOneCard(CardBaseInfo card,int color)
+    {
+        eventCards.First().SetActive(true);
+        eventCards.First().transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{card.EnergyCost}";;
+        eventCards.First().GetComponent<Image>().sprite = card.Artwork;    
+        eventCards.First().GetComponentInChildren<Text>().text = $"{card.NutritionPoints}";
+        Color32 imageColor = ChangeColor(color);
+        eventCards.First().GetComponent<Image>().color = imageColor;
+
+       
+    }
+    private Color32 ChangeColor(int color)
+    {
+        switch (color)
+        {
+            case 0:
+                //RED
+                
+                return new Color32(255,200,200,255);
+            case 1:
+                //GREEN
+                return new Color32(200,255,200,255);
+            case 2:
+                //TRANSPARENT
+                return new Color32(255,255,255,255);
+            default:
+                //WHAT IS THIS COLOR?
+                Debug.Log("WHAT IS THIS COLOR?");
+                return new Color32(200,50,255,255);
+
+        }
+    }
     //AK JE MENEJ/ROVNE AKO PERCENTAGE TAK VRATI TRUE
     private bool RandomState(int percentage = 50)
     {
         Random rnd = new Random();
         int value = rnd.Next(1,101);
-        //Debug.Log(value);
+        Debug.Log(value);
         return value <= percentage;
     }
 
@@ -485,6 +729,7 @@ public class EventWindowControl : WindowControl
     {
         foreach (GameObject card in eventCards)
         {
+            card.GetComponent<Image>().color= Color.clear;
             card.SetActive(false);
         }
         tmpCards?.Clear();

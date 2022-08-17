@@ -93,6 +93,12 @@ MonoBehaviour:
   caveSprite: {fileID: 21300000, guid: 116d0bf87a354bc4dbac30cdc94795cc, type: 3}
   stuckMerchantSprite: {fileID: 21300000, guid: 52ae18701b6605f4cb691c65a7d07987, type: 3}
   thievesSprite: {fileID: 21300000, guid: a89e5fa26fe5c604694e0d2d03702981, type: 3}
+  shrineOfWealthSprite: {fileID: 0}
+  shrineOfFoodSprite: {fileID: 0}
+  fallenNestSprite: {fileID: 0}
+  drowningCatSprite: {fileID: 0}
+  mazeSprite: {fileID: 0}
+  slotMachineSprite: {fileID: 0}
   gatherSprite: {fileID: 21300000, guid: 437eb6db38d2fb647bbf565808164c31, type: 3}
 --- !u!1 &901222613246474814
 GameObject:
@@ -2059,6 +2065,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4455765783346474137}
     m_Modifications:
+    - target: {fileID: 3678353781711271596, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678353781711271596, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678353781711271596, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678353781711271596, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3678353781711271598, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2170,6 +2192,10 @@ PrefabInstance:
     - target: {fileID: 5562270143054720039, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 5.2061996
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424409450747985115, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
@@ -2325,6 +2351,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4455765783346474137}
     m_Modifications:
+    - target: {fileID: 3678353781711271596, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678353781711271596, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678353781711271596, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5882353
+      objectReference: {fileID: 0}
     - target: {fileID: 3678353781711271598, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
