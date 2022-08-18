@@ -2673,9 +2673,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1279.2173, y: 2095.569}
+  m_AnchoredPosition: {x: 1507.7812, y: -104.062485}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1.01, y: 1}
+  m_Pivot: {x: 1.01, y: 0}
 --- !u!114 &857187732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6356,6 +6356,7 @@ MonoBehaviour:
   deckPrefab: {fileID: 3057833653451349594, guid: 76eb670d25812f54cb3dd30cf26fa2e2, type: 3}
   number: {fileID: 1158704911}
   gameManager: {fileID: 1912536889}
+  cardLayer: {fileID: 1267996928}
 --- !u!114 &1907528045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6780,6 +6781,7 @@ MonoBehaviour:
   deckPrefab: {fileID: 3057833653451349594, guid: 76eb670d25812f54cb3dd30cf26fa2e2, type: 3}
   number: {fileID: 0}
   gameManager: {fileID: 1912536889}
+  cardLayer: {fileID: 1267996928}
 --- !u!114 &1952777086
 MonoBehaviour:
   m_ObjectHideFlags: 0

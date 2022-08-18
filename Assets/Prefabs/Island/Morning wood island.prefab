@@ -577,6 +577,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7422676755277105894}
     m_Modifications:
+    - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
+      propertyPath: islandManager
+      value: 
+      objectReference: {fileID: 5316605240045808822}
     - target: {fileID: 2429101186762805142, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -671,6 +675,10 @@ PrefabInstance:
       propertyPath: isChallenge
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
+      propertyPath: islandManager
+      value: 
+      objectReference: {fileID: 5316605240045808822}
     - target: {fileID: 2429101186762805143, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
       propertyPath: m_Name
       value: Challenge
@@ -773,6 +781,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7422676755277105894}
     m_Modifications:
+    - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
+      propertyPath: islandManager
+      value: 
+      objectReference: {fileID: 5316605240045808822}
     - target: {fileID: 2429101186762805143, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
       propertyPath: m_Name
       value: Event (4)
@@ -815,6 +827,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7422676755277105894}
     m_Modifications:
+    - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
+      propertyPath: islandManager
+      value: 
+      objectReference: {fileID: 5316605240045808822}
     - target: {fileID: 2429101186762805142, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -909,6 +925,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7422676755277105894}
     m_Modifications:
+    - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
+      propertyPath: islandManager
+      value: 
+      objectReference: {fileID: 5316605240045808822}
     - target: {fileID: 2429101186762805142, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -999,6 +1019,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7422676755277105894}
     m_Modifications:
+    - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
+      propertyPath: eventType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
+      propertyPath: islandManager
+      value: 
+      objectReference: {fileID: 5316605240045808822}
+    - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
+      propertyPath: randomEventType
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2429101186762805142, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1399,6 +1431,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7422676755277105894}
     m_Modifications:
+    - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
+      propertyPath: islandManager
+      value: 
+      objectReference: {fileID: 5316605240045808822}
     - target: {fileID: 2429101186762805143, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
       propertyPath: m_Name
       value: Event

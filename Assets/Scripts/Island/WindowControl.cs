@@ -11,7 +11,15 @@ public abstract class WindowControl : MonoBehaviour
     [SerializeField] private List<CardBaseInfo> allManoeuvreScriptableObjects;
     [SerializeField] private List<CardBaseInfo> allFoodScriptableObjects;
 
-     private static int TimeCost = 1;
+    private static int TimeCost = 1;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("escape"))
+        {
+            CloseEvent();
+        }
+    }
     
     //DONT USE AWAKE IN CHILDREN CLASS CAUSE IT WILL OVERRIDE METHOD IN PARENT
     private void Awake()
@@ -22,13 +30,13 @@ public abstract class WindowControl : MonoBehaviour
         GetAllCards();
 
     }
-    
+
     public void Init(int timeCost)
     {
         //Debug.Log("TimeCost initialized to " + timeCost);
         TimeCost = timeCost;
     }
-    
+
     private void HideWindow()
     {
         gameObject.SetActive(false);
@@ -37,14 +45,14 @@ public abstract class WindowControl : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
-    
+
     public void CloseEvent()
     {
         Time.timeScale = 1;
         EventManager.IsInEvent = false;
         islandManager.LowerTime(TimeCost);
         HideWindow();
-        
+
     }
     //TODO PREMIESTNIT KOD ABY SA NEOPAKOVAL V OKNACH
     private void GetAllCards()
@@ -59,22 +67,28 @@ public abstract class WindowControl : MonoBehaviour
                 allIngredientScriptableObjects.Add(t);
             }*/
         CardBaseInfo[] allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/Manouvers");
+        allManoeuvreScriptableObjects = new List<CardBaseInfo>(allScriptableObjectsTemp);
+        /*
         foreach (CardBaseInfo t in allScriptableObjectsTemp)
         {
             allManoeuvreScriptableObjects.Add(t);
-        }
+        }*/
+        
         allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/Ingredients");
-        foreach (CardBaseInfo t in allScriptableObjectsTemp)
+        allIngredientScriptableObjects = new List<CardBaseInfo>(allScriptableObjectsTemp);
+        /*foreach (CardBaseInfo t in allScriptableObjectsTemp)
         {
             allIngredientScriptableObjects.Add(t);
-        }
+        }*/
         allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/Food");
+        allFoodScriptableObjects = new List<CardBaseInfo>(allScriptableObjectsTemp);
+        /*
         foreach (CardBaseInfo t in allScriptableObjectsTemp)
         {
             allFoodScriptableObjects.Add(t);
-        }
+        }*/
     }
-    
+
     protected CardBaseInfo GetRandomIngredient()
     {
         int random = Random.Range(0, allIngredientScriptableObjects.Count);

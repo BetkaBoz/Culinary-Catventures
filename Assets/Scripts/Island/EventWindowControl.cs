@@ -28,7 +28,7 @@ public class EventWindowControl : WindowControl
         [SerializeField] private GameObject  secondButton;
         [SerializeField] private GameObject  thirdButton;
     */
-    
+
 
     private List<CardBaseInfo> tmpCards = new List<CardBaseInfo>();
 
@@ -57,7 +57,7 @@ public class EventWindowControl : WindowControl
 
     #endregion
 
-
+    
     //ZMAZE VSETKY AKCIE NA TLACIDLACH OKREM ZATVORENIE OKNA
     //(LEBO TO JE NASTAVENE V INSPEKTOROVI LEN NA TRETIE TLACIDLO)
     private void RemoveAllListeners()
@@ -110,11 +110,15 @@ public class EventWindowControl : WindowControl
         if (string.IsNullOrEmpty(text))
         {
             thirdButton.gameObject.SetActive(false);
+            enabled = false;
+
         }
         else
         {
             thirdButton.gameObject.SetActive(true);
             thirdButton.GetComponentInChildren<TMP_Text>().text = text;
+            enabled = true;
+
         }
     }
     //CAKA SA NA SPRITES

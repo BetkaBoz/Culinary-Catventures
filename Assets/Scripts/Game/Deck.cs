@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = System.Object;
@@ -13,10 +10,17 @@ public class Deck : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private TextMeshProUGUI name;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("escape"))
+        {
+            Destroy();
+        }
+    }
 
     public void GenerateDeck(List<CardBaseInfo> deck)
     {
-        Debug.Log("GenerateDeck!");
+        //Debug.Log("GenerateDeck!");
 
         foreach (CardBaseInfo card in deck)
         {
@@ -43,7 +47,7 @@ public class Deck : MonoBehaviour
     
     public void GenerateDeckInBattle(List<Card> deck)
     {
-        Debug.Log("GenerateDeck!");
+        //Debug.Log("GenerateDeck!");
 
         foreach (Card card in deck)
         {
@@ -96,7 +100,7 @@ public class Deck : MonoBehaviour
     
     private void OnDestroy()
     {
-        Debug.Log("Deck destroyed!");
+        //Debug.Log("Deck destroyed!");
     }
 
 }

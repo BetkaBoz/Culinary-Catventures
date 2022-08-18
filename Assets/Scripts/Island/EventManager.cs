@@ -36,12 +36,12 @@ public class EventManager : MonoBehaviour
     [HideInInspector] public int merchantCount;
     [HideInInspector] public int senseiCount;
     [HideInInspector] public int gatherCount;
-    
+
     //CONSTANTS
     public const int MaxMerchantCount = 1;
     public const int MaxSenseiCount = 1;
     public const int MaxGatherCount = 2;
-    
+
     //private bool canShowEventWindow = true;
 
     #endregion

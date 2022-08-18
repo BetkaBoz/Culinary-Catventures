@@ -6,13 +6,13 @@ using TMPro;
 public class OptionsMenu : MonoBehaviour
 {
 
-    public TextMeshProUGUI  fullscreenText;
+    public TextMeshProUGUI fullscreenText;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -42,8 +42,8 @@ public class OptionsMenu : MonoBehaviour
             Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
         }
     }
-    
-    
-    
-    
+
+
+
+
 }

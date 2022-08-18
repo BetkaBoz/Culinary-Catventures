@@ -112,7 +112,7 @@ public class Event : MonoBehaviour
         {
             AssignRandomEventRandomType();
         }
-        
+
     }
 
     //PRIRADÍ SPRITE PODĹA TYPU EVENTU

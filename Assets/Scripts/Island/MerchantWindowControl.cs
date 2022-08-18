@@ -50,7 +50,7 @@ public class MerchantWindowControl : WindowControl
                 }
                 else
                 {
-                    uiLayer.ShowNotification();
+                    uiLayer.ShowCoinsNotification();
                 }
 
             });

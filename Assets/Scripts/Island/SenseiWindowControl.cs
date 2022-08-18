@@ -40,7 +40,7 @@ public class SenseiWindowControl : WindowControl
                 }
                 else
                 {
-                    uiLayer.ShowNotification();
+                    uiLayer.ShowCoinsNotification();
                 }
 
             });
