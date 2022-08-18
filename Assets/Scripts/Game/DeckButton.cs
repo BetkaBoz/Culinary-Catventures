@@ -17,7 +17,10 @@ public class DeckButton : MonoBehaviour
     private void Awake()
     {
         //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-
+        if (gameObject.name == "DeckButtonIsland")
+        {
+            enabled = false;
+        }
     }
     private void Update()
     {
