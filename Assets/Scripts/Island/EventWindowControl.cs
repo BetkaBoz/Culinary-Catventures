@@ -57,7 +57,7 @@ public class EventWindowControl : WindowControl
 
     #endregion
 
-    
+
     //ZMAZE VSETKY AKCIE NA TLACIDLACH OKREM ZATVORENIE OKNA
     //(LEBO TO JE NASTAVENE V INSPEKTOROVI LEN NA TRETIE TLACIDLO)
     private void RemoveAllListeners()
@@ -584,8 +584,8 @@ public class EventWindowControl : WindowControl
     {
         //MAZE
         firstButton.onClick.AddListener(delegate {
-            //20%
-            if (RandomState(20))
+            //30%
+            if (RandomState(30))
             {
                 SetUpEventWindow("", "You fell in mud...", "LEFT", "RIGHT");
                 Maze();
@@ -593,8 +593,8 @@ public class EventWindowControl : WindowControl
             }
             else
             {
-                //25%
-                if (RandomState(25))
+                //35%
+                if (RandomState(35))
                 {
                     //GRAND PRIZE
                     SetUpEventWindow("", "You find treasure in the middle of the maze!");
@@ -610,17 +610,17 @@ public class EventWindowControl : WindowControl
             }
         });
         secondButton.onClick.AddListener(delegate {
-            //20%
-            if (RandomState(20))
+            //30%
+            if (RandomState(30))
             {
                 SetUpEventWindow("", "You fell in the mud...", "LEFT", "RIGHT");
                 Maze();
-                ChangeReputation(-Minor);
+                ChangeReputation(-Moderate);
             }
             else
             {
-                //25%
-                if (RandomState(25))
+                //35%
+                if (RandomState(35))
                 {
                     //GRAND PRIZE
                     SetUpEventWindow("", "You find treasure in the middle of the maze!");
@@ -704,7 +704,6 @@ public class EventWindowControl : WindowControl
         {
             case 0:
                 //RED
-
                 return new Color32(255, 200, 200, 255);
             case 1:
                 //GREEN
@@ -756,7 +755,7 @@ public class EventWindowControl : WindowControl
             text.color = Color.red;
 
         }
-        Debug.Log("COIN: " + coin);
+        //Debug.Log("COIN: " + coin);
         uiLayer.ChangeMoney(coin);
     }
     private void ChangeReputation(int rep)
@@ -775,7 +774,7 @@ public class EventWindowControl : WindowControl
             text.color = Color.red;
 
         }
-        Debug.Log("REP: " + rep);
+        //Debug.Log("REP: " + rep);
         uiLayer.ChangeReputation(rep);
     }
 }

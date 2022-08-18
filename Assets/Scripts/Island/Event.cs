@@ -102,7 +102,7 @@ public class Event : MonoBehaviour
         Array rvalues = Enum.GetValues(typeof(RandomEventType));
         Random random = new Random(Guid.NewGuid().GetHashCode());
         int eventNumber = random.Next(rvalues.Length);
-        Debug.Log(eventNumber);
+        //Debug.Log(eventNumber);
         if (!eventManager.tmpRandomEvents.Contains(eventNumber))
         {
             eventManager.tmpRandomEvents.Add(eventNumber);
