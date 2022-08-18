@@ -17,19 +17,19 @@ public class IslandManager : MonoBehaviour
     //[SerializeField] private TextMeshProUGUI  repText; IN UILayer
     [SerializeField] private Light2D sun;
     [SerializeField] private GameObject playerLight;
-    
+
     [SerializeField] private GameObject lights;
     //EVENT MANAGER
     private EventManager eventManager;
-    
-     //public int Time => time;
+
+    //public int Time => time;
 
 
 
     private void Awake()
     {
         timeText.text = "Time: " + time;
-        sun  = GameObject.FindGameObjectWithTag("Light").GetComponent<Light2D>();
+        sun = GameObject.FindGameObjectWithTag("Light").GetComponent<Light2D>();
         //playerLight  = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
         //playerLight = FindObjectOfType<Player>().GetComponentInChildren<Light2D>().gameObject;
         eventManager = FindObjectOfType<EventManager>();
@@ -40,7 +40,7 @@ public class IslandManager : MonoBehaviour
 
     private void LockAllEvents()
     {
-        
+
         //List<GameObject>;
         //GameObject[] tmpEvents = GameObject.FindGameObjectsWithTag("Event");
         //List<EventManager> Events = new List<EventManager>();
@@ -68,51 +68,50 @@ public class IslandManager : MonoBehaviour
         {
             time = 0;
             LockAllEvents();
-            Invoke(nameof(StartGrabber),20f);
-           
+            Invoke(nameof(StartGrabber), 20f);
+
         }
 
         timeText.text = "Time: " + time;
     }
-    
+
     private void StartGrabber()
     {
         //GameObject grabber = Instantiate(grabberPrefab, transform.position, Quaternion.identity) as GameObject;
         //grabber.transform.position = new Vector3(grabber.transform.position.x, grabber.transform.position.y, 20);
         //Debug.Log(grabber.transform.position.z);
         Instantiate(grabberPrefab);
-        Invoke(nameof(GrabberEasterEgg),2f);
+        Invoke(nameof(GrabberEasterEgg), 2f);
     }
 
     private void GrabberEasterEgg()
     {
         //TODO EASTER EGG
-        Debug.Log(nameof(GrabberEasterEgg)+"!");
+        Debug.Log(nameof(GrabberEasterEgg) + "!");
         Instantiate(easterEggGrabberPrefab);
-        Invoke(nameof(StartBattle),10f);
-
+        Invoke(nameof(StartBattle), 10f);
         
     }
 
     //MENENIE SVETIEL PODLA CASU NA MAPE
     private void LightControl()
     {
-        sun.intensity = 0.2f + time * 0.2f ;
+        sun.intensity = 0.2f + time * 0.2f;
 
         if (sun.intensity < 0.6)
         {
             lights.SetActive(true);
             //playerLight.SetActive(true);
-            
+
         }
         else
-        {            
+        {
             lights.SetActive(false);
             //playerLight.SetActive(false);
 
         }
     }
-    
+
     //SPUSTI SCÉNU BOJA
     public void StartBattle()
     {

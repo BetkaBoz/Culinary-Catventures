@@ -1,23 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DeckButton : MonoBehaviour
 {
     //[SerializeField] private Button button;
     [SerializeField] private Deck deckPrefab;
-    [SerializeField] TextMeshProUGUI number;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private GameObject cardLayer;
     //private Player player;
 
 
     private void Awake()
     {
         //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-
+        if (gameObject.name == "DeckButtonIsland")
+        {
+            enabled = false;
+        }
     }
     private void Update()
     {
@@ -26,40 +25,40 @@ public class DeckButton : MonoBehaviour
 
     public void ShowPlayerDeckInIsland()
     {
-        Debug.Log("Show Deck!");
+        //Debug.Log("Show Deck!");
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         UILayer uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
 
-        Deck deckGameObject = Instantiate(deckPrefab,uiLayer.transform);
+        Deck deckGameObject = Instantiate(deckPrefab, uiLayer.transform);
 
         deckGameObject.GenerateDeck(player.Deck);
         deckGameObject.ChangeName("DECK");
-        
+
         Adjust();
     }
     //TODO PRIDAT LISTY PODLA KTORYCH SA MA GENEROVAT DECK
     public void ShowPlayerDeckInBattle()
     {
-        Debug.Log("Show Deck!");
+        //Debug.Log("Show Deck!");
 
         //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        GameObject toolTipLayer = GameObject.Find("Card Layer");
-        Deck deckGameObject = Instantiate(deckPrefab,toolTipLayer.transform);
+        //GameObject cardLayer = GameObject.Find("Card Layer");
+        Deck deckGameObject = Instantiate(deckPrefab, cardLayer.transform);
 
         deckGameObject.GenerateDeckInBattle(gameManager.deck);
         deckGameObject.ChangeName("DECK");
 
         Adjust();
     }
-    
+
     public void ShowPlayerDiscardInBattle()
-    {        
-        Debug.Log("Show Discard!");
+    {
+        //Debug.Log("Show Discard!");
 
         //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        GameObject toolTipLayer = GameObject.Find("Card Layer");
+        //GameObject cardLayer = GameObject.Find("Card Layer");
 
-        Deck deckGameObject = Instantiate(deckPrefab,toolTipLayer.transform);
+        Deck deckGameObject = Instantiate(deckPrefab, cardLayer.transform);
 
         deckGameObject.GenerateDeckInBattle(gameManager.discardPile);
         deckGameObject.ChangeName("DISCARD");
@@ -80,8 +79,7 @@ public class DeckButton : MonoBehaviour
         if (gameObject.name == "DeckButton")
         {
             TextMeshProUGUI text = GetComponentInChildren<TextMeshProUGUI>();
-            
-            //if(text != null) text.text = $"{gameManager.deck.Count}";
+
             text.text = $"{gameManager.deck.Count}";
 
         }

@@ -7,68 +7,76 @@ using Random = System.Random;
 public class Event : MonoBehaviour
 {
     #region Private Vars
+
     [SerializeField] public bool isChallenge;
     [SerializeField] public EventType eventType;
-    [SerializeField] public RandomEventType randomEventType; //FOR NOW
+    [SerializeField] public RandomEventType randomEventType;
     [SerializeField] public int timeCost = 1;
     [SerializeField] private Image imageComponent;
     [SerializeField] private Material eventGlowMaterial;
 
     //[SerializeField] private CircleCollider2D circleCollider2D;
-    
+
     private bool isUsed;
     private bool isOnEvent;
 
 
 
     //EVENT MANAGER
-    [SerializeField]private EventManager eventManager;
+    [SerializeField] private EventManager eventManager;
     //ISLAND MANAGER
-    [SerializeField]private IslandManager islandManager;
+    [SerializeField] private IslandManager islandManager;
     //PLAYER CHARACTER
-    [SerializeField]private GameObject playerCharacter;
-    
+    [SerializeField] private GameObject playerCharacter;
+
     #endregion
 
     private void Awake()
     {
         imageComponent = GetComponentInChildren<Image>();
 
-        eventManager = FindObjectOfType<EventManager>();
-        islandManager = FindObjectOfType<IslandManager>();
-        playerCharacter = GameObject.FindGameObjectWithTag("PlayerCharacter");
+        //  eventManager = FindObjectOfType<EventManager>();
+        //islandManager = FindObjectOfType<IslandManager>();
+        //playerCharacter = GameObject.FindGameObjectWithTag("PlayerCharacter");
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ( Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             ActivateEvent();
         }
         //SPUSTENIE EVENTU AK HO AKTIVUJEME
     }
-    
+
     //URČI TYP EVENTU, CHALLENGE SA NASTAVUJE Z INŠPEKTORA
     public void AssignRandomType()
     {
         if (isChallenge) eventType = EventType.Challenge;
-            //JEDEN MERCHANT
-            else if(eventManager.merchantCount < EventManager.MaxMerchantCount )
-            {
-                eventManager.merchantCount++;
-                eventType = EventType.Merchant;
-            }//JEDEN SENSEI
-            else if(eventManager.senseiCount < EventManager.MaxSenseiCount )
-            {
-                eventManager.senseiCount++;
-                eventType = EventType.Sensei;
-            }
-            else {
+        //JEDEN MERCHANT
+        else if (eventManager.merchantCount < EventManager.MaxMerchantCount)
+        {
+            eventManager.merchantCount++;
+            eventType = EventType.Merchant;
+        } //JEDEN SENSEI
+        else if (eventManager.senseiCount < EventManager.MaxSenseiCount)
+        {
+            eventManager.senseiCount++;
+            eventType = EventType.Sensei;
+        } //DVA GATHERY
+        else if (eventManager.gatherCount < EventManager.MaxGatherCount)
+        {
+            eventManager.gatherCount++;
+            eventType = EventType.Gather;
+        }
+        else
+        {
+            eventType = EventType.Random;
+            /*
                 Array values = Enum.GetValues(typeof(EventType));
                 Random random = new Random(Guid.NewGuid().GetHashCode());
-                //TODO: ZMENIT  NA -1 PO TESTOVANI RANDOM EVENTOV
                 eventType = (EventType) values.GetValue(random.Next(values.Length - 3));
                 //MAX 2 GATHERY
                 if (eventType == EventType.Gather)
@@ -79,17 +87,34 @@ public class Event : MonoBehaviour
                         eventType = EventType.Random;
                     }
                 }
-            }
+                */
+        }
     }
-    
+    public void DEVELOPER_AssignRandomEvent()
+    {
+        eventType = EventType.Random;
+        islandManager.time = 69;
+    }
+
     //URČI NÁHODNÝ TYP RANDOM EVENTU
     private void AssignRandomEventRandomType()
     {
         Array rvalues = Enum.GetValues(typeof(RandomEventType));
         Random random = new Random(Guid.NewGuid().GetHashCode());
-        randomEventType = (RandomEventType) rvalues.GetValue(random.Next(rvalues.Length ));
+        int eventNumber = random.Next(rvalues.Length);
+        Debug.Log(eventNumber);
+        if (!eventManager.tmpRandomEvents.Contains(eventNumber))
+        {
+            eventManager.tmpRandomEvents.Add(eventNumber);
+            randomEventType = (RandomEventType)rvalues.GetValue(eventNumber);
+        }
+        else
+        {
+            AssignRandomEventRandomType();
+        }
+
     }
-    
+
     //PRIRADÍ SPRITE PODĹA TYPU EVENTU
     public void AssignSprite()
     {
@@ -98,30 +123,30 @@ public class Event : MonoBehaviour
         switch (eventType)
         {
             case EventType.Random:
-                imageComponent.sprite =  eventManager.spriteRandom;
+                imageComponent.sprite = eventManager.spriteRandom;
                 AssignRandomEventRandomType();
                 break;
             case EventType.Gather:
-                imageComponent.sprite =  eventManager.spriteHarvest;
+                imageComponent.sprite = eventManager.spriteHarvest;
                 break;
             case EventType.Merchant:
-                imageComponent.sprite  =  eventManager.spriteMerchant;
+                imageComponent.sprite = eventManager.spriteMerchant;
                 break;
             case EventType.Sensei:
-                imageComponent.sprite  =  eventManager.spriteSensei;
+                imageComponent.sprite = eventManager.spriteSensei;
                 break;
-            
+
             case EventType.Challenge:
-                imageComponent.sprite =  eventManager.spriteChallenge;
+                imageComponent.sprite = eventManager.spriteChallenge;
                 break;
             default:
                 Debug.Log("What are you doing here CRIMINAL SCUM?");
                 break;
         }
     }
-    
+
     //ZMENENIE VELKOSTI SPRITU EVENTU
-    private void ChangeEventScale( )
+    private void ChangeEventScale()
     {
         if (isOnEvent)
         {
@@ -135,7 +160,7 @@ public class Event : MonoBehaviour
 
         }
     }
-    
+
     //NABEHNUTIE HRÁČA NA EVENT
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -143,11 +168,11 @@ public class Event : MonoBehaviour
 
         //if(!isUsed && islandManager.time > 0) eventManager.btnPrompt.text = "Press SPACE to do stuff";
         if (isUsed) return;
-        eventManager.btnPrompt.text = "Press SPACE to do stuff"; 
+        eventManager.btnPrompt.text = "Press SPACE to do stuff";
         isOnEvent = true;
         ChangeEventScale();
     }
-   
+
     //ODÍDENIE HRÁČA Z EVENTU
     private void OnTriggerExit2D(Collider2D col)
     {
@@ -165,7 +190,7 @@ public class Event : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (isUsed || EventManager.IsInEvent ) return;
+        if (isUsed || EventManager.IsInEvent) return;
         isOnEvent = true;
         ChangeEventScale();
 
@@ -181,7 +206,7 @@ public class Event : MonoBehaviour
 
     private void ActivateEvent()
     {
-        if (isOnEvent && !isUsed  && (islandManager.time > 0  || eventType == EventType.Challenge))
+        if (isOnEvent && !isUsed && (islandManager.time > 0 || eventType == EventType.Challenge))
         {
             EventManager.IsInEvent = true;
             Time.timeScale = 0;
@@ -195,7 +220,7 @@ public class Event : MonoBehaviour
     public void LockEvent()
     {
         isUsed = true;
-        imageComponent.color = new Color32(125,125,125,255);
+        imageComponent.color = new Color32(125, 125, 125, 255);
         imageComponent.gameObject.transform.localScale = new Vector3(1, 1, 1);
         imageComponent.material = null;
     }
@@ -227,14 +252,15 @@ public class Event : MonoBehaviour
         playerCharacter.transform.position = position;
         playerCharacter.transform.localScale = scale;
     }
-    
-    
-    public enum EventType{
+
+
+    public enum EventType
+    {
         Random = 1,
         Gather = 2,
         Merchant = 3,
         Sensei = 4,
-        
+
         Challenge = 10
     }
 
@@ -247,7 +273,14 @@ public class Event : MonoBehaviour
         Cave = 5,
         StuckMerchant = 6,
         Thieves = 7,
+
+        ShrineOfWealth = 8,
+        ShrineOfFood = 9,
+        FallenNest = 10,
+        DrowningCat = 11,
+        Maze = 12,
+        SlotMachine = 13,
     }
-    
-    
+
+
 }

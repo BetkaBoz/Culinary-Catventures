@@ -25,7 +25,7 @@ public class PlayerGrabber : MonoBehaviour
         transform.position = challengePosition;
 
         lr = GetComponent<LineRenderer>();
-        
+
         Gradient gradient = new Gradient();
         gradient.SetKeys(
             new[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.white, 1.0f) },
@@ -63,7 +63,7 @@ public class PlayerGrabber : MonoBehaviour
         var position = transform.position;
         position = Vector2.MoveTowards(position, playerTransform.position, speed * Time.deltaTime);
         //ABY BOLA VIDITELNA RUKA
-        position = new Vector3(position.x,position.y,20);
+        position = new Vector3(position.x, position.y, 20);
         transform.position = position;
 
         if (Vector2.Distance(transform.position, playerTransform.position) < 0.5)
