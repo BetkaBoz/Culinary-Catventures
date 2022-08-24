@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: a0d15f515f00cc344a1cd0a79b9fb8dd, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Roll
-  cardType: Neutral
+  cardType: 3
   canTarget: 1
   energyCost: 1
   nutritionPoints: 5

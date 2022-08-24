@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: 2dc77d9da2ed7fa4881808e34f8dc9e5, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Chicken Wings
-  cardType: Meat
+  cardType: 1
   canTarget: 1
   energyCost: 1
   nutritionPoints: 10

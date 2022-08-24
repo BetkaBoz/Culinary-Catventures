@@ -10,7 +10,7 @@ public class CardBaseInfo : ScriptableObject
     [SerializeField] private Sprite artwork;
     [SerializeField] private CardEffect cardEffect;
     [SerializeField] private string cardName;
-    [SerializeField] private string cardType;
+    [SerializeField] private CardTypes cardType;
     [SerializeField] private bool canTarget = false;
     [SerializeField] private int energyCost;
     [SerializeField] private int nutritionPoints;
@@ -39,7 +39,7 @@ public class CardBaseInfo : ScriptableObject
             return cardName;
         }
     }
-    public string CardType
+    public CardTypes CardType
     {
         get
         {

@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
+        player.isDead = false;
+        player.isVictorious = false;
         SetUpDeck();
         for (int i = 0; i < cardSlots.Length; i++)
         {
@@ -65,7 +67,7 @@ public class GameManager : MonoBehaviour
         int idx = 0;
         foreach (var card in player.Deck)
         {
-            if (card.CardType != "Manoeuvre")
+            if (card.CardType != CardTypes.Manoeuvre)
                 idx = 1;
             else
                 idx = 0;
@@ -100,7 +102,7 @@ public class GameManager : MonoBehaviour
     
     public bool IsEnoughFoodOnHand(int requiredAmount)
     {
-        return hand.FindAll(card => card.CardType == "Vegetarian" || card.CardType == "Meat" || card.CardType == "Mix" || card.CardType == "Neutral").Count >= requiredAmount;
+        return hand.FindAll(card => card.CardType == CardTypes.Vegetarian || card.CardType == CardTypes.Meat || card.CardType == CardTypes.Mix || card.CardType == CardTypes.Neutral).Count >= requiredAmount;
     }
 
     //emergency delivery code
@@ -480,7 +482,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public void SetDiscardFilter(string[] filter)
+    public void SetDiscardFilter(CardTypes[] filter)
     {
         discardController.Filter = filter;
     }
@@ -529,7 +531,7 @@ public class GameManager : MonoBehaviour
     public void FindCombineTarget()
     {
         List<string> find = new List<string>();
-        List<string> types = new List<string>();
+        List<CardTypes> types = new List<CardTypes>();
         Card card;
 
         for (int i = 0; i < cardSlots.Length; i++)

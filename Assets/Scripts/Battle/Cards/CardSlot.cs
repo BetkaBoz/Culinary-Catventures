@@ -71,7 +71,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     public void SetCard(Card otherCard)
     {
         card = otherCard;
-        if (otherCard.CardType == "Manoeuvre")
+        if (otherCard.CardType == CardTypes.Manoeuvre)
         {
             nutritionalValue.text = "";
         }
@@ -124,7 +124,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     public void UpdateNP()
     {
         int result = card.CalculateNP(gm);
-        if (card.CardType != "Manoeuvre")
+        if (card.CardType != CardTypes.Manoeuvre)
             nutritionalValue.text = "" + result;
     }
     #endregion
@@ -194,7 +194,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     private void Select()
     {
-        if(card.CardType == "Manoeuvre") { return; }
+        if(card.CardType == CardTypes.Manoeuvre) { return; }
         if (!gm.discardPhase && gm.combinePhase)
         {
             if (isSelected)
@@ -310,7 +310,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                 if ( gm.SpendEnergy(card.EnergyCost))//hasBeenPlayed == false &&
                 {
                     //hasBeenPlayed = true;
-                    if (card.CardType == "Manoeuvre")
+                    if (card.CardType == CardTypes.Manoeuvre)
                     {
                         MoveToDiscardPile(false);
                         card.TriggerCardEffect(gm, hit);
@@ -335,7 +335,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                 if ((hit.transform.gameObject.tag != "Customer") && gm.SpendEnergy(card.EnergyCost))//hasBeenPlayed == false && 
                 {
                     //hasBeenPlayed = true;
-                    if (card.CardType == "Manoeuvre")
+                    if (card.CardType == CardTypes.Manoeuvre)
                     {
                         if(
                             !(card.CardEffect is DiscardCardEffect) 

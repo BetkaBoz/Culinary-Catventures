@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: bf98aa8b4fef3524b95648017e88f5bf, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Avocado Salmon Toast
-  cardType: Mix
+  cardType: 2
   canTarget: 1
   energyCost: 2
   nutritionPoints: 47

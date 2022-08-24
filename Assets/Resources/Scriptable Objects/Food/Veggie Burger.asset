@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: 424be9ea512ab3948916a882ac8b91ad, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Veggie Burger
-  cardType: Vegetarian
+  cardType: 4
   canTarget: 1
   energyCost: 3
   nutritionPoints: 57

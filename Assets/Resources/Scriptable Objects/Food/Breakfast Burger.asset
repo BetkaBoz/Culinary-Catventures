@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: 7a12ed08b36acbc48a35457eca35fa26, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Breakfast Burger
-  cardType: Vegetarian
+  cardType: 4
   canTarget: 1
   energyCost: 3
   nutritionPoints: 59

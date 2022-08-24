@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: 74eddfae52fca8c4ca9d6a59e3599731, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Chicken
-  cardType: Meat
+  cardType: 1
   canTarget: 1
   energyCost: 1
   nutritionPoints: 10

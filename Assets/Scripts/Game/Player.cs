@@ -148,6 +148,12 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public void ResetEarnedAmounts()
+    {
+        repAmount = 0;
+        moneyAmount = 0;
+    }
+    
     // // TODO: Testing method for loading scenes after 10 seconds, DELETE WHEN NOT NEEDED
     // IEnumerator Test()
     // {
@@ -288,7 +294,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             foreach (CardBaseInfo tmpCard in deck)
             {
-                if (tmpCard.CardType == "Vegetarian" || tmpCard.CardType == "Meat" || tmpCard.CardType == "Mix")
+                if (tmpCard.CardType == CardTypes.Vegetarian || tmpCard.CardType == CardTypes.Meat || tmpCard.CardType == CardTypes.Mix )
                 {
                     card = tmpCard;
                     return card;
@@ -316,7 +322,7 @@ public class Player : MonoBehaviour, IDamageable
 
         foreach (CardBaseInfo tmpCard in deck)
         {
-            if (tmpCard.CardType == "Vegetarian" || tmpCard.CardType == "Meat" || tmpCard.CardType == "Mix")
+            if (tmpCard.CardType == CardTypes.Vegetarian || tmpCard.CardType == CardTypes.Meat || tmpCard.CardType == CardTypes.Mix  )
             {
                 return true;
             }

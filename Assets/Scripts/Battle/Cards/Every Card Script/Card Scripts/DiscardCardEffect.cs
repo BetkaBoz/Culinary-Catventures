@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class DiscardCardEffect : CardEffect
 {
-    [SerializeField] protected string[] filter;
+    [SerializeField] protected CardTypes[] filter;
 
     protected async void Discard(GameManager gm, Action discardSuccessfulCallback = null)
     {

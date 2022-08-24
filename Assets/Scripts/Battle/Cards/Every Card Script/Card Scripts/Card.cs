@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CardTypes
+{
+    Manoeuvre,
+    Meat,
+    Mix,
+    Neutral,
+    Vegetarian
+}
+
 public class Card : MonoBehaviour
 {
     #region SerializeFields
@@ -9,7 +18,7 @@ public class Card : MonoBehaviour
     [SerializeField] Sprite artwork;
     [SerializeField] CardEffect cardEffect = null;
     [SerializeField] string cardName;
-    [SerializeField] string cardType;
+    [SerializeField] CardTypes cardType;
     [SerializeField] bool canTarget = false;
     [SerializeField] int energyCost;
     [SerializeField] int nutritionPoints;
@@ -44,7 +53,7 @@ public class Card : MonoBehaviour
         set { cardName = value; }
     }
 
-    public string CardType
+    public CardTypes CardType
     {
         get { return cardType; }
         set { cardType = value; }
@@ -73,7 +82,7 @@ public class Card : MonoBehaviour
     public void GetDataFromBase(CardBaseInfo baseCard)
     {
         artwork = baseCard.Artwork;
-        if (baseCard.CardType == "Manoeuvre")
+        if (baseCard.CardType == CardTypes.Manoeuvre)
             cardEffect = baseCard.CardEffect;
         cardType = baseCard.CardType;
         cardName = baseCard.CardName;
@@ -97,13 +106,13 @@ public class Card : MonoBehaviour
     {
         switch (CardType)
         {
-            case "Vegetarian":
+            case CardTypes.Vegetarian:
                 return (int) (nutritionPoints * gm.Player.VegetarianFoodMod);
-            case "Meat":
+            case CardTypes.Meat:
                 return (int) (nutritionPoints * gm.Player.MeatFoodMod);
-            case "Mix":
+            case CardTypes.Mix:
                 return (int)(nutritionPoints * gm.Player.GeneralFoodMod);
-            case "Neutral":
+            case CardTypes.Neutral:
                 return (int) (nutritionPoints * gm.Player.GeneralFoodMod);
             default:
                 return -1;

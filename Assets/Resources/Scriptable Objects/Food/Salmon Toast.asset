@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: 39a336cc6359a1f41bf80de794e9600b, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Salmon Toast
-  cardType: Meat
+  cardType: 1
   canTarget: 1
   energyCost: 1
   nutritionPoints: 36
