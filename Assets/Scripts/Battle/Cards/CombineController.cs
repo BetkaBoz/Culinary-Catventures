@@ -89,7 +89,7 @@ public class CombineController : MonoBehaviour
 
     //Functions calls LookForCard to see if the selected combination is in the JSON file
     //If yes then show found card 
-    public void FindCard(string[] find, string[] types)
+    public void FindCard(string[] find, CardTypes[] types)
     {
         //This is here because there are no 1 card combination
         //Also it will reset the shown card (aka hides it)
@@ -168,17 +168,17 @@ public class CombineController : MonoBehaviour
         result = foundCard;
     }
 
-    private string GetPileType(string[] types)
+    private string GetPileType(CardTypes[] types)
     {
         bool isMeat = false;
         bool isVeggie = false;
         for(int i = 0; i < types.Length; i++)
         {
-            if (types[i] == "Meat")
+            if (types[i] == CardTypes.Meat)
                 isMeat = true;
-            if (types[i] == "Vegetarian")
+            if (types[i] == CardTypes.Vegetarian)
                 isVeggie = true;
-            if (types[i] == "Mix")
+            if (types[i] == CardTypes.Mix)
             {
                 isVeggie = true;
                 isMeat = true;

@@ -14,7 +14,7 @@ public class EmergencyDeliveryHandler : MonoBehaviour
 
     void Awake()
     {
-        npLimit = GameObject.FindGameObjectsWithTag("Customer")[0].GetComponent<Customer>().Data.MaxHunger * 2;
+        npLimit = 100;//GameObject.FindGameObjectsWithTag("Customer")[0].GetComponent<Customer>().Data.MaxHunger * 2;        
     }
 
     public void OpenDelivery()
@@ -55,8 +55,8 @@ public class EmergencyDeliveryHandler : MonoBehaviour
             generatedCards.Add(newCard);
         }
         gm.AddCardsToDeck(generatedCards);
-        layer.SetActive(false);
-        gm.EndPlayersTurn();
+        //layer.SetActive(false);
+        //gm.EndPlayersTurn();
     }
 
     // Update is called once per frame

@@ -10,7 +10,7 @@ public class SenseiWindowControl : WindowControl
     private void AssignSenseiCards()
     {
         foreach (GameObject card in senseiCards)
-        {   
+        {
 
             Image artwork = card.GetComponent<Image>();
             //Text nutritionalValue = card.GetComponentInChildren<Text>();
@@ -19,26 +19,30 @@ public class SenseiWindowControl : WindowControl
             TextMeshProUGUI price = card.transform.Find("Coin").gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
             button.onClick.RemoveAllListeners();
-            artwork.color= Color.white;
+            artwork.color = Color.white;
 
             CardBaseInfo randomCard = GetRandomManoeuvre();
             artwork.sprite = randomCard.Artwork;
-            energyCost.text =  $"{randomCard.EnergyCost}";
+            energyCost.text = $"{randomCard.EnergyCost}";
 
-            
+
             //CARD PRICE
-            price.text =  $"{Random.Range(20, 41)}"; 
+            price.text = $"{Random.Range(20, 41)}";
 
             //BUY CARD
             button.onClick.AddListener(delegate {
                 if (player.HaveMoney(int.Parse(price.text)))
                 {
-                    uiLayer.ChangeMoney(- int.Parse(price.text));
+                    uiLayer.ChangeMoney(-int.Parse(price.text));
                     player.Deck.Add(randomCard);
-                    artwork.color= Color.gray;
+                    artwork.color = Color.gray;
                     button.onClick.RemoveAllListeners();
                 }
-                
+                else
+                {
+                    uiLayer.ShowCoinsNotification();
+                }
+
             });
 
 
@@ -46,7 +50,8 @@ public class SenseiWindowControl : WindowControl
     }
     public void StartWindow()
     {
-        AssignSenseiCards();
         ShowWindow();
+
+        AssignSenseiCards();
     }
 }

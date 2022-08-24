@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: 5d7cd8c3e8e67774c9e9e8a2b8529c26, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Chicken Salad
-  cardType: Mix
+  cardType: 2
   canTarget: 1
   energyCost: 2
   nutritionPoints: 45

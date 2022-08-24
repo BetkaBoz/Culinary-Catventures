@@ -10,8 +10,8 @@ public class DiscardController : MonoBehaviour
     [SerializeField] private Transform cardSlot;
     [SerializeField] private GameManager gm;
     [SerializeField] private Button discardBttn;
-    private string[] filter;
-    public string[] Filter
+    private CardTypes[] filter;
+    public CardTypes[] Filter
     {
         set
         {
@@ -66,7 +66,7 @@ public class DiscardController : MonoBehaviour
         return false;
     }
 
-    private bool IsinFilter(string selectedCardType)
+    private bool IsinFilter(CardTypes selectedCardType)
     {
         if (filter.Length == 0)
             return true;

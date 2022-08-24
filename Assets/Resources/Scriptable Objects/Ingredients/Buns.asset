@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: e3b073d40d1796545bad94de6a909d82, type: 3}
   cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
   cardName: Buns
-  cardType: Neutral
+  cardType: 3
   canTarget: 1
   energyCost: 1
   nutritionPoints: 5

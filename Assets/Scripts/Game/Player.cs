@@ -11,8 +11,9 @@ public class Player : MonoBehaviour, IDamageable
 {
     // TODO: script should be renamed to PlayerData, PlayerDataSingleton or similiar to convey it only carries variables
     //  ^in case of name change, the Player tag should probably also be renamed
-    
+
     #region Private Vars
+
     public static Player Instance { get; set; }
     [SerializeField] float generalFoodModBase;
     [SerializeField] float meatFoodModBase;
@@ -26,11 +27,11 @@ public class Player : MonoBehaviour, IDamageable
     public bool isVictorious;
     string className;
     // int reputation = 0;
-    int money; 
+    int money;
     int maxEnergy = 5;
     int energy;
     int maxRep = 150;
-    
+
     int currExp = 400;
     int nextLvl = 1000;
     public List<string> helpers = new List<string>();
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour, IDamageable
     public bool canCallEmergencyDelivery = true;
 
     #region Getters/Setters
+
     public int CurrentExp
     {
         get { return currExp; }
@@ -133,19 +135,25 @@ public class Player : MonoBehaviour, IDamageable
         // singleton pattern
         if (Instance != null && Instance != this)
         {
-            Destroy(this.gameObject); 
+            Destroy(this.gameObject);
         }
         else
         {
             Instance = this;
             isDead = false;
             isVictorious = false;
-        
+
             DontDestroyOnLoad(this.gameObject);
             // StartCoroutine(Test());
         }
     }
 
+    public void ResetEarnedAmounts()
+    {
+        repAmount = 0;
+        moneyAmount = 0;
+    }
+    
     // // TODO: Testing method for loading scenes after 10 seconds, DELETE WHEN NOT NEEDED
     // IEnumerator Test()
     // {
@@ -286,7 +294,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             foreach (CardBaseInfo tmpCard in deck)
             {
-                if (tmpCard.CardType == "Vegetarian" || tmpCard.CardType == "Meat"|| tmpCard.CardType == "Mix" )
+                if (tmpCard.CardType == CardTypes.Vegetarian || tmpCard.CardType == CardTypes.Meat || tmpCard.CardType == CardTypes.Mix )
                 {
                     card = tmpCard;
                     return card;
@@ -314,7 +322,7 @@ public class Player : MonoBehaviour, IDamageable
 
         foreach (CardBaseInfo tmpCard in deck)
         {
-            if (tmpCard.CardType == "Vegetarian" || tmpCard.CardType == "Meat" || tmpCard.CardType == "Mix"  )
+            if (tmpCard.CardType == CardTypes.Vegetarian || tmpCard.CardType == CardTypes.Meat || tmpCard.CardType == CardTypes.Mix  )
             {
                 return true;
             }

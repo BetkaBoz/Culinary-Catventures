@@ -50,6 +50,9 @@ public class BattleWonManager : MonoBehaviour
         if (player.earnedRep + player.rep > player.MaxRep) player.rep = player.MaxRep;
         else player.rep += player.earnedRep;
 
+        player.ResetEarnedAmounts();
+        //but what about money??
+
         player.Energy = 0;
 
         //string helperName = currentHelper.GetComponent<ActionManager>().CurrentName;
