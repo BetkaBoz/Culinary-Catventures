@@ -92,18 +92,18 @@ public class CardLayoutManager : MonoBehaviour
             Debug.Log("Couldn't find the slot!");
         else
         {
-            Debug.Log("Success childIdx: "+childIdx);
+            //Debug.Log("Success childIdx: "+childIdx);
             int removeIdx = childIdx;
-            Debug.Log(numOfLeft + " " + numOfRight);
+            //Debug.Log(numOfLeft + " " + numOfRight);
             if(numOfLeft < numOfRight)
             {
-                Debug.Log("Move Right to Left");
+                //Debug.Log("Move Right to Left");
                 numOfRight--;
                 for(int i = childIdx; i < transformPoints.Count-1; i++)
                 {
                     if (!transformPoints[i+1].PointsToCardSlot)
                     {
-                        Debug.Log(i);
+                        //Debug.Log(i);
                         break;
                     }
                     transformPoints[i].CardSlot = transformPoints[i+1].CardSlot;
@@ -113,13 +113,13 @@ public class CardLayoutManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Move Left");
+                //Debug.Log("Move Left");
                 numOfLeft--;
                 for (int i = childIdx; i > 0; i--)
                 {
                     if (!transformPoints[i-1].PointsToCardSlot)
                     {
-                        Debug.Log(i);
+                        //Debug.Log(i);
                         break;
                     }
                     transformPoints[i].CardSlot = transformPoints[i-1].CardSlot;
@@ -127,7 +127,7 @@ public class CardLayoutManager : MonoBehaviour
                     removeIdx = i-1;
                 }
             }
-            Debug.Log(numOfLeft + " " + numOfRight + " removeIdx" + removeIdx);
+            //Debug.Log(numOfLeft + " " + numOfRight + " removeIdx" + removeIdx);
             transformPoints[removeIdx].RemoveCardSlot();
         }
         OrderChildren();

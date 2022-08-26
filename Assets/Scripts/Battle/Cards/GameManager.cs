@@ -47,8 +47,7 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
-        player.isDead = false;
-        player.isVictorious = false;
+        player.ResetPlayer();
         SetUpDeck();
         for (int i = 0; i < cardSlots.Length; i++)
         {
@@ -82,7 +81,7 @@ public class GameManager : MonoBehaviour
         if (player.isVictorious) { return; }
         foreach(var exhaustedCard in exhaustPile)
         {
-            Debug.Log("deleting" + exhaustedCard.CardName);
+           // Debug.Log("deleting" + exhaustedCard.CardName);
             CardBaseInfo foundCard = null;
            foreach(var card in player.Deck)
             {
@@ -169,7 +168,7 @@ public class GameManager : MonoBehaviour
             buffs.Remove(buff);
         else
         {
-            Debug.Log("apply");
+            //Debug.Log("apply");
             buff.Apply();
         }
         UpdateUI();
@@ -377,7 +376,7 @@ public class GameManager : MonoBehaviour
 
     public void SendToDiscard(int idx, bool isEndTurn)
     {
-        Debug.Log("idx:" + idx);
+        //Debug.Log("idx:" + idx);
         Card card = cardSlots[idx].GetCard();
         availableCardSlots[idx] = true;
         //card.HandIndex = -1;
@@ -541,7 +540,7 @@ public class GameManager : MonoBehaviour
                 card = cardSlots[i].GetCard();
                 //if(card.CardType != "Manoeuvre")
                 //{
-                Debug.Log(card.CardName);
+                //Debug.Log(card.CardName);
                 find.Add(card.CardName);
                 types.Add(card.CardType);
                 //}

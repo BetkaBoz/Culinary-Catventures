@@ -148,10 +148,12 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    public void ResetEarnedAmounts()
+    public void ResetPlayer()
     {
-        repAmount = 0;
+        earnedRep = 0;
         moneyAmount = 0;
+        isDead = false;
+        isVictorious = false;
     }
     
     // // TODO: Testing method for loading scenes after 10 seconds, DELETE WHEN NOT NEEDED
@@ -330,6 +332,18 @@ public class Player : MonoBehaviour, IDamageable
 
         return false;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.BackQuote))
+        {
+            Debug.Log("Player stats:");
+            Debug.Log("Rep cur: " + rep + " max: " + maxRep + " repAmount: " + repAmount + " earnedRep: " + earnedRep);
+            Debug.Log("Money cur: " + money + " moneyAmount: " + moneyAmount);
+            //Debug.Log("Deck size: "+deck.Count+" contents: "+deck.ToString());
+        }
+    }
+
     // async Task LoadBattleWon()
     //{
     //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Battle Won", LoadSceneMode.Additive);
