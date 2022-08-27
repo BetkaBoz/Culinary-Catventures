@@ -15,12 +15,8 @@ public class Event : MonoBehaviour
     [SerializeField] private Image imageComponent;
     [SerializeField] private Material eventGlowMaterial;
 
-    //[SerializeField] private CircleCollider2D circleCollider2D;
-
     private bool isUsed;
     private bool isOnEvent;
-
-
 
     //EVENT MANAGER
     [SerializeField] private EventManager eventManager;
@@ -112,7 +108,6 @@ public class Event : MonoBehaviour
         {
             AssignRandomEventRandomType();
         }
-
     }
 
     //PRIRADÍ SPRITE PODĹA TYPU EVENTU
@@ -135,7 +130,6 @@ public class Event : MonoBehaviour
             case EventType.Sensei:
                 imageComponent.sprite = eventManager.spriteSensei;
                 break;
-
             case EventType.Challenge:
                 imageComponent.sprite = eventManager.spriteChallenge;
                 break;
@@ -193,14 +187,12 @@ public class Event : MonoBehaviour
         if (isUsed || EventManager.IsInEvent) return;
         isOnEvent = true;
         ChangeEventScale();
-
     }
 
     private void OnMouseExit()
     {
         isOnEvent = false;
         ChangeEventScale();
-
     }
 
 

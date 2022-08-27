@@ -643,8 +643,7 @@ public class EventWindowControl : WindowControl
             //5%
             if (player.Money < 5)
             {
-                SetUpEventWindow("", "You don't have enough coins to play!.");
-
+                SetUpEventWindow("", "You don't have enough coins to play!");
             }
             else if (RandomState(5))
             {
@@ -659,14 +658,12 @@ public class EventWindowControl : WindowControl
                     SetUpEventWindow("", "You won! You can play again...", "PLAY");
                     SlotMachine();
                     ChangeMoney(Major);
-
                 }
                 else
                 {
                     SetUpEventWindow("", "You lost! You can play again...", "PLAY");
                     ChangeMoney(-Minor);
                     SlotMachine();
-
                 }
             }
         });

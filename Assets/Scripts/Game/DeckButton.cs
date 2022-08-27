@@ -68,7 +68,7 @@ public class DeckButton : MonoBehaviour
 
     private void Adjust()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 1;
         EventManager.IsInEvent = true;
     }
 

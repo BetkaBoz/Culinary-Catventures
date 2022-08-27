@@ -77,6 +77,11 @@ public class IslandManager : MonoBehaviour
 
     private void StartGrabber()
     {
+        if (EventManager.IsInEvent)
+        {
+            Invoke(nameof(StartGrabber), 20f);
+            return;
+        }
         //GameObject grabber = Instantiate(grabberPrefab, transform.position, Quaternion.identity) as GameObject;
         //grabber.transform.position = new Vector3(grabber.transform.position.x, grabber.transform.position.y, 20);
         //Debug.Log(grabber.transform.position.z);
