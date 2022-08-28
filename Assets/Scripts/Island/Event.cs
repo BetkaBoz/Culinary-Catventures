@@ -113,7 +113,6 @@ public class Event : MonoBehaviour
     //PRIRADÍ SPRITE PODĹA TYPU EVENTU
     public void AssignSprite()
     {
-        //Image imageComponent = GetComponent<Image>();
 
         switch (eventType)
         {
@@ -159,8 +158,6 @@ public class Event : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         //Debug.Log(gameObject.name + " Collided");
-
-        //if(!isUsed && islandManager.time > 0) eventManager.btnPrompt.text = "Press SPACE to do stuff";
         if (isUsed) return;
         eventManager.btnPrompt.text = "Press SPACE to do stuff";
         isOnEvent = true;
@@ -201,7 +198,7 @@ public class Event : MonoBehaviour
         if (isOnEvent && !isUsed && (islandManager.time > 0 || eventType == EventType.Challenge))
         {
             EventManager.IsInEvent = true;
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             eventManager.ClearBtnPrompt();
             eventManager.RecognizeAndRunEvent(this);
             LockEvent();

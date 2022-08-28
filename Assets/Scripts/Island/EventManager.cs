@@ -42,8 +42,6 @@ public class EventManager : MonoBehaviour
     public const int MaxSenseiCount = 1;
     public const int MaxGatherCount = 2;
 
-    //private bool canShowEventWindow = true;
-
     #endregion
 
     private void Awake()
@@ -75,7 +73,7 @@ public class EventManager : MonoBehaviour
             allEvents.Add(@event);
         }
     }
-    //VYBERA NAHODNY EVENT NA MAPE A PRIDAVAMU TYP A SPRITE
+    //VYBERA NAHODNY EVENT NA MAPE A PRIDAVA MU TYP A SPRITE
     private void AssignRandomTypes()
     {
         int iterations = allEvents.Count;

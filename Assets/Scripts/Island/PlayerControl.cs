@@ -16,7 +16,14 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isDisabled) MovePlayer();
+        if (!isDisabled && !EventManager.IsInEvent)
+        {
+            Debug.Log(EventManager.IsInEvent);
+            Debug.Log(isDisabled);
+
+            MovePlayer();
+
+        } 
     }
 
     //HÝBANIE HRÁČOM

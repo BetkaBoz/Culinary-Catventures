@@ -93,7 +93,7 @@ public class Deck : MonoBehaviour
     public void Destroy()
     {
         Destroy(gameObject);
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         EventManager.IsInEvent = false;
 
     }

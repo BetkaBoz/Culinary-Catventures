@@ -1,9 +1,8 @@
-using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+
 
 public class IslandManager : MonoBehaviour
 {
@@ -22,9 +21,6 @@ public class IslandManager : MonoBehaviour
     //EVENT MANAGER
     private EventManager eventManager;
 
-    //public int Time => time;
-
-
 
     private void Awake()
     {
@@ -40,17 +36,11 @@ public class IslandManager : MonoBehaviour
 
     private void LockAllEvents()
     {
-
-        //List<GameObject>;
-        //GameObject[] tmpEvents = GameObject.FindGameObjectsWithTag("Event");
-        //List<EventManager> Events = new List<EventManager>();
         Debug.Log("EVENTS ARE LOCKED!");
         foreach (Event @event in eventManager.allEvents)
         {
             if (!@event.isChallenge)
             {
-                //@event.isUsed = true;
-                //@event.GetComponentInChildren<Image>().color = new Color32(125,125,125,255); 
                 @event.LockEvent();
             }
         }
@@ -120,17 +110,13 @@ public class IslandManager : MonoBehaviour
     //SPUSTI SCÉNU BOJA
     public void StartBattle()
     {
-        //Uloženie hodnôt do PLAYERPREFS
-        //NOT GOOD
-        //{PlayerPrefs.SetInt("reputation", 100);}
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if (player != null)
         {
             player.isDead = false;
             player.isVictorious = false;
         }
-
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         SceneManager.LoadScene("Battle", LoadSceneMode.Single);
     }
 }

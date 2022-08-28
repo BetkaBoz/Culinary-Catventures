@@ -48,7 +48,7 @@ public abstract class WindowControl : MonoBehaviour
 
     public void CloseEvent()
     {
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         EventManager.IsInEvent = false;
         islandManager.LowerTime(TimeCost);
         HideWindow();
