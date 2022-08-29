@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Chad
   m_EditorClassIdentifier: 
   Name: Chad
+  Value: 1
   MaxHunger: 60
   Turns: 3
   Money: 10

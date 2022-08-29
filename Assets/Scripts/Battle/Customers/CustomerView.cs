@@ -98,9 +98,9 @@ public class CustomerView : MonoBehaviour, IDropHandler
     {
         float t = 1f - (float)_customer.TurnsLeft / _customer.Data.Turns;        //ratio of two variables
         int spriteIndex = (int) Mathf.Lerp(0, (float)_customer.Data.Sprites.Count-1, t);
-        //Body.DOFade(1, 0.2f).OnPlay(() => { Body.sprite = _customer.Data.Sprites[spriteIndex]; });
+        Body.DOFade(1, 0.2f).OnPlay(() => { Body.sprite = _customer.Data.Sprites[spriteIndex]; });
         // _customer.Data.overrider.SetAnimations(_customer.Data.overrideControllers[spriteIndex]);
-        anim.SetTrigger("UpdateIdle");
+        //anim.SetTrigger("UpdateIdle");
     }
 
     private void Die()

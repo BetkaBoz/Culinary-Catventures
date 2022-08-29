@@ -27,11 +27,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image energyNotification;
     [SerializeField] CardLayoutManager layoutManager;//card layout
     [SerializeField] HighlightObjectController bellHighlight;
-    [SerializeField] private float bellRingCooldown;
+    [SerializeField] float bellRingCooldown;
+    [SerializeField] Image roundNotification;
+    [SerializeField] Text roundNotificationText;
     #endregion
 
     private float lastBellRingTimestamp;
     int numOfCards = 0;//right now useless
+    int roundNumber;
     List<Customer> customers = new List<Customer>();
 
     #region Public Vars
@@ -58,6 +61,8 @@ public class GameManager : MonoBehaviour
         repUI.text = $"{player.rep}";
         combinePhase = false;
         discardPhase = false;
+
+        ShowRoundNotification();
     }
 
     private void SetUpDeck()
@@ -124,7 +129,22 @@ public class GameManager : MonoBehaviour
             });
         });
     }
-    
+
+    public void ShowRoundNotification()
+    {
+        roundNumber++;
+        roundNotificationText.text = $"Round {roundNumber}";
+        roundNotification.gameObject.SetActive(true);
+        roundNotification.DOFade(1f, 0.7f)
+            .OnPlay(() => { roundNotificationText.DOFade(1f, 0.7f); })
+            .OnComplete(() =>
+            {
+                roundNotification.DOFade(0, 0.9f);
+                roundNotificationText.DOFade(0f, 0.9f)
+                .OnComplete(() => { roundNotification.gameObject.SetActive(false); });
+            });
+    }
+
     #region Player Functions
     public void AddEnergy(int amount)
     {
@@ -240,6 +260,8 @@ public class GameManager : MonoBehaviour
     public void EndEnemyTurn()
     {
         Debug.Log("ITS PLAYERS TURN");
+
+        ShowRoundNotification();
 
         DrawCards(5);
 
