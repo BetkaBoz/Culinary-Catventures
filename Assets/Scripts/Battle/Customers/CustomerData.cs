@@ -6,6 +6,7 @@ using UnityEngine;
 public class CustomerData : ScriptableObject
 {
     public string Name;
+    public int Value;
     public int MaxHunger;
     public int Turns;
     public int Money;

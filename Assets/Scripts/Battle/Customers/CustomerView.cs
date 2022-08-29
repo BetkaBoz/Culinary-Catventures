@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Experimental.U2D.Animation;
 using UnityEngine.UI;
 
 public class CustomerView : MonoBehaviour, IDropHandler
@@ -12,8 +13,11 @@ public class CustomerView : MonoBehaviour, IDropHandler
     [SerializeField] Image Body;
     [SerializeField] GameObject debuffs;
     [SerializeField] Hoverable hoverable;
+    [SerializeField] List<SpriteLibraryAsset> spriteLibraries;
     Customer _customer;
+    Animator anim;
     public Customer Customer => _customer;
+    public SpriteLibrary spriteLibrary;
     string message, header;
 
     public void SetUp(Customer customer, CustomerSetUp customerSetUp)
@@ -27,7 +31,7 @@ public class CustomerView : MonoBehaviour, IDropHandler
         (transform as RectTransform).sizeDelta = new Vector2(Body.rectTransform.rect.width, Body.rectTransform.rect.height);
         //rotating customer
         Vector3 target = new Vector3(transform.rotation.x, customerSetUp.customerYRotate, transform.rotation.z);
-        Body.transform.Rotate(target);        
+        Body.transform.Rotate(target);     
 
         //subscribtion on events from Customer class -> Observer
         customer.OnDamageTaken += TakeDamage; 
@@ -43,6 +47,7 @@ public class CustomerView : MonoBehaviour, IDropHandler
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         Action.transform.DOScale(1.07f, 0.85f).SetLoops(-1, LoopType.Yoyo);
     }
 
@@ -93,7 +98,9 @@ public class CustomerView : MonoBehaviour, IDropHandler
     {
         float t = 1f - (float)_customer.TurnsLeft / _customer.Data.Turns;        //ratio of two variables
         int spriteIndex = (int) Mathf.Lerp(0, (float)_customer.Data.Sprites.Count-1, t);
-        Body.DOFade(1, 0.2f).OnPlay(() => { Body.sprite = _customer.Data.Sprites[spriteIndex]; });
+        //Body.DOFade(1, 0.2f).OnPlay(() => { Body.sprite = _customer.Data.Sprites[spriteIndex]; });
+        // _customer.Data.overrider.SetAnimations(_customer.Data.overrideControllers[spriteIndex]);
+        anim.SetTrigger("UpdateIdle");
     }
 
     private void Die()

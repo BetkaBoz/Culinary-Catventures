@@ -26,3 +26,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 80610fc619d39f045abafb060fcef784, type: 3}
   - {fileID: 21300000, guid: ab4b2396d24a22b4cb89634bb733d598, type: 3}
   - {fileID: 21300000, guid: a42112c070b3b9446ab2ad70b431a0a2, type: 3}
+  overrideControllers:
+  - {fileID: 22100000, guid: 36eecdbe22b16664bab5f87e9e4a9b31, type: 2}
+  overrider: {fileID: 5654921171458616312, guid: 15b91858967c58547bbd448b19aec6c3, type: 3}
