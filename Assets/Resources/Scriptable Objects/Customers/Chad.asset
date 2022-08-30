@@ -17,7 +17,13 @@ MonoBehaviour:
   MaxHunger: 60
   Turns: 3
   Money: 10
+  MaxMoneyEarned: 0
   Reputation: 10
+  MaxReputationEarned: 0
+  MaxDamageMade: 0
+  HalfHealthLeftPercentage: 2
+  ThirdHealthLeftPercentage: 3
+  QuarterHealthLeftPercentage: 4
   Sprites:
   - {fileID: 21300000, guid: 7eeaaa8bb102f25489277af371e0999f, type: 3}
   - {fileID: 21300000, guid: 70635937629a8094faa4c4292c0b15e5, type: 3}
