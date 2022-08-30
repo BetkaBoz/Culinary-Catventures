@@ -16,18 +16,18 @@ public class Chungus : Customer
         {
             if (currHunger >= Data.MaxHunger / 2)
             {
-                gm.Player.TakeDamage(80);
+                gm.Player.TakeDamage(Data.MaxDamageMade / Data.HalfHealthLeftPercentage);
                 finalMoney -= 50;
             }
             else if (currHunger >= Data.MaxHunger / 3)
             {
                 finalMoney += Data.Money + 10;
-                gm.Player.TakeDamage(40);
+                gm.Player.TakeDamage(Data.MaxDamageMade / Data.ThirdHealthLeftPercentage);
             }
             else if (currHunger >= Data.MaxHunger / 4)
             {
                 finalMoney += Data.Money + 25;
-                gm.Player.TakeDamage(20);
+                gm.Player.TakeDamage(Data.MaxDamageMade / Data.QuarterHealthLeftPercentage);
             }
             Die(true);
             gm.Player.ChangeMoney(finalMoney);

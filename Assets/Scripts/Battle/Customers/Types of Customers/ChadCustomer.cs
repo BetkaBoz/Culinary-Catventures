@@ -16,17 +16,17 @@ public class ChadCustomer : Customer
         {
             if (currHunger >= Data.MaxHunger / 2)
             {
-                gm.Player.TakeDamage(100);
+                gm.Player.TakeDamage(Data.MaxDamageMade / Data.HalfHealthLeftPercentage);
                 finalMoney -= 60;
             }
             else if (currHunger >= Data.MaxHunger / 3)
             {
-                gm.Player.TakeDamage(50);
+                gm.Player.TakeDamage(Data.MaxDamageMade / Data.ThirdHealthLeftPercentage);
                 finalMoney += Data.Money + 15;
             }
             else if (currHunger >= Data.MaxHunger / 4)
             {
-                gm.Player.TakeDamage(25);
+                gm.Player.TakeDamage(Data.MaxDamageMade / Data.QuarterHealthLeftPercentage);
                 finalMoney += Data.Money + 30;
             }
             Die(true);

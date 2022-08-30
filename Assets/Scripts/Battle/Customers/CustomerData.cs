@@ -10,7 +10,13 @@ public class CustomerData : ScriptableObject
     public int MaxHunger;
     public int Turns;
     public int Money;
+    public int MaxMoneyEarned;
     public int Reputation;
+    public int MaxReputationEarned;
+    public int MaxDamageMade;
+    public int HalfHealthLeftPercentage;
+    public int ThirdHealthLeftPercentage;
+    public int QuarterHealthLeftPercentage;
     public List<Sprite> Sprites;
     public List<Sprite> ActionSprites;
 }

@@ -103,8 +103,8 @@ public abstract class Customer : IDamageable
         if (currHunger ==  0)
         {
             Die(true);
-            finalMoney += 50;
-            finalRep += 30;
+            finalMoney += Data.MaxMoneyEarned;
+            finalRep += Data.MaxReputationEarned;
             gm.Player.ChangeMoney(finalMoney);
             gm.Player.earnedRep += finalRep;
         }
