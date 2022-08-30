@@ -17,7 +17,9 @@ public class CustomerView : MonoBehaviour, IDropHandler
     Customer _customer;
     Animator anim;
     public Customer Customer => _customer;
-    public SpriteLibrary spriteLibrary;
+    //public SpriteLibrary spriteLibrary;
+    //public SpriteResolver spriteResolver;
+
     string message, header;
 
     public void SetUp(Customer customer, CustomerSetUp customerSetUp)
@@ -56,6 +58,8 @@ public class CustomerView : MonoBehaviour, IDropHandler
         Action.DOFade(1f, 1f);
 
         hoverable.SetTooltipEnabled(true);
+
+        ChangeExpressions();
     }
 
     private void ActionChange()
@@ -99,8 +103,8 @@ public class CustomerView : MonoBehaviour, IDropHandler
         float t = 1f - (float)_customer.TurnsLeft / _customer.Data.Turns;        //ratio of two variables
         int spriteIndex = (int) Mathf.Lerp(0, (float)_customer.Data.Sprites.Count-1, t);
         Body.DOFade(1, 0.2f).OnPlay(() => { Body.sprite = _customer.Data.Sprites[spriteIndex]; });
-        // _customer.Data.overrider.SetAnimations(_customer.Data.overrideControllers[spriteIndex]);
-        //anim.SetTrigger("UpdateIdle");
+        
+        //spriteResolver.SetCategoryAndLabel($"Idle State {spriteIndex}", $"{spriteIndex}0");
     }
 
     private void Die()
