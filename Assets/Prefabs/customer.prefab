@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7434931225825327893}
   - component: {fileID: 6755538214365672040}
   - component: {fileID: 3719504316910534307}
-  - component: {fileID: 1077736972002203609}
   m_Layer: 6
   m_Name: customer
   m_TagString: Customer
@@ -95,25 +94,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 267, y: 499.178}
   m_EdgeRadius: 0
---- !u!95 &1077736972002203609
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65602712083082045}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bdf71756fc79bf743b5fb2c2db48fda8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2135321469211898073
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,9 +180,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2135321469211898073}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bdf71756fc79bf743b5fb2c2db48fda8, type: 2}
+  m_Controller: {fileID: 9100000, guid: c27de16840dddb24eb563c7930b6d050, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -236,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CategoryHash: 1.1701339e-37
-  m_labelHash: -2.9696366e-27
+  m_CategoryHash: 1.581889e-11
+  m_labelHash: -0.000047226087
 --- !u!1 &5392355283522671463
 GameObject:
   m_ObjectHideFlags: 0

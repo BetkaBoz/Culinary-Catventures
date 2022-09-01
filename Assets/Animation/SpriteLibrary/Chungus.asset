@@ -103,8 +103,8 @@ MonoBehaviour:
     - m_Name: 28
       m_Hash: -2069103088
       m_Sprite: {fileID: -9068600904545375802, guid: ce34984fbca114545bc37cb4ba128d9e, type: 3}
-  - m_Name: Idle State3
-    m_Hash: 35603767
+  - m_Name: Idle State 3
+    m_Hash: -1266518717
     m_CategoryList:
     - m_Name: 30
       m_Hash: -1821685917
