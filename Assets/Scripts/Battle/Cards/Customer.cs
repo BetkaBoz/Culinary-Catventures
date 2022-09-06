@@ -89,9 +89,26 @@ public abstract class Customer : IDamageable
     {
 
     }
-    public void Feed(int amount)
+    public void Feed(int amount, CardTypes type)
     {
-        TakeDamage(amount);
+        switch (type)
+        {
+            case CardTypes.Vegetarian:
+                TakeDamage((int)(amount * _customerData.VeggieFoodDefence));
+                break;
+            case CardTypes.Meat:
+                TakeDamage((int)(amount * _customerData.MeatFoodDefence));
+                break;
+            case CardTypes.Mix:
+                TakeDamage((int)(amount * _customerData.GeneralFoodDefence));
+                break;
+            case CardTypes.Neutral:
+                TakeDamage((int)(amount * _customerData.GeneralFoodDefence));
+                break;
+            default:
+                Debug.Log("Error, food doesn't have a type!");
+                break;
+        }
     }
     public void TakeDamage(int amount)
     {
