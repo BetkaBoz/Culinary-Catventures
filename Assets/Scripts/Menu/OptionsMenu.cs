@@ -20,12 +20,12 @@ public class OptionsMenu : MonoBehaviour
     {
         if (Screen.fullScreen)
         {
-            fullscreenText.text = "Fullscreen: Yes";
+            fullscreenText.text = "Fullscreen ON";
 
         }
         else
         {
-            fullscreenText.text = "Fullscreen: No";
+            fullscreenText.text = "Fullscreen OFF";
 
         }
     }
