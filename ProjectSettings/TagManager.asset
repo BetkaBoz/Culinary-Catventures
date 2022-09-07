@@ -16,6 +16,7 @@ TagManager:
   - Notification
   - PlayerCharacter
   - GameManager
+  - Deck
   layers:
   - Default
   - TransparentFX

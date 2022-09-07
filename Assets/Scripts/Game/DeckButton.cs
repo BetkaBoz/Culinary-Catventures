@@ -5,6 +5,8 @@ public class DeckButton : MonoBehaviour
 {
     //[SerializeField] private Button button;
     [SerializeField] private Deck deckPrefab;
+    [SerializeField] private GameObject spawnLocation;
+    [SerializeField] private Player player;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject cardLayer;
     //private Player player;
@@ -12,9 +14,9 @@ public class DeckButton : MonoBehaviour
 
     private void Awake()
     {
-        //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        if (gameObject.name == "DeckButtonIsland")
-        {
+        if (gameObject.name == "DeckButtonIsland"|| gameObject.name == "SellButton")
+    {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             enabled = false;
         }
     }
@@ -26,21 +28,50 @@ public class DeckButton : MonoBehaviour
     public void ShowPlayerDeckInIsland()
     {
         //Debug.Log("Show Deck!");
-        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        UILayer uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
+        //Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //UILayer uiLayer = GameObject.FindGameObjectWithTag("UILayer").GetComponent<UILayer>();
+        //GameObject spawn = GameObject.FindGameObjectWithTag("Deck");
 
-        Deck deckGameObject = Instantiate(deckPrefab, uiLayer.transform);
+        Deck deckGameObject = Instantiate(deckPrefab, spawnLocation.transform);
 
         deckGameObject.GenerateDeck(player.Deck);
         deckGameObject.ChangeName("DECK");
-
+        
         Adjust();
     }
+    public void ShowPlayerDeckInMerchant()
+    {
+        //Debug.Log("Show Deck!");
+        //Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //GameObject spawn = GameObject.FindGameObjectWithTag("Deck");
+
+        Deck deckGameObject = Instantiate(deckPrefab, spawnLocation.transform);
+
+        deckGameObject.GenerateDeckInMerchant(player.Deck);
+        deckGameObject.ChangeName("DECK");
+        Adjust();
+    }
+    public void ShowPlayerDeckInSensei()
+    {
+        //Debug.Log("Show Deck!");
+        //Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //GameObject spawn = GameObject.FindGameObjectWithTag("Deck");
+
+        Deck deckGameObject = Instantiate(deckPrefab, spawnLocation.transform);
+
+        deckGameObject.GenerateDeckInSensei(player.Deck);
+        deckGameObject.ChangeName("DECK");
+        Adjust();
+    }
+    
+    /*public void MoveInHierarchy(int delta, GameObject deck) {
+        int index = deck.transform.GetSiblingIndex();
+        transform.SetSiblingIndex (index + delta);
+    }*/
     //TODO PRIDAT LISTY PODLA KTORYCH SA MA GENEROVAT DECK
     public void ShowPlayerDeckInBattle()
     {
         //Debug.Log("Show Deck!");
-
         //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         //GameObject cardLayer = GameObject.Find("Card Layer");
         Deck deckGameObject = Instantiate(deckPrefab, cardLayer.transform);
@@ -54,10 +85,8 @@ public class DeckButton : MonoBehaviour
     public void ShowPlayerDiscardInBattle()
     {
         //Debug.Log("Show Discard!");
-
         //GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         //GameObject cardLayer = GameObject.Find("Card Layer");
-
         Deck deckGameObject = Instantiate(deckPrefab, cardLayer.transform);
 
         deckGameObject.GenerateDeckInBattle(gameManager.discardPile);

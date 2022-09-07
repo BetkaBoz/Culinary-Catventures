@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SenseiWindowControl : WindowControl
 {
     [SerializeField] private List<GameObject> senseiCards;
+    public static bool IsInSensei;
 
     private void AssignSenseiCards()
     {
@@ -15,8 +16,11 @@ public class SenseiWindowControl : WindowControl
             Image artwork = card.GetComponent<Image>();
             //Text nutritionalValue = card.GetComponentInChildren<Text>();
             Button button = card.GetComponent<Button>();
-            TextMeshProUGUI energyCost = card.transform.Find("Energy").gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            TextMeshProUGUI price = card.transform.Find("Coin").gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            GameObject energy = card.transform.Find("Energy").gameObject;
+
+            TextMeshProUGUI energyCost = energy.GetComponentInChildren<TextMeshProUGUI>();
+            GameObject coin = card.transform.Find("Coin").gameObject;
+            TextMeshProUGUI price = coin.GetComponentInChildren<TextMeshProUGUI>();
 
             button.onClick.RemoveAllListeners();
             artwork.color = Color.white;
@@ -31,27 +35,39 @@ public class SenseiWindowControl : WindowControl
 
             //BUY CARD
             button.onClick.AddListener(delegate {
-                if (player.HaveMoney(int.Parse(price.text)))
-                {
-                    uiLayer.ChangeMoney(-int.Parse(price.text));
-                    player.Deck.Add(randomCard);
-                    artwork.color = Color.gray;
-                    button.onClick.RemoveAllListeners();
-                }
-                else
+                if (!player.HaveMoney(int.Parse(price.text)))
                 {
                     uiLayer.ShowCoinsNotification();
+                    return;
+                }
+                uiLayer.ChangeMoney(-int.Parse(price.text));
+                player.Deck.Add(randomCard);
+                artwork.color = Color.gray;
+
+                price.color = Color.gray;
+                coin.GetComponentInChildren<Image>().color = Color.gray;
+                foreach (Transform child in energy.transform)
+                {
+                    //print("Foreach loop: " + child);
+                    if (child.GetComponent<Image>())
+                    {
+                        child.GetComponent<Image>().color = Color.grey;
+                    }
+                    else if (child.GetComponent<TextMeshProUGUI>())
+                    {
+                        child.GetComponent<TextMeshProUGUI>().color = Color.gray;
+                    }
                 }
 
+                Destroy(button);
+                
             });
-
-
         }
     }
     public void StartWindow()
     {
         ShowWindow();
-
+        IsInSensei = true;
         AssignSenseiCards();
     }
 }

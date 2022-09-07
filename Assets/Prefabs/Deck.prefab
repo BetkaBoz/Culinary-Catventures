@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 3378162434503063798}
   - component: {fileID: 6888514996980330058}
   m_Layer: 5
-  m_Name: ThirdButton
+  m_Name: LeaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,7 +312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 693, y: -366}
+  m_AnchoredPosition: {x: 693, y: -355}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &24248718616887568
@@ -764,6 +764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 3678353781711271599, guid: 8f5fb65a0bf878a48ab6aa7e765970d9, type: 3}
+  merchantCardPrefab: {fileID: 3190598409302527135, guid: df4c534184bd2aa4eba9bfb7e9cb30df, type: 3}
   panel: {fileID: 6016238169120186866}
   name: {fileID: 1273746975876976659}
 --- !u!1 &6016238169120186866

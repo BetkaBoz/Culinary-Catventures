@@ -27,7 +27,6 @@ public class Player : MonoBehaviour, IDamageable
     public bool isVictorious;
     string className;
     // int reputation = 0;
-    int money;
     int maxEnergy = 5;
     int energy;
     int maxRep = 150;
@@ -37,6 +36,7 @@ public class Player : MonoBehaviour, IDamageable
     public List<string> helpers = new List<string>();
     public int moneyAmount, repAmount, earnedRep;
     public int rep = 150;
+    public int money = 200;
 
     #endregion
 
