@@ -417,7 +417,7 @@ public class EventWindowControl : WindowControl
                 break;
             case Event.RandomEventType.FallenNest:
                 //FALLEN NEST
-                SetUpEventWindow("Fallen nest", "In the woods you find a fallen bird nest with eggs inside. You can save the eggs or take them...",
+                SetUpEventWindow("Fallen nest", "In the woods you find a fallen bird nest with eggs inside. You can save the eggs or...",
                     "SAVE", "TAKE", "");
 
                 firstButton.onClick.AddListener(delegate {

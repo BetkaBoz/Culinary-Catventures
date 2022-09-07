@@ -50,6 +50,8 @@ public abstract class WindowControl : MonoBehaviour
     {
         //Time.timeScale = 1;
         EventManager.IsInEvent = false;
+        SenseiWindowControl.IsInSensei = false;
+        MerchantWindowControl.IsInMerchant = false;
         islandManager.LowerTime(TimeCost);
         HideWindow();
 

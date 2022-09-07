@@ -18,8 +18,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (!isDisabled && !EventManager.IsInEvent)
         {
-            Debug.Log(EventManager.IsInEvent);
-            Debug.Log(isDisabled);
+            //Debug.Log(EventManager.IsInEvent);
+            //Debug.Log(isDisabled);
 
             MovePlayer();
 
