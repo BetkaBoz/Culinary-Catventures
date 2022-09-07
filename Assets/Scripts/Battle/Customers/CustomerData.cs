@@ -17,6 +17,9 @@ public class CustomerData : ScriptableObject
     public int HalfHealthLeftPercentage;
     public int ThirdHealthLeftPercentage;
     public int QuarterHealthLeftPercentage;
+    public float VeggieFoodDefence = 1; //1.25 == 25% weakness to food, 0.75 == 25% resistance to food
+    public float MeatFoodDefence = 1;
+    public float GeneralFoodDefence = 1;
     public List<Sprite> Sprites;
     public List<Sprite> ActionSprites;
 }

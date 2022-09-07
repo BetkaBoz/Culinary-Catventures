@@ -11,6 +11,6 @@ public class FoodBase : CardEffect, IFeed
 
     public void Feed(CustomerView target, int amount)
     {
-        target.Customer.Feed(amount);//,foodType
+        target.Customer.Feed(amount, card.CardType);//,foodType
     }
 }
