@@ -3,19 +3,16 @@ using UnityEngine;
 
 public class DeckButton : MonoBehaviour
 {
-    //[SerializeField] private Button button;
     [SerializeField] private Deck deckPrefab;
     [SerializeField] private GameObject spawnLocation;
     [SerializeField] private Player player;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject cardLayer;
-    //private Player player;
-
 
     private void Awake()
     {
         if (gameObject.name == "DeckButtonIsland"|| gameObject.name == "SellButton")
-    {
+        {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             enabled = false;
         }
@@ -36,7 +33,7 @@ public class DeckButton : MonoBehaviour
 
         deckGameObject.GenerateDeck(player.Deck);
         deckGameObject.ChangeName("DECK");
-        
+
         Adjust();
     }
     public void ShowPlayerDeckInMerchant()
@@ -78,7 +75,6 @@ public class DeckButton : MonoBehaviour
 
         deckGameObject.GenerateDeckInBattle(gameManager.deck);
         deckGameObject.ChangeName("DECK");
-
         Adjust();
     }
 

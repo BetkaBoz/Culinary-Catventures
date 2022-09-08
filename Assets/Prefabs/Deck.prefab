@@ -176,18 +176,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2154979289477985407}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8277984017485570389}
   m_Father: {fileID: 4332524762010643996}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 615, y: 44}
-  m_SizeDelta: {x: 650, y: 50}
+  m_AnchoredPosition: {x: 615, y: 53.75}
+  m_SizeDelta: {x: 50, y: 669.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5051570115767932849
 CanvasRenderer:
@@ -269,9 +269,9 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 3402608597490145080}
   m_HandleRect: {fileID: 3168457396093918997}
-  m_Direction: 1
-  m_Value: 1
-  m_Size: 0.37483242
+  m_Direction: 2
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -576,7 +576,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.017486572, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.017486572}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4374168524269020505
@@ -612,12 +612,12 @@ RectTransform:
   m_Children:
   - {fileID: 8862776145079418050}
   m_Father: {fileID: 4332524762010643996}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -112.5, y: -28.005}
-  m_SizeDelta: {x: 1411, y: 775.9893}
+  m_AnchoredPosition: {x: -112.5, y: 0}
+  m_SizeDelta: {x: 1411, y: 777}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2632383225692925084
 MonoBehaviour:
@@ -733,8 +733,8 @@ RectTransform:
   - {fileID: 4751881401277711537}
   - {fileID: 279483873156891300}
   - {fileID: 6293039808325556730}
-  - {fileID: 515743155169012447}
   - {fileID: 5842596881835687155}
+  - {fileID: 515743155169012447}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -777,6 +777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8862776145079418050}
   - component: {fileID: 4081322592072932414}
+  - component: {fileID: 8847256056178583901}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -798,11 +799,11 @@ RectTransform:
   m_Father: {fileID: 515743155169012447}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 387.99466}
-  m_SizeDelta: {x: 1411, y: 2070.23}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1356, y: 0}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &4081322592072932414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,7 +827,21 @@ MonoBehaviour:
   m_CellSize: {x: 236, y: 333}
   m_Spacing: {x: 44, y: 67}
   m_Constraint: 0
-  m_ConstraintCount: 2
+  m_ConstraintCount: 5
+--- !u!114 &8847256056178583901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6016238169120186866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &7016757352315575598
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 812, y: -170}
+  m_AnchoredPosition: {x: 812, y: -160}
   m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8138088966078461363
@@ -967,7 +982,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DECK
+  m_text: 'DECK
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
