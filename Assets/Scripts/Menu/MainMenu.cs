@@ -10,7 +10,9 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        var playerGO = GameObject.FindGameObjectWithTag("Player");
+        if(playerGO!=null)
+            player = playerGO.GetComponent<Player>();
     }
 
     public void PlayGame()

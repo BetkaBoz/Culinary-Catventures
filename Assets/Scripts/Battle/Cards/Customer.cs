@@ -27,6 +27,13 @@ public abstract class Customer : IDamageable
     public event Action OnTurnStarted;
     public event Action OnTurnEnded;
     public event Action OnActionChanged;
+
+    public float VeggieFoodDefenceBonus = 0; //Used by (de)buffs to adjust Food Defences
+    public float MeatFoodDefenceBonus = 0;
+    public float GeneralFoodDefenceBonus = 0;
+    public float VeggieFoodDefence { get{ return _customerData.VeggieFoodDefence + VeggieFoodDefenceBonus; } } //1.25 == 25% weakness to food, 0.75 == 25% resistance to food
+    public float MeatFoodDefence { get { return _customerData.MeatFoodDefence + MeatFoodDefenceBonus; } }
+    public float GeneralFoodDefence { get { return _customerData.GeneralFoodDefence + GeneralFoodDefenceBonus; } }
     public int CurrentAction 
     {   
         get
@@ -89,6 +96,15 @@ public abstract class Customer : IDamageable
     {
 
     }
+    public void Captivate()
+    {
+        turnsLeft++;
+        TakeDamage(0);
+    }
+    public void Stun()
+    {
+        TakeDamage(0);
+    }
     public void Feed(int amount, CardTypes type)
     {
         switch (type)
@@ -106,7 +122,7 @@ public abstract class Customer : IDamageable
                 TakeDamage((int)(amount * _customerData.GeneralFoodDefence));
                 break;
             default:
-                Debug.Log("Error, food doesn't have a type!");
+                TakeDamage(amount);
                 break;
         }
     }

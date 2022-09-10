@@ -11,6 +11,11 @@ public class DrainEnergy : IBuffable
     }
     public override void Apply()
     {
-        target.Energy -= value;
+        if(targetPlayer != null)
+        {
+            targetPlayer.Energy -= value;
+            base.Apply();
+        }
+
     }
 }

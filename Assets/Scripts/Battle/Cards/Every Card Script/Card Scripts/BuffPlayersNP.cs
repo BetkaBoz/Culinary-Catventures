@@ -14,7 +14,7 @@ public class BuffPlayersNP : CardEffect, IChangeFoodPower
     public void ChangeFoodPower(GameManager gm, float amount, string type)
     {
         GameObject temp = Instantiate(buffable);
-        IncreaseFoodMod tempBuff = temp.GetComponent<IncreaseFoodMod>();
+        ChangeFoodMod tempBuff = temp.GetComponent<ChangeFoodMod>();
         tempBuff.SetType(type);
         tempBuff.SetValue(amount);
         gm.BuffPlayer(tempBuff,true);

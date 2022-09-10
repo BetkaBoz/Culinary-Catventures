@@ -8,7 +8,8 @@ public enum CardTypes
     Meat,
     Mix,
     Neutral,
-    Vegetarian
+    Vegetarian,
+    None
 }
 
 public class Card : MonoBehaviour

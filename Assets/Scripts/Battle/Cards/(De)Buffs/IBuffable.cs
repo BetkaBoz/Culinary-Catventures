@@ -4,33 +4,44 @@ using UnityEngine;
 
 public class IBuffable : MonoBehaviour
 {
-    [SerializeField] int numOfTurns = 1;
+    [SerializeField] protected int numOfTurns = 1;
+    protected bool finished = false;
     public bool Finished
     {
         //each buff/debuff should only last one turn
         get
         {
-            if (numOfTurns > 0)
-            {
-                numOfTurns--;
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return finished;
         }
     }
-    [SerializeField] protected Player target;
-    public void SetTarget(Player target)
+    [SerializeField] protected Player targetPlayer = null;
+    [SerializeField] protected Customer targetCustomer = null;
+    public virtual void CheckFinished()
     {
-        this.target = target;
+        if(numOfTurns <= 0)
+        {
+            finished = true;
+        }
+        else
+        {
+            finished = false;
+        }
     }
-    public void EndEffect()
+    public virtual void SetTarget(Player target)
+    {
+        targetPlayer = target;
+    }
+    public virtual void SetTarget(Customer target)
+    {
+        targetCustomer = target;
+    }
+    public virtual void EndEffect()
     {
         Destroy(gameObject);
     }
     public virtual void Apply()
     {
+        numOfTurns--;
+        CheckFinished();
     }
 }
