@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.U2D.Animation;
 
 [CreateAssetMenu(menuName = "Customers/Customer")]
 public class CustomerData : ScriptableObject
@@ -22,4 +23,10 @@ public class CustomerData : ScriptableObject
     public float GeneralFoodDefence = 1;
     public List<Sprite> Sprites;
     public List<Sprite> ActionSprites;
+    public SpriteLibraryAsset AnimationSprites;
+
+    [Header("Sprite position offset")]
+    public float shadowOffset;
+    public float actionOffset;
+    public float spriteOffset;
 }

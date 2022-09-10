@@ -40,9 +40,6 @@ MonoBehaviour:
     - m_Name: 07
       m_Hash: 639795459
       m_Sprite: {fileID: 2653300975583550615, guid: ac9719663bb54c349ae6e00406d74539, type: 3}
-    - m_Name: 08
-      m_Hash: -1231184750
-      m_Sprite: {fileID: 5569393918252001291, guid: ac9719663bb54c349ae6e00406d74539, type: 3}
   - m_Name: Idle State 1
     m_Hash: 1519129711
     m_CategoryList:
@@ -70,9 +67,6 @@ MonoBehaviour:
     - m_Name: 17
       m_Hash: 1060745282
       m_Sprite: {fileID: -5533135596645387174, guid: 9afbd7b711e18c442a3052bdadfbfee9, type: 3}
-    - m_Name: 18
-      m_Hash: -1350128173
-      m_Sprite: {fileID: -5791693927513419623, guid: 9afbd7b711e18c442a3052bdadfbfee9, type: 3}
   - m_Name: Idle State 2
     m_Hash: -1014676011
     m_CategoryList:
@@ -100,9 +94,6 @@ MonoBehaviour:
     - m_Name: 27
       m_Hash: 336913281
       m_Sprite: {fileID: -5004903562718594050, guid: ce34984fbca114545bc37cb4ba128d9e, type: 3}
-    - m_Name: 28
-      m_Hash: -2069103088
-      m_Sprite: {fileID: -9068600904545375802, guid: ce34984fbca114545bc37cb4ba128d9e, type: 3}
   - m_Name: Idle State 3
     m_Hash: -1266518717
     m_CategoryList:

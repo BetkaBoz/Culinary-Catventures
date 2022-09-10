@@ -22,13 +22,13 @@ public class ChangeFoodMod:IBuffable
             switch (type)
             {
                 case "meat":
-                    targetCustomer.Data.MeatFoodDefenceBonus += value;
+                    targetCustomer.MeatFoodDefenceBonus += value;
                     break;
                 case "veggie":
-                    targetCustomer.Data.VeggieFoodDefenceBonus += value;
+                    targetCustomer.VeggieFoodDefenceBonus += value;
                     break;
                 default:
-                    targetCustomer.Data.GeneralFoodDefenceBonus += value;
+                    targetCustomer.GeneralFoodDefenceBonus += value;
                     break;
             }
         }

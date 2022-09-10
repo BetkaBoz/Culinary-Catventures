@@ -24,6 +24,9 @@ MonoBehaviour:
   HalfHealthLeftPercentage: 2
   ThirdHealthLeftPercentage: 3
   QuarterHealthLeftPercentage: 4
+  VeggieFoodDefence: 1
+  MeatFoodDefence: 1
+  GeneralFoodDefence: 1
   Sprites:
   - {fileID: 21300000, guid: 7eeaaa8bb102f25489277af371e0999f, type: 3}
   - {fileID: 21300000, guid: 70635937629a8094faa4c4292c0b15e5, type: 3}
@@ -33,3 +36,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 80610fc619d39f045abafb060fcef784, type: 3}
   - {fileID: 21300000, guid: ab4b2396d24a22b4cb89634bb733d598, type: 3}
   - {fileID: 21300000, guid: a42112c070b3b9446ab2ad70b431a0a2, type: 3}
+  AnimationSprites: {fileID: 11400000, guid: 63419df6e70893947ae18df4d734ea88, type: 2}
+  shadowOffset: 0
+  actionOffset: 0
+  spriteOffset: 0.5

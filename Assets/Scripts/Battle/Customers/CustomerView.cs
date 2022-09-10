@@ -10,10 +10,10 @@ using UnityEngine.UI;
 public class CustomerView : MonoBehaviour, IDropHandler
 {
     [SerializeField] Image Action;
-    [SerializeField] Image Body;
+    [SerializeField] GameObject Body;
+    [SerializeField] GameObject Shadow;
     [SerializeField] GameObject debuffs;
     [SerializeField] Hoverable hoverable;
-    [SerializeField] List<SpriteLibraryAsset> spriteLibraries;
     Customer _customer;
     Animator anim;
     public Customer Customer => _customer;
@@ -28,12 +28,19 @@ public class CustomerView : MonoBehaviour, IDropHandler
         //set customer to given position
         (transform as RectTransform).anchoredPosition = customerSetUp.customerPosition;
         //show customer
-        Body.sprite = customer.Data.Sprites[0];     //set Element 0 as default sprite 
-        Body.SetNativeSize();
-        (transform as RectTransform).sizeDelta = new Vector2(Body.rectTransform.rect.width, Body.rectTransform.rect.height);
+        // Body.sprite = customer.Data.Sprites[0];     //set Element 0 as default sprite 
+        // Body.SetNativeSize();
+        // (transform as RectTransform).sizeDelta = new Vector2(Body.rectTransform.rect.width, Body.rectTransform.rect.height);
+        // (transform as RectTransform).sizeDelta = new Vector2(Body.GetComponent<SpriteRenderer>().sprite.border.x, Body.GetComponent<SpriteRenderer>().sprite.bounds.size.y);
+        Body.GetComponent<SpriteLibrary>().spriteLibraryAsset = customer.Data.AnimationSprites;
+        anim = Body.GetComponent<Animator>();
+        
+        Action.transform.position += new Vector3(0, customer.Data.actionOffset);
+        Body.transform.position += new Vector3(0, customer.Data.spriteOffset);
+        Shadow.transform.position += new Vector3(0, customer.Data.shadowOffset);
         //rotating customer
         Vector3 target = new Vector3(transform.rotation.x, customerSetUp.customerYRotate, transform.rotation.z);
-        Body.transform.Rotate(target);     
+        Body.transform.Rotate(target);  
 
         //subscribtion on events from Customer class -> Observer
         customer.OnDamageTaken += TakeDamage; 
@@ -49,7 +56,6 @@ public class CustomerView : MonoBehaviour, IDropHandler
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
         Action.transform.DOScale(1.07f, 0.85f).SetLoops(-1, LoopType.Yoyo);
     }
 
@@ -100,17 +106,15 @@ public class CustomerView : MonoBehaviour, IDropHandler
 
     private void ChangeExpressions()
     {
-        float t = 1f - (float)_customer.TurnsLeft / _customer.Data.Turns;        //ratio of two variables
-        int spriteIndex = (int) Mathf.Lerp(0, (float)_customer.Data.Sprites.Count-1, t);
-        Body.DOFade(1, 0.2f).OnPlay(() => { Body.sprite = _customer.Data.Sprites[spriteIndex]; });
-        
-        //spriteResolver.SetCategoryAndLabel($"Idle State {spriteIndex}", $"{spriteIndex}0");
+        float turnsLeftRatio = 1f - (float)_customer.TurnsLeft / _customer.Data.Turns;
+        // int spriteIndex = (int) Mathf.Lerp(0, (float)_customer.Data.Sprites.Count-1, turnsLeftRatio);
+        anim.SetInteger("animStateIndex", (int) Mathf.Lerp(0, (float) _customer.Data.Sprites.Count - 1, turnsLeftRatio));
     }
 
     private void Die()
     {
         Action.DOFade(0, 2f);
-        Body.DOFade(0, 2f).OnComplete(() => { Destroy(gameObject); });
+        Body.GetComponent<SpriteRenderer>().DOFade(0, 2f).OnComplete(() => { Destroy(gameObject); });
     }
 
     private void OnDestroy()

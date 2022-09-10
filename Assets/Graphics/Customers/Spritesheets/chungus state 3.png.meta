@@ -73,7 +73,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,7 +123,7 @@ TextureImporter:
         serializedVersion: 2
         x: 8
         y: 6
-        width: 274
+        width: 272
         height: 347
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -142,9 +142,9 @@ TextureImporter:
       name: chungus state 3_1
       rect:
         serializedVersion: 2
-        x: 298
+        x: 299
         y: 6
-        width: 274
+        width: 271
         height: 347
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: chungus state 3_2
       rect:
         serializedVersion: 2
-        x: 588
+        x: 587
         y: 6
-        width: 274
-        height: 347
+        width: 273
+        height: 346
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: chungus state 3_3
       rect:
         serializedVersion: 2
-        x: 878
+        x: 876
         y: 6
         width: 274
-        height: 347
+        height: 346
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +205,10 @@ TextureImporter:
       name: chungus state 3_4
       rect:
         serializedVersion: 2
-        x: 1168
+        x: 1167
         y: 6
-        width: 274
-        height: 347
+        width: 272
+        height: 346
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +226,10 @@ TextureImporter:
       name: chungus state 3_5
       rect:
         serializedVersion: 2
-        x: 1458
+        x: 1457
         y: 6
-        width: 274
-        height: 347
+        width: 273
+        height: 346
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -249,8 +249,8 @@ TextureImporter:
         serializedVersion: 2
         x: 1748
         y: 6
-        width: 274
-        height: 347
+        width: 271
+        height: 346
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,10 +268,10 @@ TextureImporter:
       name: chungus state 3_7
       rect:
         serializedVersion: 2
-        x: 2038
+        x: 2036
         y: 6
         width: 274
-        height: 347
+        height: 346
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,10 +289,10 @@ TextureImporter:
       name: chungus state 3_8
       rect:
         serializedVersion: 2
-        x: 2328
+        x: 2326
         y: 6
         width: 274
-        height: 347
+        height: 346
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
