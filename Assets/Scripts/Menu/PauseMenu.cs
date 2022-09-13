@@ -74,7 +74,7 @@ public class PauseMenu : MonoBehaviour
     private void GetOptions()
     {
         var gammaValue = liftGammaGain.gamma.value.w;
-        Debug.Log("GAMMA : "+gammaValue);
+        //Debug.Log("GAMMA : "+gammaValue);
         gammaSlider.value = gammaValue;
         
         gammaSlider.onValueChanged.AddListener (delegate {
@@ -90,6 +90,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuSection.SetActive(true);
         optionsMenuSection.SetActive(false);
     }
+    //TODO: NASTAVIT VSETKO NA DEFAULT
     public void SetToDefaultValues()
     {
         liftGammaGain.gamma.Override(new Vector4(1f, 1f, 1f, 1f));
