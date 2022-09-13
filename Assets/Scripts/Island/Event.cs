@@ -11,7 +11,7 @@ public class Event : MonoBehaviour
     [SerializeField] public bool isChallenge;
     [SerializeField] public EventType eventType;
     [SerializeField] public RandomEventType randomEventType;
-    [SerializeField] public int timeCost = 1;
+    //[SerializeField] public int timeCost = 1;
     [SerializeField] private Image imageComponent;
     [SerializeField] private Material eventGlowMaterial;
 

@@ -59,15 +59,7 @@ public abstract class WindowControl : MonoBehaviour
     //TODO PREMIESTNIT KOD ABY SA NEOPAKOVAL V OKNACH
     private void GetAllCards()
     {
-        /*
-            if (t.CardType == "Manoeuvre" )
-            {
-                allManoeuvreScriptableObjects.Add(t);
-            }
-            else if ( !t.CardName.Contains("Pile") )
-            {
-                allIngredientScriptableObjects.Add(t);
-            }*/
+
         CardBaseInfo[] allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/Manouvers");
         allManoeuvreScriptableObjects = new List<CardBaseInfo>(allScriptableObjectsTemp);
         /*
@@ -78,17 +70,11 @@ public abstract class WindowControl : MonoBehaviour
         
         allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/Ingredients");
         allIngredientScriptableObjects = new List<CardBaseInfo>(allScriptableObjectsTemp);
-        /*foreach (CardBaseInfo t in allScriptableObjectsTemp)
-        {
-            allIngredientScriptableObjects.Add(t);
-        }*/
+
         allScriptableObjectsTemp = Resources.LoadAll<CardBaseInfo>("Scriptable Objects/Food");
         allFoodScriptableObjects = new List<CardBaseInfo>(allScriptableObjectsTemp);
-        /*
-        foreach (CardBaseInfo t in allScriptableObjectsTemp)
-        {
-            allFoodScriptableObjects.Add(t);
-        }*/
+
+        allFoodScriptableObjects.RemoveAll(x => x.CardName.Contains("Pile"));
     }
 
     protected CardBaseInfo GetRandomIngredient()
