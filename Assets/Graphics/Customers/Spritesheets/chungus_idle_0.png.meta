@@ -73,7 +73,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1
+  spritePixelsToUnits: 0.95
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,12 +121,12 @@ TextureImporter:
       name: chungus_idle_0_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 6
-        width: 274
-        height: 347
+        x: 0
+        y: 0
+        width: 292
+        height: 362
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,12 +142,12 @@ TextureImporter:
       name: chungus_idle_0_1
       rect:
         serializedVersion: 2
-        x: 298
-        y: 6
-        width: 274
-        height: 347
+        x: 292
+        y: 0
+        width: 292
+        height: 362
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,12 +163,12 @@ TextureImporter:
       name: chungus_idle_0_2
       rect:
         serializedVersion: 2
-        x: 588
-        y: 6
-        width: 274
-        height: 347
+        x: 584
+        y: 0
+        width: 292
+        height: 362
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: chungus_idle_0_3
       rect:
         serializedVersion: 2
-        x: 878
-        y: 6
-        width: 274
-        height: 347
+        x: 876
+        y: 0
+        width: 292
+        height: 362
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -206,11 +206,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1168
-        y: 6
-        width: 274
-        height: 347
+        y: 0
+        width: 292
+        height: 362
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,12 +226,12 @@ TextureImporter:
       name: chungus_idle_0_5
       rect:
         serializedVersion: 2
-        x: 1458
-        y: 6
-        width: 274
-        height: 347
+        x: 1460
+        y: 0
+        width: 292
+        height: 362
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,12 +247,12 @@ TextureImporter:
       name: chungus_idle_0_6
       rect:
         serializedVersion: 2
-        x: 1748
-        y: 6
-        width: 274
-        height: 347
+        x: 1752
+        y: 0
+        width: 292
+        height: 362
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,12 +268,12 @@ TextureImporter:
       name: chungus_idle_0_7
       rect:
         serializedVersion: 2
-        x: 2038
-        y: 6
-        width: 274
-        height: 347
+        x: 2044
+        y: 0
+        width: 292
+        height: 362
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -289,12 +289,12 @@ TextureImporter:
       name: chungus_idle_0_8
       rect:
         serializedVersion: 2
-        x: 2328
-        y: 6
-        width: 274
-        height: 347
+        x: 2336
+        y: 0
+        width: 292
+        height: 362
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

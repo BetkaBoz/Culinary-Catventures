@@ -70,7 +70,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1.1
+  spritePixelsToUnits: 1.05
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -118,8 +118,8 @@ TextureImporter:
       name: chad_idle_2_0
       rect:
         serializedVersion: 2
-        x: 71
-        y: 19
+        x: 0
+        y: 0
         width: 322
         height: 518
       alignment: 0
@@ -139,9 +139,9 @@ TextureImporter:
       name: chad_idle_2_1
       rect:
         serializedVersion: 2
-        x: 442
-        y: 19
-        width: 321
+        x: 322
+        y: 0
+        width: 322
         height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -160,8 +160,8 @@ TextureImporter:
       name: chad_idle_2_2
       rect:
         serializedVersion: 2
-        x: 813
-        y: 19
+        x: 644
+        y: 0
         width: 322
         height: 518
       alignment: 0
@@ -181,9 +181,9 @@ TextureImporter:
       name: chad_idle_2_3
       rect:
         serializedVersion: 2
-        x: 1184
-        y: 19
-        width: 321
+        x: 966
+        y: 0
+        width: 322
         height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -202,8 +202,8 @@ TextureImporter:
       name: chad_idle_2_4
       rect:
         serializedVersion: 2
-        x: 1555
-        y: 19
+        x: 1288
+        y: 0
         width: 322
         height: 518
       alignment: 0
@@ -223,9 +223,9 @@ TextureImporter:
       name: chad_idle_2_5
       rect:
         serializedVersion: 2
-        x: 1926
-        y: 19
-        width: 321
+        x: 1610
+        y: 0
+        width: 322
         height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -244,8 +244,8 @@ TextureImporter:
       name: chad_idle_2_6
       rect:
         serializedVersion: 2
-        x: 2297
-        y: 19
+        x: 1932
+        y: 0
         width: 322
         height: 518
       alignment: 0
@@ -265,9 +265,9 @@ TextureImporter:
       name: chad_idle_2_7
       rect:
         serializedVersion: 2
-        x: 2668
-        y: 19
-        width: 321
+        x: 2254
+        y: 0
+        width: 322
         height: 518
       alignment: 0
       pivot: {x: 0, y: 0}

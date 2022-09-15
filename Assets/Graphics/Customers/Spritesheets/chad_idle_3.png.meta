@@ -26,9 +26,6 @@ TextureImporter:
   - first:
       213: -4371130592213982579
     second: chad_idle_3_7
-  - first:
-      213: 6927192029231288561
-    second: chad_idle_3_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -73,7 +70,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1.1
+  spritePixelsToUnits: 1.05
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,8 +118,8 @@ TextureImporter:
       name: chad_idle_3_0
       rect:
         serializedVersion: 2
-        x: 27
-        y: 19
+        x: 0
+        y: 0
         width: 322
         height: 518
       alignment: 0
@@ -142,9 +139,9 @@ TextureImporter:
       name: chad_idle_3_1
       rect:
         serializedVersion: 2
-        x: 395
-        y: 19
-        width: 321
+        x: 322
+        y: 0
+        width: 322
         height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -163,9 +160,9 @@ TextureImporter:
       name: chad_idle_3_2
       rect:
         serializedVersion: 2
-        x: 771
-        y: 19
-        width: 321
+        x: 644
+        y: 0
+        width: 322
         height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -184,10 +181,10 @@ TextureImporter:
       name: chad_idle_3_3
       rect:
         serializedVersion: 2
-        x: 1088
-        y: 237
-        width: 5
-        height: 5
+        x: 966
+        y: 0
+        width: 322
+        height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,8 +202,8 @@ TextureImporter:
       name: chad_idle_3_4
       rect:
         serializedVersion: 2
-        x: 1139
-        y: 19
+        x: 1288
+        y: 0
         width: 322
         height: 518
       alignment: 0
@@ -226,8 +223,8 @@ TextureImporter:
       name: chad_idle_3_5
       rect:
         serializedVersion: 2
-        x: 1517
-        y: 19
+        x: 1610
+        y: 0
         width: 322
         height: 518
       alignment: 0
@@ -247,9 +244,9 @@ TextureImporter:
       name: chad_idle_3_6
       rect:
         serializedVersion: 2
-        x: 1895
-        y: 19
-        width: 321
+        x: 1932
+        y: 0
+        width: 322
         height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -268,9 +265,9 @@ TextureImporter:
       name: chad_idle_3_7
       rect:
         serializedVersion: 2
-        x: 2273
-        y: 19
-        width: 321
+        x: 2254
+        y: 0
+        width: 322
         height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -281,27 +278,6 @@ TextureImporter:
       bones: []
       spriteID: d822e38b2ef9653c0800000000000000
       internalID: -4371130592213982579
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chad_idle_3_8
-      rect:
-        serializedVersion: 2
-        x: 2651
-        y: 19
-        width: 322
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f09f31e274522060800000000000000
-      internalID: 6927192029231288561
       vertices: []
       indices: 
       edges: []

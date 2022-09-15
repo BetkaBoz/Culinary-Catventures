@@ -39,7 +39,7 @@ MonoBehaviour:
       m_Sprite: {fileID: -2300997067637390412, guid: 04ceace974c8be64da0c5055a21072a8, type: 3}
     - m_Name: 07
       m_Hash: 639795459
-      m_Sprite: {fileID: 2451691979172646901, guid: 04ceace974c8be64da0c5055a21072a8, type: 3}
+      m_Sprite: {fileID: -6827529950717538401, guid: 04ceace974c8be64da0c5055a21072a8, type: 3}
   - m_Name: Idle State 1
     m_Hash: 1519129711
     m_CategoryList:

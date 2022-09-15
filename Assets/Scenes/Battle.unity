@@ -2382,7 +2382,7 @@ MonoBehaviour:
   m_AlphaBlendOnOverlap: 0
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
-  m_PointLightInnerAngle: 68.96
+  m_PointLightInnerAngle: 85
   m_PointLightOuterAngle: 116.18
   m_PointLightInnerRadius: 2.8705823
   m_PointLightOuterRadius: 24.064741
@@ -2839,9 +2839,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 949.3018, y: 1813.3837}
+  m_AnchoredPosition: {x: -1322.8573, y: 490.47604}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1.01, y: 1}
+  m_Pivot: {x: -0.1, y: 1}
 --- !u!114 &857187732
 MonoBehaviour:
   m_ObjectHideFlags: 0
