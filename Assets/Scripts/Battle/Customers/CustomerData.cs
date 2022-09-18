@@ -27,7 +27,6 @@ public class CustomerData : ScriptableObject
     public SpriteLibraryAsset AnimationSprites;
 
     [Header("Sprite position offset")]
-    public float shadowOffset;
     public float actionOffset;
     public float spriteOffset;
 }

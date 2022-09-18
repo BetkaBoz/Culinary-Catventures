@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 566342611737428916}
   - component: {fileID: 6068039988306208278}
   - component: {fileID: 6236374333752651628}
+  - component: {fileID: 7844652300115638489}
+  - component: {fileID: 4381494532687777726}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: Effects
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,6 +77,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7844652300115638489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721137353023719134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53cfff5d9a0951469b2186dc56543f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helper: {fileID: 0}
+  hoverable: {fileID: 4381494532687777726}
+  message: 
+  header: 
+--- !u!114 &4381494532687777726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721137353023719134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d55030168ba75d4c916dd81c3e609cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipEnabled: 1
 --- !u!1 &1153831811818997225
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +411,10 @@ MonoBehaviour:
   nutritionalValue: {fileID: 1863598012971351994}
   isHighlight: 0
   highlightedSlot: {fileID: 0}
+  hoverableDebuffs:
+  - {fileID: 4381494532687777726}
+  - {fileID: 8516783897636318719}
+  - {fileID: 5522725653097312490}
   SlotIndex: 0
 --- !u!222 &5399595339633185638
 CanvasRenderer:
@@ -693,9 +728,11 @@ GameObject:
   - component: {fileID: 7378527946462408311}
   - component: {fileID: 3311362282032569391}
   - component: {fileID: 4026440735962896025}
+  - component: {fileID: 4667707019995592792}
+  - component: {fileID: 5522725653097312490}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: Effects
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -757,6 +794,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4667707019995592792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6796419103889965106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53cfff5d9a0951469b2186dc56543f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helper: {fileID: 0}
+  hoverable: {fileID: 5522725653097312490}
+  message: 
+  header: 
+--- !u!114 &5522725653097312490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6796419103889965106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d55030168ba75d4c916dd81c3e609cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipEnabled: 1
 --- !u!1 &7295333741565750687
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,9 +909,11 @@ GameObject:
   - component: {fileID: 2384307585271410024}
   - component: {fileID: 3887628921831937402}
   - component: {fileID: 4560727255696321450}
+  - component: {fileID: 3997112066609719759}
+  - component: {fileID: 8516783897636318719}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: Effects
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -907,6 +975,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3997112066609719759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983911642797098867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53cfff5d9a0951469b2186dc56543f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helper: {fileID: 0}
+  hoverable: {fileID: 8516783897636318719}
+  message: 
+  header: 
+--- !u!114 &8516783897636318719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983911642797098867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d55030168ba75d4c916dd81c3e609cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipEnabled: 1
 --- !u!1 &8415400295355280063
 GameObject:
   m_ObjectHideFlags: 0

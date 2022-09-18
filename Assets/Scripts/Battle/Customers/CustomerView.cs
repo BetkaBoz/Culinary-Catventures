@@ -15,11 +15,10 @@ public class CustomerView : MonoBehaviour, IDropHandler
     [SerializeField] GameObject Shadow;
     [SerializeField] GameObject debuffs;
     [SerializeField] Hoverable hoverable;
+    [SerializeField] List<Hoverable> hoverableDebuffs;
     Customer _customer;
     Animator anim;
     public Customer Customer => _customer;
-    //public SpriteLibrary spriteLibrary;
-    //public SpriteResolver spriteResolver;
 
     string message, header;
 
@@ -29,17 +28,12 @@ public class CustomerView : MonoBehaviour, IDropHandler
         //set customer to given position
         (transform as RectTransform).anchoredPosition = customerSetUp.customerPosition;
         //show customer
-        // Body.sprite = customer.Data.Sprites[0];     //set Element 0 as default sprite 
-        // Body.SetNativeSize();
-        // (transform as RectTransform).sizeDelta = new Vector2(Body.rectTransform.rect.width, Body.rectTransform.rect.height);
-        // (transform as RectTransform).sizeDelta = new Vector2(Body.GetComponent<SpriteRenderer>().sprite.border.x, Body.GetComponent<SpriteRenderer>().sprite.bounds.size.y);
         Body.GetComponent<SpriteLibrary>().spriteLibraryAsset = customer.Data.AnimationSprites;
         anim = Body.GetComponent<Animator>();
-        
+        //set offsets
         Action.transform.position += new Vector3(0, customer.Data.actionOffset);
         Body.transform.position += new Vector3(0, customer.Data.spriteOffset);
-        Shadow.transform.position += new Vector3(0, customer.Data.shadowOffset);
-        //rotating customer
+        //rotate customer
         Vector3 target = new Vector3(transform.rotation.x, customerSetUp.customerYRotate, transform.rotation.z);
         Body.transform.Rotate(target);  
 
@@ -102,24 +96,36 @@ public class CustomerView : MonoBehaviour, IDropHandler
         {
             DebuffIcons[i].gameObject.SetActive(true);
             DebuffIcons[i].sprite = _customer.Data.DebuffSprites[(int)_customer.CurrentDebuffs[i]];
-        }
 
-        //switch (_customer.CurrentAction)
-        //{
-        //    case 0:
-        //        message = "Customer will leave next round!";
-        //        header = "";
-        //        break;
-        //    case 1:
-        //        message = "If customer won't be fed this round, they will take your Reputation Points";
-        //        header = "Reputation Debuff";
-        //        break;
-        //    case 2:
-        //        message = "If customer won't be fed this round, they will cause Energy Points loss for the next round";
-        //        header = "Energy Debuff";
-        //        break;
-        //}
-        //hoverable.SetMessageHeader(message, header);
+            switch (_customer.CurrentDebuffs[i])
+            {
+                case DebuffTypes.Stun:
+                    message = "Customer will be unable to perform their action for a turn. Stacking of this effect should increase the number of turns this effect lasts.";
+                    header = "STUN";
+                    break;
+                case DebuffTypes.Captivate:
+                    message = "Prevents customer from leaving. Stacking of this effect increases the number of turns this effect lasts.";
+                    header = "CAPTIVATE";
+                    break;
+                case DebuffTypes.Flavourful:
+                    message = "Customer's Hunger will get decreased by X at the start of their turn, then X will decrease by 1. Stacking of this effect should increase X.";
+                    header = "FLAVORFUL";
+                    break;
+                case DebuffTypes.WeaknessMeat:
+                    message = "Any Meat only food used on customer will decrease Hunger by additional 25%. Stacking of this effect should increase the number of turns this effect lasts.";
+                    header = "WEAKNESS: Meat";
+                    break;
+                case DebuffTypes.WeaknessVegg:
+                    message = "Any Mixed food used on customer will decrease Hunger by additional 25%. Stacking of this effect should increase the number of turns this effect lasts.";
+                    header = "WEAKNESS: Vegetables";
+                    break;
+                case DebuffTypes.WeaknessMix:
+                    message = "Any Vegetarian food used on customer will decrease Hunger by additional 25%. Stacking of this effect should increase the number of turns this effect lasts.";
+                    header = "WEAKNESS: Mix";
+                    break;
+            }
+            hoverableDebuffs[i].SetMessageHeader(message, header);
+        }
     }
 
     private void TakeDamage()

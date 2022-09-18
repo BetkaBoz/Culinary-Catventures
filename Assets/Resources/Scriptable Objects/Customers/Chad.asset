@@ -44,6 +44,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0a42657246eb0414287158d5bb150069, type: 3}
   - {fileID: 21300000, guid: 4b3ae5951af7b5341abcb1ee050f7b78, type: 3}
   AnimationSprites: {fileID: 11400000, guid: 63419df6e70893947ae18df4d734ea88, type: 2}
-  shadowOffset: 0
   actionOffset: 0
-  spriteOffset: 0.5
+  spriteOffset: 0

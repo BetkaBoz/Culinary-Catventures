@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Hoverable: MonoBehaviour
 {
-    bool tooltipEnabled;
-    string _message;
-    string _header;
+    [SerializeField] bool tooltipEnabled;
+    string _message = string.Empty;
+    string _header = string.Empty;
     public string Message => _message;
     public string Header => _header;
 

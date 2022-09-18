@@ -26,6 +26,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     int originalSiblingIndex;
     GameObject notification;
     HighlightObjectController highlightController;
+    string message, header;
+    List<DebuffTypes> currentDebuffs = new List<DebuffTypes>();
     #endregion
 
     #region SerializeFields
@@ -39,6 +41,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     [SerializeField] Text nutritionalValue;
     [SerializeField] bool isHighlight = false;
     [SerializeField] CardSlot highlightedSlot = null;
+    [SerializeField] List<Hoverable> hoverableDebuffs;
     #endregion
 
     #region Getters/Setters
@@ -63,6 +66,8 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             return isSelected;
         }
     }
+
+    public List<DebuffTypes> CurrentDebuffs => currentDebuffs;
 
     //public void SetHasBeenPlayed(bool hasBeenPlayed)
     //{
@@ -122,6 +127,35 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         for(int i = idx; i < debuffImage.Count; i++)
         {
             debuffImage[i].gameObject.SetActive(false);
+
+        //    switch (CurrentDebuffs[idx])
+        //    {
+        //        case DebuffTypes.Stun:
+        //            message = "Customer will be unable to perform their action for a turn. Stacking of this effect should increase the number of turns this effect lasts.";
+        //            header = "STUN";
+        //            break;
+        //        case DebuffTypes.Captivate:
+        //            message = "Prevents customer from leaving. Stacking of this effect increases the number of turns this effect lasts.";
+        //            header = "CAPTIVATE";
+        //            break;
+        //        case DebuffTypes.Flavourful:
+        //            message = "Customer's Hunger will get decreased by X at the start of their turn, then X will decrease by 1. Stacking of this effect should increase X.";
+        //            header = "FLAVORFUL";
+        //            break;
+        //        case DebuffTypes.WeaknessMeat:
+        //            message = "Any Meat only food used on customer will decrease Hunger by additional 25%. Stacking of this effect should increase the number of turns this effect lasts.";
+        //            header = "WEAKNESS: Meat";
+        //            break;
+        //        case DebuffTypes.WeaknessVegg:
+        //            message = "Any Mixed food used on customer will decrease Hunger by additional 25%. Stacking of this effect should increase the number of turns this effect lasts.";
+        //            header = "WEAKNESS: Vegetables";
+        //            break;
+        //        case DebuffTypes.WeaknessMix:
+        //            message = "Any Vegetarian food used on customer will decrease Hunger by additional 25%. Stacking of this effect should increase the number of turns this effect lasts.";
+        //            header = "WEAKNESS: Mix";
+        //            break;
+        //    }
+        //    hoverableDebuffs[i].SetMessageHeader(message, header);
         }
     }
 

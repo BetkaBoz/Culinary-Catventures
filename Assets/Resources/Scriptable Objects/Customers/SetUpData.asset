@@ -23,11 +23,11 @@ MonoBehaviour:
     noteYRotate: 180
   - customerPosition: {x: -795, y: -300}
     customerYRotate: 0
-    notePosition: {x: -534, y: -85}
+    notePosition: {x: -420, y: -100}
     noteYRotate: 180
   - customerPosition: {x: 660, y: -300}
     customerYRotate: 180
-    notePosition: {x: 416, y: -85}
+    notePosition: {x: 308, y: -100}
     noteYRotate: 0
   customerDatas:
   - {fileID: 11400000, guid: dcb517b9d4960e845a94049e5218de7a, type: 2}

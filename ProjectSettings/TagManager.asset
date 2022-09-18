@@ -17,6 +17,7 @@ TagManager:
   - PlayerCharacter
   - GameManager
   - Deck
+  - Effects
   layers:
   - Default
   - TransparentFX
