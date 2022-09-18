@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Creamy Shrimp Spaghetti
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: a8db4162643895c47a94d468f7f6e76d, type: 3}
-  cardEffect: []
+  cardEffect:
+  - {fileID: 7035150423466079547, guid: 5fb8286eafc97374b8767604197a72ea, type: 3}
   cardName: Creamy Shrimp Spaghetti
   cardType: 1
   canTarget: 1
   energyCost: 1
-  nutritionPoints: 32
+  nutritionPoints: 14

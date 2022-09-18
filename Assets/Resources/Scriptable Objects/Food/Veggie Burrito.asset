@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Veggie Burrito
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: b82f20547a042ca448732d2adb78a97c, type: 3}
-  cardEffect: []
+  cardEffect:
+  - {fileID: 5744032628524560483, guid: 2ca9cf83fb02ef145b454c4ab4a2ab8d, type: 3}
   cardName: Veggie Burrito
   cardType: 4
   canTarget: 1
   energyCost: 4
-  nutritionPoints: 69
+  nutritionPoints: 28

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Steak with Fries
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 65049eacf5913054d9cee94255280fe8, type: 3}
-  cardEffect: []
+  cardEffect:
+  - {fileID: 8451479289404110285, guid: f0888fac854fff041b380d4c3b7af4e5, type: 3}
   cardName: Steak with Fries
   cardType: 1
   canTarget: 1
   energyCost: 1
-  nutritionPoints: 41
+  nutritionPoints: 19

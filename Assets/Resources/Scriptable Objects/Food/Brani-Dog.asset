@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Brani-Dog
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 17633a23a0ff55e4f8d78c91e2f32995, type: 3}
-  cardEffect: []
+  cardEffect:
+  - {fileID: 6997140908331537471, guid: a01c3890e76b78e4db68b1f620890fd5, type: 3}
   cardName: Brani-Dog
   cardType: 2
   canTarget: 1
   energyCost: 1
-  nutritionPoints: 35
+  nutritionPoints: 18

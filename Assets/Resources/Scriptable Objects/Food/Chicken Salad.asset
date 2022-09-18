@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Chicken Salad
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 5d7cd8c3e8e67774c9e9e8a2b8529c26, type: 3}
-  cardEffect: []
+  cardEffect:
+  - {fileID: 4403617306600843380, guid: 66b3ff955f0e14546af5a76c378e3acb, type: 3}
   cardName: Chicken Salad
   cardType: 2
   canTarget: 1
   energyCost: 2
-  nutritionPoints: 45
+  nutritionPoints: 25
