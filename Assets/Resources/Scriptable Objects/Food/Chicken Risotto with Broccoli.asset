@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chicken Risotto with Broccoli
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 024b2cddae344b94fbe738ba5608cca0, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Chicken Risotto with Broccoli
   cardType: 2
   canTarget: 1

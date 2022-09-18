@@ -9,10 +9,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2391064370604258347, guid: c0b561f1b88f82d4fbdc09f54a3bd8f5, type: 3}
       propertyPath: m_Name
-      value: Foos Card
+      value: Food Card
       objectReference: {fileID: 0}
     - target: {fileID: 2676747730409211899, guid: c0b561f1b88f82d4fbdc09f54a3bd8f5, type: 3}
       propertyPath: cardEffect
+      value: 
+      objectReference: {fileID: 6981370048078092438}
+    - target: {fileID: 2676747730409211899, guid: c0b561f1b88f82d4fbdc09f54a3bd8f5, type: 3}
+      propertyPath: cardEffects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676747730409211899, guid: c0b561f1b88f82d4fbdc09f54a3bd8f5, type: 3}
+      propertyPath: cardEffects.Array.data[0]
       value: 
       objectReference: {fileID: 6981370048078092438}
     - target: {fileID: 5535333448320708006, guid: c0b561f1b88f82d4fbdc09f54a3bd8f5, type: 3}

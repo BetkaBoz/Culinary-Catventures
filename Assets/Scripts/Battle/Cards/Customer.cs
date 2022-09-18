@@ -13,6 +13,7 @@ public abstract class Customer : IDamageable
     //[SerializeField] GameObject debuffs;
     CustomerData _customerData;
     int currentAction;
+    List<DebuffTypes> currentDebuffs = new List<DebuffTypes>();
 
     protected GameManager gm;
     protected int turnsLeft;
@@ -27,6 +28,7 @@ public abstract class Customer : IDamageable
     public event Action OnTurnStarted;
     public event Action OnTurnEnded;
     public event Action OnActionChanged;
+    public event Action OnDebuffChanged;
 
     public float VeggieFoodDefenceBonus = 0; //Used by (de)buffs to adjust Food Defences
     public float MeatFoodDefenceBonus = 0;
@@ -34,17 +36,24 @@ public abstract class Customer : IDamageable
     public float VeggieFoodDefence { get{ return _customerData.VeggieFoodDefence + VeggieFoodDefenceBonus; } } //1.25 == 25% weakness to food, 0.75 == 25% resistance to food
     public float MeatFoodDefence { get { return _customerData.MeatFoodDefence + MeatFoodDefenceBonus; } }
     public float GeneralFoodDefence { get { return _customerData.GeneralFoodDefence + GeneralFoodDefenceBonus; } }
-    public int CurrentAction 
-    {   
+    public int CurrentAction
+    {
         get
         {
             return currentAction;
-        } 
+        }
         private set
         {
             currentAction = value;
             OnActionChanged?.Invoke();
-        } 
+        }
+    }
+    public List<DebuffTypes> CurrentDebuffs
+    {
+        get
+        {
+            return currentDebuffs;
+        }
     }
     public int Money => finalMoney;
     public int Rep => finalRep;
@@ -96,17 +105,32 @@ public abstract class Customer : IDamageable
     {
 
     }
+
+    public void AddDebuff(DebuffTypes debuff)
+    {
+        Debug.Log(debuff + " " + (int)debuff);
+        currentDebuffs.Add(debuff);
+        OnDebuffChanged?.Invoke();
+    }
+
+    public void RemoveDebuff(DebuffTypes debuff)
+    {
+        currentDebuffs.Remove(debuff);
+        OnDebuffChanged?.Invoke();
+    }
+
     public void Captivate()
     {
         turnsLeft++;
-        TakeDamage(0);
+        Stun();
     }
     public void Stun()
     {
-        TakeDamage(0);
+        satisfied = true;
     }
-    public void Feed(int amount, CardTypes type)
+    public void Feed(int amount, CardTypes type, bool doesSatisfy = true)
     {
+        if (doesSatisfy) Stun();
         switch (type)
         {
             case CardTypes.Vegetarian:
@@ -128,10 +152,9 @@ public abstract class Customer : IDamageable
     }
     public void TakeDamage(int amount)
     {
-        satisfied = true;
         currHunger = currHunger >= amount ? currHunger - amount : 0;
 
-        if (numTurnsStunned <= 0) numTurnsStunned++;
+        //if (numTurnsStunned <= 0) numTurnsStunned++;
 
         if (currHunger ==  0)
         {

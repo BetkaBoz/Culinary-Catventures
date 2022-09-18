@@ -173,12 +173,36 @@ public class GameManager : MonoBehaviour
         repUI.text = $"{player.rep}";
     }
 
-    public void BuffPlayer(IBuffable buff, bool applyNow = false)
+    private IBuffable IsUniqueBuff(IBuffable newBuff)
     {
-        buff.SetTarget(player);
-        buffs.Add(buff);
-        if (applyNow)
-            ApplyBuff(buff);
+        foreach(var oldBuff in buffs)
+        {
+            if (oldBuff.TypeOfDebuff == newBuff.TypeOfDebuff && oldBuff.TargetPlayer == newBuff.TargetPlayer && oldBuff.TargetCustomer == newBuff.TargetCustomer)
+            {
+                return oldBuff;
+            }
+        }
+        return null;
+    }
+
+    public void SetBuff(IBuffable buff, Customer target = null)
+    {
+        IBuffable oldBuff = IsUniqueBuff(buff);
+        if (buff.TypeOfStacking == TypeOfBuffStacking.Stack || oldBuff == null)
+        {
+            if (target == null)
+                buff.SetTarget(player);
+            else
+            {
+                buff.SetTarget(target);
+                target.AddDebuff(buff.TypeOfDebuff);
+            }
+            buffs.Add(buff);
+        }
+        else
+        {
+            oldBuff.increaseTimer(buff.NumOfTurns);
+        }
     }
 
     //run this at the start of Player's turn so all the buffs are added properly
@@ -197,9 +221,9 @@ public class GameManager : MonoBehaviour
     //run this at the start of Player's turn so all the buffs are added properly
     public void ApplyBuffables()
     {
-        player.GeneralFoodModBonus = 0;
-        player.MeatFoodModBonus = 0;
-        player.VegetarianFoodModBonus = 0;
+        //player.GeneralFoodModBonus = 0;
+        //player.MeatFoodModBonus = 0;
+        //player.VegetarianFoodModBonus = 0;
         List<IBuffable> delBuffs = new List<IBuffable>();
         foreach (var buff in buffs)
         {

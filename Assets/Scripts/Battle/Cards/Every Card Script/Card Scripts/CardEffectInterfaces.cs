@@ -31,6 +31,6 @@ public interface IStun
 //Add other interfaces after you figure out how buffing works
 public interface IChangeFoodPower
 {
-    void ChangeFoodPower(GameManager gm, float amount, string type);
+    void ChangeFoodPower(GameManager gm, float amount, CardTypes type);
 }
 

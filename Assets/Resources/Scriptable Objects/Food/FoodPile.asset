@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FoodPile
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 7459f809d6dff8f43bf85eaa625bf278, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: FoodPile
   cardType: 2
   canTarget: 1

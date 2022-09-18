@@ -29,6 +29,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     #endregion
 
     #region SerializeFields
+    [SerializeField] List<Image> debuffImage;
     [SerializeField] Image artworkImage;
     [SerializeField] TextMeshProUGUI energyTxt;
     [SerializeField] GameManager gm;
@@ -80,8 +81,48 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
             nutritionalValue.text = "" + otherCard.NutritionPoints;
         }
         artworkImage.sprite = otherCard.Artwork;
+        SetBuffImages();
         UpdateEnergy();
         UpdateNP();
+    }
+
+    private void SetBuffImages()
+    {
+        if(card.CardType == CardTypes.Manoeuvre)
+        {
+            foreach(var img in debuffImage)
+            {
+                img.GetComponentInParent<Image>().gameObject.SetActive(false);
+            }
+            return;
+        }
+        else
+        {
+            foreach (var img in debuffImage)
+            {
+                img.GetComponentInParent<Image>().gameObject.SetActive(true);
+            }
+            
+        }
+        int idx = 0;
+        foreach(var effect in card.CardEffect)
+        {
+            if(effect is CardEffectWithDebuff)
+            {
+                if(idx > debuffImage.Count)
+                {
+                    Debug.Log("HOW IS YOUR NUMBER OF EFFECTS MORE THAN 3?!");
+                    return;
+                }
+                debuffImage[idx].gameObject.SetActive(true);
+                debuffImage[idx].sprite = (effect as CardEffectWithDebuff).BuffArtworkCard;
+                idx++;
+            }
+        }
+        for(int i = idx; i < debuffImage.Count; i++)
+        {
+            debuffImage[i].gameObject.SetActive(false);
+        }
     }
 
     public void SetHighlight(CardSlot otherSlot)
@@ -337,10 +378,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
                     //hasBeenPlayed = true;
                     if (card.CardType == CardTypes.Manoeuvre)
                     {
-                        if(
-                            !(card.CardEffect is DiscardCardEffect) 
-                            || (card.CardEffect is DiscardCardEffect 
-                                && (card.CardEffect as DiscardCardEffect).CanBeUsed(gm)))
+                        if(DiscardCheck())
                         {
                             MoveToDiscardPile(false);
                             card.TriggerCardEffect(gm, hit);
@@ -378,6 +416,22 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
         }
     }
     #endregion
+
+    private bool DiscardCheck()
+    {
+        return card.CardEffect.FindAll(item => item is DiscardCardEffect).Count==0 || card.CardEffect.FindAll(item => item is DiscardCardEffect && (item as DiscardCardEffect).CanBeUsed(gm)).Count>0;
+        //foreach (var effect in card.CardEffect)
+        //{
+        //    if (
+        //    !(effect is DiscardCardEffect)
+        //    || (effect is DiscardCardEffect
+        //    && (effect as DiscardCardEffect).CanBeUsed(gm)))
+        //    {
+        //        return true;
+        //    }
+        //}
+        //return false;
+    }
 
     #region MouseHover
     public void OnPointerEnter(PointerEventData eventData)

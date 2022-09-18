@@ -17,7 +17,7 @@ public class Card : MonoBehaviour
     #region SerializeFields
 
     [SerializeField] Sprite artwork;
-    [SerializeField] CardEffect cardEffect = null;
+    [SerializeField] List<CardEffect> cardEffects = null;
     [SerializeField] string cardName;
     [SerializeField] CardTypes cardType;
     [SerializeField] bool canTarget = false;
@@ -42,10 +42,10 @@ public class Card : MonoBehaviour
         set { artwork = value; }
     }
 
-    public CardEffect CardEffect
+    public List<CardEffect> CardEffect
     {
-        get { return cardEffect; }
-        set { cardEffect = value; }
+        get { return cardEffects; }
+        set { cardEffects = value; }
     }
 
     public string CardName
@@ -83,8 +83,12 @@ public class Card : MonoBehaviour
     public void GetDataFromBase(CardBaseInfo baseCard)
     {
         artwork = baseCard.Artwork;
-        if (baseCard.CardType == CardTypes.Manoeuvre)
-            cardEffect = baseCard.CardEffect;
+        //if (baseCard.CardType == CardTypes.Manoeuvre)
+        foreach(var effect in baseCard.CardEffect)
+        {
+            if (!(effect is FoodBase))
+                cardEffects.Add(effect);
+        }
         cardType = baseCard.CardType;
         cardName = baseCard.CardName;
         canTarget = baseCard.CanTarget;
@@ -100,7 +104,10 @@ public class Card : MonoBehaviour
 
     public void TriggerCardEffect(GameManager gm, RaycastHit2D hit)
     {
-        cardEffect.Effect(gm, hit);
+        foreach(CardEffect effect in cardEffects)
+        {
+            effect.Effect(gm, hit);
+        }
     }
 
     public int CalculateNP(GameManager gm)

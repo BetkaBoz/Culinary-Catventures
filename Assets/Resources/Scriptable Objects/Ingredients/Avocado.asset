@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Avocado
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: f8e3f883ec23c64448b0feb1c6a9c60a, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Avocado
   cardType: 4
   canTarget: 1

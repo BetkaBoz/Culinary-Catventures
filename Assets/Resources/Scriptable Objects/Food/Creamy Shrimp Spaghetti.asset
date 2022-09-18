@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Creamy Shrimp Spaghetti
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: a8db4162643895c47a94d468f7f6e76d, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Creamy Shrimp Spaghetti
   cardType: 1
   canTarget: 1

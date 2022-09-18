@@ -5,14 +5,31 @@ using UnityEngine;
 public class ChangeFoodMod:IBuffable
 {
     [SerializeField] float value;
-    [SerializeField] string type;
+    [SerializeField] CardTypes type;
     public void SetValue(float value)
     {
         this.value = value;
     }
-    public void SetType(string type)
+    public void SetType(CardTypes type)
     {
         this.type = type;
+        switch (type)
+        {
+            case CardTypes.Meat:
+                _typeOfDebuff = DebuffTypes.WeaknessMeat;
+                break;
+            case CardTypes.Vegetarian:
+                _typeOfDebuff = DebuffTypes.WeaknessVegg;
+                break;
+            case CardTypes.Mix:
+            case CardTypes.Neutral:
+                _typeOfDebuff = DebuffTypes.WeaknessMix;
+                break;
+            default:
+                _typeOfDebuff = DebuffTypes.WeaknessMeat;
+                Debug.Log("You can only use food types!");
+                break;
+        }
     }
     public override void SetTarget(Customer target)
     {
@@ -21,14 +38,18 @@ public class ChangeFoodMod:IBuffable
         {
             switch (type)
             {
-                case "meat":
+                case CardTypes.Meat:
                     targetCustomer.MeatFoodDefenceBonus += value;
                     break;
-                case "veggie":
+                case CardTypes.Vegetarian:
                     targetCustomer.VeggieFoodDefenceBonus += value;
                     break;
-                default:
+                case CardTypes.Mix:
+                case CardTypes.Neutral:
                     targetCustomer.GeneralFoodDefenceBonus += value;
+                    break;
+                default:
+                    Debug.Log("You can only use food types!");
                     break;
             }
         }
@@ -40,14 +61,18 @@ public class ChangeFoodMod:IBuffable
         {
             switch (type)
             {
-                case "meat":
+                case CardTypes.Meat:
                     targetPlayer.MeatFoodModBonus += value;
                     break;
-                case "veggie":
+                case CardTypes.Vegetarian:
                     targetPlayer.VegetarianFoodModBonus += value;
                     break;
-                default:
+                case CardTypes.Mix:
+                case CardTypes.Neutral:
                     targetPlayer.GeneralFoodModBonus += value;
+                    break;
+                default:
+                    Debug.Log("You can only use food types!");
                     break;
             }
         }
@@ -58,14 +83,18 @@ public class ChangeFoodMod:IBuffable
         {
             switch (type)
             {
-                case "meat":
+                case CardTypes.Meat:
                     targetPlayer.MeatFoodModBonus -= value;
                     break;
-                case "veggie":
+                case CardTypes.Vegetarian:
                     targetPlayer.VegetarianFoodModBonus -= value;
                     break;
-                default:
+                case CardTypes.Mix:
+                case CardTypes.Neutral:
                     targetPlayer.GeneralFoodModBonus -= value;
+                    break;
+                default:
+                    Debug.Log("You can only use food types!");
                     break;
             }
         }
@@ -73,14 +102,18 @@ public class ChangeFoodMod:IBuffable
         {
             switch (type)
             {
-                case "meat":
+                case CardTypes.Meat:
                     targetCustomer.MeatFoodDefenceBonus -= value;
                     break;
-                case "veggie":
+                case CardTypes.Vegetarian:
                     targetCustomer.VeggieFoodDefenceBonus -= value;
                     break;
-                default:
+                case CardTypes.Mix:
+                case CardTypes.Neutral:
                     targetCustomer.GeneralFoodDefenceBonus -= value;
+                    break;
+                default:
+                    Debug.Log("You can only use food types!");
                     break;
             }
         }

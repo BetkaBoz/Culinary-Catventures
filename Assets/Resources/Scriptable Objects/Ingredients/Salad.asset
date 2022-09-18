@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Salad
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 9fdf3e0c6986bca4aac8ea601aa3c1d3, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Salad
   cardType: 4
   canTarget: 1

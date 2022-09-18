@@ -8,7 +8,7 @@ public class CardBaseInfo : ScriptableObject
 {
     #region SerializeFields
     [SerializeField] private Sprite artwork;
-    [SerializeField] private CardEffect cardEffect;
+    [SerializeField] private List<CardEffect> cardEffect;
     [SerializeField] private string cardName;
     [SerializeField] private CardTypes cardType;
     [SerializeField] private bool canTarget = false;
@@ -25,7 +25,7 @@ public class CardBaseInfo : ScriptableObject
             return artwork;
         }
     }
-    public CardEffect CardEffect
+    public List<CardEffect> CardEffect
     {
         get
         {

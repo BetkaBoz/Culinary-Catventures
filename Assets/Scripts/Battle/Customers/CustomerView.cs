@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class CustomerView : MonoBehaviour, IDropHandler
 {
     [SerializeField] Image Action;
+    [SerializeField] List<Image> DebuffIcons;
     [SerializeField] GameObject Body;
     [SerializeField] GameObject Shadow;
     [SerializeField] GameObject debuffs;
@@ -48,6 +49,7 @@ public class CustomerView : MonoBehaviour, IDropHandler
         customer.OnTurnStarted += StartTurn;
         customer.OnTurnEnded += ChangeExpressions;
         customer.OnActionChanged += ActionChange;
+        customer.OnDebuffChanged += DebuffChange;
 
         customer.RandomizeDebuffs();
 
@@ -90,6 +92,36 @@ public class CustomerView : MonoBehaviour, IDropHandler
         hoverable.SetMessageHeader(message, header);
     }
 
+    private void DebuffChange()
+    {
+        foreach (var icon in DebuffIcons)
+        {
+            icon.gameObject.SetActive(false);
+        }
+        for(int i = 0; i < _customer.CurrentDebuffs.Count; i++)
+        {
+            DebuffIcons[i].gameObject.SetActive(true);
+            DebuffIcons[i].sprite = _customer.Data.DebuffSprites[(int)_customer.CurrentDebuffs[i]];
+        }
+
+        //switch (_customer.CurrentAction)
+        //{
+        //    case 0:
+        //        message = "Customer will leave next round!";
+        //        header = "";
+        //        break;
+        //    case 1:
+        //        message = "If customer won't be fed this round, they will take your Reputation Points";
+        //        header = "Reputation Debuff";
+        //        break;
+        //    case 2:
+        //        message = "If customer won't be fed this round, they will cause Energy Points loss for the next round";
+        //        header = "Energy Debuff";
+        //        break;
+        //}
+        //hoverable.SetMessageHeader(message, header);
+    }
+
     private void TakeDamage()
     {
         Body.transform.DOShakeScale(0.5f, 0.1f, 8, 40, true);
@@ -125,5 +157,6 @@ public class CustomerView : MonoBehaviour, IDropHandler
         _customer.OnTurnStarted -= StartTurn;
         _customer.OnTurnEnded -= ChangeExpressions;
         _customer.OnActionChanged -= ActionChange;
+        _customer.OnDebuffChanged -= DebuffChange;
     }
 }

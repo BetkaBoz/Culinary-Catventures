@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sausage
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: f8d570713a9b3a84bbd1348943323b51, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Sausage
   cardType: 1
   canTarget: 1

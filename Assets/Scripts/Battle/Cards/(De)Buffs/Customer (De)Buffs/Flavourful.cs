@@ -8,7 +8,7 @@ public class Flavourful : IBuffable
     {
         if(targetCustomer != null)
         {
-            targetCustomer.Feed(numOfTurns, CardTypes.None);
+            targetCustomer.Feed(numOfTurns, CardTypes.None, false);
             base.Apply();
         }
     }

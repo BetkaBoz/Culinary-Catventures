@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chicken Legs with Fries
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 9e44331b6fab7de4da6400ba0ee67c10, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Chicken Legs with Fries
   cardType: 1
   canTarget: 1

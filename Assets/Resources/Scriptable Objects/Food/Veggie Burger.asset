@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Veggie Burger
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 424be9ea512ab3948916a882ac8b91ad, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Veggie Burger
   cardType: 4
   canTarget: 1

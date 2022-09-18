@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hamburger
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 3921c48a70dadd343a98144679964921, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Hamburger
   cardType: 1
   canTarget: 1

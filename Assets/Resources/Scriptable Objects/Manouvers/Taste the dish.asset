@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Taste the dish
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: ff753dad87c3d804ea1a83abde312b83, type: 3}
-  cardEffect: {fileID: 2951753765375129582, guid: e1faa52aaeb4bb4479be7fa634c5c031, type: 3}
+  cardEffect:
+  - {fileID: 2951753765375129582, guid: e1faa52aaeb4bb4479be7fa634c5c031, type: 3}
   cardName: Taste the dish
-  cardType: Manoeuvre
+  cardType: 0
   canTarget: 0
   energyCost: 0
   nutritionPoints: 0

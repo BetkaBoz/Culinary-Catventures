@@ -36,6 +36,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 80610fc619d39f045abafb060fcef784, type: 3}
   - {fileID: 21300000, guid: ab4b2396d24a22b4cb89634bb733d598, type: 3}
   - {fileID: 21300000, guid: a42112c070b3b9446ab2ad70b431a0a2, type: 3}
+  DebuffSprites:
+  - {fileID: 21300000, guid: c222d5ae900f0ec4a928a3e7091c53bd, type: 3}
+  - {fileID: 21300000, guid: 5c8df9a413364754d9ca808a7854346c, type: 3}
+  - {fileID: 21300000, guid: a7f4f22af9cf8c144a4d6cc839fcd87c, type: 3}
+  - {fileID: 21300000, guid: 32c54b6c293631d46b579d90de3233a6, type: 3}
+  - {fileID: 21300000, guid: 0a42657246eb0414287158d5bb150069, type: 3}
+  - {fileID: 21300000, guid: 4b3ae5951af7b5341abcb1ee050f7b78, type: 3}
   AnimationSprites: {fileID: 11400000, guid: 63419df6e70893947ae18df4d734ea88, type: 2}
   shadowOffset: 0
   actionOffset: 0

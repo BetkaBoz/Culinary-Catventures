@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tofu
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 11599aacbdc774243a43fa52e97de66a, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Tofu
   cardType: 4
   canTarget: 1

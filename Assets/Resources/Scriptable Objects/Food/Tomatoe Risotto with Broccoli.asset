@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tomatoe Risotto with Broccoli
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 1dd1b6d7009a23b49ae218b54b70d583, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Tomatoe Risotto with Broccoli
   cardType: 4
   canTarget: 1

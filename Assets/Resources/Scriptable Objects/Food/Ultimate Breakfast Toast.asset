@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ultimate Breakfast Toast
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 1df86af92da43a44cb8b0a7fef38f2b5, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Ultimate Breakfast Toast
   cardType: 4
   canTarget: 1

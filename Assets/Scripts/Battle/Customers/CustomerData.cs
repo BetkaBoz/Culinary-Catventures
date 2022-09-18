@@ -23,6 +23,7 @@ public class CustomerData : ScriptableObject
     public float GeneralFoodDefence = 1;
     public List<Sprite> Sprites;
     public List<Sprite> ActionSprites;
+    public List<Sprite> DebuffSprites;
     public SpriteLibraryAsset AnimationSprites;
 
     [Header("Sprite position offset")]

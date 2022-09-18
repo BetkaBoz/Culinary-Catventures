@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Burrito
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: 243fb896e9c3c0b4ea613320a0dbe27b, type: 3}
-  cardEffect: {fileID: 6222526229609788162, guid: 5039bbbb92db3cc4fb13c78edf44f15d, type: 3}
+  cardEffect: []
   cardName: Burrito
   cardType: 2
   canTarget: 1
