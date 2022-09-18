@@ -11,9 +11,10 @@ public class Event : MonoBehaviour
     [SerializeField] public bool isChallenge;
     [SerializeField] public EventType eventType;
     [SerializeField] public RandomEventType randomEventType;
-    [SerializeField] public int timeCost = 1;
+    //[SerializeField] public int timeCost = 1;
     [SerializeField] private Image imageComponent;
     [SerializeField] private Material eventGlowMaterial;
+    [SerializeField] private Material senseiGlowMaterial;
 
     private bool isUsed;
     private bool isOnEvent;
@@ -24,6 +25,7 @@ public class Event : MonoBehaviour
     [SerializeField] private IslandManager islandManager;
     //PLAYER CHARACTER
     [SerializeField] private GameObject playerCharacter;
+    private static readonly int Color1 = Shader.PropertyToID("Color");
 
     #endregion
 
@@ -61,6 +63,8 @@ public class Event : MonoBehaviour
         {
             eventManager.senseiCount++;
             eventType = EventType.Sensei;
+            eventGlowMaterial = senseiGlowMaterial;
+
         } //DVA GATHERY
         else if (eventManager.gatherCount < EventManager.MaxGatherCount)
         {

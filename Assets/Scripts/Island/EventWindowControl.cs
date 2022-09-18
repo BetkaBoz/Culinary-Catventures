@@ -290,7 +290,7 @@ public class EventWindowControl : WindowControl
                             player.Deck.Add(randomCard);
                             tmpCards.Add(randomCard);
                         }
-                        ShowCards(tmpCards, 1);
+                        ShowCards(tmpCards, 2);
                         Debug.Log("GIMME DAT GRAPES");
                     }
                 }); //RESIST THE DARK SIDE!
@@ -411,7 +411,7 @@ public class EventWindowControl : WindowControl
                         player.Deck.Add(randomFood);
                         tmpCards.Add(randomFood);
                     }
-                    ShowCards(tmpCards, 1);
+                    ShowCards(tmpCards, 2);
                     ChangeReputation(-Major);
                 });
                 break;
@@ -432,7 +432,7 @@ public class EventWindowControl : WindowControl
                         player.Deck.Add(randomFood);
                         tmpCards.Add(randomFood);
                     }
-                    ShowCards(tmpCards, 1);
+                    ShowCards(tmpCards, 2);
                     ChangeReputation(-Major);
                 });
                 break;
@@ -478,7 +478,7 @@ public class EventWindowControl : WindowControl
     }
     private void Stumble(CardBaseInfo card)
     {
-        ShowOneCard(card, 0);
+        ShowOneCard(card, 2);
 
         //STUMBLE
         firstButton.onClick.AddListener(delegate {
@@ -578,7 +578,7 @@ public class EventWindowControl : WindowControl
             player.Deck.Add(randomCard);
             tmpCards.Add(randomCard);
         }
-        ShowCards(tmpCards, 1);
+        ShowCards(tmpCards, 2);
     }
     private void Maze()
     {
@@ -593,8 +593,8 @@ public class EventWindowControl : WindowControl
             }
             else
             {
-                //35%
-                if (RandomState(35))
+                //33%
+                if (RandomState(33))
                 {
                     //GRAND PRIZE
                     SetUpEventWindow("", "You find treasure in the middle of the maze!");
@@ -619,8 +619,8 @@ public class EventWindowControl : WindowControl
             }
             else
             {
-                //35%
-                if (RandomState(35))
+                //33%
+                if (RandomState(33))
                 {
                     //GRAND PRIZE
                     SetUpEventWindow("", "You find treasure in the middle of the maze!");

@@ -54,12 +54,12 @@ MonoBehaviour:
   isChallenge: 0
   eventType: 0
   randomEventType: 0
-  timeCost: 1
   imageComponent: {fileID: 0}
   eventGlowMaterial: {fileID: 2100000, guid: 9cb532f66bcef314595b9ebf323bee13, type: 2}
-  isUsed: 0
+  senseiGlowMaterial: {fileID: 2100000, guid: dc41c5eacf9bba24eb20f7325c36e4b3, type: 2}
   eventManager: {fileID: 0}
   islandManager: {fileID: 0}
+  playerCharacter: {fileID: 0}
 --- !u!58 &8575847236975576997
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e4ab8e68ff0c51740886cb58fae86665, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5465913e2fab9f54ca225d9b74b60c13, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -392,7 +392,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 58.4255, y: 64.1599}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &609409101207965793
 PrefabInstance:
@@ -679,6 +679,10 @@ PrefabInstance:
       propertyPath: islandManager
       value: 
       objectReference: {fileID: 5316605240045808822}
+    - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
+      propertyPath: eventGlowMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 883e09f537075dd49b0c15d9c8669023, type: 2}
     - target: {fileID: 2429101186762805143, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
       propertyPath: m_Name
       value: Challenge
@@ -1029,7 +1033,7 @@ PrefabInstance:
       objectReference: {fileID: 5316605240045808822}
     - target: {fileID: 1087782752828155293, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
       propertyPath: randomEventType
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2429101186762805142, guid: 31201ee4df949f542abf6641a6e58546, type: 3}
       propertyPath: m_RootOrder

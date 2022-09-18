@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BellGlow
-  m_Shader: {fileID: -6465566751694194690, guid: 79d0fb3c42244be48b4995d1c1e8e315, type: 3}
+  m_Name: SenseiGlow
+  m_Shader: {fileID: -6465566751694194690, guid: e6f5585662d3cf048b6cca455ce0dff4, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6430eabeb68026345ba171bb22b493be, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -48,11 +48,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_9939768022a1443bb78738abc0926a3e: -4.5
+    - Vector1_4564c2392cc7499abf0be7a45e2c1d17: 0.95
     - _EnableExternalAlpha: 0
     m_Colors:
-    - Color_e29538bb1ada4d399f87f44869f05fbb: {r: 1024, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0, g: 6283232, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
