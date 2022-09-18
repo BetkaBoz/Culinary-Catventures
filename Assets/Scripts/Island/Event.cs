@@ -14,7 +14,7 @@ public class Event : MonoBehaviour
     //[SerializeField] public int timeCost = 1;
     [SerializeField] private Image imageComponent;
     [SerializeField] private Material eventGlowMaterial;
-    [SerializeField] private Material senseiGlowMaterial;
+    //[SerializeField] private Material senseiGlowMaterial;
 
     private bool isUsed;
     private bool isOnEvent;
@@ -63,7 +63,7 @@ public class Event : MonoBehaviour
         {
             eventManager.senseiCount++;
             eventType = EventType.Sensei;
-            eventGlowMaterial = senseiGlowMaterial;
+            //eventGlowMaterial = senseiGlowMaterial;
 
         } //DVA GATHERY
         else if (eventManager.gatherCount < EventManager.MaxGatherCount)
