@@ -402,6 +402,10 @@ MonoBehaviour:
   - {fileID: 6236374333752651628}
   - {fileID: 4560727255696321450}
   - {fileID: 4026440735962896025}
+  debuffImageParents:
+  - {fileID: 7717817507692210755}
+  - {fileID: 3198074433884562784}
+  - {fileID: 2533831392758514055}
   artworkImage: {fileID: 1290662945258169807}
   energyTxt: {fileID: 1214633719447030738}
   gm: {fileID: 0}

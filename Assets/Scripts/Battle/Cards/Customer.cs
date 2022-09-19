@@ -128,16 +128,16 @@ public abstract class Customer : IDamageable
         switch (type)
         {
             case CardTypes.Vegetarian:
-                TakeDamage((int)(amount * _customerData.VeggieFoodDefence));
+                TakeDamage((int)(amount * VeggieFoodDefence));
                 break;
             case CardTypes.Meat:
-                TakeDamage((int)(amount * _customerData.MeatFoodDefence));
+                TakeDamage((int)(amount * MeatFoodDefence));
                 break;
             case CardTypes.Mix:
-                TakeDamage((int)(amount * _customerData.GeneralFoodDefence));
+                TakeDamage((int)(amount * GeneralFoodDefence));
                 break;
             case CardTypes.Neutral:
-                TakeDamage((int)(amount * _customerData.GeneralFoodDefence));
+                TakeDamage((int)(amount * GeneralFoodDefence));
                 break;
             default:
                 TakeDamage(amount);

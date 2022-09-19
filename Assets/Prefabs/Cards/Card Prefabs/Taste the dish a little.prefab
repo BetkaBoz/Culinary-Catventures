@@ -46,8 +46,4 @@ MonoBehaviour:
   discardAmount: 1
   amount: 2
   card: {fileID: 0}
-  filter:
-  - Vegetarian
-  - Meat
-  - Mix
-  - Neutral
+  filter: 01000000020000000300000004000000

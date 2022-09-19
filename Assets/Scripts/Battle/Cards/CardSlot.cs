@@ -32,6 +32,7 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     #region SerializeFields
     [SerializeField] List<Image> debuffImage;
+    [SerializeField] List<Image> debuffImageParents;
     [SerializeField] Image artworkImage;
     [SerializeField] TextMeshProUGUI energyTxt;
     [SerializeField] GameManager gm;
@@ -94,21 +95,22 @@ public class CardSlot : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 
     private void SetBuffImages()
     {
-        if(card.CardType == CardTypes.Manoeuvre)
+        if (card.CardType == CardTypes.Manoeuvre)
         {
-            foreach(var img in debuffImage)
+            foreach (var img in debuffImageParents)
             {
-                img.GetComponentInParent<Image>().gameObject.SetActive(false);
+                //Debug.Log(name);
+                img.gameObject.SetActive(false);
             }
             return;
         }
         else
         {
-            foreach (var img in debuffImage)
+            foreach (var img in debuffImageParents)
             {
-                img.GetComponentInParent<Image>().gameObject.SetActive(true);
+                img.gameObject.SetActive(true);
             }
-            
+
         }
         int idx = 0;
         foreach(var effect in card.CardEffect)

@@ -45,5 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   discardAmount: 0
   amount: 15
-  type: Meat
-  buffable: {fileID: 6174740975825435201, guid: 5c9c94f25985a044ba30c17cbb219162, type: 3}
+  card: {fileID: 0}
+  _duration: 0
+  _buffable: {fileID: 0}
+  _buffArtwork: {fileID: 21300000, guid: ae4e80fcb0786bc43b9bb84c859565ea, type: 3}
+  type: 0
