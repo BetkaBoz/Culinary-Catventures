@@ -36,7 +36,7 @@ public class IslandManager : MonoBehaviour
 
     private void LockAllEvents()
     {
-        Debug.Log("EVENTS ARE LOCKED!");
+        //Debug.Log("EVENTS ARE LOCKED!");
         foreach (Event @event in eventManager.allEvents)
         {
             if (!@event.isChallenge)

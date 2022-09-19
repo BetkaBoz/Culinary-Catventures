@@ -421,12 +421,12 @@ public class Deck : MonoBehaviour
         if (MerchantWindowControl.IsInMerchant || SenseiWindowControl.IsInSensei)
         {
             EventManager.IsInEvent = true;
-            Debug.Log("IsInEvent = " + EventManager.IsInEvent);
+            //Debug.Log("IsInEvent = " + EventManager.IsInEvent);
         }
         else
         {
             EventManager.IsInEvent = false;
-            Debug.Log("IsInEvent = " + EventManager.IsInEvent);
+            //Debug.Log("IsInEvent = " + EventManager.IsInEvent);
         }
 
     }
@@ -435,7 +435,7 @@ public class Deck : MonoBehaviour
     private void SetPanelHeight(int rows)
     {
         int height = 333 * rows + (rows - 1) * 67 + 44;
-        Debug.Log(height);
+        //Debug.Log(height);
         panel.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.Unconstrained;
         Vector2 sizeDelta = panel.GetComponent<RectTransform>().sizeDelta;
         sizeDelta = new Vector2(sizeDelta.x, height);
