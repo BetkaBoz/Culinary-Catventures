@@ -102,7 +102,7 @@ public abstract class Customer : IDamageable
 
     public void AddDebuff(DebuffTypes debuff)
     {
-        Debug.Log(debuff + " " + (int)debuff);
+        //Debug.Log(debuff + " " + (int)debuff);
         currentDebuffs.Add(debuff);
         OnDebuffChanged?.Invoke();
     }
@@ -121,6 +121,7 @@ public abstract class Customer : IDamageable
     public void Stun()
     {
         satisfied = true;
+        OnDamageTaken?.Invoke();
     }
     public void Feed(int amount, CardTypes type, bool doesSatisfy = true)
     {
@@ -146,6 +147,7 @@ public abstract class Customer : IDamageable
     }
     public void TakeDamage(int amount)
     {
+        Debug.Log("damage " + amount);
         currHunger = currHunger >= amount ? currHunger - amount : 0;
 
         //if (numTurnsStunned <= 0) numTurnsStunned++;

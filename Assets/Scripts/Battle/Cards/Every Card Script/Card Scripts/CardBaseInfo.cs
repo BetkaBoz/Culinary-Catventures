@@ -14,10 +14,12 @@ public class CardBaseInfo : ScriptableObject
     [SerializeField] private bool canTarget = false;
     [SerializeField] private int energyCost;
     [SerializeField] private int nutritionPoints;
+    [SerializeField] int comboIndex; //aka how many cards did it take to make this one (e.g. brani-dog = 2 [sausage + pepper])
     //[SerializeField] private int amount;
     //[SerializeField] private int discardAmount;
     #endregion
     #region Getters
+    public int ComboIndex => comboIndex;
     public Sprite Artwork
     {
         get

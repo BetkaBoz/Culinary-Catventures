@@ -42,7 +42,7 @@ public class IBuffable : MonoBehaviour
     public int NumOfTurns => numOfTurns;
     public virtual void CheckFinished()
     {
-        if(numOfTurns <= 0)
+        if(numOfTurns < 1)
         {
             finished = true;
         }

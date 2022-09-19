@@ -21,6 +21,11 @@
 			"cardProduced": "Avocado Toast with Salad"
 		},
 		{
+			"numOfCards": 2,
+			"cardsUsed": ["Avocado Toast","Salad"],
+			"cardProduced": "Avocado Toast with Salad"
+		},
+		{
 			"numOfCards": 4,
 			"cardsUsed": ["Beef","Tortilla","Salad","Tomatoes"],
 			"cardProduced": "Beef Taco"
@@ -214,6 +219,136 @@
 			"numOfCards": 5,
 			"cardsUsed": ["Tortilla","Rice","Tomatoes","Salad","Tofu"],
 			"cardProduced": "Veggie Burrito"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Shrimps","Octopus","Rice"],
+			"cardProduced": "Shrimp Risotto"
+		},
+		{
+			"numOfCards": 4,
+			"cardsUsed": ["Shrimps","Octopus","Rice","Broccoli"],
+			"cardProduced": "Shrimp Risotto with Broccoli"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Shrimp Risotto","Broccoli"],
+			"cardProduced": "Shrimp Risotto with Broccoli"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Buns","Egg"],
+			"cardProduced": "Breakfast Muffin"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Sausage","Egg"],
+			"cardProduced": "Breakfast Plate"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Tortilla","Tomatoes"],
+			"cardProduced": "Nachos with Salsa"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Tortilla","Tomatoes","Avocado"],
+			"cardProduced": "Nachos with Guacamole"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Guacamole","Avocado"],
+			"cardProduced": "Nachos with Guacamole"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Guacamole","Toast"],
+			"cardProduced": "Guaca Toast"
+		},
+		{
+			"numOfCards": 3,
+			"cardsUsed": ["Tomatoes","Avocado","Toast"],
+			"cardProduced": "Guaca Toast"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Tomatoes","Avocado"],
+			"cardProduced": "Guacamole"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Shrimps","Roll"],
+			"cardProduced": "Fried Shrimps"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Shrimps","Buns"],
+			"cardProduced": "Fried Shrimps"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Sausage","Toast"],
+			"cardProduced": "Sausage Toast"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Rice","Octopus"],
+			"cardProduced": "Onigiri Octopus"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Rice","Shrimps"],
+			"cardProduced": "Onigiri Shrimp"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Rice","Salmon"],
+			"cardProduced": "Onigiri Salmon"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Chicken Legs","Chicken Wings"],
+			"cardProduced": "Fried Chicken Bowl"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Chicken","Roll"],
+			"cardProduced": "Chicken Strips"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Chicken","Buns"],
+			"cardProduced": "Chicken Strips"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Chicken Risotto","Broccoli"],
+			"cardProduced": "Chicken Risotto with Broccoli"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Hot-Dog","Potatoes"],
+			"cardProduced": "Hot-Dog with Fries"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Hot-Dog","Batatas"],
+			"cardProduced": "Hot-Dog with Fries"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Spaghetti Bolognese","Tofu"],
+			"cardProduced": "Spaghetti Bolognese with Tofu"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Steak with Fries","Salad"],
+			"cardProduced": "Steak with Fries with Salad"
+		},
+		{
+			"numOfCards": 2,
+			"cardsUsed": ["Tomatoe Chicken Risotto","Broccoli"],
+			"cardProduced": "Tomatoe Chicken Risotto with Broccoli"
 		},
 		{
 			"numOfCards": 3,

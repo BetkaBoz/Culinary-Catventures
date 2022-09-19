@@ -124,7 +124,11 @@ public class CombineController : MonoBehaviour
                     break;
             }
             result.NutritionPoints = gm.GetComboNP(true);
-            result.EnergyCost = gm.GetComboEnergy();
+            result.ComboIndex = gm.GetComboIndex();
+            if(result.ComboIndex > 9)
+                result.EnergyCost = 9;
+            else
+                result.EnergyCost = result.ComboIndex-1;
             findSlot.SetCard(result);
             //if (findSlot.gameObject.activeSelf)
             //{

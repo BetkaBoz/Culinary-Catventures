@@ -228,12 +228,9 @@ public class GameManager : MonoBehaviour
         List<IBuffable> delBuffs = new List<IBuffable>();
         foreach (var buff in buffs)
         {
+            buff.Apply();
             if (buff.Finished)
                 delBuffs.Add(buff);
-            else
-            {
-                buff.Apply();
-            }
         }
         //TODO: Find a better way to do this
         foreach (var buff in delBuffs)
@@ -639,20 +636,17 @@ public class GameManager : MonoBehaviour
         return result + (int)(result * 0.08f);
     }
 
-    public int GetComboEnergy()
+    public int GetComboIndex()
     {
-        int result = -1;
+        int result = 0;
         for (int i = 0; i < cardSlots.Length; i++)
         {
             if (cardSlots[i].Selected)
             {
-                result += cardSlots[i].GetCard().EnergyCost;
+                result += cardSlots[i].GetCard().ComboIndex;
             }
         }
-        if (result > 9)
-            return 9;//do we want to have energy cost in double digits?
-        else
-            return result;
+        return result;
     }
 
     public int GetNumOfSelected()

@@ -132,9 +132,19 @@ public class CustomerView : MonoBehaviour, IDropHandler
     {
         Body.transform.DOShakeScale(0.5f, 0.1f, 8, 40, true);
 
-        if (_customer.CurrentAction != 0) Action.DOFade(0f, 1f);
+        if ((_customer.CurrentAction != 0 || DoesDebuffExist(DebuffTypes.Captivate)) && _customer.Satisfied) Action.DOFade(0f, 1f);
 
         hoverable.SetTooltipEnabled(false);
+    }
+
+    private bool DoesDebuffExist(DebuffTypes find)
+    {
+        foreach(var debuff in _customer.CurrentDebuffs)
+        {
+            if (debuff == find)
+                return true;
+        }
+        return false;
     }
 
     public void OnDrop(PointerEventData eventData)

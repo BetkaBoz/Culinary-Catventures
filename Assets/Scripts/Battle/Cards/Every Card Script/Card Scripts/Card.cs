@@ -23,6 +23,7 @@ public class Card : MonoBehaviour
     [SerializeField] bool canTarget = false;
     [SerializeField] int energyCost;
     [SerializeField] int nutritionPoints;
+    public int ComboIndex; //aka how many cards did it take to make this one (e.g. brani-dog = 2 [sausage + pepper])
 
     #endregion
 
@@ -94,7 +95,7 @@ public class Card : MonoBehaviour
         canTarget = baseCard.CanTarget;
         energyCost = baseCard.EnergyCost;
         nutritionPoints = baseCard.NutritionPoints;
-
+        ComboIndex = baseCard.ComboIndex;
         //if(cardEffect != null)
         //{
         //    cardEffect.Amount = baseCard.Amount;

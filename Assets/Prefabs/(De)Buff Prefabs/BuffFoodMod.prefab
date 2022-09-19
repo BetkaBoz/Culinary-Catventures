@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005490a2c2c090449a355ce74ce16c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfTurns: 1
+  _typeOfStacking: 0
+  _typeOfDebuff: 0
+  numOfTurns: 0
   targetPlayer: {fileID: 0}
   value: 0
-  type: 
+  type: 0

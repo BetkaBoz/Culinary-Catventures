@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5004839786474717151, guid: 31fd67c096780ce4294461453ec94928, type: 3}
       propertyPath: amount
-      value: -15
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5004839786474717151, guid: 31fd67c096780ce4294461453ec94928, type: 3}
       propertyPath: _buffable

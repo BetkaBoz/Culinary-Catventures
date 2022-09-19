@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _typeOfStacking: 0
   _typeOfDebuff: 2
-  numOfTurns: 1
+  numOfTurns: 0
   targetPlayer: {fileID: 0}
