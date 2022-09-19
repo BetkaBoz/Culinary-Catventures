@@ -32,10 +32,13 @@ public class BattleWonManager : MonoBehaviour
         for(int i = 0; i < helperParent.transform.childCount; i++)
         {
             helpers.Add(helperParent.transform.GetChild(i).gameObject);
-        } 
+        }
 
-        reputation.text = $"{player.earnedRep}";
-        coins.text = $"{player.MoneyAmount}";
+        if (player.earnedRep > 0) reputation.text = $"+{player.earnedRep}";
+        else reputation.text = $"{player.earnedRep}";
+
+        if (player.MoneyAmount > 0) coins.text = $"+{player.MoneyAmount}";
+        else coins.text = $"{player.MoneyAmount}";
     }
 
     private void NextLevel()

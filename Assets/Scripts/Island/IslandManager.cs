@@ -1,36 +1,41 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 public class IslandManager : MonoBehaviour
 {
     [SerializeField] public int time;
-    [SerializeField] private TextMeshProUGUI timeText;
+    //[SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] Image Time;
+    [SerializeField] List<Sprite> timeSprites;
 
-    [SerializeField] private GameObject grabberPrefab;
-    [SerializeField] private GameObject easterEggGrabberPrefab;
+    [SerializeField] GameObject grabberPrefab;
+    [SerializeField] GameObject easterEggGrabberPrefab;
 
     //[SerializeField] private TextMeshProUGUI  coinText;
     //[SerializeField] private TextMeshProUGUI  repText; IN UILayer
-    [SerializeField] private Light2D sun;
-    [SerializeField] private GameObject playerLight;
+    [SerializeField] Light2D sun;
+    [SerializeField] GameObject playerLight;
 
-    [SerializeField] private GameObject lights;
+    [SerializeField] GameObject lights;
     //EVENT MANAGER
-    private EventManager eventManager;
+    EventManager eventManager;
+    int sprite = 0;
 
 
     private void Awake()
     {
-        timeText.text = "Time: " + time;
+        //timeText.text = "Time: " + time;
         sun = GameObject.FindGameObjectWithTag("Light").GetComponent<Light2D>();
         //playerLight  = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
         //playerLight = FindObjectOfType<Player>().GetComponentInChildren<Light2D>().gameObject;
         eventManager = FindObjectOfType<EventManager>();
 
         LightControl();
+        LowerTime();
     }
 
 
@@ -48,21 +53,21 @@ public class IslandManager : MonoBehaviour
 
 
     //ZNIŽOVANIE ČASU O LOWERBY
-    public void LowerTime(int lowerBy)
+    public void LowerTime()
     {
-        time -= lowerBy;
-
+        time--;
+        Time.sprite = timeSprites[sprite];
+        sprite++;
         LightControl();
         //AK VYPRŠÍ TAK SPAWNI RUKU
         if (time <= 0)
         {
-            time = 0;
+            time = -1;
             LockAllEvents();
             Invoke(nameof(StartGrabber), 20f);
-
         }
-
-        timeText.text = "Time: " + time;
+        
+        //timeText.text = "Time: " + time;
     }
 
     private void StartGrabber()

@@ -17,7 +17,6 @@ public class ChadCustomer : Customer
             if (currHunger >= Data.MaxHunger / 2)
             {
                 gm.Player.TakeDamage(Data.MaxDamageMade / Data.HalfHealthLeftPercentage);
-                finalMoney -= 60;
             }
             else if (currHunger >= Data.MaxHunger / 3)
             {

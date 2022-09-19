@@ -17,7 +17,6 @@ public class Chungus : Customer
             if (currHunger >= Data.MaxHunger / 2)
             {
                 gm.Player.TakeDamage(Data.MaxDamageMade / Data.HalfHealthLeftPercentage);
-                finalMoney -= 50;
             }
             else if (currHunger >= Data.MaxHunger / 3)
             {
