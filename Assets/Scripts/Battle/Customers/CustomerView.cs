@@ -152,6 +152,10 @@ public class CustomerView : MonoBehaviour, IDropHandler
     private void Die()
     {
         Action.DOFade(0, 2f);
+        foreach (var img in DebuffIcons)
+        {
+            img.DOFade(0, 2f);
+        }
         Body.GetComponent<SpriteRenderer>().DOFade(0, 2f).OnComplete(() => { Destroy(gameObject); });
     }
 
