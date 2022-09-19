@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300f693d6c1542d4a809bc7f7e7394dd, type: 3}
   m_Name: Shrimp Risotto with Broccoli
   m_EditorClassIdentifier: 
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: fe35bca0090a21d418480d7deabb76ad, type: 3}
   cardEffect: []
-  cardName: 
-  cardType: 0
-  canTarget: 0
-  energyCost: 0
-  nutritionPoints: 0
-  comboIndex: 0
+  cardName: Shrimp Risotto with Broccoli
+  cardType: 2
+  canTarget: 1
+  energyCost: 3
+  nutritionPoints: 38
+  comboIndex: 4

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artwork: {fileID: 0}
   cardEffect: []
-  cardName: 
-  cardType: 0
-  canTarget: 0
-  energyCost: 0
-  nutritionPoints: 0
-  comboIndex: 0
+  cardName: Breakfast Muffin
+  cardType: 4
+  canTarget: 1
+  energyCost: 1
+  nutritionPoints: 27
+  comboIndex: 2

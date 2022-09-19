@@ -19,3 +19,4 @@ MonoBehaviour:
   canTarget: 1
   energyCost: 2
   nutritionPoints: 36
+  comboIndex: 3

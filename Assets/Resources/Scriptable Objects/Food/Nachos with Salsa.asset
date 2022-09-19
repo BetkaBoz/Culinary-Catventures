@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300f693d6c1542d4a809bc7f7e7394dd, type: 3}
   m_Name: Nachos with Salsa
   m_EditorClassIdentifier: 
-  artwork: {fileID: 0}
-  cardEffect: []
-  cardName: 
-  cardType: 0
-  canTarget: 0
-  energyCost: 0
-  nutritionPoints: 0
-  comboIndex: 0
+  artwork: {fileID: 21300000, guid: d1b5b834e373b234dbbe8d9195eb9f36, type: 3}
+  cardEffect:
+  - {fileID: 5310167066602206872, guid: e84d6d70b449de243b5fec2db91fe63e, type: 3}
+  cardName: Nachos with Salsa
+  cardType: 4
+  canTarget: 1
+  energyCost: 1
+  nutritionPoints: 17
+  comboIndex: 2

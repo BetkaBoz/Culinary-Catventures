@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300f693d6c1542d4a809bc7f7e7394dd, type: 3}
   m_Name: Chicken Strips
   m_EditorClassIdentifier: 
-  artwork: {fileID: 0}
-  cardEffect: []
-  cardName: 
-  cardType: 0
-  canTarget: 0
-  energyCost: 0
-  nutritionPoints: 0
-  comboIndex: 0
+  artwork: {fileID: 21300000, guid: 20d904fc00f8d29429d5e4b7d2b09ff4, type: 3}
+  cardEffect:
+  - {fileID: 8537783375711951159, guid: 03c6461f719e7f144b425f63890026fd, type: 3}
+  cardName: Chicken Strips
+  cardType: 1
+  canTarget: 1
+  energyCost: 1
+  nutritionPoints: 21
+  comboIndex: 2

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300f693d6c1542d4a809bc7f7e7394dd, type: 3}
   m_Name: Sausage Toast
   m_EditorClassIdentifier: 
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 120a10fe522cbc44dac4603aa5307deb, type: 3}
   cardEffect: []
-  cardName: 
-  cardType: 0
-  canTarget: 0
-  energyCost: 0
-  nutritionPoints: 0
-  comboIndex: 0
+  cardName: Sausage Toast
+  cardType: 1
+  canTarget: 1
+  energyCost: 1
+  nutritionPoints: 24
+  comboIndex: 2
