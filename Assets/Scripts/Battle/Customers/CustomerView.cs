@@ -116,11 +116,11 @@ public class CustomerView : MonoBehaviour, IDropHandler
                     header = "WEAKNESS: Meat";
                     break;
                 case DebuffTypes.WeaknessVegg:
-                    message = "Any Mixed food used on customer will decrease Hunger by additional 25%. Stacking of this effect should increase the number of turns this effect lasts.";
+                    message = "Any Vegetarian food used on customer will decrease Hunger by additional 25%. Stacking of this effect should increase the number of turns this effect lasts.";
                     header = "WEAKNESS: Vegetables";
                     break;
                 case DebuffTypes.WeaknessMix:
-                    message = "Any Vegetarian food used on customer will decrease Hunger by additional 25%. Stacking of this effect should increase the number of turns this effect lasts.";
+                    message = "Any Mixed food used on customer will decrease Hunger by additional 25%. Stacking of this effect should increase the number of turns this effect lasts.";
                     header = "WEAKNESS: Mix";
                     break;
             }

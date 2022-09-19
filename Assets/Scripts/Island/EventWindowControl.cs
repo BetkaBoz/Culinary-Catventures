@@ -506,7 +506,7 @@ public class EventWindowControl : WindowControl
                 }
                 else
                 {
-                    SetUpEventWindow("", "You found your lost ingredient by myself.");
+                    SetUpEventWindow("", "You found your lost ingredient by yourself.");
                 }
             }
             else

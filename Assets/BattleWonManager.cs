@@ -34,8 +34,8 @@ public class BattleWonManager : MonoBehaviour
             helpers.Add(helperParent.transform.GetChild(i).gameObject);
         } 
 
-        reputation.text = $"+{player.earnedRep}";
-        coins.text = $"+{player.MoneyAmount}";
+        reputation.text = $"{player.earnedRep}";
+        coins.text = $"{player.MoneyAmount}";
     }
 
     private void NextLevel()

@@ -630,7 +630,7 @@ public class GameManager : MonoBehaviour
         {
             if (cardSlots[i].Selected)
             {
-                result += 8;
+                result += 6;
                 if (cardSlots[i].GetCard().NutritionPoints > highest)
                     highest = cardSlots[i].GetCard().NutritionPoints;
             }

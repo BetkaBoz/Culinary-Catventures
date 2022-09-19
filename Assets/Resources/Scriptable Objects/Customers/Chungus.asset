@@ -16,10 +16,10 @@ MonoBehaviour:
   Value: 0
   MaxHunger: 50
   Turns: 5
-  Money: 5
-  MaxMoneyEarned: 25
-  Reputation: 5
-  MaxReputationEarned: 25
+  Money: 4
+  MaxMoneyEarned: 15
+  Reputation: 4
+  MaxReputationEarned: 15
   MaxDamageMade: 25
   HalfHealthLeftPercentage: 2
   ThirdHealthLeftPercentage: 3
