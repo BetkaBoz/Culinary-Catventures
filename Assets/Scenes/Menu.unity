@@ -3213,7 +3213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: version Alpha v0.3
+  m_text: version Alpha v0.4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8aba2b5bab1e684094ae6c2418e0d82, type: 2}
   m_sharedMaterial: {fileID: 3655034238412398367, guid: d8aba2b5bab1e684094ae6c2418e0d82, type: 2}

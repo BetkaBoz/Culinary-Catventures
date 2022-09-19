@@ -271,6 +271,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 956654929}
     - target: {fileID: 5316605240045808822, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
+      propertyPath: time
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316605240045808822, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeText
       value: 
       objectReference: {fileID: 781179815}
@@ -285,11 +289,11 @@ PrefabInstance:
     - target: {fileID: 5316605240045808822, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeSprites.Array.data[0]
       value: 
-      objectReference: {fileID: 21300000, guid: db81bfb6c17bc7e459c368d264158f6c, type: 3}
+      objectReference: {fileID: 21300000, guid: c1baa58ada3a93344866438f80ae96d5, type: 3}
     - target: {fileID: 5316605240045808822, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeSprites.Array.data[1]
       value: 
-      objectReference: {fileID: 21300000, guid: bf486cf7660c13a41ba434104b749fdc, type: 3}
+      objectReference: {fileID: 21300000, guid: 9c4358a79f6a71a44828f635265c847a, type: 3}
     - target: {fileID: 5316605240045808822, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeSprites.Array.data[2]
       value: 
@@ -297,11 +301,11 @@ PrefabInstance:
     - target: {fileID: 5316605240045808822, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeSprites.Array.data[3]
       value: 
-      objectReference: {fileID: 21300000, guid: 9c4358a79f6a71a44828f635265c847a, type: 3}
+      objectReference: {fileID: 21300000, guid: bf486cf7660c13a41ba434104b749fdc, type: 3}
     - target: {fileID: 5316605240045808822, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: timeSprites.Array.data[4]
       value: 
-      objectReference: {fileID: 21300000, guid: c1baa58ada3a93344866438f80ae96d5, type: 3}
+      objectReference: {fileID: 21300000, guid: db81bfb6c17bc7e459c368d264158f6c, type: 3}
     - target: {fileID: 5316605240826109772, guid: 01cd8afd1a02f084183259a322d8dee2, type: 3}
       propertyPath: m_IsActive
       value: 1
