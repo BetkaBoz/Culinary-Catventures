@@ -7,5 +7,6 @@ public abstract class CardEffectWithDebuff : CardEffect
     [SerializeField] protected int _duration;
     [SerializeField] protected GameObject _buffable;
     [SerializeField] Sprite _buffArtwork;
+    public DebuffTypes debuffTypes;
     public Sprite BuffArtworkCard => _buffArtwork;
 }

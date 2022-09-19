@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     #region SerializeFields
     [SerializeField] Player player;
     [SerializeField] CardSlot[] cardSlots;
+    [SerializeField] int cardsOnHand = 5;
     [SerializeField] CardSlot highlightSlot;
     [SerializeField] bool[] availableCardSlots;
     [SerializeField] TextMeshProUGUI energyUI;
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
         {
             cardSlots[i].Hide(true);
         }
-        DrawCards(5);
+        DrawCards(cardsOnHand);
         AddEnergy(player.MaxEnergy);
         repUI.text = $"{player.rep}";
         combinePhase = false;
@@ -287,7 +288,7 @@ public class GameManager : MonoBehaviour
 
         ShowRoundNotification();
 
-        DrawCards(5);
+        DrawCards(cardsOnHand);
 
         foreach (var customer in customers.ToArray())
         {

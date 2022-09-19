@@ -48,13 +48,7 @@ public abstract class Customer : IDamageable
             OnActionChanged?.Invoke();
         }
     }
-    public List<DebuffTypes> CurrentDebuffs
-    {
-        get
-        {
-            return currentDebuffs;
-        }
-    }
+    public List<DebuffTypes> CurrentDebuffs => currentDebuffs;
     public int Money => finalMoney;
     public int Rep => finalRep;
     public int CurrentHunger => currHunger;

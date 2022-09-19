@@ -1651,15 +1651,17 @@ MonoBehaviour:
   deck:
   - {fileID: 11400000, guid: f5986a78c5ad1e546aff75a942327f8c, type: 2}
   - {fileID: 11400000, guid: f5986a78c5ad1e546aff75a942327f8c, type: 2}
-  - {fileID: 11400000, guid: f5986a78c5ad1e546aff75a942327f8c, type: 2}
   - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
   - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
   - {fileID: 11400000, guid: 2eda0dac2d5995b40971273646322a4d, type: 2}
+  - {fileID: 11400000, guid: b34fdf64bf5f33341a0b862535532a3b, type: 2}
   - {fileID: 11400000, guid: b34fdf64bf5f33341a0b862535532a3b, type: 2}
   - {fileID: 11400000, guid: b34fdf64bf5f33341a0b862535532a3b, type: 2}
   - {fileID: 11400000, guid: b34fdf64bf5f33341a0b862535532a3b, type: 2}
   - {fileID: 11400000, guid: 79e570868a9e4144faa45b5b0e3b437b, type: 2}
   - {fileID: 11400000, guid: 79e570868a9e4144faa45b5b0e3b437b, type: 2}
+  - {fileID: 11400000, guid: 79e570868a9e4144faa45b5b0e3b437b, type: 2}
+  - {fileID: 11400000, guid: bb5f1cef4cbbcf542af68a9002862e83, type: 2}
   - {fileID: 11400000, guid: bb5f1cef4cbbcf542af68a9002862e83, type: 2}
   - {fileID: 11400000, guid: bb5f1cef4cbbcf542af68a9002862e83, type: 2}
   - {fileID: 11400000, guid: b43c6f1212a2a924abd8e28dee0e6c97, type: 2}
@@ -1668,24 +1670,28 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 04cf38d94563e494396f6b153571e53f, type: 2}
   - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
   - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
-  - {fileID: 11400000, guid: 9734095e5e8ad0e45b03299dd63f33e7, type: 2}
+  - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
+  - {fileID: 11400000, guid: e1f007779058f5147a6aa1bab6a86ffa, type: 2}
   - {fileID: 11400000, guid: 9734095e5e8ad0e45b03299dd63f33e7, type: 2}
   - {fileID: 11400000, guid: 144145c2dad2f3b419667ff0ac6ddbc9, type: 2}
   - {fileID: 11400000, guid: 144145c2dad2f3b419667ff0ac6ddbc9, type: 2}
+  - {fileID: 11400000, guid: 76747097478ef55438ce0728f4bebd82, type: 2}
+  - {fileID: 11400000, guid: 76747097478ef55438ce0728f4bebd82, type: 2}
+  - {fileID: 11400000, guid: 1a1643d24f3c713458ade65358e36bfe, type: 2}
+  - {fileID: 11400000, guid: 1a1643d24f3c713458ade65358e36bfe, type: 2}
   - {fileID: 11400000, guid: d6f532aef60f6774da05fb802fed6564, type: 2}
   - {fileID: 11400000, guid: d6f532aef60f6774da05fb802fed6564, type: 2}
-  - {fileID: 11400000, guid: e964297736755964c85230482268dd93, type: 2}
-  - {fileID: 11400000, guid: e964297736755964c85230482268dd93, type: 2}
   - {fileID: 11400000, guid: 5f251d38747dee846a43cb37ead20189, type: 2}
   - {fileID: 11400000, guid: 5f251d38747dee846a43cb37ead20189, type: 2}
   - {fileID: 11400000, guid: b6d9a3f9f208cbd429a6a905c3092245, type: 2}
   - {fileID: 11400000, guid: b6d9a3f9f208cbd429a6a905c3092245, type: 2}
   - {fileID: 11400000, guid: e68142c1b454a6242bd3880e4f3d9773, type: 2}
-  - {fileID: 11400000, guid: e68142c1b454a6242bd3880e4f3d9773, type: 2}
+  - {fileID: 11400000, guid: 51b5d22314b26e247af3925061c0edc7, type: 2}
+  - {fileID: 11400000, guid: 51b5d22314b26e247af3925061c0edc7, type: 2}
+  - {fileID: 11400000, guid: e446072749c293042a2f74cc42db60ae, type: 2}
   - {fileID: 11400000, guid: 734d03b68abe91d4998f7ebdab661b1a, type: 2}
   - {fileID: 11400000, guid: 98bdc6f7efb35a541bfbe47875f9f8f7, type: 2}
   - {fileID: 11400000, guid: 95a71b274e37be54c919c68a2a94d77e, type: 2}
-  - {fileID: 11400000, guid: e446072749c293042a2f74cc42db60ae, type: 2}
   isDead: 0
   isVictorious: 0
   helpers: []
@@ -1693,7 +1699,7 @@ MonoBehaviour:
   repAmount: 0
   earnedRep: 0
   rep: 100
-  money: 200
+  money: 0
   canCallEmergencyDelivery: 1
 --- !u!4 &534415302
 Transform:
@@ -2976,9 +2982,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.233634, y: 752.2926}
+  m_AnchoredPosition: {x: 228.67426, y: 783.101}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: -0.1, y: 1}
+  m_Pivot: {x: 1.01, y: 1}
 --- !u!114 &857187732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5577,6 +5583,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3997112066609719759, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4171123526881261318, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5604,6 +5614,10 @@ PrefabInstance:
     - target: {fileID: 4566925227505613918, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
       propertyPath: m_Name
       value: CardSlot 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667707019995592792, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5155093665452338839, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5667,6 +5681,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7251360434902969133, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844652300115638489, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8656433782970610554, guid: 08a1ed10ffded6b4f876f9267b855928, type: 3}
@@ -7228,6 +7246,7 @@ MonoBehaviour:
   - {fileID: 850031509}
   - {fileID: 517797241}
   - {fileID: 1805034233}
+  cardsOnHand: 6
   highlightSlot: {fileID: 1138483620}
   availableCardSlots: 01010101010101010101
   energyUI: {fileID: 1229504367}

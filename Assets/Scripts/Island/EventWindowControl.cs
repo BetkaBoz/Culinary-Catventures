@@ -211,39 +211,39 @@ public class EventWindowControl : WindowControl
                     "HELP", "ROB", "");
 
                 firstButton.onClick.AddListener(delegate {
-                    SetUpEventWindow("", "You helped the homeless cat.");
+                    SetUpEventWindow("", "You helped the homeless cat by giving them some of your coins.");
                     ChangeMoney(-Moderate);
                     ChangeReputation(Major);
                 });
                 secondButton.onClick.AddListener(delegate {
-                    SetUpEventWindow("", "You robbed the homeless cat.");
+                    SetUpEventWindow("", "You robbed the homeless cat... That wasn't very nice of you and everyone will remember that.");
                     ChangeMoney(Moderate);
                     ChangeReputation(-Major);
                 });
                 break;
             case Event.RandomEventType.DiceCat:
                 //DICE_CAT
-                SetUpEventWindow("Dice cat", "You see a cat playing dice. He wants to play with you.",
+                SetUpEventWindow("Dice cat", "You see a kitten playing dice. You locked eyes and looks like he's eager to play with you.",
                     "PLAY", "DECLINE", "");
 
                 firstButton.onClick.AddListener(delegate {
                     if (RandomState())
                     {
                         //PREHRAL
-                        SetUpEventWindow("", "You lost! At least the cat is happy...");
+                        SetUpEventWindow("", "You decided to play so you roll the dice and....You lost! You lost some of your money but at least the kittne is happy...");
                         ChangeMoney(-Moderate);
                         ChangeReputation(Minor);
                     }
                     else
                     {
                         //VYHRAL
-                        SetUpEventWindow("", "You won and the cat is happy that someone played with him.");
+                        SetUpEventWindow("", "You decided to play so you roll the dice and... You won! You took kitten's money he bet with but he looks happy that someone played with him.");
                         ChangeMoney(Moderate);
                         ChangeReputation(Minor);
                     }
                 });
                 secondButton.onClick.AddListener(delegate {
-                    SetUpEventWindow("", "The cat is unhappy because you didn't play with him.");
+                    SetUpEventWindow("", "You quickly broke the eye contact and went on. The cat is sad because you didn't play with him.");
                     ChangeReputation(-Minor);
                 });
                 break;
@@ -252,14 +252,14 @@ public class EventWindowControl : WindowControl
                 player = FindObjectOfType<Player>();
                 if (!player.CheckIfDeckHasIngredient())
                 {
-                    SetUpEventWindow("Stumble", "You stumbled on a small rock. If you had an ingredient you would surely lose it, but now everyone is laughing at you!");
+                    SetUpEventWindow("Stumble", "On your walk getting groceries you tripped over a small rock and fell down. If you had an ingredient you would surely lose it... but now everyone is laughing at you!");
                     thirdButton.onClick.AddListener(delegate {
                         ChangeReputation(-Minor);
                     });
                 }
                 else
                 {
-                    SetUpEventWindow("Stumble", "You stumbled on a small rock and lost an ingredient."
+                    SetUpEventWindow("Stumble", "On your walk getting groceries you tripped over a small rock and fell down. Some ingredients you had in a bag rolled out on dusty road. You lost an ingredient!"
                         , "ASK FOR HELP", "SEARCH");
                     CardBaseInfo randomCard = player.FindCardFromDeck();
 
@@ -269,20 +269,20 @@ public class EventWindowControl : WindowControl
                 break;
             case Event.RandomEventType.PerfectTomatoes:
                 //PERFECT_TOMATOES
-                SetUpEventWindow("Perfect tomatoes", "You see perfect tomatoes behind a fence.",
+                SetUpEventWindow("Perfect tomatoes", "On your wanders you came across a perfect tomatoes behind someone's fence.",
                     "CLIMB", "DON'T TEMPT", "");
                 firstButton.onClick.AddListener(delegate {
                     //30%
                     if (RandomState(30))
                     {
                         //PADOL A VSIMLI SI HO
-                        SetUpEventWindow("", "While climbing on the fence your tail got stuck and you fell down. Owner of the tomatoes heard you!");
+                        SetUpEventWindow("", "The tomatoes looked so tasty! While awkwardly climbing on the fence your tail got stuck and you fell over the fence with big *THUD*. Owner of the tomatoes heard you and chased you away!");
                         ChangeReputation(-Major);
                     }
                     else
                     {
                         // PRESKOCIL A UKRADOL 2 RAJCINY :O
-                        SetUpEventWindow("", "You successfully climbed the fence and stole some tomatoes.");
+                        SetUpEventWindow("", "The tomatoes looked so tasty! You looked around and decided to climb the fence and it was... Successfull! You *borrowed* some tomatoes and ran away.");
 
                         for (int i = 0; i < 2; i++)
                         {
@@ -295,13 +295,13 @@ public class EventWindowControl : WindowControl
                     }
                 }); //RESIST THE DARK SIDE!
                 secondButton.onClick.AddListener(delegate {
-                    SetUpEventWindow("", "You did not fall into your temptation. God gave you some reputation.");
+                    SetUpEventWindow("", "You shook your head and resisted the temptation. Cat God saw your determination and gave you some reputation.");
                     ChangeReputation(Minor);
                 });
                 break;
             case Event.RandomEventType.Cave:
                 //CAVE
-                SetUpEventWindow("Cave", "You see entrance to a cave and some ingredients to gather nearby.",
+                SetUpEventWindow("Cave", "You see a cave with some ingredients to gather nearby the enterance.",
                     "GO IN", "GATHER", "");
 
                 firstButton.onClick.AddListener(delegate {
@@ -311,13 +311,13 @@ public class EventWindowControl : WindowControl
                         if (RandomState())
                         {
                             //NASIEL PENIAZGY
-                            SetUpEventWindow("", "You went in and found some coins on the ground.");
+                            SetUpEventWindow("", "You went in but you didn't wander too far. In slight shine of the sun entering the cave you noticed someting shiny on the ground. You found some coins!");
                             ChangeMoney(Moderate);
                         }
                         else
                         {
                             //STRATIL PENIAZGY
-                            SetUpEventWindow("", "You went in and in the pitch darkness someone or something took your coins.");
+                            SetUpEventWindow("", "You went in and went deep into the cave. In pitch darkness you fell over a trap and someone or something took your coins!");
                             ChangeMoney(-Moderate);
                         }
                     }
@@ -329,7 +329,7 @@ public class EventWindowControl : WindowControl
                             "PAY", "DON'T PAY", "");
                         Debug.Log("YOU FOUND WITCH!");
                         firstButton.onClick.AddListener(delegate {
-                            SetUpEventWindow("", "After finishing her brew the witch joined your team.");
+                            SetUpEventWindow("", "After finishing her suspicious brew the witch joined your team for some... coins.");
                             ChangeMoney(-Moderate);
 
                         });
@@ -345,7 +345,7 @@ public class EventWindowControl : WindowControl
                 break;
             case Event.RandomEventType.StuckMerchant:
                 //STUCK_MERCHANT
-                SetUpEventWindow("Stuck merchant", "You see a stuck merchant on the road.",
+                SetUpEventWindow("Stuck merchant", "You see a stuck merchant under crushd carriage on the road.",
                     "HELP", "IGNORE", "");
 
                 firstButton.onClick.AddListener(delegate {
@@ -353,7 +353,7 @@ public class EventWindowControl : WindowControl
                     if (RandomState(30))
                     {
                         //AMBUSH
-                        SetUpEventWindow("Robbers", "It's a trap! You see robbers coming to you.",
+                        SetUpEventWindow("Robbers", "It's a trap! You see robbers waiting for you to rob you as well.",
                             "FIGHT", "RUN", "");
                         Debug.Log("It's a trap!");
                         //SAME AS THIEVES EVENT BUT DIFFERENT
@@ -362,7 +362,7 @@ public class EventWindowControl : WindowControl
                     else
                     {
                         //HELPED HIM
-                        SetUpEventWindow("", "You helped the merchant and he thanked you.");
+                        SetUpEventWindow("", "You helped the merchant to get out. He thanked you and will spread a word of your actions.");
                         ChangeReputation(Major);
                     }
                 });
