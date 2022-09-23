@@ -14,7 +14,8 @@ public class Chungus : Customer
         //or cause reputation demage on player
         if (turnsLeft == 0)
         {
-            if (currHunger >= Data.MaxHunger / 2)
+            if(currHunger == Data.MaxHunger) { gm.Player.TakeDamage(30); }
+            else if (currHunger >= Data.MaxHunger / 2)
             {
                 gm.Player.TakeDamage(Data.MaxDamageMade / Data.HalfHealthLeftPercentage);
             }
