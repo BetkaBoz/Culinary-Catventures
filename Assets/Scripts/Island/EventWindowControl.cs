@@ -466,13 +466,13 @@ public class EventWindowControl : WindowControl
                 Maze();
                 break;
             case Event.RandomEventType.SlotMachine:
-                SetUpEventWindow("Slot machine", "You find a abandoned slot machine, you need to pay in order to play."
+                SetUpEventWindow("Arcade machine", "You find a abandoned arcade machine, you need to insert token in order to play."
                     , "PLAY");
 
                 SlotMachine();
                 break;
             default:
-                Debug.Log("What are you doing here CRIMINAL SCUM?");
+                Debug.Log("What are you doing here THIEF?");
                 break;
         }
     }
@@ -647,7 +647,7 @@ public class EventWindowControl : WindowControl
             }
             else if (RandomState(5))
             {
-                SetUpEventWindow("", "You break the machine! Some coins fall on the ground but you can't play anymore.");
+                SetUpEventWindow("", "You broke the machine! Some free tokens fell on the ground but you can't play anymore. You gain a small amount of coins from tokens.");
                 ChangeMoney(Minor);
             }
             else
@@ -655,13 +655,13 @@ public class EventWindowControl : WindowControl
                 //25%
                 if (RandomState(20))
                 {
-                    SetUpEventWindow("", "You won! You can play again...", "PLAY");
+                    SetUpEventWindow("", "You won! You can play arcade again...", "PLAY");
                     SlotMachine();
                     ChangeMoney(Major);
                 }
                 else
                 {
-                    SetUpEventWindow("", "You lost! You can play again...", "PLAY");
+                    SetUpEventWindow("", "You lost! You can try to play arcade again...", "PLAY");
                     ChangeMoney(-Minor);
                     SlotMachine();
                 }
